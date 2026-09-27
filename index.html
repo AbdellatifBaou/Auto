@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Auto Meknès Ismailia — Toyota</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --red:#EB0A1E;--red-glow:rgba(235,10,30,.4);
+  --bg:#08080C;--surface:#111118;--surface2:#18181F;--surface3:#1E1E28;
+  --border:rgba(255,255,255,.06);--border2:rgba(255,255,255,.12);
+  --text:#F2F2F8;--text2:#7B7B96;--text3:#4A4A62;
+  --gold:#F5B942;--emerald:#34D399;--cyan:#22D3EE;
+  --radius:20px;
+}
+html{scroll-behavior:smooth;height:100%}
+body{
+  min-height:100%;background:var(--bg);color:var(--text);
+  font-family:'Montserrat',system-ui,sans-serif;
+  overflow-x:hidden;-webkit-tap-highlight-color:transparent;
+  line-height:1.5;
+}
+body.ar{direction:rtl;font-family:'Cairo',system-ui,sans-serif}
+
+/* ═══ AMBIENT ORBS ═══ */
+.ambient{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(120px);opacity:.12;will-change:transform}
+.orb-1{width:600px;height:600px;background:var(--red);top:-10%;left:-10%;animation:orbFloat1 20s ease-in-out infinite}
+.orb-2{width:500px;height:500px;background:#1e40af;bottom:-15%;right:-10%;animation:orbFloat2 25s ease-in-out infinite}
+.orb-3{width:400px;height:400px;background:var(--gold);top:50%;left:50%;animation:orbFloat3 30s ease-in-out infinite}
+@keyframes orbFloat1{0%,100%{transform:translate(0,0)}50%{transform:translate(80px,60px)}}
+@keyframes orbFloat2{0%,100%{transform:translate(0,0)}50%{transform:translate(-70px,-50px)}}
+@keyframes orbFloat3{0%,100%{transform:translate(-50%,-50%)}50%{transform:translate(-30%,-40%)}}
+
+/* ═══ REVEAL ANIMATIONS ═══ */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+.reveal-scale{opacity:0;transform:scale(.92);transition:opacity .7s ease,transform .7s cubic-bezier(.16,1,.3,1)}
+.reveal-scale.visible{opacity:1;transform:scale(1)}
+
+/* ═══ LAYOUT ═══ */
+.container{max-width:1080px;margin:0 auto;padding:0 20px}
+@media(min-width:768px){.container{padding:0 40px}}
+section{position:relative;z-index:1}
+
+/* ═══ HEADER ═══ */
+.header{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  background:rgba(8,8,12,.75);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border);
+  transition:background .3s;
+}
+.header.scrolled{background:rgba(8,8,12,.94);border-bottom-color:var(--border2)}
+.header-inner{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 20px;max-width:1080px;margin:0 auto;
+}
+@media(min-width:768px){.header-inner{padding:14px 40px}}
+.logo-group{
+  display:flex;align-items:center;text-decoration:none;
+}
+.logo-img{
+  width:56px;height:56px;border-radius:14px;
+  background:#000;border:1px solid var(--border2);
+  overflow:hidden;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;padding:4px;
+  box-shadow:0 4px 16px rgba(0,0,0,.6);
+  transition:transform .2s, border-color .2s;
+}
+.logo-group:hover .logo-img{border-color:rgba(255,255,255,.25);transform:scale(1.03)}
+.logo-group:active .logo-img{transform:scale(.96)}
+.logo-img img{width:100%;height:100%;object-fit:contain}
+.header-actions{display:flex;align-items:center;gap:8px}
+.pill{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:6px 12px;border-radius:99px;font-size:10px;font-weight:700;
+  border:1px solid;white-space:nowrap;
+}
+.pill-open{background:rgba(52,211,153,.08);border-color:rgba(52,211,153,.25);color:var(--emerald)}
+.pill-dot{width:6px;height:6px;border-radius:50%;background:currentColor;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.lang-toggle{
+  display:flex;background:var(--surface2);
+  border:1px solid var(--border2);border-radius:99px;padding:2px;
+}
+.lang-btn{
+  padding:5px 12px;border-radius:99px;border:none;
+  font-family:inherit;font-size:11px;font-weight:700;
+  cursor:pointer;transition:all .2s;
+  color:var(--text2);background:transparent;
+}
+.lang-btn.on{background:var(--red);color:#fff}
+
+/* ═══ HERO ═══ */
+.hero{
+  position:relative;
+  min-height:85vh;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:96px 20px 40px;
+  text-align:center;
+  overflow:hidden;
+}
+
+/* Ambient glow behind car */
+.hero-glow{
+  position:absolute;
+  bottom:-10%;left:50%;transform:translateX(-50%);
+  width:600px;height:340px;
+  background:radial-gradient(ellipse at 50% 100%, rgba(235,10,30,.2) 0%, transparent 65%);
+  pointer-events:none;z-index:0;
+}
+
+.hero-logo-wrap{
+  position:relative;z-index:1;
+  width:72px;height:72px;
+  border-radius:18px;
+  background:rgba(0,0,0,.85);
+  border:1px solid rgba(255,255,255,.18);
+  box-shadow:0 10px 30px rgba(0,0,0,.8), 0 0 24px rgba(235,10,30,.2);
+  display:flex;align-items:center;justify-content:center;
+  padding:6px;
+  margin:0 auto 16px auto;
+  opacity:0;animation:heroIn .6s .05s forwards;
+  transition:transform .3s, border-color .3s;
+}
+.hero-logo-wrap:hover{transform:scale(1.06);border-color:rgba(255,255,255,.35)}
+.hero-logo{
+  width:100%;height:100%;object-fit:contain;
+}
+
+.hero-tagline{
+  position:relative;z-index:1;
+  font-size:clamp(10px,1.4vw,11px);font-weight:800;
+  letter-spacing:.2em;text-transform:uppercase;
+  color:var(--red);margin-bottom:10px;
+  opacity:0;animation:heroIn .6s .1s forwards;
+}
+.hero-title{
+  position:relative;z-index:1;
+  font-size:clamp(28px,5.5vw,56px);font-weight:900;
+  line-height:1.08;letter-spacing:-.02em;
+  background:linear-gradient(180deg,#fff 40%,rgba(255,255,255,.5));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;margin-bottom:8px;
+  opacity:0;animation:heroIn .7s .2s forwards;
+}
+.hero-subtitle{
+  position:relative;z-index:1;
+  font-size:clamp(12.5px,1.6vw,15px);font-weight:500;
+  color:var(--text2);max-width:380px;margin:0 auto;
+  line-height:1.45;
+  opacity:0;animation:heroIn .7s .35s forwards;
+}
+.hero-cta-row{
+  position:relative;z-index:1;
+  display:flex;gap:10px;margin-top:18px;flex-wrap:wrap;justify-content:center;
+  opacity:0;animation:heroIn .7s .5s forwards;
+}
+@keyframes heroIn{to{opacity:1}}
+
+/* Car image — centered, natural aspect ratio, floats in */
+.hero-car-wrap{
+  position:relative;z-index:1;
+  width:100%;max-width:440px;
+  aspect-ratio:4/3;
+  margin:16px auto 0;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;animation:heroCarIn 1s .4s cubic-bezier(.16,1,.3,1) forwards;
+}
+@keyframes heroCarIn{
+  from{opacity:0;transform:translateY(20px) scale(.96)}
+  to  {opacity:1;transform:translateY(0)    scale(1)}
+}
+.hero-car-wrap img{
+  width:100%;height:100%;object-fit:contain;object-position:center;display:block;
+  filter:drop-shadow(0 16px 36px rgba(0,0,0,.8))
+         drop-shadow(0  6px 16px rgba(235,10,30,.12));
+  animation:carFloat 6s ease-in-out 1.6s infinite;
+}
+@keyframes carFloat{
+  0%,100%{transform:translateY(0)}
+  50%    {transform:translateY(-8px)}
+}
+/* Ground reflection line */
+.hero-ground{
+  position:absolute;bottom:8px;left:50%;transform:translateX(-50%);
+  width:65%;max-width:280px;height:2px;
+  background:linear-gradient(90deg,transparent,rgba(235,10,30,.5),transparent);
+  border-radius:99px;
+  box-shadow:0 0 24px 6px rgba(235,10,30,.18);
+  opacity:0;animation:heroIn .5s 1.2s forwards;
+}
+
+/* ═══ BUTTONS ═══ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:13px 24px;border-radius:14px;border:none;
+  font-family:inherit;font-size:13px;font-weight:700;
+  cursor:pointer;text-decoration:none;white-space:nowrap;
+  transition:all .3s cubic-bezier(.16,1,.3,1);position:relative;overflow:hidden;
+}
+.btn-red{
+  background:var(--red);color:#fff;
+  box-shadow:0 4px 24px var(--red-glow);
+}
+.btn-red:hover{transform:translateY(-2px);box-shadow:0 8px 32px var(--red-glow)}
+.btn-glass{
+  background:rgba(255,255,255,.06);color:var(--text);
+  border:1px solid var(--border2);
+  backdrop-filter:blur(10px);
+}
+.btn-glass:hover{background:rgba(255,255,255,.12);transform:translateY(-2px)}
+.btn svg{width:16px;height:16px;flex-shrink:0}
+
+/* ═══ SECTION TITLES ═══ */
+.sec-label{
+  font-size:10px;font-weight:800;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--red);margin-bottom:8px;
+}
+.sec-title{
+  font-size:clamp(24px,4vw,40px);font-weight:900;line-height:1.1;
+  letter-spacing:-.01em;
+}
+.sec-desc{font-size:14px;color:var(--text2);margin-top:8px;max-width:500px}
+
+/* ═══ GOOGLE REVIEW ═══ */
+.review-strip{
+  margin:0 auto;max-width:1080px;padding:0 20px;
+  position:relative;z-index:1;
+}
+@media(min-width:768px){.review-strip{padding:0 40px}}
+.review-card{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  background:linear-gradient(135deg,rgba(245,185,66,.06),rgba(245,185,66,.02));
+  border:1px solid rgba(245,185,66,.15);border-radius:16px;
+  padding:16px 22px;text-decoration:none;
+  transition:border-color .3s,box-shadow .3s,transform .3s;flex-wrap:wrap;
+}
+.review-card:hover{border-color:rgba(245,185,66,.35);box-shadow:0 8px 40px rgba(245,185,66,.08);transform:translateY(-2px)}
+.rv-left{display:flex;align-items:center;gap:14px}
+.rv-g{
+  width:42px;height:42px;border-radius:12px;background:#fff;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.rv-stars{color:var(--gold);font-size:14px;letter-spacing:2px}
+.rv-title{font-size:14px;font-weight:700;color:var(--text)}
+.rv-sub{font-size:11px;color:var(--text2);margin-top:1px}
+.rv-cta{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:9px 18px;border-radius:99px;
+  background:rgba(245,185,66,.1);border:1px solid rgba(245,185,66,.22);
+  color:var(--gold);font-size:12px;font-weight:700;
+  white-space:nowrap;flex-shrink:0;
+  transition:background .2s;
+}
+.rv-cta:hover{background:rgba(245,185,66,.18)}
+
+/* ═══ CAR SHOWCASES ═══ */
+.showcase{padding:60px 0}
+.showcase-inner{
+  display:grid;grid-template-columns:1fr;gap:28px;align-items:center;
+}
+@media(min-width:768px){
+  .showcase-inner{grid-template-columns:1.2fr 1fr;gap:48px}
+  .showcase.flip .showcase-inner{grid-template-columns:1fr 1.2fr}
+  .showcase.flip .sc-visual{order:2}
+  .showcase.flip .sc-info{order:1}
+}
+.sc-visual{position:relative;width:100%}
+.sc-stage{
+  position:relative;width:100%;aspect-ratio:4/3;max-height:360px;
+  display:flex;align-items:center;justify-content:center;
+  background:transparent;
+}
+.sc-stage img{
+  width:100%;height:100%;object-fit:contain;object-position:center;
+  position:relative;z-index:2;display:block;
+  filter:drop-shadow(0 20px 40px rgba(0,0,0,.9));
+  transition:transform .6s cubic-bezier(.16,1,.3,1);
+}
+.sc-stage:hover img{transform:scale(1.04) translateY(-6px)}
+.sc-stage-bg{display:none}
+.sc-beam{display:none}
+
+.sc-info{padding:8px 0}
+.sc-cat{
+  display:inline-flex;padding:5px 14px;border-radius:99px;
+  font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  margin-bottom:16px;
+}
+.sc-prado .sc-cat{background:rgba(235,10,30,.1);color:#FF6B7A;border:1px solid rgba(235,10,30,.2)}
+.sc-corolla .sc-cat{background:rgba(34,211,238,.08);color:var(--cyan);border:1px solid rgba(34,211,238,.18)}
+.sc-cross .sc-cat{background:rgba(245,185,66,.08);color:var(--gold);border:1px solid rgba(245,185,66,.18)}
+.sc-name{font-size:clamp(22px,3.5vw,32px);font-weight:900;line-height:1.1;margin-bottom:6px}
+.sc-price{font-size:clamp(20px,3vw,28px);font-weight:900;margin-bottom:20px}
+.sc-prado .sc-price{color:#FF6B7A}
+.sc-corolla .sc-price{color:var(--cyan)}
+.sc-cross .sc-price{color:var(--gold)}
+.sc-price small{font-size:12px;font-weight:500;color:var(--text2);margin-inline-start:6px}
+.sc-price bdi, .dt-badge bdi, .cmp-price bdi{font-variant-numeric:tabular-nums;unicode-bidi:isolate}
+body.ar .sc-price, body.ar .dt-badge, body.ar .cmp-price{direction:rtl}
+body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin-inline-start:6px}
+
+/* Spec pills */
+.sc-specs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.spec-pill{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:8px 14px;border-radius:12px;
+  background:var(--surface2);border:1px solid var(--border);
+  font-size:11px;font-weight:600;color:var(--text2);
+}
+.spec-pill-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
+.sc-actions{display:flex;gap:10px;flex-wrap:wrap}
+.sc-actions .btn{padding:12px 22px;font-size:12px}
+
+/* ═══ SERVICES SECTION ═══ */
+.services{padding:80px 0}
+.svc-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:12px;
+  margin-top:32px;
+}
+@media(min-width:768px){.svc-grid{grid-template-columns:repeat(4,1fr);gap:16px}}
+.svc-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:24px 20px;
+  cursor:pointer;text-decoration:none;display:block;
+  transition:border-color .3s,transform .3s,box-shadow .3s;
+}
+.svc-card:hover{border-color:var(--border2);transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,.4)}
+.svc-icon-wrap{
+  width:48px;height:48px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:16px;
+}
+.svc-icon-wrap svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8}
+.svc-name{font-size:14px;font-weight:800;margin-bottom:4px}
+.svc-sub{font-size:11px;color:var(--text2)}
+
+/* ═══ SLOGAN BAND ═══ */
+.slogan{
+  padding:80px 0;text-align:center;position:relative;z-index:1;
+}
+.slogan-text{
+  font-size:clamp(18px,3.5vw,32px);font-weight:900;
+  line-height:1.3;letter-spacing:-.01em;
+  background:linear-gradient(90deg,var(--text),var(--text2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;max-width:600px;margin:0 auto;
+}
+.slogan-divider{
+  width:60px;height:3px;border-radius:99px;
+  background:var(--red);margin:20px auto 0;
+}
+
+/* ═══ FOOTER ═══ */
+.footer{
+  padding:48px 0 32px;border-top:1px solid var(--border);
+  position:relative;z-index:1;
+}
+.footer-grid{
+  display:grid;grid-template-columns:1fr;gap:28px;
+}
+@media(min-width:768px){.footer-grid{grid-template-columns:1.5fr 1fr 1fr;gap:40px}}
+.ft-heading{font-size:12px;font-weight:800;color:var(--text);margin-bottom:10px}
+.ft-address{font-size:12px;color:var(--text2);line-height:1.7}
+.ft-address strong{color:var(--text);display:block}
+.socials{display:flex;gap:8px;margin-top:12px}
+.social-link{
+  width:40px;height:40px;border-radius:12px;
+  background:var(--surface2);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--text2);text-decoration:none;
+  transition:border-color .2s,color .2s,transform .2s;
+}
+.social-link:hover{border-color:var(--border2);color:var(--text);transform:scale(1.08)}
+.social-link svg{width:16px;height:16px;fill:currentColor}
+.ft-links{list-style:none}
+.ft-links li{margin-bottom:8px}
+.ft-links a{font-size:12px;color:var(--text2);text-decoration:none;transition:color .2s}
+.ft-links a:hover{color:var(--text)}
+.ft-cta-group{display:flex;flex-direction:column;gap:8px}
+.ft-cta-group .btn{font-size:12px;padding:12px 18px;justify-content:flex-start}
+.ft-bottom{
+  text-align:center;font-size:10px;color:var(--text3);
+  margin-top:32px;padding-top:20px;border-top:1px solid var(--border);
+}
+
+/* ═══ MOBILE BOTTOM BAR ═══ */
+.mob-bar{
+  display:flex;position:fixed;bottom:0;left:0;right:0;z-index:50;
+  background:rgba(8,8,12,.94);backdrop-filter:blur(24px);
+  -webkit-backdrop-filter:blur(24px);
+  border-top:1px solid var(--border2);
+  padding:6px 8px calc(6px + env(safe-area-inset-bottom));
+  gap:4px;
+}
+@media(min-width:768px){.mob-bar{display:none}}
+.mob-btn{
+  flex:1;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:3px;padding:8px 4px;
+  border-radius:12px;border:none;min-height:48px;
+  font-family:inherit;font-size:9px;font-weight:700;
+  cursor:pointer;text-decoration:none;color:var(--text2);background:transparent;
+  transition:transform .15s, background .15s, color .15s;
+  -webkit-tap-highlight-color:transparent;
+}
+.mob-btn:active{transform:scale(.92);background:rgba(255,255,255,.05)}
+.mob-btn svg{width:20px;height:20px;flex-shrink:0}
+.mob-btn.accent{
+  background:var(--red);color:#fff;border-radius:14px;
+  box-shadow:0 2px 12px var(--red-glow);
+}
+.mob-btn.accent:active{transform:scale(.92);background:#d0091a}
+.mob-btn.gold{color:var(--gold)}
+
+/* ═══ MODALS ═══ */
+.modal-bg{
+  position:fixed;inset:0;z-index:60;
+  background:rgba(0,0,0,.85);backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  display:none;align-items:center;justify-content:center;padding:16px;
+  opacity:0;transition:opacity .25s ease;
+}
+.modal-bg.open{display:flex;opacity:1}
+.modal-box{
+  width:100%;max-width:620px;max-height:90dvh;
+  background:var(--surface);border:1px solid var(--border2);
+  border-radius:24px;overflow:hidden;
+  display:flex;flex-direction:column;
+  transform:scale(.95);transition:transform .25s cubic-bezier(.16,1,.3,1);
+}
+.modal-bg.open .modal-box{transform:scale(1)}
+.modal-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 24px;border-bottom:1px solid var(--border);flex-shrink:0;
+}
+.mh-title{font-size:16px;font-weight:800}
+.mh-sub{font-size:11px;color:var(--text2);margin-top:2px}
+.modal-x{
+  width:36px;height:36px;border-radius:99px;
+  background:var(--surface2);border:1px solid var(--border);
+  color:var(--text2);font-size:16px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .2s, transform .15s;flex-shrink:0;
+}
+.modal-x:active{transform:scale(.9)}
+.modal-body{
+  flex:1;overflow-y:auto;padding:24px;
+  -webkit-overflow-scrolling:touch;
+}
+.modal-foot{
+  padding:16px 24px;border-top:1px solid var(--border);
+  display:flex;gap:10px;flex-shrink:0;
+}
+.modal-foot .btn{flex:1;padding:14px 18px;font-size:13px}
+
+/* Forms */
+.fg{margin-bottom:16px}
+.fg label{display:block;font-size:11px;font-weight:700;color:var(--text2);margin-bottom:6px}
+.finput,.fselect{
+  width:100%;padding:13px 16px;border-radius:12px;
+  background:var(--surface2);border:1px solid var(--border2);
+  color:var(--text);font-family:inherit;font-size:16px; /* Prevents auto-zoom on iOS Safari */
+  outline:none;transition:border-color .2s;-webkit-appearance:none;
+}
+.finput::placeholder{color:var(--text3)}
+.finput:focus,.fselect:focus{border-color:var(--red)}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.radio-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}
+.rcard input{display:none}
+.rlabel{
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  padding:12px;border-radius:12px;min-height:44px;
+  border:1px solid var(--border2);background:var(--surface2);
+  font-size:12px;font-weight:600;color:var(--text2);
+  cursor:pointer;transition:all .2s;user-select:none;
+}
+.rlabel:active{transform:scale(.98)}
+.rcard input:checked+.rlabel{border-color:var(--red);background:rgba(235,10,30,.08);color:var(--text)}
+
+/* Detail modal */
+.dt-stage{
+  background:transparent;border-radius:16px;
+  aspect-ratio:4/3;max-height:280px;display:flex;align-items:center;justify-content:center;
+  padding:12px;margin:0 auto 20px;position:relative;overflow:hidden;
+}
+.dt-stage img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 16px 30px rgba(0,0,0,.9))}
+.dt-badge{
+  position:absolute;bottom:12px;inset-inline-end:12px;
+  background:rgba(8,8,12,.88);backdrop-filter:blur(10px);
+  border:1px solid var(--border2);border-radius:12px;
+  padding:6px 14px;font-size:18px;font-weight:900;
+}
+.dt-cat{position:absolute;bottom:12px;inset-inline-start:12px}
+.specs-grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:16px}
+@media(min-width:480px){.specs-grid2{grid-template-columns:repeat(3,1fr)}}
+.spc{
+  background:var(--surface2);border-radius:12px;padding:12px 14px;
+  border:1px solid var(--border);
+}
+.spc-label{font-size:9px;color:var(--text2);font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.spc-val{font-size:12px;font-weight:700;margin-top:4px}
+.feat-box{background:var(--surface2);border-radius:14px;padding:16px;border:1px solid var(--border)}
+.feat-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--red);margin-bottom:12px}
+.feat-item{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--text2);margin-bottom:8px}
+.feat-check{color:var(--emerald);font-weight:700;flex-shrink:0}
+
+/* Compare */
+.cmp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:640px){.cmp-grid{grid-template-columns:1fr;gap:16px}}
+.cmp-col{border-radius:16px;overflow:hidden;background:var(--surface2);border:1px solid var(--border)}
+.cmp-img{aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;padding:10px;background:transparent}
+.cmp-img img{width:100%;height:100%;object-fit:contain}
+.cmp-info{padding:14px}
+.cmp-name{font-size:13px;font-weight:800}
+.cmp-price{font-size:16px;font-weight:900;margin:4px 0 10px}
+.cmp-row{font-size:11px;color:var(--text2);margin-bottom:5px}
+.cmp-row strong{display:block;color:var(--text);margin-top:1px}
+
+/* Team */
+.tm-card{
+  display:flex;align-items:center;gap:14px;
+  padding:16px;border-radius:16px;margin-bottom:12px;
+  background:var(--surface2);border:1px solid var(--border);
+}
+.tm-photo{width:60px;height:60px;border-radius:14px;object-fit:cover;flex-shrink:0}
+.tm-name{font-size:14px;font-weight:800}
+.tm-role{font-size:11px;color:var(--text2);margin-top:2px}
+.tm-actions{display:flex;gap:8px;margin-top:10px}
+.tm-actions .btn{font-size:11px;padding:9px 14px}
+
+/* ═══ MOBILE & RESPONSIVE REFINEMENTS ═══ */
+@media(max-width:767px){
+  body{padding-bottom:calc(72px + env(safe-area-inset-bottom))}
+  .container{padding:0 20px}
+  .header-inner{padding:10px 16px}
+  .logo-img{width:48px;height:48px;border-radius:12px;padding:3px}
+  .pill-open{padding:6px 11px;font-size:10px}
+  .lang-btn{padding:5px 11px;font-size:11px}
+  
+  /* Centered Section Headings */
+  .sec-label, .sec-title, .sec-desc{
+    text-align:center;
+    margin-left:auto;
+    margin-right:auto;
+  }
+  .sec-desc{max-width:340px}
+
+  /* Centered Hero */
+  .hero{
+    padding:80px 16px 20px;
+    min-height:auto;
+    text-align:center;
+  }
+  .hero-logo-wrap{width:56px;height:56px;border-radius:14px;padding:5px;margin-bottom:12px}
+  .hero-tagline{font-size:9.5px;margin-bottom:6px;letter-spacing:.16em;text-align:center}
+  .hero-title{font-size:clamp(26px,7.5vw,36px);margin-bottom:6px;text-align:center}
+  .hero-subtitle{font-size:12.5px;max-width:320px;margin:0 auto;text-align:center}
+  .hero-cta-row{width:100%;gap:8px;margin:14px auto 0;justify-content:center}
+  .hero-cta-row .btn{flex:1 1 calc(50% - 6px);min-width:130px;max-width:180px;padding:11px 12px;font-size:12px}
+  .hero-car-wrap{margin:12px auto 0;max-width:340px;aspect-ratio:4/3}
+  .hero-glow{width:100%;height:180px;filter:blur(45px)}
+
+  /* Centered Showcases */
+  .showcase{padding:32px 0}
+  .showcase-inner{gap:16px;text-align:center}
+  .sc-stage{border-radius:18px;max-width:360px;margin:0 auto}
+  .sc-info{
+    padding:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+  }
+  .sc-cat{font-size:9px;padding:4px 12px;margin:0 auto 6px auto}
+  .sc-name{font-size:22px;margin-bottom:2px;text-align:center}
+  .sc-price{font-size:20px;margin-bottom:10px;text-align:center}
+  .sc-specs{justify-content:center;gap:6px;margin:0 auto 14px auto}
+  .spec-pill{padding:5px 10px;font-size:9.5px;border-radius:8px}
+  .sc-actions{
+    display:flex;
+    gap:8px;
+    width:100%;
+    max-width:360px;
+    margin:0 auto;
+    justify-content:center;
+  }
+  .sc-actions .btn{flex:1 1 50%;padding:11px 8px;font-size:11.5px;justify-content:center}
+
+  /* Centered Google Review */
+  .review-strip{padding:0 20px}
+  .review-card{
+    padding:16px;
+    border-radius:16px;
+    gap:12px;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+  }
+  .rv-left{
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    gap:8px;
+  }
+  .rv-g{margin:0 auto}
+  .rv-stars{text-align:center}
+  .rv-title{text-align:center;font-size:13.5px}
+  .rv-sub{text-align:center;font-size:11px}
+  .rv-cta{width:100%;max-width:280px;justify-content:center;padding:10px 16px;margin:2px auto 0 auto}
+
+  /* Centered Services */
+  .services{padding:36px 0}
+  .svc-grid{gap:10px;margin-top:16px}
+  .svc-card{
+    padding:16px 12px;
+    border-radius:14px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+  }
+  .svc-card:active{transform:scale(.97)}
+  .svc-icon-wrap{width:40px;height:40px;border-radius:10px;margin:0 auto 10px auto}
+  .svc-name{font-size:12.5px;text-align:center}
+  .svc-sub{font-size:9.5px;text-align:center}
+
+  /* Slogan */
+  .slogan{padding:32px 0}
+  .slogan-text{font-size:clamp(15px,4.2vw,20px);text-align:center}
+
+  /* Centered Footer */
+  .footer{padding:28px 0 16px}
+  .footer-grid{
+    display:flex;
+    flex-direction:column;
+    gap:24px;
+    text-align:center;
+    align-items:center;
+  }
+  .ft-heading{text-align:center}
+  .ft-address{text-align:center}
+  .socials{justify-content:center}
+  .social-link{width:42px;height:42px}
+  .ft-links{text-align:center;padding:0}
+  .ft-cta-group{align-items:center;width:100%}
+  .ft-cta-group .btn{width:100%;max-width:280px;justify-content:center}
+  .ft-bottom{text-align:center}
+}
+
+@media(max-width:480px){
+  .hero-car-wrap{max-width:290px}
+  .sc-stage{max-width:310px}
+}
+
+@media(max-width:600px){
+  .modal-bg{padding:0;align-items:flex-end}
+  .modal-box{
+    border-radius:22px 22px 0 0;
+    max-height:92dvh;
+    border-bottom:none;
+  }
+  .modal-head{padding:16px 20px}
+  .modal-body{padding:18px 20px}
+  .modal-foot{padding:12px 20px calc(14px + env(safe-area-inset-bottom))}
+  .frow{grid-template-columns:1fr;gap:10px}
+}
+
+/* Scrollbar */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:99px}
+</style>
+</head>
+<body>
+
+<!-- ═══ AMBIENT ORBS ═══ -->
+<div class="ambient">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+</div>
+
+<!-- ═══ HEADER ═══ -->
+<header class="header" id="header">
+  <div class="header-inner">
+    <a href="#" class="logo-group" aria-label="Auto Meknès Ismailia">
+      <div class="logo-img"><img src="logo.png" alt="Auto Meknès Ismailia"></div>
+    </a>
+    <div class="header-actions">
+      <div class="pill pill-open">
+        <span class="pill-dot"></span>
+        <span id="h-status">Ouvert · 08:30 — 19:00</span>
+      </div>
+      <div class="lang-toggle">
+        <button class="lang-btn on" id="btn-fr" onclick="setLang('fr')">FR</button>
+        <button class="lang-btn" id="btn-ar" onclick="setLang('ar')">ع</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-logo-wrap">
+    <img src="logo.png" alt="Auto Meknès Ismailia Logo" class="hero-logo">
+  </div>
+  <div class="hero-tagline" id="hero-tag">L'EXCELLENCE AUTOMOBILE, NOTRE ENGAGEMENT</div>
+  <h1 class="hero-title" id="hero-title">Auto Meknès<br>Ismailia</h1>
+  <p class="hero-subtitle" id="hero-sub">Votre concessionnaire agréé Toyota à Meknès.</p>
+  <div class="hero-cta-row">
+    <a href="#showroom" class="btn btn-red" id="hero-cta1">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+      <span>Voir les Modèles</span>
+    </a>
+    <a href="https://wa.me/212535524768?text=Bonjour%20Auto%20Meknès%20Ismailia" target="_blank" class="btn btn-glass" id="hero-cta2">
+      <svg fill="currentColor" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.699c.983.537 1.956.822 2.796.822 3.179 0 5.767-2.586 5.768-5.766 0-3.18-2.589-5.768-5.768-5.768zm7.394 5.766c0 4.079-3.315 7.394-7.394 7.394-1.284 0-2.484-.33-3.535-.905l-4.14 1.086 1.106-4.037c-.675-1.12-1.031-2.415-1.031-3.738 0-4.079 3.315-7.394 7.394-7.394 4.079 0 7.394 3.315 7.394 7.394z"/></svg>
+      <span>WhatsApp Direct</span>
+    </a>
+  </div>
+  <div class="hero-car-wrap">
+    <img src="heronew.png" alt="Toyota Corolla Prestige Open Doors">
+    <div class="hero-ground"></div>
+  </div>
+</section>
+
+<!-- ═══ GOOGLE REVIEW ═══ -->
+<div class="review-strip reveal" style="margin-top:-20px;margin-bottom:20px">
+  <a href="https://search.google.com/local/writereview" target="_blank" class="review-card">
+    <div class="rv-left">
+      <div class="rv-g">
+        <svg width="22" height="22" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.34 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.99 0 12s.45 3.82 1.25 5.42l4.03-3.15z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/></svg>
+      </div>
+      <div>
+        <div class="rv-stars">★★★★★</div>
+        <div class="rv-title" id="rv-title">Donnez votre Avis Google</div>
+        <div class="rv-sub" id="rv-sub">Votre satisfaction au cœur de nos priorités</div>
+      </div>
+    </div>
+    <div class="rv-cta">
+      <span id="rv-cta">Laisser un Avis</span>
+      <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
+    </div>
+  </a>
+</div>
+
+<!-- ═══ SHOWROOM — 3 CAR SHOWCASES ═══ -->
+<section id="showroom" style="padding-top:40px">
+  <div class="container">
+    <div class="reveal">
+      <div class="sec-label" id="sec-cars-label">SHOWROOM</div>
+      <div class="sec-title" id="sec-cars-name">Nos Modèles</div>
+      <p class="sec-desc" id="sec-cars-desc">Trois véhicules Toyota de dernière génération, disponibles immédiatement.</p>
+    </div>
+  </div>
+
+  <!-- PRADO -->
+  <div class="container showcase sc-prado reveal" id="sc-prado">
+    <div class="showcase-inner">
+      <div class="sc-visual">
+        <div class="sc-stage">
+          <div class="sc-stage-bg"></div>
+          <img src="prado.png" alt="Land Cruiser Prado">
+          <div class="sc-beam"></div>
+        </div>
+      </div>
+      <div class="sc-info">
+        <div class="sc-cat" id="prado-cat">SUV 4×4 Luxe</div>
+        <div class="sc-name" id="prado-name">Land Cruiser Prado</div>
+        <div class="sc-price" id="prado-price">645 000 DH <small>TTC</small></div>
+        <div class="sc-specs">
+          <span class="spec-pill"><span class="spec-pill-dot" style="background:#FF6B7A"></span><span id="prado-sp1">204 ch · 2.8L D-4D</span></span>
+          <span class="spec-pill"><span class="spec-pill-dot" style="background:var(--text2)"></span><span id="prado-sp2">Auto 6 · 4×4</span></span>
+          <span class="spec-pill"><span class="spec-pill-dot" style="background:var(--emerald)"></span><span id="prado-sp3">7.9 L/100km</span></span>
+        </div>
+        <div class="sc-actions">
+          <button class="btn btn-glass" onclick="openCarDetail('prado')" id="prado-fiche">Fiche Technique</button>
+          <button class="btn btn-red" onclick="bookCar('Toyota Land Cruiser Prado')" id="prado-book">Réserver un Essai</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COROLLA -->
+  <div class="container showcase flip sc-corolla reveal" id="sc-corolla">
+    <div class="showcase-inner">
+      <div class="sc-visual">
+        <div class="sc-stage">
+          <div class="sc-stage-bg"></div>
+          <img src="corolla.png" alt="Corolla Berline Hybride">
+          <div class="sc-beam"></div>
+        </div>
+      </div>
+      <div class="sc-info">
+        <div class="sc-cat" id="corolla-cat">Berline Hybride</div>
+        <div class="sc-name" id="corolla-name">Corolla Berline</div>
+        <div class="sc-price" id="corolla-price">245 000 DH <small>TTC</small></div>
+        <div class="sc-specs">
+          <span class="spec-pill"><span class="spec-pill-dot" style="background:var(--cyan)"></span><span id="corolla-sp1">140 ch · 1.8L Hybride</span></span>
+          <span class="spec-pill"><span class="spec-pill-dot" style="background:var(--text2)"></span><span id="corolla-sp2">e-CVT Automatique</span></span>
+          <span class="spec-pill"><span class="spec-pill-dot" style="background:var(--emerald)"></span><span id="corolla-sp3">4.1 L/100km</span></span>
+        </div>
+        <div class="sc-actions">
+          <button class="btn btn-glass" onclick="openCarDetail('corolla')" id="corolla-fiche">Fiche Technique</button>
+          <button class="btn btn-red" onclick="bookCar('Toyota Corolla Berline')" id="corolla-book">Réserver un Essai</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COROLLA CROSS -->
+  <div class="container showcase sc-cross reveal" id="sc-cross">
+    <div class="showcase-inner">
+      <div class="sc-visual">
+        <div class="sc-stage">
+          <div class="sc-stage-bg"></div>
+          <img src="corolla-cross.png" alt="Corolla Cross AWD Hybride">
+          <div class="sc-beam"></div>
+        </div>
+      </div>
+      <div class="sc-info">
+        <div class="sc-cat" id="cross-cat">SUV Crossover AWD</div>
+        <div class="sc-name" id="cross-name">Corolla Cross AWD</div>
+        <div class="sc-price" id="cross-price">369 000 DH <small>TTC</small></div>
+        <div class="sc-specs">
+          <span class="spec-pill"><span class="spec-pill-dot" style="background:var(--gold)"></span><span id="cross-sp1">197 ch · 2.0L AWD-i</span></span>
+          <span class="spec-pill"><span class="spec-pill-dot" style="background:var(--text2)"></span><span id="cross-sp2">e-CVT Intégrale</span></span>
+          <span class="spec-pill"><span class="spec-pill-dot" style="background:var(--emerald)"></span><span id="cross-sp3">4.8 L/100km</span></span>
+        </div>
+        <div class="sc-actions">
+          <button class="btn btn-glass" onclick="openCarDetail('corolla-cross')" id="cross-fiche">Fiche Technique</button>
+          <button class="btn btn-red" onclick="bookCar('Toyota Corolla Cross AWD')" id="cross-book">Réserver un Essai</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SLOGAN ═══ -->
+<section class="slogan reveal">
+  <div class="container">
+    <p class="slogan-text" id="slogan-text">L'excellence automobile,<br>notre engagement.</p>
+    <div class="slogan-divider"></div>
+  </div>
+</section>
+
+<!-- ═══ SERVICES ═══ -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="reveal">
+      <div class="sec-label" id="sec-svc-label">SERVICES</div>
+      <div class="sec-title" id="sec-svc-name">Comment pouvons-nous vous aider ?</div>
+    </div>
+    <div class="svc-grid">
+      <div class="svc-card reveal reveal-delay-1" onclick="openModal('modal-booking')">
+        <div class="svc-icon-wrap" style="background:rgba(235,10,30,.08);color:#FF6B7A">
+          <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
+        <div class="svc-name" id="svc-1">Réserver un Essai</div>
+        <div class="svc-sub" id="svc-1s">Confirmation sous 30 min</div>
+      </div>
+      <div class="svc-card reveal reveal-delay-2" onclick="openModal('modal-compare')">
+        <div class="svc-icon-wrap" style="background:rgba(34,211,238,.08);color:var(--cyan)">
+          <svg viewBox="0 0 24 24"><path d="M16 3h5v5"/><path d="M8 3H3v5"/><path d="M12 21v-8"/><path d="M8 7H3v4a5 5 0 0 0 5 5h8a5 5 0 0 0 5-5V7h-5"/></svg>
+        </div>
+        <div class="svc-name" id="svc-2">Comparateur</div>
+        <div class="svc-sub" id="svc-2s">3 modèles côte à côte</div>
+      </div>
+      <div class="svc-card reveal reveal-delay-3" onclick="openModal('modal-team')">
+        <div class="svc-icon-wrap" style="background:rgba(52,211,153,.08);color:var(--emerald)">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="svc-name" id="svc-3">Notre Équipe</div>
+        <div class="svc-sub" id="svc-3s">2 conseillers dédiés</div>
+      </div>
+      <div class="svc-card reveal reveal-delay-3" onclick="openModal('modal-tradein')">
+        <div class="svc-icon-wrap" style="background:rgba(245,185,66,.08);color:var(--gold)">
+          <svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+        </div>
+        <div class="svc-name" id="svc-4">Reprise Auto</div>
+        <div class="svc-sub" id="svc-4s">Offre ferme sous 2h</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="ft-heading">Auto Meknès Ismailia</div>
+        <div class="ft-address">
+          <strong>RDC Angle Bd. Des F.A.R & Av. Yaacoub El Mansour</strong>
+          Meknès, Maroc<br>
+          <span id="ft-sav">Showroom & SAV Agréé Toyota</span>
+        </div>
+        <div class="socials">
+          <a href="https://www.instagram.com/automeknesismailiatoyota" target="_blank" class="social-link" title="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/AutoMeknesIsmailiaToyota" target="_blank" class="social-link" title="Facebook">
+            <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="https://tiktok.com/@auto_meknes_ismailia" target="_blank" class="social-link" title="TikTok">
+            <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.24 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+          </a>
+          <a href="https://share.google/qjgfQifJ4eAU9GInu" target="_blank" class="social-link" title="Google Maps">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <div class="ft-heading" id="ft-nav-title">Navigation</div>
+        <ul class="ft-links">
+          <li><a href="#showroom" id="ft-l1">Showroom</a></li>
+          <li><a href="#services" id="ft-l2">Services</a></li>
+          <li><a href="https://search.google.com/local/writereview" target="_blank" id="ft-l3">Avis Google</a></li>
+          <li><a href="https://share.google/qjgfQifJ4eAU9GInu" target="_blank" id="ft-l4">Nous trouver</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="ft-heading" id="ft-contact-title">Contact Direct</div>
+        <div class="ft-cta-group">
+          <a href="tel:0535524768" class="btn btn-glass">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            05 35 52 47 68
+          </a>
+          <a href="https://wa.me/212535524768?text=Bonjour%20Auto%20Meknès%20Ismailia" target="_blank" class="btn btn-red">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.699c.983.537 1.956.822 2.796.822 3.179 0 5.767-2.586 5.768-5.766 0-3.18-2.589-5.768-5.768-5.768zm7.394 5.766c0 4.079-3.315 7.394-7.394 7.394-1.284 0-2.484-.33-3.535-.905l-4.14 1.086 1.106-4.037c-.675-1.12-1.031-2.415-1.031-3.738 0-4.079 3.315-7.394 7.394-7.394 4.079 0 7.394 3.315 7.394 7.394z"/></svg>
+            <span id="ft-wa">WhatsApp Direct</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="ft-bottom" id="ft-copy">© 2026 Auto Meknès Ismailia · Concessionnaire Agréé Toyota · Marketif</div>
+  </div>
+</footer>
+
+<!-- ═══ MOBILE BOTTOM BAR ═══ -->
+<nav class="mob-bar">
+  <a href="tel:0535524768" class="mob-btn">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    <span id="mb-call">Appeler</span>
+  </a>
+  <a href="https://wa.me/212535524768?text=Bonjour%20Auto%20Meknès%20Ismailia" target="_blank" class="mob-btn accent">
+    <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.699c.983.537 1.956.822 2.796.822 3.179 0 5.767-2.586 5.768-5.766 0-3.18-2.589-5.768-5.768-5.768zm7.394 5.766c0 4.079-3.315 7.394-7.394 7.394-1.284 0-2.484-.33-3.535-.905l-4.14 1.086 1.106-4.037c-.675-1.12-1.031-2.415-1.031-3.738 0-4.079 3.315-7.394 7.394-7.394 4.079 0 7.394 3.315 7.394 7.394z"/></svg>
+    WhatsApp
+  </a>
+  <button class="mob-btn" onclick="openModal('modal-booking')">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+    <span id="mb-book">Essai</span>
+  </button>
+  <a href="https://share.google/qjgfQifJ4eAU9GInu" target="_blank" class="mob-btn">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    <span id="mb-maps">Maps</span>
+  </a>
+  <a href="https://search.google.com/local/writereview" target="_blank" class="mob-btn gold">
+    <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+    <span id="mb-review">Avis</span>
+  </a>
+</nav>
+
+<!-- ═══ MODALS ═══ -->
+
+<!-- Detail -->
+<div class="modal-bg" id="modal-detail">
+  <div class="modal-box" style="max-width:640px">
+    <div class="modal-head">
+      <div><div class="mh-title" id="dt-title">Fiche Technique</div><div class="mh-sub" id="dt-sub">Spécifications complètes</div></div>
+      <button class="modal-x" onclick="closeModal('modal-detail')">✕</button>
+    </div>
+    <div class="modal-body" id="dt-body"></div>
+    <div class="modal-foot">
+      <button class="btn btn-glass" onclick="closeModal('modal-detail')" id="dt-close">Fermer</button>
+      <button class="btn btn-red" onclick="bookFromDetail()" id="dt-book">Réserver cet Essai</button>
+    </div>
+  </div>
+</div>
+
+<!-- Compare -->
+<div class="modal-bg" id="modal-compare">
+  <div class="modal-box" style="max-width:800px">
+    <div class="modal-head">
+      <div><div class="mh-title" id="cmp-title">Comparateur</div><div class="mh-sub" id="cmp-sub">Tarifs en Dirhams TTC</div></div>
+      <button class="modal-x" onclick="closeModal('modal-compare')">✕</button>
+    </div>
+    <div class="modal-body"><div class="cmp-grid" id="cmp-body"></div></div>
+  </div>
+</div>
+
+<!-- Booking -->
+<div class="modal-bg" id="modal-booking">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div><div class="mh-title" id="bk-title">Réserver un Essai</div><div class="mh-sub" id="bk-sub">Confirmation immédiate par WhatsApp</div></div>
+      <button class="modal-x" onclick="closeModal('modal-booking')">✕</button>
+    </div>
+    <div class="modal-body">
+      <form id="bk-form" onsubmit="submitBooking(event)">
+        <div class="fg">
+          <label id="bk-lbl-type">Type de demande</label>
+          <div class="radio-row">
+            <div class="rcard"><input type="radio" name="type" id="r-essai" value="Essai" checked><label class="rlabel" for="r-essai">🏎️ <span id="rb-1">Essai sur Route</span></label></div>
+            <div class="rcard"><input type="radio" name="type" id="r-devis" value="Devis"><label class="rlabel" for="r-devis">💼 <span id="rb-2">Devis & Financement</span></label></div>
+          </div>
+        </div>
+        <div class="fg">
+          <label id="bk-lbl-car">Modèle souhaité</label>
+          <select class="fselect" id="bk-car">
+            <option value="Toyota Land Cruiser Prado">Land Cruiser Prado (204ch · 4×4)</option>
+            <option value="Toyota Corolla Berline">Corolla Berline Hybride (140ch)</option>
+            <option value="Toyota Corolla Cross AWD">Corolla Cross AWD Hybride (197ch)</option>
+          </select>
+        </div>
+        <div class="frow">
+          <div class="fg"><label id="bk-lbl-date">Date</label><input type="date" class="finput" required></div>
+          <div class="fg"><label id="bk-lbl-time">Créneau</label><select class="fselect"><option>09:00 – 11:00</option><option>11:00 – 13:00</option><option>15:00 – 17:00</option><option>17:00 – 19:00</option></select></div>
+        </div>
+        <div class="fg"><label id="bk-lbl-name">Nom et Prénom</label><input type="text" class="finput" id="bk-name" required placeholder="Votre nom complet"></div>
+        <div class="fg"><label id="bk-lbl-phone">WhatsApp / Téléphone</label><input type="tel" class="finput" id="bk-phone" required placeholder="06 XX XX XX XX"></div>
+        <button type="submit" class="btn btn-red" style="width:100%;padding:14px;font-size:13px" id="bk-submit">Envoyer via WhatsApp</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Team -->
+<div class="modal-bg" id="modal-team">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div><div class="mh-title" id="tm-title">Vos Conseillers</div><div class="mh-sub" id="tm-sub">Équipe Auto Meknès Ismailia</div></div>
+      <button class="modal-x" onclick="closeModal('modal-team')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="tm-card">
+        <img src="team1.png" class="tm-photo" alt="Karim Alami">
+        <div>
+          <div class="tm-name">Karim Alami</div>
+          <div class="tm-role" id="tm-1r">Ventes Neufs · Hybride & 4×4</div>
+          <div class="tm-actions">
+            <a href="https://wa.me/212535524768?text=Bonjour%20Karim" target="_blank" class="btn btn-red">WhatsApp</a>
+            <a href="tel:0535524768" class="btn btn-glass" id="tm-c1">Appeler</a>
+          </div>
+        </div>
+      </div>
+      <div class="tm-card">
+        <img src="team2.png" class="tm-photo" alt="Siham Bennani">
+        <div>
+          <div class="tm-name">Siham Bennani</div>
+          <div class="tm-role" id="tm-2r">Financement · Crédit & Leasing</div>
+          <div class="tm-actions">
+            <a href="https://wa.me/212535524768?text=Bonjour%20Siham" target="_blank" class="btn btn-red">WhatsApp</a>
+            <a href="tel:0535524768" class="btn btn-glass" id="tm-c2">Appeler</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Trade-in -->
+<div class="modal-bg" id="modal-tradein">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div><div class="mh-title" id="tr-title">Estimation de Reprise</div><div class="mh-sub" id="tr-sub">Offre ferme sous 2 heures</div></div>
+      <button class="modal-x" onclick="closeModal('modal-tradein')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="fg"><label id="tr-lbl-m">Marque & Modèle</label><input type="text" class="finput" id="tr-model" placeholder="Ex: Toyota Yaris 2020"></div>
+      <div class="frow">
+        <div class="fg"><label id="tr-lbl-y">Année</label><input type="number" class="finput" id="tr-year" placeholder="2019"></div>
+        <div class="fg"><label id="tr-lbl-k">Kilométrage</label><input type="number" class="finput" id="tr-km" placeholder="80 000"></div>
+      </div>
+      <div class="fg"><label id="tr-lbl-p">Votre Téléphone</label><input type="tel" class="finput" id="tr-phone" placeholder="06 XX XX XX XX"></div>
+      <button onclick="submitTradeIn()" class="btn btn-red" style="width:100%;padding:14px;font-size:13px" id="tr-submit">Demander Mon Offre</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ JAVASCRIPT ═══ -->
+<script>
+/* ─── DATA ─── */
+const CARS=[
+  {id:'prado',name:'Toyota Land Cruiser Prado',nameAr:'تويوتا لاند كروزر برادو',
+   cat:'SUV 4×4 Luxe',catAr:'دفع رباعي فاخر',price:645000,img:'prado.png',pc:'#FF6B7A',
+   specs:{fr:['204 ch / 2.8L D-4D Turbo Diesel','Boîte Auto 6 rapports + 4×4','7.9 L/100km cycle mixte','0–100 km/h : 9.9s','Vitesse max : 175 km/h','Garantie 3 ans / 100 000 km'],
+          ar:['204 حصان / 2.8 لتر ديزل توربو','ناقل أوتوماتيكي 6 سرعات + دفع رباعي','7.9 لتر / 100 كم','0-100 كم/س : 9.9 ث','السرعة القصوى: 175 كم/س','ضمان 3 سنوات / 100,000 كم']},
+   feats:{fr:['4×4 permanent avec différentiel Torsen','Suspension KDSS + Crawl Control','Cuir perforé, sièges ventilés & chauffants','Écran 12.3", Apple CarPlay & Android Auto','Caméras 360° Multi-Terrain Monitor','Toyota Safety Sense 3.0'],
+          ar:['دفع رباعي دائم مع قفل تفاضلي Torsen','تعليق KDSS ونظام Crawl Control','جلد فاخر مع مقاعد مهواة ومدفأة','شاشة 12.3 بوصة مع Apple CarPlay','كاميرات محيطية 360 درجة','Toyota Safety Sense 3.0']}},
+  {id:'corolla',name:'Toyota Corolla Berline',nameAr:'تويوتا كورولا سيدان',
+   cat:'Berline Hybride',catAr:'سيدان هجينة',price:245000,img:'corolla.png',pc:'#22D3EE',
+   specs:{fr:['140 ch / 1.8L Hybride Auto-Rechargeable','e-CVT Automatique','4.1 L/100km (ultra-économique)','0–100 km/h : 9.2s','Vitesse max : 180 km/h','Hybride 5 ans / 100 000 km'],
+          ar:['140 حصان / 1.8 لتر هجين ذاتي الشحن','ناقل e-CVT أوتوماتيكي','4.1 لتر / 100 كم','0-100 كم/س : 9.2 ث','السرعة القصوى: 180 كم/س','ضمان هجين 5 سنوات / 100,000 كم']},
+   feats:{fr:['Hybride 5ème génération à recharge automatique','Mode 100% électrique EV en ville','Tableau de bord digital 12.3" + écran 10.5"','Climatisation bi-zone Nanoe-X Toyota','Régulateur adaptatif + maintien de voie actif','Full LED & jantes 17" alliage bi-ton'],
+          ar:['الجيل الخامس من الهجين ذاتي الشحن','وضع كهربائي كامل EV داخل المدينة','شاشة قيادة 12.3 + شاشة مركزية 10.5','مكيف مزدوج مع Nanoe-X','مثبت سرعة متكيف + البقاء في المسار','مصابيح Full LED وجنوط 17 بوصة']}},
+  {id:'corolla-cross',name:'Toyota Corolla Cross AWD',nameAr:'تويوتا كورولا كروس AWD',
+   cat:'SUV Crossover AWD',catAr:'كروس أوفر دفع رباعي',price:369000,img:'corolla-cross.png',pc:'#F5B942',
+   specs:{fr:['197 ch / 2.0L Hybride AWD-i Intégrale','e-CVT Intégrale intelligente AWD-i','4.8 L/100km','0–100 km/h : 7.5s','Vitesse max : 180 km/h','Hybride 5 ans / 100 000 km'],
+          ar:['197 حصان / 2.0 لتر هجين دفع رباعي ذكي','دفع رباعي ذكي AWD-i مع e-CVT','4.8 لتر / 100 كم','0-100 كم/س : 7.5 ث','السرعة القصوى: 180 كم/س','ضمان هجين 5 سنوات / 100,000 كم']},
+   feats:{fr:['AWD-i avec moteur électrique arrière indépendant','Toit panoramique & hayon mains-libres','Position surélevée, visibilité optimale','Chargeur induction + 4 ports USB-C','Angle mort BSM + alerte trafic arrière RCTA','Garde au sol parfaite pour routes marocaines'],
+          ar:['دفع رباعي ذكي AWD-i مع محرك خلفي مستقل','سقف بانورامي وباب خلفي كهربائي ذكي','وضعية مرتفعة ورؤية شاملة','شاحن لاسلكي ومنافذ USB-C سريعة','نظام مراقبة النقطة العمياء BSM','ارتفاع مثالي للطرق المغربية']}}
+];
+
+const D={
+  fr:{badge:'CONCESSIONNAIRE TOYOTA',status:'Ouvert · 08:30 — 19:00',location:'Meknès · Toyota Officiel',
+    heroTag:"L'EXCELLENCE AUTOMOBILE, NOTRE ENGAGEMENT",heroTitle:'Auto Meknès<br>Ismailia',
+    heroSub:'Votre concessionnaire agréé Toyota à Meknès. Découvrez la nouvelle génération.',
+    heroCta1:'Voir les Modèles',heroCta2:'WhatsApp Direct',
+    rvTitle:'Donnez votre Avis Google',rvSub:'Votre satisfaction au cœur de nos priorités',rvCta:'Laisser un Avis',
+    secCarsLabel:'SHOWROOM',secCarsName:'Nos Modèles',secCarsDesc:'Trois véhicules Toyota de dernière génération, disponibles immédiatement.',
+    secSvcLabel:'SERVICES',secSvcName:'Comment pouvons-nous vous aider ?',
+    svc1:'Réserver un Essai',svc1s:'Confirmation sous 30 min',
+    svc2:'Comparateur',svc2s:'3 modèles côte à côte',
+    svc3:'Notre Équipe',svc3s:'2 conseillers dédiés',
+    svc4:'Reprise Auto',svc4s:'Offre ferme sous 2h',
+    slogan:"L'excellence automobile,<br>notre engagement.",
+    ftSav:'Showroom & SAV Agréé Toyota',ftNav:'Navigation',ftContact:'Contact Direct',
+    ftL1:'Showroom',ftL2:'Services',ftL3:'Avis Google',ftL4:'Nous trouver',ftWa:'WhatsApp Direct',
+    ftCopy:'© 2026 Auto Meknès Ismailia · Concessionnaire Agréé Toyota · Marketif',
+    mbCall:'Appeler',mbBook:'Essai',mbMaps:'Maps',mbReview:'Avis',
+    fiche:'Fiche Technique',book:'Réserver un Essai',
+    cmpTitle:'Comparateur',cmpSub:'Tarifs en Dirhams TTC',cmpBook:'Réserver',
+    bkTitle:'Réserver un Essai',bkSub:'Confirmation immédiate par WhatsApp',
+    bkLblType:'Type de demande',rb1:'Essai sur Route',rb2:'Devis & Financement',
+    bkLblCar:'Modèle souhaité',bkLblDate:'Date',bkLblTime:'Créneau',
+    bkLblName:'Nom et Prénom',bkLblPhone:'WhatsApp / Téléphone',bkSubmit:'Envoyer via WhatsApp',
+    tmTitle:'Vos Conseillers',tmSub:'Équipe Auto Meknès Ismailia',
+    tm1r:'Ventes Neufs · Hybride & 4×4',tm2r:'Financement · Crédit & Leasing',tmCall:'Appeler',
+    trTitle:'Estimation de Reprise',trSub:'Offre ferme sous 2 heures',
+    trLblM:'Marque & Modèle',trLblY:'Année',trLblK:'Kilométrage',trLblP:'Votre Téléphone',trSubmit:'Demander Mon Offre',
+    dtSub:'Spécifications complètes',dtClose:'Fermer',dtBook:'Réserver cet Essai',
+    specsT:'Spécifications',featT:'Équipements'},
+  ar:{badge:'وكيل تويوتا المعتمد',status:'مفتوح · 08:30 — 19:00',location:'مكناس · تويوتا الرسمي',
+    heroTag:'التميز في عالم السيارات، التزامنا الدائم',heroTitle:'Auto Meknès<br>Ismailia',
+    heroSub:'وكيلكم المعتمد لتويوتا في مكناس. اكتشفوا الجيل الجديد.',
+    heroCta1:'اكتشف الموديلات',heroCta2:'واتساب مباشر',
+    rvTitle:'أضف تقييمك على Google',rvSub:'رضاكم هو أولويتنا دائماً',rvCta:'أضف تقييمك',
+    secCarsLabel:'المعرض',secCarsName:'موديلاتنا',secCarsDesc:'ثلاث سيارات تويوتا من أحدث جيل، متوفرة فوراً.',
+    secSvcLabel:'الخدمات',secSvcName:'كيف يمكننا مساعدتك؟',
+    svc1:'طلب تجربة قيادة',svc1s:'تأكيد خلال 30 دقيقة',
+    svc2:'المقارن',svc2s:'3 موديلات جنباً إلى جنب',
+    svc3:'فريق المبيعات',svc3s:'مستشاران في خدمتكم',
+    svc4:'استبدال سيارتك',svc4s:'عرض خلال ساعتين',
+    slogan:'التميز في عالم السيارات،<br>التزامنا الدائم.',
+    ftSav:'معرض وخدمة ما بعد البيع',ftNav:'التنقل',ftContact:'تواصل مباشر',
+    ftL1:'المعرض',ftL2:'الخدمات',ftL3:'تقييم Google',ftL4:'موقعنا',ftWa:'واتساب مباشر',
+    ftCopy:'© 2026 Auto Meknès Ismailia · وكيل تويوتا المعتمد · Marketif',
+    mbCall:'اتصال',mbBook:'تجربة',mbMaps:'الخريطة',mbReview:'تقييم',
+    fiche:'المواصفات التقنية',book:'طلب تجربة',
+    cmpTitle:'المقارن',cmpSub:'الأسعار بالدرهم شاملة الضريبة',cmpBook:'طلب تجربة',
+    bkTitle:'طلب تجربة قيادة',bkSub:'تأكيد فوري عبر واتساب',
+    bkLblType:'نوع الطلب',rb1:'تجربة قيادة',rb2:'عرض سعر وتمويل',
+    bkLblCar:'الموديل المطلوب',bkLblDate:'التاريخ',bkLblTime:'الوقت',
+    bkLblName:'الاسم الكامل',bkLblPhone:'واتساب / الهاتف',bkSubmit:'إرسال عبر واتساب',
+    tmTitle:'مستشارو المبيعات',tmSub:'فريق Auto Meknès Ismailia',
+    tm1r:'مبيعات الجديدة · هجين ودفع رباعي',tm2r:'التمويل · الائتمان والليزينغ',tmCall:'اتصال',
+    trTitle:'تقييم سيارتك للاستبدال',trSub:'عرض نهائي خلال ساعتين',
+    trLblM:'الماركة والموديل',trLblY:'سنة الصنع',trLblK:'الكيلومترات',trLblP:'هاتفك / واتساب',trSubmit:'احسب عرض الاستبدال',
+    dtSub:'المواصفات الكاملة',dtClose:'إغلاق',dtBook:'طلب تجربة هذا الموديل',
+    specsT:'المواصفات',featT:'التجهيزات'}
+};
+
+let lang='fr',currentCar=null;
+
+function formatPrice(val, l){
+  const num = new Intl.NumberFormat('fr-FR').format(val);
+  if(l === 'ar'){
+    return `<bdi>${num}</bdi> درهم <small>شامل الضريبة</small>`;
+  }
+  return `${num} DH <small>TTC</small>`;
+}
+
+function setLang(l){
+  lang=l;
+  document.documentElement.lang=l;
+  document.body.classList.toggle('ar',l==='ar');
+  document.getElementById('btn-fr').classList.toggle('on',l==='fr');
+  document.getElementById('btn-ar').classList.toggle('on',l==='ar');
+  const d=D[l];
+  const s=(id,v)=>{const e=document.getElementById(id);if(e){if(v.includes('<br>')||v.includes('<small>')||v.includes('<bdi>')){e.innerHTML=v}else{e.textContent=v}}};
+  s('h-badge',d.badge);s('h-status',d.status);s('h-location',d.location);
+  s('hero-tag',d.heroTag);s('hero-title',d.heroTitle);s('hero-sub',d.heroSub);
+  document.querySelector('#hero-cta1 span').textContent=d.heroCta1;
+  document.querySelector('#hero-cta2 span').textContent=d.heroCta2;
+  s('rv-title',d.rvTitle);s('rv-sub',d.rvSub);s('rv-cta',d.rvCta);
+  s('sec-cars-label',d.secCarsLabel);s('sec-cars-name',d.secCarsName);s('sec-cars-desc',d.secCarsDesc);
+  s('sec-svc-label',d.secSvcLabel);s('sec-svc-name',d.secSvcName);
+  s('svc-1',d.svc1);s('svc-1s',d.svc1s);
+  s('svc-2',d.svc2);s('svc-2s',d.svc2s);
+  s('svc-3',d.svc3);s('svc-3s',d.svc3s);
+  s('svc-4',d.svc4);s('svc-4s',d.svc4s);
+  s('slogan-text',d.slogan);
+  s('ft-sav',d.ftSav);s('ft-nav-title',d.ftNav);s('ft-contact-title',d.ftContact);
+  s('ft-l1',d.ftL1);s('ft-l2',d.ftL2);s('ft-l3',d.ftL3);s('ft-l4',d.ftL4);
+  s('ft-wa',d.ftWa);s('ft-copy',d.ftCopy);
+  s('mb-call',d.mbCall);s('mb-book',d.mbBook);s('mb-maps',d.mbMaps);s('mb-review',d.mbReview);
+  
+  // Car buttons
+  s('prado-fiche',d.fiche);s('prado-book',d.book);
+  s('corolla-fiche',d.fiche);s('corolla-book',d.book);
+  s('cross-fiche',d.fiche);s('cross-book',d.book);
+  
+  // Car names, categories & localized prices
+  const isAr=l==='ar';
+  s('prado-cat',isAr?CARS[0].catAr:CARS[0].cat);
+  s('prado-name',isAr?CARS[0].nameAr:'Land Cruiser Prado');
+  s('prado-price',formatPrice(CARS[0].price,l));
+  
+  s('corolla-cat',isAr?CARS[1].catAr:CARS[1].cat);
+  s('corolla-name',isAr?CARS[1].nameAr:'Corolla Berline');
+  s('corolla-price',formatPrice(CARS[1].price,l));
+  
+  s('cross-cat',isAr?CARS[2].catAr:CARS[2].cat);
+  s('cross-name',isAr?CARS[2].nameAr:'Corolla Cross AWD');
+  s('cross-price',formatPrice(CARS[2].price,l));
+  
+  // Modals
+  s('cmp-title',d.cmpTitle);s('cmp-sub',d.cmpSub);
+  s('bk-title',d.bkTitle);s('bk-sub',d.bkSub);
+  s('bk-lbl-type',d.bkLblType);s('rb-1',d.rb1);s('rb-2',d.rb2);
+  s('bk-lbl-car',d.bkLblCar);s('bk-lbl-date',d.bkLblDate);s('bk-lbl-time',d.bkLblTime);
+  s('bk-lbl-name',d.bkLblName);s('bk-lbl-phone',d.bkLblPhone);s('bk-submit',d.bkSubmit);
+  s('tm-title',d.tmTitle);s('tm-sub',d.tmSub);
+  s('tm-1r',d.tm1r);s('tm-2r',d.tm2r);s('tm-c1',d.tmCall);s('tm-c2',d.tmCall);
+  s('tr-title',d.trTitle);s('tr-sub',d.trSub);
+  s('tr-lbl-m',d.trLblM);s('tr-lbl-y',d.trLblY);s('tr-lbl-k',d.trLblK);s('tr-lbl-p',d.trLblP);s('tr-submit',d.trSubmit);
+  s('dt-sub',d.dtSub);s('dt-close',d.dtClose);s('dt-book',d.dtBook);
+  renderCompare();
+}
+
+/* ─── Modals ─── */
+function openModal(id){document.getElementById(id).classList.add('open')}
+function closeModal(id){document.getElementById(id).classList.remove('open')}
+document.querySelectorAll('.modal-bg').forEach(o=>{o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('open')})});
+
+/* ─── Detail ─── */
+function openCarDetail(id){
+  const car=CARS.find(c=>c.id===id);if(!car)return;currentCar=car;
+  const d=D[lang],isAr=lang==='ar';
+  const formattedNum=new Intl.NumberFormat('fr-FR').format(car.price);
+  const badgeText=isAr?`<bdi>${formattedNum}</bdi> درهم`:`${formattedNum} DH`;
+  document.getElementById('dt-title').textContent=isAr?car.nameAr:car.name;
+  document.getElementById('dt-body').innerHTML=`
+    <div class="dt-stage">
+      <img src="${car.img}" alt="${car.name}">
+      <div class="dt-badge" style="color:${car.pc}">${badgeText}</div>
+      <div class="dt-cat"><span class="sc-cat" style="background:rgba(8,8,12,.85);border:1px solid rgba(255,255,255,.2);color:#fff;backdrop-filter:blur(10px);margin:0">${isAr?car.catAr:car.cat}</span></div>
+    </div>
+    <div class="specs-grid2">
+      ${car.specs[lang].map(s=>{const p=s.split(':');return`<div class="spc"><div class="spc-label">${p[0]}</div><div class="spc-val">${p[1]||s}</div></div>`}).join('')}
+    </div>
+    <div class="feat-box">
+      <div class="feat-label">${d.featT}</div>
+      ${car.feats[lang].map(f=>`<div class="feat-item"><span class="feat-check">✓</span><span>${f}</span></div>`).join('')}
+    </div>`;
+  openModal('modal-detail');
+}
+function bookFromDetail(){closeModal('modal-detail');if(currentCar)bookCar(currentCar.name)}
+
+/* ─── Compare ─── */
+function renderCompare(){
+  const d=D[lang],isAr=lang==='ar';
+  document.getElementById('cmp-body').innerHTML=CARS.map(c=>{
+    const formattedNum=new Intl.NumberFormat('fr-FR').format(c.price);
+    const priceText=isAr?`<bdi>${formattedNum}</bdi> درهم`:`${formattedNum} DH`;
+    return `
+    <div class="cmp-col">
+      <div class="cmp-img"><img src="${c.img}" alt="${c.name}"></div>
+      <div class="cmp-info">
+        <div class="cmp-name">${isAr?c.nameAr:c.name}</div>
+        <div class="cmp-price" style="color:${c.pc}">${priceText}</div>
+        ${c.specs[lang].slice(0,4).map(s=>{const p=s.split(':');return`<div class="cmp-row">${p[0]}<strong>${p[1]||s}</strong></div>`}).join('')}
+        <button onclick="bookCar('${c.name}')" class="btn btn-red" style="width:100%;margin-top:12px;font-size:11px">${d.cmpBook}</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+/* ─── Booking ─── */
+function bookCar(name){
+  const sel=document.getElementById('bk-car');
+  for(let i=0;i<sel.options.length;i++){if(sel.options[i].value===name){sel.selectedIndex=i;break}}
+  closeModal('modal-compare');openModal('modal-booking');
+}
+function submitBooking(e){
+  e.preventDefault();
+  const type=document.querySelector('input[name="type"]:checked').value;
+  const car=document.getElementById('bk-car').value;
+  const name=document.getElementById('bk-name').value;
+  const phone=document.getElementById('bk-phone').value;
+  const msg=`Bonjour Auto Meknès Ismailia — ${type}: ${car}. Nom: ${name}, Tél: ${phone}`;
+  window.open(`https://wa.me/212535524768?text=${encodeURIComponent(msg)}`,'_blank');
+  closeModal('modal-booking');
+}
+
+/* ─── Trade-in ─── */
+function submitTradeIn(){
+  const m=document.getElementById('tr-model').value;
+  const y=document.getElementById('tr-year').value;
+  const k=document.getElementById('tr-km').value;
+  const p=document.getElementById('tr-phone').value;
+  const msg=`Demande reprise: ${m} (${y}), ${k} km. Contact: ${p}`;
+  window.open(`https://wa.me/212535524768?text=${encodeURIComponent(msg)}`,'_blank');
+  closeModal('modal-tradein');
+}
+
+/* ─── Scroll reveal ─── */
+const observer=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}});
+},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+/* ─── Header scroll ─── */
+window.addEventListener('scroll',()=>{
+  document.getElementById('header').classList.toggle('scrolled',window.scrollY>60);
+},{passive:true});
+
+/* init */
+renderCompare();
+</script>
+</body>
+</html>
