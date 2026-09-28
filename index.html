@@ -386,14 +386,9 @@ body.ar .reel-bottom{text-align:right}
   padding:18px 20px 20px;display:flex;flex-direction:column;flex:1;
   background:var(--surface);
 }
-.exp-top-row{
-  display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px;
-}
 .exp-model-title{
   font-size:15px;font-weight:900;color:var(--text);letter-spacing:-.01em;
-}
-.exp-loc{
-  font-size:11px;font-weight:700;color:var(--gold);
+  margin-bottom:8px;
 }
 .exp-desc{
   font-size:12.5px;line-height:1.55;color:var(--text2);font-weight:500;
@@ -1019,9 +1014,9 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
 <section class="exp-sec" id="experience">
   <div class="container">
     <div class="exp-header reveal">
-      <div class="sec-label" id="sec-exp-label">LIVRAISONS SHOWROOM</div>
-      <div class="sec-title" id="sec-exp-title">Moments de Livraison à Meknès</div>
-      <p class="sec-desc" id="sec-exp-desc">Chaque remise de clés est une célébration. Bienvenue dans la famille Toyota.</p>
+      <div class="sec-label" id="sec-exp-label">LIVRAISONS CLIENTS</div>
+      <div class="sec-title" id="sec-exp-title">Moments de Livraison Clients</div>
+      <p class="sec-desc" id="sec-exp-desc">La joie et la fierté de nos clients lors de la remise des clés. Bienvenue dans la famille Toyota.</p>
     </div>
     <div class="exp-grid reveal reveal-delay-1">
       <!-- Moment 1: kunde1.webp -->
@@ -1030,10 +1025,7 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
           <img src="kunde1.webp" alt="Livraison Toyota Corolla Berline" class="exp-img" loading="lazy" decoding="async">
         </div>
         <div class="exp-content">
-          <div class="exp-top-row">
-            <span class="exp-model-title" id="exp-m1-title">Toyota Corolla Berline</span>
-            <span class="exp-loc" id="exp-m1-loc">Showroom Meknès</span>
-          </div>
+          <div class="exp-model-title" id="exp-m1-title">Toyota Corolla Berline</div>
           <p class="exp-desc" id="exp-m1-desc">Remise des clés et accueil privilégié par l'équipe commerciale pour cette nouvelle Corolla Berline.</p>
         </div>
       </div>
@@ -1044,10 +1036,7 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
           <img src="kunde2.webp" alt="Livraison Toyota Corolla Cross Hybride" class="exp-img" loading="lazy" decoding="async">
         </div>
         <div class="exp-content">
-          <div class="exp-top-row">
-            <span class="exp-model-title" id="exp-m2-title">Corolla Cross AWD Hybride</span>
-            <span class="exp-loc" id="exp-m2-loc">Nouvelle Acquisition</span>
-          </div>
+          <div class="exp-model-title" id="exp-m2-title">Corolla Cross AWD Hybride</div>
           <p class="exp-desc" id="exp-m2-desc">Félicitations à notre client pour son choix de la technologie hybride avec l'accompagnement de Khalid Alami.</p>
         </div>
       </div>
@@ -1058,10 +1047,7 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
           <img src="kunde3.webp" alt="Préparation & Livraison Land Cruiser Prado" class="exp-img" loading="lazy" decoding="async">
         </div>
         <div class="exp-content">
-          <div class="exp-top-row">
-            <span class="exp-model-title" id="exp-m3-title">Nouveau Land Cruiser Prado</span>
-            <span class="exp-loc" id="exp-m3-loc">Plaque WW & Remise</span>
-          </div>
+          <div class="exp-model-title" id="exp-m3-title">Nouveau Land Cruiser Prado</div>
           <p class="exp-desc" id="exp-m3-desc">Pose de la plaque WW et mise en main complète du légendaire baroudeur Toyota 4×4.</p>
         </div>
       </div>
@@ -1578,10 +1564,10 @@ const D={
     secReelsLabel:'EXPÉRIENCE SHOWROOM',secReelsTitle:'Immersion Vidéo',secReelsDesc:"Découvrez l'atmosphère de notre showroom et l'excellence Toyota en mouvement.",
     reelB1Title:'Land Cruiser Prado',reelB1Sub:"L'icône tout-terrain à Meknès",
     reelB2Title:'Gamme Hybride Toyota',reelB2Sub:'Innovation, confort & efficience',
-    secExpLabel:'LIVRAISONS SHOWROOM',secExpTitle:'Moments de Livraison à Meknès',secExpDesc:'Chaque remise de clés est une célébration. Bienvenue dans la famille Toyota.',
-    expM1Title:'Toyota Corolla Berline',expM1Loc:'Showroom Meknès',expM1Desc:"Remise des clés et accueil privilégié par l'équipe commerciale pour cette nouvelle Corolla Berline.",
-    expM2Title:'Corolla Cross AWD Hybride',expM2Loc:'Nouvelle Acquisition',expM2Desc:"Félicitations à notre client pour son choix de la technologie hybride avec l'accompagnement de Khalid Alami.",
-    expM3Title:'Nouveau Land Cruiser Prado',expM3Loc:'Plaque WW & Remise',expM3Desc:'Pose de la plaque WW et mise en main complète du légendaire baroudeur Toyota 4×4.',
+    secExpLabel:'LIVRAISONS CLIENTS',secExpTitle:'Moments de Livraison Clients',secExpDesc:'La joie et la fierté de nos clients lors de la remise des clés. Bienvenue dans la famille Toyota.',
+    expM1Title:'Toyota Corolla Berline',expM1Desc:"Remise des clés et accueil privilégié par l'équipe commerciale pour cette nouvelle Corolla Berline.",
+    expM2Title:'Corolla Cross AWD Hybride',expM2Desc:"Félicitations à notre client pour son choix de la technologie hybride avec l'accompagnement de Khalid Alami.",
+    expM3Title:'Nouveau Land Cruiser Prado',expM3Desc:'Pose de la plaque WW et mise en main complète du légendaire baroudeur Toyota 4×4.',
     secCarsLabel:'SHOWROOM',secCarsName:'Nos Modèles',secCarsDesc:'Trois véhicules Toyota de dernière génération, disponibles immédiatement.',
     catCollapse:'Réduire le catalogue',catExpand:'Découvrir nos 3 modèles Toyota',catBadgeCount:'3 Modèles',
     secSvcLabel:'SERVICES',secSvcName:'Comment pouvons-nous vous aider ?',
@@ -1634,10 +1620,10 @@ const D={
     secReelsLabel:'تجربة المعرض',secReelsTitle:'جولة فيديو حصرية',secReelsDesc:'اكتشفوا أجواء صالة العرض وتميز سيارات تويوتا عن قرب وبشكل ديناميكي.',
     reelB1Title:'لاند كروزر برادو',reelB1Sub:'أيقونة الدفع الرباعي في مكناس',
     reelB2Title:'تشكيلة تويوتا الهجينة',reelB2Sub:'ابتكار، راحة واقتصاد مثالي',
-    secExpLabel:'تسليم السيارات في المعرض',secExpTitle:'لحظات تسليم السيارات بمكناس',secExpDesc:'كل تسليم مفاتيح هو احتفال خاص. مرحباً بكم في عائلة تويوتا.',
-    expM1Title:'تويوتا كورولا سيدان',expM1Loc:'صالة العرض بمكناس',expM1Desc:'تسليم مفاتيح السيارة واستقبال خاص لزبوننا الكريم رفقة فريق المبيعات.',
-    expM2Title:'كورولا كروس AWD هجينة',expM2Loc:'سيارة جديدة',expM2Desc:'تهانينا لزبوننا العزيز لاختياره التكنولوجيا الهجينة المتطورة مع مرافقة السيد خالد العلمي.',
-    expM3Title:'لاند كروزر برادو الجديد',expM3Loc:'تركيب لوحة WW والتسليم',expM3Desc:'لحظة تركيب لوحة الترقيم المؤقتة WW وإعداد سيارة لاند كروزر برادو للتسليم.',
+    secExpLabel:'تسليم سيارات الزبناء',secExpTitle:'لحظات تسليم سيارات زبنائنا الكرام',secExpDesc:'فرحة وثقة زبنائنا الكرام عند استلام مفاتيح سياراتهم الجديدة. مرحباً بكم في عائلة تويوتا.',
+    expM1Title:'تويوتا كورولا سيدان',expM1Desc:'تسليم مفاتيح السيارة واستقبال خاص لزبوننا الكريم رفقة فريق المبيعات.',
+    expM2Title:'كورولا كروس AWD هجينة',expM2Desc:'تهانينا لزبوننا العزيز لاختياره التكنولوجيا الهجينة المتطورة مع مرافقة السيد خالد العلمي.',
+    expM3Title:'لاند كروزر برادو الجديد',expM3Desc:'لحظة تركيب لوحة الترقيم المؤقتة WW وإعداد سيارة لاند كروزر برادو للتسليم.',
     secCarsLabel:'المعرض',secCarsName:'موديلاتنا',secCarsDesc:'ثلاث سيارات تويوتا من أحدث جيل، متوفرة فوراً.',
     catCollapse:'طي الكتالوج',catExpand:'عرض موديلات تويوتا (3)',catBadgeCount:'3 موديلات',
     secSvcLabel:'الخدمات',secSvcName:'كيف يمكننا مساعدتك؟',
@@ -1951,9 +1937,9 @@ function setLang(l){
 
   // Experience & Livraisons Section
   s('sec-exp-label',d.secExpLabel);s('sec-exp-title',d.secExpTitle);s('sec-exp-desc',d.secExpDesc);
-  s('exp-m1-title',d.expM1Title);s('exp-m1-loc',d.expM1Loc);s('exp-m1-desc',d.expM1Desc);
-  s('exp-m2-title',d.expM2Title);s('exp-m2-loc',d.expM2Loc);s('exp-m2-desc',d.expM2Desc);
-  s('exp-m3-title',d.expM3Title);s('exp-m3-loc',d.expM3Loc);s('exp-m3-desc',d.expM3Desc);
+  s('exp-m1-title',d.expM1Title);s('exp-m1-desc',d.expM1Desc);
+  s('exp-m2-title',d.expM2Title);s('exp-m2-desc',d.expM2Desc);
+  s('exp-m3-title',d.expM3Title);s('exp-m3-desc',d.expM3Desc);
 
   // Showroom
   s('sec-cars-label',d.secCarsLabel);s('sec-cars-name',d.secCarsName);s('sec-cars-desc',d.secCarsDesc);
