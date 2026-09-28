@@ -1570,16 +1570,42 @@ function updateFinCalc(){
 }
 
 function submitFinLead(){
+  const isAr = lang === 'ar';
   const car = CARS.find(c => c.id === finState.carId) || CARS[0];
   const res = calcMonthly(car.price, finState.appPct, finState.months);
-  const name = document.getElementById('fin-name').value || 'Client Showroom';
+  const name = document.getElementById('fin-name').value || (isAr ? 'زبون المعرض' : 'Client Showroom');
   const phone = document.getElementById('fin-phone').value || '-';
-  const chosenColor = selectedColors[car.id] || car.colors[0];
-  const colText = chosenColor ? ` (Couleur: ${chosenColor.name})` : '';
+  const chosenColObj = selectedColors[car.id] || car.colors[0];
+  const colName = chosenColObj ? (isAr ? chosenColObj.nameAr : chosenColObj.name) : '-';
+  const carDisplayName = isAr ? car.nameAr : car.name;
   const fNum = n => new Intl.NumberFormat('fr-FR').format(n);
   const waNum = (CONFIG && CONFIG.contact && CONFIG.contact.whatsappNumber) ? CONFIG.contact.whatsappNumber : '212535524768';
   
-  const msg = `Bonjour Auto Meknès Ismailia — Simulation Financement: ${car.name}${colText}. Apport: ${fNum(res.downPayment)} DH (${finState.appPct}%), Durée: ${finState.months} mois. Mensualité estimée: ${fNum(res.monthly)} DH/mois. Nom: ${name}, Tél: ${phone}`;
+  let msg = '';
+  if(isAr){
+    msg = `📍 *Auto Meknès Ismailia — محاكاة تمويل سيارة*\n\n` +
+          `🚘 *الموديل :* ${carDisplayName}\n` +
+          `🎨 *اللون :* ${colName}\n` +
+          `💰 *سعر السيارة :* ${fNum(car.price)} درهم\n` +
+          `💵 *الدفعة الأولى :* ${fNum(res.downPayment)} درهم (${finState.appPct}%)\n` +
+          `⏳ *مدة السداد :* ${finState.months} شهر\n` +
+          `📊 *القسط الشهري التقديري :* *${fNum(res.monthly)} درهم / شهر*\n\n` +
+          `👤 *معلومات الزبون :*\n` +
+          `• *الاسم الكامل :* ${name}\n` +
+          `• *رقم الهاتف :* ${phone}`;
+  } else {
+    msg = `📍 *Auto Meknès Ismailia — Simulation de Financement*\n\n` +
+          `🚘 *Modèle :* ${carDisplayName}\n` +
+          `🎨 *Couleur :* ${colName}\n` +
+          `💰 *Prix véhicule :* ${fNum(car.price)} DH TTC\n` +
+          `💵 *Apport initial :* ${fNum(res.downPayment)} DH (${finState.appPct}%)\n` +
+          `⏳ *Durée de remboursement :* ${finState.months} mois\n` +
+          `📊 *Mensualité estimée :* *${fNum(res.monthly)} DH / mois*\n\n` +
+          `👤 *Coordonnées client :*\n` +
+          `• *Nom & Prénom :* ${name}\n` +
+          `• *Téléphone :* ${phone}`;
+  }
+  
   window.open(`https://wa.me/${waNum}?text=${encodeURIComponent(msg)}`, '_blank');
   closeModal('modal-finance');
 }
@@ -1744,34 +1770,76 @@ function bookCar(name){
 }
 function submitBooking(e){
   e.preventDefault();
+  const isAr = lang === 'ar';
   const typeEl = document.querySelector('input[name="type"]:checked');
-  const type = typeEl ? typeEl.value : 'Conseil & Achat';
+  const typeVal = typeEl ? typeEl.value : 'Conseil & Achat';
   const carName = document.getElementById('bk-car').value;
   const carObj = CARS.find(c => c.name === carName);
-  const chosenColor = carObj && selectedColors[carObj.id] ? ` (Couleur: ${selectedColors[carObj.id].name})` : '';
-  const dateEl = document.getElementById('bk-date');
-  const date = dateEl ? dateEl.value : '';
-  const timeEl = document.getElementById('bk-time');
-  const time = timeEl ? timeEl.value : '';
-  const name = document.getElementById('bk-name').value || 'Client Showroom';
+  const chosenColObj = carObj && selectedColors[carObj.id] ? selectedColors[carObj.id] : (carObj ? carObj.colors[0] : null);
+  const colName = chosenColObj ? (isAr ? chosenColObj.nameAr : chosenColObj.name) : '-';
+  const carDisplayName = carObj ? (isAr ? carObj.nameAr : carObj.name) : carName;
+  const date = document.getElementById('bk-date') ? document.getElementById('bk-date').value : '-';
+  const time = document.getElementById('bk-time') ? document.getElementById('bk-time').value : '-';
+  const name = document.getElementById('bk-name').value || (isAr ? 'زبون المعرض' : 'Client Showroom');
   const phone = document.getElementById('bk-phone').value || '-';
-  const dateTimeStr = date ? ` Date souhaitée: ${date} (${time}).` : '';
   const waNum = (CONFIG && CONFIG.contact && CONFIG.contact.whatsappNumber) ? CONFIG.contact.whatsappNumber : '212535524768';
   
-  const msg = `Bonjour Auto Meknès Ismailia — Demande de Rendez-vous (${type}): ${carName}${chosenColor}.${dateTimeStr} Nom: ${name}, Tél: ${phone}`;
+  let msg = '';
+  if(isAr){
+    msg = `📍 *Auto Meknès Ismailia — طلب موعد واستشارة*\n\n` +
+          `📋 *نوع الطلب :* ${typeVal === 'Conseil & Achat' ? 'استشارة وشراء سيارة' : 'عرض سعر وتمويل'}\n` +
+          `🚘 *السيارة :* ${carDisplayName}\n` +
+          `🎨 *اللون المختار :* ${colName}\n` +
+          `📅 *التاريخ المطلوب :* ${date}\n` +
+          `⏰ *التوقيت :* ${time}\n\n` +
+          `👤 *معلومات الزبون :*\n` +
+          `• *الاسم الكامل :* ${name}\n` +
+          `• *رقم الهاتف :* ${phone}`;
+  } else {
+    msg = `📍 *Auto Meknès Ismailia — Demande de Rendez-vous*\n\n` +
+          `📋 *Objet :* ${typeVal}\n` +
+          `🚘 *Véhicule :* ${carDisplayName}\n` +
+          `🎨 *Couleur choisie :* ${colName}\n` +
+          `📅 *Date souhaitée :* ${date}\n` +
+          `⏰ *Créneau horaire :* ${time}\n\n` +
+          `👤 *Coordonnées client :*\n` +
+          `• *Nom & Prénom :* ${name}\n` +
+          `• *Téléphone :* ${phone}`;
+  }
+  
   window.open(`https://wa.me/${waNum}?text=${encodeURIComponent(msg)}`, '_blank');
   closeModal('modal-booking');
 }
 
 /* ─── Trade-in ─── */
 function submitTradeIn(){
-  const m=document.getElementById('tr-model').value;
-  const y=document.getElementById('tr-year').value;
-  const k=document.getElementById('tr-km').value;
-  const p=document.getElementById('tr-phone').value;
+  const isAr = lang === 'ar';
+  const m = document.getElementById('tr-model').value || '-';
+  const y = document.getElementById('tr-year').value || '-';
+  const k = document.getElementById('tr-km').value || '-';
+  const p = document.getElementById('tr-phone').value || '-';
   const waNum = (CONFIG && CONFIG.contact && CONFIG.contact.whatsappNumber) ? CONFIG.contact.whatsappNumber : '212535524768';
-  const msg=`Demande reprise: ${m} (${y}), ${k} km. Contact: ${p}`;
-  window.open(`https://wa.me/${waNum}?text=${encodeURIComponent(msg)}`,'_blank');
+  
+  let msg = '';
+  if(isAr){
+    msg = `📍 *Auto Meknès Ismailia — تقييم استبدال سيارة*\n\n` +
+          `🚗 *معلومات السيارة المراد استبدالها :*\n` +
+          `• *الماركة والموديل :* ${m}\n` +
+          `• *سنة الصنع :* ${y}\n` +
+          `• *الكيلومترات :* ${k} كم\n\n` +
+          `👤 *معلومات التواصل :*\n` +
+          `• *رقم الهاتف :* ${p}`;
+  } else {
+    msg = `📍 *Auto Meknès Ismailia — Estimation de Reprise Auto*\n\n` +
+          `🚗 *Véhicule à reprendre :*\n` +
+          `• *Marque & Modèle :* ${m}\n` +
+          `• *Année :* ${y}\n` +
+          `• *Kilométrage :* ${k} km\n\n` +
+          `👤 *Contact client :*\n` +
+          `• *Téléphone :* ${p}`;
+  }
+  
+  window.open(`https://wa.me/${waNum}?text=${encodeURIComponent(msg)}`, '_blank');
   closeModal('modal-tradein');
 }
 
