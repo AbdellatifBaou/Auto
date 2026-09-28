@@ -694,7 +694,7 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
 <header class="header" id="header">
   <div class="header-inner">
     <a href="#" class="logo-group" aria-label="Auto Meknès Ismailia">
-      <div class="logo-img"><img src="logo.png" alt="Auto Meknès Ismailia"></div>
+      <div class="logo-img"><img src="logo.webp" alt="Auto Meknès Ismailia" width="56" height="56" fetchpriority="high"></div>
     </a>
     <div class="header-actions">
       <div class="pill pill-open">
@@ -713,7 +713,7 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
 <section class="hero">
   <div class="hero-glow"></div>
   <div class="hero-logo-wrap">
-    <img src="logo.png" alt="Auto Meknès Ismailia Logo" class="hero-logo">
+    <img src="logo.webp" alt="Auto Meknès Ismailia Logo" class="hero-logo" width="84" height="84" fetchpriority="high">
   </div>
   <div class="hero-tagline" id="hero-tag">L'EXCELLENCE AUTOMOBILE, NOTRE ENGAGEMENT</div>
   <h1 class="hero-title" id="hero-title">Auto Meknès<br>Ismailia</h1>
@@ -729,7 +729,7 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
     </a>
   </div>
   <div class="hero-car-wrap">
-    <img src="heronew.png" alt="Toyota Corolla Prestige Open Doors">
+    <img src="heronew.webp" alt="Toyota Corolla Prestige Open Doors" fetchpriority="high" decoding="async">
     <div class="hero-ground"></div>
   </div>
 </section>
@@ -770,7 +770,7 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
       <div class="sc-visual">
         <div class="sc-stage">
           <div class="sc-stage-bg"></div>
-          <img src="prado.png" alt="Land Cruiser Prado">
+          <img src="prado.webp" alt="Land Cruiser Prado" loading="lazy" decoding="async">
           <div class="sc-beam"></div>
         </div>
       </div>
@@ -797,7 +797,7 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
       <div class="sc-visual">
         <div class="sc-stage">
           <div class="sc-stage-bg"></div>
-          <img src="corolla.png" alt="Corolla Berline Hybride">
+          <img src="corolla.webp" alt="Corolla Berline Hybride" loading="lazy" decoding="async">
           <div class="sc-beam"></div>
         </div>
       </div>
@@ -824,7 +824,7 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
       <div class="sc-visual">
         <div class="sc-stage">
           <div class="sc-stage-bg"></div>
-          <img src="corolla-cross.png" alt="Corolla Cross AWD Hybride">
+          <img src="corolla-cross.webp" alt="Corolla Cross AWD Hybride" loading="lazy" decoding="async">
           <div class="sc-beam"></div>
         </div>
       </div>
@@ -1044,7 +1044,7 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
     </div>
     <div class="modal-body">
       <div class="tm-card">
-        <img src="team1.png" class="tm-photo" alt="Karim Alami">
+        <img src="team1.webp" class="tm-photo" alt="Karim Alami" loading="lazy" decoding="async">
         <div>
           <div class="tm-name">Karim Alami</div>
           <div class="tm-role" id="tm-1r">Ventes Neufs · Hybride & 4×4</div>
@@ -1055,7 +1055,7 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
         </div>
       </div>
       <div class="tm-card">
-        <img src="team2.png" class="tm-photo" alt="Siham Bennani">
+        <img src="team2.webp" class="tm-photo" alt="Siham Bennani" loading="lazy" decoding="async">
         <div>
           <div class="tm-name">Siham Bennani</div>
           <div class="tm-role" id="tm-2r">Financement · Crédit & Leasing</div>
@@ -1094,19 +1094,19 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
 /* ─── DATA ─── */
 const CARS=[
   {id:'prado',name:'Toyota Land Cruiser Prado',nameAr:'تويوتا لاند كروزر برادو',
-   cat:'SUV 4×4 Luxe',catAr:'دفع رباعي فاخر',price:645000,img:'prado.png',pc:'#FF6B7A',
+   cat:'SUV 4×4 Luxe',catAr:'دفع رباعي فاخر',price:645000,img:'prado.webp',pc:'#FF6B7A',
    specs:{fr:['204 ch / 2.8L D-4D Turbo Diesel','Boîte Auto 6 rapports + 4×4','7.9 L/100km cycle mixte','0–100 km/h : 9.9s','Vitesse max : 175 km/h','Garantie 3 ans / 100 000 km'],
           ar:['204 حصان / 2.8 لتر ديزل توربو','ناقل أوتوماتيكي 6 سرعات + دفع رباعي','7.9 لتر / 100 كم','0-100 كم/س : 9.9 ث','السرعة القصوى: 175 كم/س','ضمان 3 سنوات / 100,000 كم']},
    feats:{fr:['4×4 permanent avec différentiel Torsen','Suspension KDSS + Crawl Control','Cuir perforé, sièges ventilés & chauffants','Écran 12.3", Apple CarPlay & Android Auto','Caméras 360° Multi-Terrain Monitor','Toyota Safety Sense 3.0'],
           ar:['دفع رباعي دائم مع قفل تفاضلي Torsen','تعليق KDSS ونظام Crawl Control','جلد فاخر مع مقاعد مهواة ومدفأة','شاشة 12.3 بوصة مع Apple CarPlay','كاميرات محيطية 360 درجة','Toyota Safety Sense 3.0']}},
   {id:'corolla',name:'Toyota Corolla Berline',nameAr:'تويوتا كورولا سيدان',
-   cat:'Berline Hybride',catAr:'سيدان هجينة',price:245000,img:'corolla.png',pc:'#22D3EE',
+   cat:'Berline Hybride',catAr:'سيدان هجينة',price:245000,img:'corolla.webp',pc:'#22D3EE',
    specs:{fr:['140 ch / 1.8L Hybride Auto-Rechargeable','e-CVT Automatique','4.1 L/100km (ultra-économique)','0–100 km/h : 9.2s','Vitesse max : 180 km/h','Hybride 5 ans / 100 000 km'],
           ar:['140 حصان / 1.8 لتر هجين ذاتي الشحن','ناقل e-CVT أوتوماتيكي','4.1 لتر / 100 كم','0-100 كم/س : 9.2 ث','السرعة القصوى: 180 كم/س','ضمان هجين 5 سنوات / 100,000 كم']},
    feats:{fr:['Hybride 5ème génération à recharge automatique','Mode 100% électrique EV en ville','Tableau de bord digital 12.3" + écran 10.5"','Climatisation bi-zone Nanoe-X Toyota','Régulateur adaptatif + maintien de voie actif','Full LED & jantes 17" alliage bi-ton'],
           ar:['الجيل الخامس من الهجين ذاتي الشحن','وضع كهربائي كامل EV داخل المدينة','شاشة قيادة 12.3 + شاشة مركزية 10.5','مكيف مزدوج مع Nanoe-X','مثبت سرعة متكيف + البقاء في المسار','مصابيح Full LED وجنوط 17 بوصة']}},
   {id:'corolla-cross',name:'Toyota Corolla Cross AWD',nameAr:'تويوتا كورولا كروس AWD',
-   cat:'SUV Crossover AWD',catAr:'كروس أوفر دفع رباعي',price:369000,img:'corolla-cross.png',pc:'#F5B942',
+   cat:'SUV Crossover AWD',catAr:'كروس أوفر دفع رباعي',price:369000,img:'corolla-cross.webp',pc:'#F5B942',
    specs:{fr:['197 ch / 2.0L Hybride AWD-i Intégrale','e-CVT Intégrale intelligente AWD-i','4.8 L/100km','0–100 km/h : 7.5s','Vitesse max : 180 km/h','Hybride 5 ans / 100 000 km'],
           ar:['197 حصان / 2.0 لتر هجين دفع رباعي ذكي','دفع رباعي ذكي AWD-i مع e-CVT','4.8 لتر / 100 كم','0-100 كم/س : 7.5 ث','السرعة القصوى: 180 كم/س','ضمان هجين 5 سنوات / 100,000 كم']},
    feats:{fr:['AWD-i avec moteur électrique arrière indépendant','Toit panoramique & hayon mains-libres','Position surélevée, visibilité optimale','Chargeur induction + 4 ports USB-C','Angle mort BSM + alerte trafic arrière RCTA','Garde au sol parfaite pour routes marocaines'],
