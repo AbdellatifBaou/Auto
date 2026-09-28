@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Auto Meknès Ismailia — Tableau de Bord Administrateur</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#08080C">
+<link rel="icon" type="image/webp" href="logo.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --red:#EB0A1E;--red-glow:rgba(235,10,30,.35);
+  --bg:#08080C;--surface:#111118;--surface2:#181822;--surface3:#22222E;
+  --border:rgba(255,255,255,.08);--border2:rgba(255,255,255,.16);
+  --text:#F2F2F8;--text2:#8C8CA8;--text3:#565670;
+  --gold:#F5B942;--emerald:#34D399;--cyan:#22D3EE;
+  --radius:16px;
+}
+html,body{height:100%}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:'Montserrat',system-ui,sans-serif;
+  line-height:1.5;overflow-x:hidden;
+  -webkit-tap-highlight-color:transparent;
+}
+
+/* Background gradient blobs */
+.ambient{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(140px);opacity:.12}
+.orb-1{width:500px;height:500px;background:var(--red);top:-10%;left:-10%}
+.orb-2{width:450px;height:450px;background:#2563eb;bottom:-10%;right:-10%}
+
+/* App Layout */
+.app{position:relative;z-index:1;min-height:100%;display:flex;flex-direction:column}
+
+/* Top Navbar */
+.dash-nav{
+  background:rgba(17,17,24,.85);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  padding:14px 24px;display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:40;
+}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--text)}
+.brand-logo{width:38px;height:38px;border-radius:10px;border:1px solid var(--border2);background:#000;padding:2px}
+.brand-logo img{width:100%;height:100%;object-fit:contain}
+.brand-title{font-size:15px;font-weight:800;letter-spacing:-.3px}
+.brand-badge{
+  font-size:10px;font-weight:700;color:var(--gold);
+  background:rgba(245,185,66,.12);border:1px solid rgba(245,185,66,.25);
+  padding:2px 8px;border-radius:99px;margin-left:6px;
+}
+.nav-actions{display:flex;align-items:center;gap:12px}
+
+/* Main Container */
+.main-wrap{flex:1;max-width:1100px;width:100%;margin:0 auto;padding:24px 20px 60px}
+
+/* Auth Card */
+#auth-gate{
+  position:fixed;inset:0;z-index:100;
+  background:rgba(8,8,12,.95);backdrop-filter:blur(24px);
+  display:flex;align-items:center;justify-content:center;padding:20px;
+}
+.auth-box{
+  background:var(--surface);border:1px solid var(--border2);
+  border-radius:24px;padding:36px;width:100%;max-width:400px;text-align:center;
+  box-shadow:0 24px 60px rgba(0,0,0,.7);
+}
+.auth-logo{width:70px;height:70px;margin:0 auto 16px;border-radius:18px;border:1px solid var(--border2);background:#000;padding:6px}
+.auth-logo img{width:100%;height:100%;object-fit:contain}
+.auth-title{font-size:20px;font-weight:800;margin-bottom:6px}
+.auth-desc{font-size:13px;color:var(--text2);margin-bottom:24px}
+.pin-input{
+  width:100%;padding:14px 18px;border-radius:14px;
+  background:var(--surface2);border:1px solid var(--border2);
+  color:var(--text);font-size:20px;font-weight:800;text-align:center;
+  letter-spacing:6px;outline:none;margin-bottom:16px;transition:border-color .2s;
+}
+.pin-input:focus{border-color:var(--red);box-shadow:0 0 0 3px var(--red-glow)}
+
+/* Tab Bar */
+.tabs-header{
+  display:flex;gap:8px;overflow-x:auto;padding-bottom:12px;margin-bottom:24px;
+  border-bottom:1px solid var(--border);scrollbar-width:none;
+}
+.tabs-header::-webkit-scrollbar{display:none}
+.tab-btn{
+  background:transparent;border:1px solid transparent;color:var(--text2);
+  padding:10px 18px;border-radius:12px;font-size:13px;font-weight:700;
+  cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:8px;
+  transition:all .2s;font-family:inherit;
+}
+.tab-btn:hover{color:var(--text);background:var(--surface)}
+.tab-btn.active{
+  background:var(--surface2);color:var(--text);border-color:var(--border2);
+  box-shadow:0 4px 14px rgba(0,0,0,.3);
+}
+
+/* Tab Panels */
+.tab-pane{display:none}
+.tab-pane.active{display:block;animation:fadeUp .25s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* Section Cards */
+.card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:24px;margin-bottom:20px;
+}
+.card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+.card-title{font-size:16px;font-weight:800;display:flex;align-items:center;gap:10px}
+.card-desc{font-size:12px;color:var(--text2);margin-top:2px}
+
+/* Forms */
+.form-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.fg{margin-bottom:16px}
+.fg:last-child{margin-bottom:0}
+.fg label{
+  display:block;font-size:11px;font-weight:700;letter-spacing:.5px;
+  text-transform:uppercase;color:var(--text2);margin-bottom:6px;
+}
+.fg .hint{font-size:11px;color:var(--text3);margin-top:4px}
+.input, .select{
+  width:100%;padding:11px 14px;border-radius:12px;
+  background:var(--surface2);border:1px solid var(--border);
+  color:var(--text);font-size:13px;font-weight:500;font-family:inherit;
+  outline:none;transition:all .2s;
+}
+.input:focus, .select:focus{border-color:var(--red);box-shadow:0 0 0 3px var(--red-glow)}
+.input-prefix{display:flex;align-items:center;background:var(--surface2);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.input-prefix span{padding:0 12px;font-size:12px;font-weight:700;color:var(--text3);background:var(--surface3);border-right:1px solid var(--border)}
+.input-prefix .input{border:none;border-radius:0}
+
+/* Buttons */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:10px 20px;border-radius:12px;font-size:13px;font-weight:700;
+  cursor:pointer;border:1px solid transparent;transition:all .2s;
+  font-family:inherit;text-decoration:none;
+}
+.btn-red{background:var(--red);color:#fff;box-shadow:0 4px 18px var(--red-glow)}
+.btn-red:hover{background:#d40819;transform:translateY(-1px)}
+.btn-glass{background:rgba(255,255,255,.05);border-color:var(--border2);color:var(--text)}
+.btn-glass:hover{background:rgba(255,255,255,.1);color:#fff}
+.btn-emerald{background:rgba(52,211,153,.15);border-color:rgba(52,211,153,.35);color:var(--emerald)}
+.btn-emerald:hover{background:rgba(52,211,153,.25)}
+
+/* Floating bottom save bar */
+.save-bar{
+  position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
+  background:rgba(17,17,24,.92);backdrop-filter:blur(24px);
+  border:1px solid var(--border2);border-radius:99px;
+  padding:10px 20px;display:flex;align-items:center;gap:16px;
+  box-shadow:0 16px 40px rgba(0,0,0,.6);z-index:30;
+}
+.save-status{font-size:12px;font-weight:600;color:var(--text2);display:flex;align-items:center;gap:8px}
+.status-dot{width:8px;height:8px;border-radius:50%;background:var(--emerald)}
+
+/* Toast */
+#toast{
+  position:fixed;top:24px;right:24px;z-index:200;
+  background:var(--surface2);border:1px solid var(--border2);
+  border-radius:14px;padding:14px 20px;font-size:13px;font-weight:700;
+  box-shadow:0 12px 30px rgba(0,0,0,.5);display:none;align-items:center;gap:10px;
+}
+#toast.show{display:flex;animation:fadeUp .25s ease}
+#toast.success{border-color:var(--emerald);color:var(--emerald)}
+#toast.error{border-color:var(--red);color:#ff7885}
+
+@media(max-width:768px){
+  .dash-nav{padding:12px 16px}
+  .main-wrap{padding:16px 12px 100px}
+  .save-bar{width:calc(100% - 32px);justify-content:space-between;border-radius:18px}
+}
+</style>
+</head>
+<body>
+
+<div class="ambient">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+</div>
+
+<!-- ═══ PIN AUTH GATE ═══ -->
+<div id="auth-gate">
+  <div class="auth-box">
+    <div class="auth-logo"><img src="logo.webp" alt="Logo"></div>
+    <div class="auth-title">Espace Administrateur</div>
+    <div class="auth-desc">Veuillez saisir votre code PIN de sécurité</div>
+    <form onsubmit="handleAuth(event)">
+      <input type="password" id="pin-input" class="pin-input" placeholder="••••" maxlength="8" autofocus required>
+      <button type="submit" class="btn btn-red" style="width:100%;padding:14px">Déverrouiller le Tableau</button>
+    </form>
+    <div style="font-size:11px;color:var(--text3);margin-top:14px">Code PIN par défaut : <strong>2026</strong></div>
+  </div>
+</div>
+
+<!-- ═══ DASHBOARD INTERFACE ═══ -->
+<div class="app">
+  <header class="dash-nav">
+    <div class="brand">
+      <div class="brand-logo"><img src="logo.webp" alt="Logo"></div>
+      <div>
+        <span class="brand-title">Auto Meknès Ismailia</span>
+        <span class="brand-badge">Admin Hub</span>
+      </div>
+    </div>
+    <div class="nav-actions">
+      <a href="index.html" target="_blank" class="btn btn-glass" style="font-size:12px;padding:8px 14px">
+        <span>👁️ Voir le Site</span>
+      </a>
+      <button onclick="logout()" class="btn btn-glass" style="font-size:12px;padding:8px 14px">
+        <span>🔒 Verrouiller</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="main-wrap">
+    <!-- Tab Bar -->
+    <div class="tabs-header">
+      <button class="tab-btn active" onclick="showTab('tab-contact')">📱 Contact & WhatsApp</button>
+      <button class="tab-btn" onclick="showTab('tab-socials')">🌐 Réseaux Sociaux</button>
+      <button class="tab-btn" onclick="showTab('tab-cars')">🚘 Prix des Véhicules</button>
+      <button class="tab-btn" onclick="showTab('tab-team')">👥 Conseillers & Vente</button>
+      <button class="tab-btn" onclick="showTab('tab-sync')">⚙️ Publication & GitHub</button>
+    </div>
+
+    <!-- TAB 1: CONTACT & WHATSAPP -->
+    <div id="tab-contact" class="tab-pane active">
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <div class="card-title">📱 Coordonnées Générales</div>
+            <div class="card-desc">Gérez le numéro de téléphone officiel et WhatsApp du showroom</div>
+          </div>
+        </div>
+        <div class="form-grid">
+          <div class="fg">
+            <label>Numéro WhatsApp Principal</label>
+            <div class="input-prefix">
+              <span>+</span>
+              <input type="text" id="cfg-wa" class="input" placeholder="212535524768">
+            </div>
+            <div class="hint">Format international sans '+' ni espaces (Ex: 212535524768)</div>
+          </div>
+          <div class="fg">
+            <label>Téléphone Fixe (Appels)</label>
+            <input type="text" id="cfg-phone-call" class="input" placeholder="0535524768">
+            <div class="hint">Numéro composé lors du clic sur "Appeler"</div>
+          </div>
+          <div class="fg">
+            <label>Téléphone (Affichage Visuel)</label>
+            <input type="text" id="cfg-phone-disp" class="input" placeholder="05 35 52 47 68">
+            <div class="hint">Texte affiché dans le footer et en haut</div>
+          </div>
+          <div class="fg">
+            <label>Horaires d'ouverture (FR)</label>
+            <input type="text" id="cfg-hours-fr" class="input" placeholder="08:30 — 19:00">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: SOCIAL MEDIA LINKS -->
+    <div id="tab-socials" class="tab-pane">
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <div class="card-title">🌐 Liens Réseaux Sociaux & Avis</div>
+            <div class="card-desc">Liens cliquables des logos officiels en bas de page</div>
+          </div>
+        </div>
+        <div class="fg">
+          <label>Lien Instagram</label>
+          <input type="url" id="cfg-insta" class="input" placeholder="https://www.instagram.com/automeknesismailiatoyota">
+        </div>
+        <div class="fg">
+          <label>Lien Facebook</label>
+          <input type="url" id="cfg-fb" class="input" placeholder="https://web.facebook.com/profile.php?...">
+        </div>
+        <div class="fg">
+          <label>Lien YouTube</label>
+          <input type="url" id="cfg-yt" class="input" placeholder="https://www.youtube.com/@AutoMeknesIsmailia">
+        </div>
+        <div class="fg">
+          <label>Lien TikTok</label>
+          <input type="url" id="cfg-tiktok" class="input" placeholder="https://tiktok.com/@auto_meknes_ismailia">
+        </div>
+        <div class="fg">
+          <label>Lien Google Maps / Itinéraire</label>
+          <input type="url" id="cfg-maps" class="input" placeholder="https://share.google/...">
+        </div>
+        <div class="fg">
+          <label>Lien Avis Google (Formulaire de dépôt)</label>
+          <input type="url" id="cfg-reviews" class="input" placeholder="https://search.google.com/local/writereview?placeid=...">
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: VEHICLE PRICES -->
+    <div id="tab-cars" class="tab-pane">
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <div class="card-title">🚘 Prix du Showroom & Tarifs TTC</div>
+            <div class="card-desc">La mise à jour d'un prix recalculera automatiquement les mensualités du simulateur</div>
+          </div>
+        </div>
+        <div class="form-grid">
+          <div class="fg">
+            <label>Toyota Land Cruiser Prado (TTC)</label>
+            <div class="input-prefix">
+              <input type="number" id="cfg-price-prado" class="input" placeholder="645000">
+              <span>DH</span>
+            </div>
+            <div class="hint" id="hint-calc-prado"></div>
+          </div>
+          <div class="fg">
+            <label>Toyota Corolla Berline Hybride (TTC)</label>
+            <div class="input-prefix">
+              <input type="number" id="cfg-price-corolla" class="input" placeholder="245000">
+              <span>DH</span>
+            </div>
+            <div class="hint" id="hint-calc-corolla"></div>
+          </div>
+          <div class="fg">
+            <label>Toyota Corolla Cross AWD Hybride (TTC)</label>
+            <div class="input-prefix">
+              <input type="number" id="cfg-price-cross" class="input" placeholder="369000">
+              <span>DH</span>
+            </div>
+            <div class="hint" id="hint-calc-cross"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: ADVISORS -->
+    <div id="tab-team" class="tab-pane">
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <div class="card-title">👥 Conseillers Commerciaux Dédiés</div>
+            <div class="card-desc">Gérez les noms, rôles et coordonnées directes des commerciaux</div>
+          </div>
+        </div>
+        
+        <!-- Conseiller 1 -->
+        <div style="background:var(--surface2);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:16px">
+          <div style="font-weight:800;font-size:14px;color:var(--gold);margin-bottom:12px">👤 Conseiller 1 (Ventes Véhicules Neufs)</div>
+          <div class="form-grid">
+            <div class="fg"><label>Nom & Prénom</label><input type="text" id="cfg-t1-name" class="input" placeholder="Karim Alami"></div>
+            <div class="fg"><label>Téléphone Direct</label><input type="text" id="cfg-t1-phone" class="input" placeholder="0535524768"></div>
+            <div class="fg"><label>WhatsApp Direct (sans +)</label><input type="text" id="cfg-t1-wa" class="input" placeholder="212535524768"></div>
+            <div class="fg"><label>Rôle (Français)</label><input type="text" id="cfg-t1-role-fr" class="input" placeholder="Ventes Neufs · Hybride & 4×4"></div>
+          </div>
+        </div>
+
+        <!-- Conseiller 2 -->
+        <div style="background:var(--surface2);border:1px solid var(--border);border-radius:14px;padding:16px">
+          <div style="font-weight:800;font-size:14px;color:var(--emerald);margin-bottom:12px">👤 Conseillère 2 (Financement & Leasing)</div>
+          <div class="form-grid">
+            <div class="fg"><label>Nom & Prénom</label><input type="text" id="cfg-t2-name" class="input" placeholder="Siham Bennani"></div>
+            <div class="fg"><label>Téléphone Direct</label><input type="text" id="cfg-t2-phone" class="input" placeholder="0535524768"></div>
+            <div class="fg"><label>WhatsApp Direct (sans +)</label><input type="text" id="cfg-t2-wa" class="input" placeholder="212535524768"></div>
+            <div class="fg"><label>Rôle (Français)</label><input type="text" id="cfg-t2-role-fr" class="input" placeholder="Financement · Crédit & Leasing"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 5: PUBLISH & GITHUB SYNC -->
+    <div id="tab-sync" class="tab-pane">
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <div class="card-title">⚙️ Synchronisation GitHub & Déploiement Direct</div>
+            <div class="card-desc">Publiez vos modifications en 1 clic directement sur GitHub pour mise à jour automatique du site</div>
+          </div>
+        </div>
+        
+        <div class="fg">
+          <label>GitHub Personal Access Token (PAT)</label>
+          <input type="password" id="cfg-gh-token" class="input" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
+          <div class="hint">Ce jeton reste sécurisé dans votre navigateur et permet de mettre à jour <code>data.json</code> directement.</div>
+        </div>
+
+        <div class="form-grid" style="margin-top:14px">
+          <div class="fg">
+            <label>Dépôt GitHub</label>
+            <input type="text" id="cfg-gh-repo" class="input" value="AbdellatifBaou/Auto">
+          </div>
+          <div class="fg">
+            <label>Branche</label>
+            <input type="text" id="cfg-gh-branch" class="input" value="main">
+          </div>
+        </div>
+
+        <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap">
+          <button onclick="publishToGitHub()" class="btn btn-red" id="btn-publish">
+            <span>🚀 Publier les modifications sur GitHub</span>
+          </button>
+          <button onclick="downloadJsonBackup()" class="btn btn-glass">
+            <span>💾 Télécharger data.json (Sauvegarde)</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Change PIN Section -->
+      <div class="card">
+        <div class="card-head">
+          <div class="card-title">🔒 Sécurité du Dashboard</div>
+        </div>
+        <div class="form-grid">
+          <div class="fg">
+            <label>Changer le Code PIN Administrateur</label>
+            <input type="password" id="cfg-new-pin" class="input" placeholder="Nouveau code PIN">
+          </div>
+          <div class="fg" style="display:flex;align-items:flex-end">
+            <button onclick="updatePin()" class="btn btn-glass" style="width:100%">Mettre à jour le PIN</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Sticky Bottom Save Bar -->
+  <div class="save-bar">
+    <div class="save-status">
+      <span class="status-dot"></span>
+      <span id="save-status-text">Prêt à enregistrer</span>
+    </div>
+    <div style="display:flex;gap:8px">
+      <button onclick="saveLocalAndNotify()" class="btn btn-glass" style="font-size:12px;padding:8px 16px">Sauvegarder Local</button>
+      <button onclick="publishToGitHub()" class="btn btn-red" style="font-size:12px;padding:8px 16px">🚀 Publier en Ligne</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast Alert -->
+<div id="toast"></div>
+
+<script>
+/* ─── State & Defaults ─── */
+let currentData = {
+  contact: {
+    phoneDisplay: "05 35 52 47 68",
+    phoneCall: "0535524768",
+    whatsappNumber: "212535524768",
+    addressFr: "RDC Angle Bd. Des F.A.R & Av. Yaacoub El Mansour",
+    addressCityFr: "Meknès, Maroc",
+    hoursFr: "08:30 — 19:00",
+    hoursAr: "08:30 — 19:00"
+  },
+  socials: {
+    instagram: "https://www.instagram.com/automeknesismailiatoyota",
+    facebook: "https://web.facebook.com/profile.php?id=61574334633685&sk=followers&locale&_rdc=1&_rdr#",
+    youtube: "https://www.youtube.com/@AutoMeknesIsmailia",
+    tiktok: "https://tiktok.com/@auto_meknes_ismailia",
+    googleMaps: "https://share.google/qjgfQifJ4eAU9GInu",
+    googleReviews: "https://search.google.com/local/writereview?placeid=ChIJn56vFYVFoA0R52LRpst-CSE"
+  },
+  cars: [
+    { id: "prado", price: 645000 },
+    { id: "corolla", price: 245000 },
+    { id: "corolla-cross", price: 369000 }
+  ],
+  team: [
+    {
+      id: "team1",
+      name: "Karim Alami",
+      roleFr: "Ventes Neufs · Hybride & 4×4",
+      roleAr: "مبيعات الجديدة · هجين ودفع رباعي",
+      phone: "0535524768",
+      whatsapp: "212535524768",
+      waPrefill: "Bonjour Karim"
+    },
+    {
+      id: "team2",
+      name: "Siham Bennani",
+      roleFr: "Financement · Crédit & Leasing",
+      roleAr: "التمويل · الائتمان والليزينغ",
+      phone: "0535524768",
+      whatsapp: "212535524768",
+      waPrefill: "Bonjour Siham"
+    }
+  ]
+};
+
+/* ─── Auth ─── */
+function checkAuth(){
+  const savedPin = localStorage.getItem('auto_admin_pin') || '2026';
+  const session = sessionStorage.getItem('auto_admin_auth');
+  if(session === 'true'){
+    document.getElementById('auth-gate').style.display = 'none';
+  }
+}
+
+function handleAuth(e){
+  e.preventDefault();
+  const inputPin = document.getElementById('pin-input').value;
+  const targetPin = localStorage.getItem('auto_admin_pin') || '2026';
+  if(inputPin === targetPin){
+    sessionStorage.setItem('auto_admin_auth', 'true');
+    document.getElementById('auth-gate').style.display = 'none';
+    showToast('Bienvenue sur le tableau de bord !', 'success');
+  } else {
+    showToast('Code PIN incorrect', 'error');
+  }
+}
+
+function logout(){
+  sessionStorage.removeItem('auto_admin_auth');
+  document.getElementById('auth-gate').style.display = 'flex';
+  document.getElementById('pin-input').value = '';
+}
+
+function updatePin(){
+  const np = document.getElementById('cfg-new-pin').value;
+  if(np.length < 4){
+    showToast('Le PIN doit comporter au moins 4 caractères', 'error');
+    return;
+  }
+  localStorage.setItem('auto_admin_pin', np);
+  document.getElementById('cfg-new-pin').value = '';
+  showToast('Code PIN mis à jour avec succès !', 'success');
+}
+
+/* ─── Tabs ─── */
+function showTab(id){
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+/* ─── Toast ─── */
+function showToast(msg, type='success'){
+  const t = document.getElementById('toast');
+  t.textContent = (type==='success'?'✓ ':'✕ ') + msg;
+  t.className = 'show ' + type;
+  setTimeout(() => t.className = '', 3500);
+}
+
+/* ─── Form Binding ─── */
+async function loadData(){
+  try {
+    const res = await fetch('data.json?t=' + Date.now());
+    if(res.ok){
+      currentData = await res.json();
+    }
+  } catch(e){
+    console.log('Using local/cached data');
+  }
+  
+  // Load stored GitHub PAT if any
+  const savedToken = localStorage.getItem('auto_gh_token') || '';
+  if(savedToken) document.getElementById('cfg-gh-token').value = savedToken;
+  
+  populateFields();
+}
+
+function populateFields(){
+  // Contact
+  document.getElementById('cfg-wa').value = currentData.contact.whatsappNumber || '';
+  document.getElementById('cfg-phone-call').value = currentData.contact.phoneCall || '';
+  document.getElementById('cfg-phone-disp').value = currentData.contact.phoneDisplay || '';
+  document.getElementById('cfg-hours-fr').value = currentData.contact.hoursFr || '';
+  
+  // Socials
+  document.getElementById('cfg-insta').value = currentData.socials.instagram || '';
+  document.getElementById('cfg-fb').value = currentData.socials.facebook || '';
+  document.getElementById('cfg-yt').value = currentData.socials.youtube || '';
+  document.getElementById('cfg-tiktok').value = currentData.socials.tiktok || '';
+  document.getElementById('cfg-maps').value = currentData.socials.googleMaps || '';
+  document.getElementById('cfg-reviews').value = currentData.socials.googleReviews || '';
+  
+  // Cars
+  const prado = currentData.cars.find(c => c.id === 'prado');
+  const corolla = currentData.cars.find(c => c.id === 'corolla');
+  const cross = currentData.cars.find(c => c.id === 'corolla-cross');
+  
+  if(prado) document.getElementById('cfg-price-prado').value = prado.price;
+  if(corolla) document.getElementById('cfg-price-corolla').value = corolla.price;
+  if(cross) document.getElementById('cfg-price-cross').value = cross.price;
+  
+  // Team
+  const t1 = currentData.team[0];
+  const t2 = currentData.team[1];
+  if(t1){
+    document.getElementById('cfg-t1-name').value = t1.name || '';
+    document.getElementById('cfg-t1-phone').value = t1.phone || '';
+    document.getElementById('cfg-t1-wa').value = t1.whatsapp || '';
+    document.getElementById('cfg-t1-role-fr').value = t1.roleFr || '';
+  }
+  if(t2){
+    document.getElementById('cfg-t2-name').value = t2.name || '';
+    document.getElementById('cfg-t2-phone').value = t2.phone || '';
+    document.getElementById('cfg-t2-wa').value = t2.whatsapp || '';
+    document.getElementById('cfg-t2-role-fr').value = t2.roleFr || '';
+  }
+}
+
+function gatherFormData(){
+  currentData.contact.whatsappNumber = document.getElementById('cfg-wa').value.trim();
+  currentData.contact.phoneCall = document.getElementById('cfg-phone-call').value.trim();
+  currentData.contact.phoneDisplay = document.getElementById('cfg-phone-disp').value.trim();
+  currentData.contact.hoursFr = document.getElementById('cfg-hours-fr').value.trim();
+  currentData.contact.hoursAr = document.getElementById('cfg-hours-fr').value.trim();
+  
+  currentData.socials.instagram = document.getElementById('cfg-insta').value.trim();
+  currentData.socials.facebook = document.getElementById('cfg-fb').value.trim();
+  currentData.socials.youtube = document.getElementById('cfg-yt').value.trim();
+  currentData.socials.tiktok = document.getElementById('cfg-tiktok').value.trim();
+  currentData.socials.googleMaps = document.getElementById('cfg-maps').value.trim();
+  currentData.socials.googleReviews = document.getElementById('cfg-reviews').value.trim();
+  
+  const pradoP = parseInt(document.getElementById('cfg-price-prado').value) || 645000;
+  const corollaP = parseInt(document.getElementById('cfg-price-corolla').value) || 245000;
+  const crossP = parseInt(document.getElementById('cfg-price-cross').value) || 369000;
+  
+  currentData.cars = [
+    { id: "prado", price: pradoP },
+    { id: "corolla", price: corollaP },
+    { id: "corolla-cross", price: crossP }
+  ];
+  
+  if(currentData.team[0]){
+    currentData.team[0].name = document.getElementById('cfg-t1-name').value.trim();
+    currentData.team[0].phone = document.getElementById('cfg-t1-phone').value.trim();
+    currentData.team[0].whatsapp = document.getElementById('cfg-t1-wa').value.trim();
+    currentData.team[0].roleFr = document.getElementById('cfg-t1-role-fr').value.trim();
+  }
+  if(currentData.team[1]){
+    currentData.team[1].name = document.getElementById('cfg-t2-name').value.trim();
+    currentData.team[1].phone = document.getElementById('cfg-t2-phone').value.trim();
+    currentData.team[1].whatsapp = document.getElementById('cfg-t2-wa').value.trim();
+    currentData.team[1].roleFr = document.getElementById('cfg-t2-role-fr').value.trim();
+  }
+  
+  return currentData;
+}
+
+function saveLocalAndNotify(){
+  const data = gatherFormData();
+  localStorage.setItem('auto_saved_data', JSON.stringify(data));
+  const token = document.getElementById('cfg-gh-token').value.trim();
+  if(token) localStorage.setItem('auto_gh_token', token);
+  showToast('Données enregistrées en local !', 'success');
+  document.getElementById('save-status-text').textContent = 'Sauvegardé localement';
+}
+
+function downloadJsonBackup(){
+  const data = gatherFormData();
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'data.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast('Fichier data.json téléchargé !', 'success');
+}
+
+/* ─── GitHub Direct API Sync ─── */
+async function publishToGitHub(){
+  const data = gatherFormData();
+  const token = document.getElementById('cfg-gh-token').value.trim();
+  const repo = document.getElementById('cfg-gh-repo').value.trim() || 'AbdellatifBaou/Auto';
+  const branch = document.getElementById('cfg-gh-branch').value.trim() || 'main';
+  const path = 'data.json';
+  
+  if(!token){
+    showTab('tab-sync');
+    showToast('Veuillez saisir votre GitHub Token pour publier en ligne', 'error');
+    return;
+  }
+  
+  localStorage.setItem('auto_gh_token', token);
+  const btn = document.getElementById('btn-publish');
+  const origText = btn.innerHTML;
+  btn.innerHTML = '<span>⏳ Enregistrement & Publication sur GitHub...</span>';
+  btn.disabled = true;
+  
+  try {
+    // 1. Get current file SHA from GitHub
+    const getUrl = `https://api.github.com/repos/${repo}/contents/${path}?ref=${branch}`;
+    const getRes = await fetch(getUrl, {
+      headers: {
+        'Authorization': `token ${token}`,
+        'Accept': 'application/vnd.github.v3+json'
+      }
+    });
+    
+    let sha = '';
+    if(getRes.ok){
+      const fileData = await getRes.json();
+      sha = fileData.sha;
+    }
+    
+    // 2. Put updated content
+    const contentEncoded = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
+    const putUrl = `https://api.github.com/repos/${repo}/contents/${path}`;
+    const putRes = await fetch(putUrl, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `token ${token}`,
+        'Accept': 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        message: 'chore: update showroom parameters via Admin Dashboard',
+        content: contentEncoded,
+        sha: sha || undefined,
+        branch: branch
+      })
+    });
+    
+    if(putRes.ok){
+      showToast('🚀 Publié avec succès sur le site en direct !', 'success');
+      document.getElementById('save-status-text').textContent = 'Publié en ligne avec succès !';
+    } else {
+      const errData = await putRes.json();
+      throw new Error(errData.message || 'Erreur lors de la publication');
+    }
+  } catch(err){
+    console.error(err);
+    showToast('Erreur: ' + err.message, 'error');
+  } finally {
+    btn.innerHTML = origText;
+    btn.disabled = false;
+  }
+}
+
+// Init
+checkAuth();
+loadData();
+</script>
+</body>
+</html>

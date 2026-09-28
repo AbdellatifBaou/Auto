@@ -1,0 +1,53 @@
+{
+  "contact": {
+    "phoneDisplay": "05 35 52 47 68",
+    "phoneCall": "0535524768",
+    "whatsappNumber": "212535524768",
+    "addressFr": "RDC Angle Bd. Des F.A.R & Av. Yaacoub El Mansour",
+    "addressCityFr": "Meknès, Maroc",
+    "hoursFr": "08:30 — 19:00",
+    "hoursAr": "08:30 — 19:00"
+  },
+  "socials": {
+    "instagram": "https://www.instagram.com/automeknesismailiatoyota",
+    "facebook": "https://web.facebook.com/profile.php?id=61574334633685&sk=followers&locale&_rdc=1&_rdr#",
+    "youtube": "https://www.youtube.com/@AutoMeknesIsmailia",
+    "tiktok": "https://tiktok.com/@auto_meknes_ismailia",
+    "googleMaps": "https://share.google/qjgfQifJ4eAU9GInu",
+    "googleReviews": "https://search.google.com/local/writereview?placeid=ChIJn56vFYVFoA0R52LRpst-CSE"
+  },
+  "cars": [
+    {
+      "id": "prado",
+      "price": 645000
+    },
+    {
+      "id": "corolla",
+      "price": 245000
+    },
+    {
+      "id": "corolla-cross",
+      "price": 369000
+    }
+  ],
+  "team": [
+    {
+      "id": "team1",
+      "name": "Karim Alami",
+      "roleFr": "Ventes Neufs · Hybride & 4×4",
+      "roleAr": "مبيعات الجديدة · هجين ودفع رباعي",
+      "phone": "0535524768",
+      "whatsapp": "212535524768",
+      "waPrefill": "Bonjour Karim"
+    },
+    {
+      "id": "team2",
+      "name": "Siham Bennani",
+      "roleFr": "Financement · Crédit & Leasing",
+      "roleAr": "التمويل · الائتمان والليزينغ",
+      "phone": "0535524768",
+      "whatsapp": "212535524768",
+      "waPrefill": "Bonjour Siham"
+    }
+  ]
+}
