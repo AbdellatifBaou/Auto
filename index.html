@@ -1583,27 +1583,31 @@ function submitFinLead(){
   
   let msg = '';
   if(isAr){
-    msg = `📍 *Auto Meknès Ismailia — محاكاة تمويل سيارة*\n\n` +
-          `🚘 *الموديل :* ${carDisplayName}\n` +
-          `🎨 *اللون :* ${colName}\n` +
-          `💰 *سعر السيارة :* ${fNum(car.price)} درهم\n` +
-          `💵 *الدفعة الأولى :* ${fNum(res.downPayment)} درهم (${finState.appPct}%)\n` +
-          `⏳ *مدة السداد :* ${finState.months} شهر\n` +
-          `📊 *القسط الشهري التقديري :* *${fNum(res.monthly)} درهم / شهر*\n\n` +
-          `👤 *معلومات الزبون :*\n` +
-          `• *الاسم الكامل :* ${name}\n` +
-          `• *رقم الهاتف :* ${phone}`;
+    msg = `*Auto Meknès Ismailia — محاكاة تمويل سيارة*\n` +
+          `────────────────────────\n` +
+          `*الموديل :* ${carDisplayName}\n` +
+          `*اللون :* ${colName}\n` +
+          `*سعر السيارة :* ${fNum(car.price)} درهم\n` +
+          `*الدفعة الأولى :* ${fNum(res.downPayment)} درهم (${finState.appPct}%)\n` +
+          `*المدة :* ${finState.months} شهر\n` +
+          `*القسط الشهري التقديري :* *${fNum(res.monthly)} درهم / شهر*\n` +
+          `────────────────────────\n` +
+          `*معلومات الزبون :*\n` +
+          `• الاسم الكامل : ${name}\n` +
+          `• رقم الهاتف : ${phone}`;
   } else {
-    msg = `📍 *Auto Meknès Ismailia — Simulation de Financement*\n\n` +
-          `🚘 *Modèle :* ${carDisplayName}\n` +
-          `🎨 *Couleur :* ${colName}\n` +
-          `💰 *Prix véhicule :* ${fNum(car.price)} DH TTC\n` +
-          `💵 *Apport initial :* ${fNum(res.downPayment)} DH (${finState.appPct}%)\n` +
-          `⏳ *Durée de remboursement :* ${finState.months} mois\n` +
-          `📊 *Mensualité estimée :* *${fNum(res.monthly)} DH / mois*\n\n` +
-          `👤 *Coordonnées client :*\n` +
-          `• *Nom & Prénom :* ${name}\n` +
-          `• *Téléphone :* ${phone}`;
+    msg = `*Auto Meknès Ismailia — Simulation de Financement*\n` +
+          `────────────────────────\n` +
+          `*Modèle :* ${carDisplayName}\n` +
+          `*Couleur :* ${colName}\n` +
+          `*Prix véhicule :* ${fNum(car.price)} DH TTC\n` +
+          `*Apport initial :* ${fNum(res.downPayment)} DH (${finState.appPct}%)\n` +
+          `*Durée :* ${finState.months} mois\n` +
+          `*Mensualité estimée :* *${fNum(res.monthly)} DH / mois*\n` +
+          `────────────────────────\n` +
+          `*Coordonnées client :*\n` +
+          `• Nom & Prénom : ${name}\n` +
+          `• Téléphone : ${phone}`;
   }
   
   window.open(`https://wa.me/${waNum}?text=${encodeURIComponent(msg)}`, '_blank');
@@ -1786,25 +1790,29 @@ function submitBooking(e){
   
   let msg = '';
   if(isAr){
-    msg = `📍 *Auto Meknès Ismailia — طلب موعد واستشارة*\n\n` +
-          `📋 *نوع الطلب :* ${typeVal === 'Conseil & Achat' ? 'استشارة وشراء سيارة' : 'عرض سعر وتمويل'}\n` +
-          `🚘 *السيارة :* ${carDisplayName}\n` +
-          `🎨 *اللون المختار :* ${colName}\n` +
-          `📅 *التاريخ المطلوب :* ${date}\n` +
-          `⏰ *التوقيت :* ${time}\n\n` +
-          `👤 *معلومات الزبون :*\n` +
-          `• *الاسم الكامل :* ${name}\n` +
-          `• *رقم الهاتف :* ${phone}`;
+    msg = `*Auto Meknès Ismailia — طلب موعد واستشارة*\n` +
+          `────────────────────────\n` +
+          `*نوع الطلب :* ${typeVal === 'Conseil & Achat' ? 'استشارة وشراء سيارة' : 'عرض سعر وتمويل'}\n` +
+          `*السيارة :* ${carDisplayName}\n` +
+          `*اللون :* ${colName}\n` +
+          `*التاريخ المطلوب :* ${date}\n` +
+          `*التوقيت :* ${time}\n` +
+          `────────────────────────\n` +
+          `*معلومات الزبون :*\n` +
+          `• الاسم الكامل : ${name}\n` +
+          `• رقم الهاتف : ${phone}`;
   } else {
-    msg = `📍 *Auto Meknès Ismailia — Demande de Rendez-vous*\n\n` +
-          `📋 *Objet :* ${typeVal}\n` +
-          `🚘 *Véhicule :* ${carDisplayName}\n` +
-          `🎨 *Couleur choisie :* ${colName}\n` +
-          `📅 *Date souhaitée :* ${date}\n` +
-          `⏰ *Créneau horaire :* ${time}\n\n` +
-          `👤 *Coordonnées client :*\n` +
-          `• *Nom & Prénom :* ${name}\n` +
-          `• *Téléphone :* ${phone}`;
+    msg = `*Auto Meknès Ismailia — Demande de Rendez-vous*\n` +
+          `────────────────────────\n` +
+          `*Objet :* ${typeVal}\n` +
+          `*Véhicule :* ${carDisplayName}\n` +
+          `*Couleur :* ${colName}\n` +
+          `*Date souhaitée :* ${date}\n` +
+          `*Créneau :* ${time}\n` +
+          `────────────────────────\n` +
+          `*Coordonnées client :*\n` +
+          `• Nom & Prénom : ${name}\n` +
+          `• Téléphone : ${phone}`;
   }
   
   window.open(`https://wa.me/${waNum}?text=${encodeURIComponent(msg)}`, '_blank');
@@ -1822,21 +1830,25 @@ function submitTradeIn(){
   
   let msg = '';
   if(isAr){
-    msg = `📍 *Auto Meknès Ismailia — تقييم استبدال سيارة*\n\n` +
-          `🚗 *معلومات السيارة المراد استبدالها :*\n` +
-          `• *الماركة والموديل :* ${m}\n` +
-          `• *سنة الصنع :* ${y}\n` +
-          `• *الكيلومترات :* ${k} كم\n\n` +
-          `👤 *معلومات التواصل :*\n` +
-          `• *رقم الهاتف :* ${p}`;
+    msg = `*Auto Meknès Ismailia — تقييم استبدال سيارة*\n` +
+          `────────────────────────\n` +
+          `*معلومات السيارة المراد استبدالها :*\n` +
+          `• الماركة والموديل : ${m}\n` +
+          `• سنة الصنع : ${y}\n` +
+          `• الكيلومترات : ${k} كم\n` +
+          `────────────────────────\n` +
+          `*معلومات التواصل :*\n` +
+          `• رقم الهاتف : ${p}`;
   } else {
-    msg = `📍 *Auto Meknès Ismailia — Estimation de Reprise Auto*\n\n` +
-          `🚗 *Véhicule à reprendre :*\n` +
-          `• *Marque & Modèle :* ${m}\n` +
-          `• *Année :* ${y}\n` +
-          `• *Kilométrage :* ${k} km\n\n` +
-          `👤 *Contact client :*\n` +
-          `• *Téléphone :* ${p}`;
+    msg = `*Auto Meknès Ismailia — Estimation de Reprise Auto*\n` +
+          `────────────────────────\n` +
+          `*Véhicule à reprendre :*\n` +
+          `• Marque & Modèle : ${m}\n` +
+          `• Année : ${y}\n` +
+          `• Kilométrage : ${k} km\n` +
+          `────────────────────────\n` +
+          `*Contact client :*\n` +
+          `• Téléphone : ${p}`;
   }
   
   window.open(`https://wa.me/${waNum}?text=${encodeURIComponent(msg)}`, '_blank');
