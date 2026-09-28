@@ -926,7 +926,7 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
       <!-- Reel 1: Video1.mp4 -->
       <div class="reel-card" onclick="toggleReelPlay(1)">
         <div class="reel-media">
-          <video id="reel-vid-1" src="Video1.mp4" playsinline muted autoplay loop preload="metadata" class="reel-video"></video>
+          <video id="reel-vid-1" src="Video1.mp4" playsinline webkit-playsinline x5-playsinline muted autoplay loop preload="auto" class="reel-video"></video>
           <div class="reel-overlay">
             <div class="reel-top">
               <span class="reel-tag">Toyota Ismailia</span>
@@ -946,7 +946,7 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
       <!-- Reel 2: Video2.mp4 -->
       <div class="reel-card" onclick="toggleReelPlay(2)">
         <div class="reel-media">
-          <video id="reel-vid-2" src="Video2.mp4" playsinline muted autoplay loop preload="metadata" class="reel-video"></video>
+          <video id="reel-vid-2" src="Video2.mp4" playsinline webkit-playsinline x5-playsinline muted autoplay loop preload="auto" class="reel-video"></video>
           <div class="reel-overlay">
             <div class="reel-top">
               <span class="reel-tag">Toyota Ismailia</span>
@@ -1616,6 +1616,27 @@ function toggleReelPlay(num){
   }
 }
 
+function initReelVideos(){
+  [1, 2].forEach(num => {
+    const vid = document.getElementById(`reel-vid-${num}`);
+    if(vid){
+      vid.muted = true;
+      const p = vid.play();
+      if(p !== undefined){
+        p.catch(() => {
+          const tryPlay = () => {
+            vid.play().catch(()=>{});
+            document.removeEventListener('touchstart', tryPlay);
+            document.removeEventListener('click', tryPlay);
+          };
+          document.addEventListener('touchstart', tryPlay, {once: true, passive: true});
+          document.addEventListener('click', tryPlay, {once: true, passive: true});
+        });
+      }
+    }
+  });
+}
+
 let selectedColors={
   prado: CARS[0].colors[0],
   corolla: CARS[1].colors[0],
@@ -2234,6 +2255,7 @@ async function loadConfigAndInit(){
   renderColorChips();
   updateFinCalc();
   renderCompare();
+  initReelVideos();
 }
 
 /* ─── Scroll reveal ─── */

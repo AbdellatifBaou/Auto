@@ -1,5 +1,7 @@
 # Large media and unused assets
 *.mp4
+!Video1.mp4
+!Video2.mp4
 *.zip
 frames/
 Toyota_Corolla_doors_opening_1080p_frames/
