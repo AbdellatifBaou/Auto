@@ -33,21 +33,25 @@
   "team": [
     {
       "id": "team1",
-      "name": "Karim Alami",
+      "name": "Ali Alami",
+      "nameAr": "علي العلمي",
       "roleFr": "Ventes Neufs · Hybride & 4×4",
       "roleAr": "مبيعات الجديدة · هجين ودفع رباعي",
+      "photo": "alami_ali.webp",
       "phone": "0535524768",
       "whatsapp": "212535524768",
-      "waPrefill": "Bonjour Karim"
+      "waPrefill": "Bonjour Ali"
     },
     {
       "id": "team2",
-      "name": "Siham Bennani",
+      "name": "Khalid Alami",
+      "nameAr": "خالد العلمي",
       "roleFr": "Financement · Crédit & Leasing",
       "roleAr": "التمويل · الائتمان والليزينغ",
+      "photo": "alami_khalid.webp",
       "phone": "0535524768",
       "whatsapp": "212535524768",
-      "waPrefill": "Bonjour Siham"
+      "waPrefill": "Bonjour Khalid"
     }
   ]
 }

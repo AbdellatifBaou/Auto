@@ -133,14 +133,14 @@ section{position:relative;z-index:1}
 
 .hero-logo-wrap{
   position:relative;z-index:1;
-  width:72px;height:72px;
-  border-radius:18px;
+  width:120px;height:120px;
+  border-radius:26px;
   background:rgba(0,0,0,.85);
-  border:1px solid rgba(255,255,255,.18);
-  box-shadow:0 10px 30px rgba(0,0,0,.8), 0 0 24px rgba(235,10,30,.2);
+  border:1px solid rgba(255,255,255,.2);
+  box-shadow:0 16px 40px rgba(0,0,0,.9), 0 0 35px rgba(235,10,30,.25);
   display:flex;align-items:center;justify-content:center;
-  padding:6px;
-  margin:0 auto 16px auto;
+  padding:10px;
+  margin:0 auto 18px auto;
   opacity:0;animation:heroIn .6s .05s forwards;
   transition:transform .3s, border-color .3s;
 }
@@ -243,6 +243,46 @@ section{position:relative;z-index:1}
   letter-spacing:-.01em;
 }
 .sec-desc{font-size:14px;color:var(--text2);margin-top:8px;max-width:500px}
+
+/* Catalogue Collapse & Compact Grid */
+.sec-head-row{
+  display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:12px;
+}
+.btn-toggle-cat{
+  font-size:12px;padding:9px 16px;border-radius:99px;display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,.05);border:1px solid var(--border2);color:var(--text);cursor:pointer;
+  transition:all .2s;
+}
+.btn-toggle-cat:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.25)}
+.btn-toggle-cat svg{transition:transform .3s cubic-bezier(.16,1,.3,1)}
+#showroom.collapsed .btn-toggle-cat svg{transform:rotate(180deg)}
+#showroom.collapsed .showcase{display:none}
+#showroom.collapsed .cat-compact-wrap{display:block}
+
+.cat-compact-wrap{display:none;padding:16px 0 40px}
+.cat-compact-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:16px;
+}
+@media(max-width:767px){
+  .sec-head-row{justify-content:center;text-align:center}
+  .cat-compact-grid{grid-template-columns:1fr;gap:14px}
+}
+.cat-compact-card{
+  background:var(--surface2);border:1px solid var(--border);border-radius:20px;
+  padding:20px 16px;display:flex;flex-direction:column;align-items:center;text-align:center;
+  transition:transform .25s,border-color .25s,box-shadow .25s;position:relative;
+}
+.cat-compact-card:hover{transform:translateY(-4px);border-color:var(--border2);box-shadow:0 12px 30px rgba(0,0,0,.6)}
+.cat-compact-img{
+  width:100%;max-width:240px;aspect-ratio:4/3;object-fit:contain;margin:6px auto 12px;
+  filter:drop-shadow(0 12px 24px rgba(0,0,0,.8));transition:transform .3s;
+}
+.cat-compact-card:hover .cat-compact-img{transform:scale(1.05)}
+.cat-compact-cat{font-size:9.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:99px;margin-bottom:8px}
+.cat-compact-name{font-size:16px;font-weight:800;margin-bottom:4px}
+.cat-compact-price{font-size:16px;font-weight:900;margin-bottom:14px}
+.cat-compact-actions{display:flex;gap:8px;width:100%}
+.cat-compact-actions .btn{flex:1;padding:10px 8px;font-size:11.5px}
 
 /* ═══ GOOGLE REVIEW ═══ */
 .review-strip{
@@ -623,13 +663,16 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
 
 /* Team */
 .tm-card{
-  display:flex;align-items:center;gap:14px;
-  padding:16px;border-radius:16px;margin-bottom:12px;
+  display:flex;align-items:center;gap:18px;
+  padding:18px;border-radius:18px;margin-bottom:14px;
   background:var(--surface2);border:1px solid var(--border);
 }
-.tm-photo{width:60px;height:60px;border-radius:14px;object-fit:cover;flex-shrink:0}
-.tm-name{font-size:14px;font-weight:800}
-.tm-role{font-size:11px;color:var(--text2);margin-top:2px}
+.tm-photo{
+  width:88px;height:88px;border-radius:18px;object-fit:cover;flex-shrink:0;
+  border:2px solid var(--border2);box-shadow:0 6px 20px rgba(0,0,0,.6);
+}
+.tm-name{font-size:15px;font-weight:800}
+.tm-role{font-size:11.5px;color:var(--text2);margin-top:3px}
 .tm-actions{display:flex;gap:8px;margin-top:10px}
 .tm-actions .btn{font-size:11px;padding:9px 14px}
 
@@ -656,7 +699,7 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
     min-height:auto;
     text-align:center;
   }
-  .hero-logo-wrap{width:56px;height:56px;border-radius:14px;padding:5px;margin-bottom:12px}
+  .hero-logo-wrap{width:90px;height:90px;border-radius:20px;padding:8px;margin-bottom:14px}
   .hero-tagline{font-size:9.5px;margin-bottom:6px;letter-spacing:.16em;text-align:center}
   .hero-title{font-size:clamp(26px,7.5vw,36px);margin-bottom:6px;text-align:center}
   .hero-subtitle{font-size:12.5px;max-width:320px;margin:0 auto;text-align:center}
@@ -829,33 +872,60 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
   </div>
 </section>
 
-<!-- ═══ GOOGLE REVIEW ═══ -->
-<div class="review-strip reveal" style="margin-top:-20px;margin-bottom:20px">
-  <a href="https://search.google.com/local/writereview?placeid=ChIJn56vFYVFoA0R52LRpst-CSE" target="_blank" rel="noopener noreferrer" class="review-card" id="top-review-link">
-    <div class="rv-left">
-      <div class="rv-g">
-        <svg width="22" height="22" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.34 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.99 0 12s.45 3.82 1.25 5.42l4.03-3.15z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/></svg>
-      </div>
-      <div>
-        <div class="rv-stars">★★★★★</div>
-        <div class="rv-title" id="rv-title">Donnez votre Avis Google</div>
-        <div class="rv-sub" id="rv-sub">Votre satisfaction au cœur de nos priorités</div>
-      </div>
-    </div>
-    <div class="rv-cta">
-      <span id="rv-cta">Laisser un Avis</span>
-      <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
-    </div>
-  </a>
-</div>
-
 <!-- ═══ SHOWROOM — 3 CAR SHOWCASES ═══ -->
 <section id="showroom" style="padding-top:40px">
   <div class="container">
-    <div class="reveal">
-      <div class="sec-label" id="sec-cars-label">SHOWROOM</div>
-      <div class="sec-title" id="sec-cars-name">Nos Modèles</div>
-      <p class="sec-desc" id="sec-cars-desc">Trois véhicules Toyota de dernière génération, disponibles immédiatement.</p>
+    <div class="sec-head-row reveal">
+      <div>
+        <div class="sec-label" id="sec-cars-label">SHOWROOM</div>
+        <div class="sec-title" id="sec-cars-name">Nos Modèles</div>
+        <p class="sec-desc" id="sec-cars-desc">Trois véhicules Toyota de dernière génération, disponibles immédiatement.</p>
+      </div>
+      <button type="button" class="btn-toggle-cat" onclick="toggleCatalog()" id="btn-toggle-cat" aria-label="Réduire ou développer le catalogue">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" id="cat-toggle-icon"><polyline points="18 15 12 9 6 15"/></svg>
+        <span id="txt-toggle-cat">Réduire le catalogue</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- COMPACT CATALOGUE VIEW (Shown when collapsed) -->
+  <div class="container cat-compact-wrap" id="cat-compact-wrap">
+    <div class="cat-compact-grid">
+      <!-- PRADO COMPACT -->
+      <div class="cat-compact-card" onclick="openCarDetail('prado')">
+        <span class="cat-compact-cat" style="background:rgba(235,10,30,.1);color:#FF6B7A;border:1px solid rgba(235,10,30,.2)" id="cmpc-prado-cat">SUV 4×4 Luxe</span>
+        <img src="prado_Farbe_F5F6F8.webp" alt="Land Cruiser Prado" class="cat-compact-img" id="cmpc-img-prado" loading="lazy" decoding="async">
+        <div class="cat-compact-name" id="cmpc-prado-name">Land Cruiser Prado</div>
+        <div class="cat-compact-price" style="color:#FF6B7A" id="cmpc-prado-price">645 000 DH <small>TTC</small></div>
+        <div class="cat-compact-actions" onclick="event.stopPropagation()">
+          <button type="button" class="btn btn-glass" onclick="openCarDetail('prado')" id="cmpc-btn-prado-fiche">Fiche</button>
+          <button type="button" class="btn btn-red" onclick="bookCar('Toyota Land Cruiser Prado')" id="cmpc-btn-prado-book">Conseil</button>
+        </div>
+      </div>
+
+      <!-- COROLLA COMPACT -->
+      <div class="cat-compact-card" onclick="openCarDetail('corolla')">
+        <span class="cat-compact-cat" style="background:rgba(34,211,238,.08);color:var(--cyan);border:1px solid rgba(34,211,238,.18)" id="cmpc-corolla-cat">Berline Hybride</span>
+        <img src="corolla_Farbe_F0F1F5.webp" alt="Corolla Berline" class="cat-compact-img" id="cmpc-img-corolla" loading="lazy" decoding="async">
+        <div class="cat-compact-name" id="cmpc-corolla-name">Corolla Berline</div>
+        <div class="cat-compact-price" style="color:var(--cyan)" id="cmpc-corolla-price">245 000 DH <small>TTC</small></div>
+        <div class="cat-compact-actions" onclick="event.stopPropagation()">
+          <button type="button" class="btn btn-glass" onclick="openCarDetail('corolla')" id="cmpc-btn-corolla-fiche">Fiche</button>
+          <button type="button" class="btn btn-red" onclick="bookCar('Toyota Corolla Berline')" id="cmpc-btn-corolla-book">Conseil</button>
+        </div>
+      </div>
+
+      <!-- COROLLA CROSS COMPACT -->
+      <div class="cat-compact-card" onclick="openCarDetail('corolla-cross')">
+        <span class="cat-compact-cat" style="background:rgba(245,185,66,.08);color:var(--gold);border:1px solid rgba(245,185,66,.18)" id="cmpc-cross-cat">SUV Crossover AWD</span>
+        <img src="corolla-cross_Farbe_7D838A.webp" alt="Corolla Cross AWD" class="cat-compact-img" id="cmpc-img-cross" loading="lazy" decoding="async">
+        <div class="cat-compact-name" id="cmpc-cross-name">Corolla Cross AWD</div>
+        <div class="cat-compact-price" style="color:var(--gold)" id="cmpc-cross-price">369 000 DH <small>TTC</small></div>
+        <div class="cat-compact-actions" onclick="event.stopPropagation()">
+          <button type="button" class="btn btn-glass" onclick="openCarDetail('corolla-cross')" id="cmpc-btn-cross-fiche">Fiche</button>
+          <button type="button" class="btn btn-red" onclick="bookCar('Toyota Corolla Cross AWD')" id="cmpc-btn-cross-book">Conseil</button>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -1017,6 +1087,26 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
   </div>
 </section>
 
+<!-- ═══ GOOGLE REVIEW (Under Services) ═══ -->
+<div class="review-strip reveal" style="margin:24px auto 40px auto">
+  <a href="https://search.google.com/local/writereview?placeid=ChIJn56vFYVFoA0R52LRpst-CSE" target="_blank" rel="noopener noreferrer" class="review-card" id="top-review-link">
+    <div class="rv-left">
+      <div class="rv-g">
+        <svg width="22" height="22" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.34 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.99 0 12s.45 3.82 1.25 5.42l4.03-3.15z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/></svg>
+      </div>
+      <div>
+        <div class="rv-stars">★★★★★</div>
+        <div class="rv-title" id="rv-title">Donnez votre Avis Google</div>
+        <div class="rv-sub" id="rv-sub">Votre satisfaction au cœur de nos priorités</div>
+      </div>
+    </div>
+    <div class="rv-cta">
+      <span id="rv-cta">Laisser un Avis</span>
+      <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
+    </div>
+  </a>
+</div>
+
 <!-- ═══ FOOTER ═══ -->
 <footer class="footer">
   <div class="container">
@@ -1109,7 +1199,7 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
     <div class="modal-body" id="dt-body"></div>
     <div class="modal-foot">
       <button class="btn btn-glass" onclick="closeModal('modal-detail')" id="dt-close">Fermer</button>
-      <button class="btn btn-red" onclick="bookFromDetail()" id="dt-book">Demander Conseil sur ce Modèle</button>
+      <button class="btn btn-red" onclick="bookFromDetail()" id="dt-book">Demander Conseil</button>
     </div>
   </div>
 </div>
@@ -1237,23 +1327,23 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
     </div>
     <div class="modal-body">
       <div class="tm-card">
-        <img src="team1.webp" class="tm-photo" alt="Karim Alami" id="tm-1img" loading="lazy" decoding="async">
+        <img src="alami_ali.webp" class="tm-photo" alt="Ali Alami" id="tm-1img" loading="lazy" decoding="async">
         <div>
-          <div class="tm-name" id="tm-1n">Karim Alami</div>
+          <div class="tm-name" id="tm-1n">Ali Alami</div>
           <div class="tm-role" id="tm-1r">Ventes Neufs · Hybride & 4×4</div>
           <div class="tm-actions">
-            <a href="https://wa.me/212535524768?text=Bonjour%20Karim" target="_blank" class="btn btn-red" id="tm-w1">WhatsApp</a>
+            <a href="https://wa.me/212535524768?text=Bonjour%20Ali" target="_blank" class="btn btn-red" id="tm-w1">WhatsApp</a>
             <a href="tel:0535524768" class="btn btn-glass" id="tm-c1">Appeler</a>
           </div>
         </div>
       </div>
       <div class="tm-card">
-        <img src="team2.webp" class="tm-photo" alt="Siham Bennani" id="tm-2img" loading="lazy" decoding="async">
+        <img src="alami_khalid.webp" class="tm-photo" alt="Khalid Alami" id="tm-2img" loading="lazy" decoding="async">
         <div>
-          <div class="tm-name" id="tm-2n">Siham Bennani</div>
+          <div class="tm-name" id="tm-2n">Khalid Alami</div>
           <div class="tm-role" id="tm-2r">Financement · Crédit & Leasing</div>
           <div class="tm-actions">
-            <a href="https://wa.me/212535524768?text=Bonjour%20Siham" target="_blank" class="btn btn-red" id="tm-w2">WhatsApp</a>
+            <a href="https://wa.me/212535524768?text=Bonjour%20Khalid" target="_blank" class="btn btn-red" id="tm-w2">WhatsApp</a>
             <a href="tel:0535524768" class="btn btn-glass" id="tm-c2">Appeler</a>
           </div>
         </div>
@@ -1338,6 +1428,8 @@ const D={
     heroCta1:'Voir les Modèles',heroCta2:'WhatsApp Direct',
     rvTitle:'Donnez votre Avis Google',rvSub:'Votre satisfaction au cœur de nos priorités',rvCta:'Laisser un Avis',
     secCarsLabel:'SHOWROOM',secCarsName:'Nos Modèles',secCarsDesc:'Trois véhicules Toyota de dernière génération, disponibles immédiatement.',
+    catCollapse:'Réduire le catalogue',catExpand:'Développer le catalogue',
+    cmpcBtnFiche:'Fiche',cmpcBtnBook:'Conseil',
     secSvcLabel:'SERVICES',secSvcName:'Comment pouvons-nous vous aider ?',
     svc1:'Rendez-vous Conseil',svc1s:'Confirmation sous 30 min',
     svc5:'Simulateur Crédit',svc5s:'Calculer mes mensualités',
@@ -1379,7 +1471,7 @@ const D={
     tm1r:'Ventes Neufs · Hybride & 4×4',tm2r:'Financement · Crédit & Leasing',tmCall:'Appeler',tmWa:'WhatsApp',
     trTitle:'Estimation de Reprise',trSub:'Offre ferme sous 2 heures',
     trLblM:'Marque & Modèle',trLblY:'Année',trLblK:'Kilométrage',trLblP:'Votre Téléphone',trSubmit:'Demander Mon Offre',
-    dtSub:'Spécifications complètes',dtClose:'Fermer',dtBook:'Demander Conseil sur ce Modèle',
+    dtSub:'Spécifications complètes',dtClose:'Fermer',dtBook:'Demander Conseil',
     specsT:'Spécifications',featT:'Équipements'},
   ar:{badge:'وكيل تويوتا المعتمد',status:'مفتوح · 08:30 — 19:00',location:'مكناس · تويوتا الرسمي',
     heroTag:'التميز في عالم السيارات، التزامنا الدائم',heroTitle:'Auto Meknès<br>Ismailia',
@@ -1387,6 +1479,8 @@ const D={
     heroCta1:'اكتشف الموديلات',heroCta2:'واتساب مباشر',
     rvTitle:'أضف تقييمك على Google',rvSub:'رضاكم هو أولويتنا دائماً',rvCta:'أضف تقييمك',
     secCarsLabel:'المعرض',secCarsName:'موديلاتنا',secCarsDesc:'ثلاث سيارات تويوتا من أحدث جيل، متوفرة فوراً.',
+    catCollapse:'طي الكتالوج',catExpand:'عرض الكتالوج',
+    cmpcBtnFiche:'المواصفات',cmpcBtnBook:'استشارة',
     secSvcLabel:'الخدمات',secSvcName:'كيف يمكننا مساعدتك؟',
     svc1:'حجز موعد استشارة',svc1s:'تأكيد فوري خلال 30 دقيقة',
     svc5:'حاسبة التمويل',svc5s:'احسب القسط الشهري',
@@ -1428,9 +1522,23 @@ const D={
     tm1r:'مبيعات الجديدة · هجين ودفع رباعي',tm2r:'التمويل · الائتمان والليزينغ',tmCall:'اتصال',tmWa:'واتساب',
     trTitle:'تقييم سيارتك للاستبدال',trSub:'عرض نهائي خلال ساعتين',
     trLblM:'الماركة والموديل',trLblY:'سنة الصنع',trLblK:'الكيلومترات',trLblP:'هاتفك / واتساب',trSubmit:'احسب عرض الاستبدال',
-    dtSub:'المواصفات الكاملة',dtClose:'إغلاق',dtBook:'طلب استشارة حول هذا الموديل',
+    dtSub:'المواصفات الكاملة',dtClose:'إغلاق',dtBook:'طلب استشارة',
     specsT:'المواصفات',featT:'التجهيزات'}
 };
+
+let lang='fr',currentCar=null;
+let catalogCollapsed = false;
+
+function toggleCatalog(){
+  catalogCollapsed = !catalogCollapsed;
+  const sec = document.getElementById('showroom');
+  if(sec) sec.classList.toggle('collapsed', catalogCollapsed);
+  const txt = document.getElementById('txt-toggle-cat');
+  if(txt){
+    const d = D[lang];
+    txt.textContent = catalogCollapsed ? d.catExpand : d.catCollapse;
+  }
+}
 
 let lang='fr',currentCar=null;
 let selectedColors={
@@ -1640,6 +1748,14 @@ function setLang(l){
   s('ft-wa',d.ftWa);s('ft-copy',d.ftCopy);
   s('mb-call',d.mbCall);s('mb-book',d.mbBook);s('mb-maps',d.mbMaps);s('mb-review',d.mbReview);
   
+  // Catalogue toggle button & Compact cards
+  const txtToggle = document.getElementById('txt-toggle-cat');
+  if(txtToggle) txtToggle.textContent = catalogCollapsed ? d.catExpand : d.catCollapse;
+  
+  s('cmpc-btn-prado-fiche',d.cmpcBtnFiche);s('cmpc-btn-prado-book',d.cmpcBtnBook);
+  s('cmpc-btn-corolla-fiche',d.cmpcBtnFiche);s('cmpc-btn-corolla-book',d.cmpcBtnBook);
+  s('cmpc-btn-cross-fiche',d.cmpcBtnFiche);s('cmpc-btn-cross-book',d.cmpcBtnBook);
+
   // Car buttons & Finance hints
   s('prado-fiche',d.fiche);s('prado-book',d.book);s('fin-hint-prado',d.finHintPrado);
   s('corolla-fiche',d.fiche);s('corolla-book',d.book);s('fin-hint-corolla',d.finHintCorolla);
@@ -1655,14 +1771,23 @@ function setLang(l){
   s('prado-cat',isAr?CARS[0].catAr:CARS[0].cat);
   s('prado-name',isAr?CARS[0].nameAr:'Land Cruiser Prado');
   s('prado-price',formatPrice(CARS[0].price,l));
+  s('cmpc-prado-cat',isAr?CARS[0].catAr:CARS[0].cat);
+  s('cmpc-prado-name',isAr?CARS[0].nameAr:'Land Cruiser Prado');
+  s('cmpc-prado-price',formatPrice(CARS[0].price,l));
   
   s('corolla-cat',isAr?CARS[1].catAr:CARS[1].cat);
   s('corolla-name',isAr?CARS[1].nameAr:'Corolla Berline');
   s('corolla-price',formatPrice(CARS[1].price,l));
+  s('cmpc-corolla-cat',isAr?CARS[1].catAr:CARS[1].cat);
+  s('cmpc-corolla-name',isAr?CARS[1].nameAr:'Corolla Berline');
+  s('cmpc-corolla-price',formatPrice(CARS[1].price,l));
   
   s('cross-cat',isAr?CARS[2].catAr:CARS[2].cat);
   s('cross-name',isAr?CARS[2].nameAr:'Corolla Cross AWD');
   s('cross-price',formatPrice(CARS[2].price,l));
+  s('cmpc-cross-cat',isAr?CARS[2].catAr:CARS[2].cat);
+  s('cmpc-cross-name',isAr?CARS[2].nameAr:'Corolla Cross AWD');
+  s('cmpc-cross-price',formatPrice(CARS[2].price,l));
   
   // Finance Modal Strings
   s('fin-title',d.finTitle);s('fin-sub',d.finSub);s('fin-lbl-est',d.finLblEst);s('fin-unit',d.finUnit);
@@ -1694,6 +1819,8 @@ function setLang(l){
   // Other Modals
   s('cmp-title',d.cmpTitle);s('cmp-sub',d.cmpSub);
   s('tm-title',d.tmTitle);s('tm-sub',d.tmSub);
+  s('tm-1n', isAr && CONFIG.team[0] && CONFIG.team[0].nameAr ? CONFIG.team[0].nameAr : (CONFIG.team[0] ? CONFIG.team[0].name : 'Ali Alami'));
+  s('tm-2n', isAr && CONFIG.team[1] && CONFIG.team[1].nameAr ? CONFIG.team[1].nameAr : (CONFIG.team[1] ? CONFIG.team[1].name : 'Khalid Alami'));
   s('tm-1r',isAr && CONFIG.team[0] && CONFIG.team[0].roleAr ? CONFIG.team[0].roleAr : (CONFIG.team[0] && CONFIG.team[0].roleFr ? CONFIG.team[0].roleFr : d.tm1r));
   s('tm-2r',isAr && CONFIG.team[1] && CONFIG.team[1].roleAr ? CONFIG.team[1].roleAr : (CONFIG.team[1] && CONFIG.team[1].roleFr ? CONFIG.team[1].roleFr : d.tm2r));
   s('tm-c1',d.tmCall);s('tm-c2',d.tmCall);
@@ -1718,7 +1845,6 @@ function openCarDetail(id){
   const d=D[lang],isAr=lang==='ar';
   const activeCol=selectedColors[car.id]||car.colors[0];
   const activeImg=(activeCol&&activeCol.img)?activeCol.img:car.img;
-  const colNameStr=isAr?activeCol.nameAr:activeCol.name;
   const formattedNum=new Intl.NumberFormat('fr-FR').format(car.price);
   const badgeText=isAr?`<bdi>${formattedNum}</bdi> درهم`:`${formattedNum} DH`;
   document.getElementById('dt-title').textContent=isAr?car.nameAr:car.name;
@@ -1729,7 +1855,6 @@ function openCarDetail(id){
     <div class="dt-stage">
       <img src="${activeImg}" alt="${car.name}">
       <div class="dt-badge" style="color:${car.pc}">${badgeText}</div>
-      <div class="dt-cat"><span class="sc-cat" style="background:rgba(8,8,12,.85);border:1px solid rgba(255,255,255,.2);color:#fff;backdrop-filter:blur(10px);margin:0">${isAr?car.catAr:car.cat} · ${colNameStr}</span></div>
     </div>
     <div style="display:flex;justify-content:center;margin-bottom:14px">
       <button onclick="closeModal('modal-detail');openFinForCar('${car.id}')" class="sc-finance-hint" style="margin:0">💳 ${isAr?'حاسبة التمويل والأقساط ←':'Simulateur Financement & Mensualités →'}</button>
@@ -1878,8 +2003,8 @@ let CONFIG = {
     { id: "corolla-cross", price: 369000 }
   ],
   team: [
-    { id: "team1", name: "Karim Alami", roleFr: "Ventes Neufs · Hybride & 4×4", roleAr: "مبيعات الجديدة · هجين ودفع رباعي", phone: "0535524768", whatsapp: "212535524768", waPrefill: "Bonjour Karim" },
-    { id: "team2", name: "Siham Bennani", roleFr: "Financement · Crédit & Leasing", roleAr: "التمويل · الائتمان والليزينغ", phone: "0535524768", whatsapp: "212535524768", waPrefill: "Bonjour Siham" }
+    { id: "team1", name: "Ali Alami", nameAr: "علي العلمي", roleFr: "Ventes Neufs · Hybride & 4×4", roleAr: "مبيعات الجديدة · هجين ودفع رباعي", photo: "alami_ali.webp", phone: "0535524768", whatsapp: "212535524768", waPrefill: "Bonjour Ali" },
+    { id: "team2", name: "Khalid Alami", nameAr: "خالد العلمي", roleFr: "Financement · Crédit & Leasing", roleAr: "التمويل · الائتمان والليزينغ", photo: "alami_khalid.webp", phone: "0535524768", whatsapp: "212535524768", waPrefill: "Bonjour Khalid" }
   ]
 };
 
@@ -1944,13 +2069,15 @@ function applyConfig(cfg){
   // Team
   if(CONFIG.team[0]){
     const t1 = CONFIG.team[0];
-    const n1 = document.getElementById('tm-1n'); if(n1) n1.textContent = t1.name;
+    const n1 = document.getElementById('tm-1n'); if(n1) n1.textContent = (lang==='ar'&&t1.nameAr)?t1.nameAr:t1.name;
+    const img1 = document.getElementById('tm-1img'); if(img1 && t1.photo) { img1.src = t1.photo; img1.alt = t1.name; }
     const w1 = document.getElementById('tm-w1'); if(w1) w1.href = `https://wa.me/${t1.whatsapp}?text=${encodeURIComponent(t1.waPrefill||'Bonjour')}`;
     const c1 = document.getElementById('tm-c1'); if(c1) c1.href = `tel:${t1.phone}`;
   }
   if(CONFIG.team[1]){
     const t2 = CONFIG.team[1];
-    const n2 = document.getElementById('tm-2n'); if(n2) n2.textContent = t2.name;
+    const n2 = document.getElementById('tm-2n'); if(n2) n2.textContent = (lang==='ar'&&t2.nameAr)?t2.nameAr:t2.name;
+    const img2 = document.getElementById('tm-2img'); if(img2 && t2.photo) { img2.src = t2.photo; img2.alt = t2.name; }
     const w2 = document.getElementById('tm-w2'); if(w2) w2.href = `https://wa.me/${t2.whatsapp}?text=${encodeURIComponent(t2.waPrefill||'Bonjour')}`;
     const c2 = document.getElementById('tm-c2'); if(c2) c2.href = `tel:${t2.phone}`;
   }
