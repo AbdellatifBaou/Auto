@@ -1151,9 +1151,9 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
         </div>
         <input type="range" class="fin-slider" id="fin-range-app" min="10" max="60" step="5" value="20" oninput="updateFinCalc()">
         <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text3);margin-top:4px">
-          <span>10% (Min)</span>
+          <span id="fin-smin">10% (Min)</span>
           <span>30%</span>
-          <span>60% (Max)</span>
+          <span id="fin-smax">60% (Max)</span>
         </div>
       </div>
 
@@ -1242,7 +1242,7 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
           <div class="tm-name">Karim Alami</div>
           <div class="tm-role" id="tm-1r">Ventes Neufs · Hybride & 4×4</div>
           <div class="tm-actions">
-            <a href="https://wa.me/212535524768?text=Bonjour%20Karim" target="_blank" class="btn btn-red">WhatsApp</a>
+            <a href="https://wa.me/212535524768?text=Bonjour%20Karim" target="_blank" class="btn btn-red" id="tm-w1">WhatsApp</a>
             <a href="tel:0535524768" class="btn btn-glass" id="tm-c1">Appeler</a>
           </div>
         </div>
@@ -1253,7 +1253,7 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
           <div class="tm-name">Siham Bennani</div>
           <div class="tm-role" id="tm-2r">Financement · Crédit & Leasing</div>
           <div class="tm-actions">
-            <a href="https://wa.me/212535524768?text=Bonjour%20Siham" target="_blank" class="btn btn-red">WhatsApp</a>
+            <a href="https://wa.me/212535524768?text=Bonjour%20Siham" target="_blank" class="btn btn-red" id="tm-w2">WhatsApp</a>
             <a href="tel:0535524768" class="btn btn-glass" id="tm-c2">Appeler</a>
           </div>
         </div>
@@ -1351,6 +1351,10 @@ const D={
     mbCall:'Appeler',mbBook:'Essai',mbMaps:'Maps',mbReview:'Avis',
     fiche:'Fiche Technique',book:'Réserver un Essai',
     lblCol:'Couleur :',
+    pradoSp:['204 ch · 2.8L D-4D','Auto 6 · 4×4','7.9 L/100km'],
+    corollaSp:['140 ch · 1.8L Hybride','e-CVT Automatique','4.1 L/100km'],
+    crossSp:['197 ch · 2.0L AWD-i','e-CVT Intégrale','4.8 L/100km'],
+    ftabPrado:'Land Cruiser Prado',ftabCorolla:'Corolla Berline',ftabCross:'Corolla Cross',
     finHintPrado:'Dès 9 850 DH / mois · Simuler Financement →',
     finHintCorolla:'Dès 3 744 DH / mois · Simuler Financement →',
     finHintCross:'Dès 5 639 DH / mois · Simuler Financement →',
@@ -1358,15 +1362,21 @@ const D={
     finLblEst:'Mensualité Estimée TTC',finUnit:'DH / mois',
     finDCar:'Prix véhicule',finDApp:'Apport initial',finDDur:'Durée',
     finLblApport:'Apport initial (Acompte)',finLblDuration:'Durée de remboursement',
+    finMonths:'mois',finMin:'10% (Min)',finMax:'60% (Max)',
     finLblName:'Votre Nom et Prénom',finLblPhone:'WhatsApp / Téléphone',
     finBtnText:'Demander cette Offre de Financement',
     cmpTitle:'Comparateur',cmpSub:'Tarifs en Dirhams TTC',cmpBook:'Réserver',
     bkTitle:'Réserver un Essai',bkSub:'Confirmation immédiate par WhatsApp',
     bkLblType:'Type de demande',rb1:'Essai sur Route',rb2:'Devis & Financement',
-    bkLblCar:'Modèle souhaité',bkLblDate:'Date',bkLblTime:'Créneau',
+    bkLblCar:'Modèle souhaité',
+    bkCarOpt1:'Land Cruiser Prado (204ch · 4×4)',
+    bkCarOpt2:'Corolla Berline Hybride (140ch)',
+    bkCarOpt3:'Corolla Cross AWD Hybride (197ch)',
+    bkLblDate:'Date',bkLblTime:'Créneau',
     bkLblName:'Nom et Prénom',bkLblPhone:'WhatsApp / Téléphone',bkSubmit:'Envoyer via WhatsApp',
+    phName:'Votre nom complet',phPhone:'06 XX XX XX XX',phModel:'Ex: Toyota Yaris 2020',
     tmTitle:'Vos Conseillers',tmSub:'Équipe Auto Meknès Ismailia',
-    tm1r:'Ventes Neufs · Hybride & 4×4',tm2r:'Financement · Crédit & Leasing',tmCall:'Appeler',
+    tm1r:'Ventes Neufs · Hybride & 4×4',tm2r:'Financement · Crédit & Leasing',tmCall:'Appeler',tmWa:'WhatsApp',
     trTitle:'Estimation de Reprise',trSub:'Offre ferme sous 2 heures',
     trLblM:'Marque & Modèle',trLblY:'Année',trLblK:'Kilométrage',trLblP:'Votre Téléphone',trSubmit:'Demander Mon Offre',
     dtSub:'Spécifications complètes',dtClose:'Fermer',dtBook:'Réserver cet Essai',
@@ -1384,12 +1394,16 @@ const D={
     svc3:'فريق المبيعات',svc3s:'مستشاران في خدمتكم',
     svc4:'استبدال سيارتك',svc4s:'عرض خلال ساعتين',
     slogan:'التميز في عالم السيارات،<br>التزامنا الدائم.',
-    ftSav:'معرض وخدمة ما بعد البيع',ftNav:'التنقل',ftContact:'تواصل مباشر',
+    ftSav:'معرض وخدمة ما بعد البيع المعتمدة',ftNav:'التنقل',ftContact:'تواصل مباشر',
     ftL1:'المعرض',ftL2:'الخدمات',ftL3:'تقييم Google',ftL4:'موقعنا',ftWa:'واتساب مباشر',
     ftCopy:'© 2026 Auto Meknès Ismailia · وكيل تويوتا المعتمد · Marketif',
     mbCall:'اتصال',mbBook:'تجربة',mbMaps:'الخريطة',mbReview:'تقييم',
     fiche:'المواصفات التقنية',book:'طلب تجربة',
     lblCol:'اللون :',
+    pradoSp:['204 حصان · 2.8 لتر ديزل','أوتوماتيك 6 · 4×4','7.9 لتر / 100 كم'],
+    corollaSp:['140 حصان · 1.8 لتر هجين','ناقل e-CVT أوتوماتيكي','4.1 لتر / 100 كم'],
+    crossSp:['197 حصان · 2.0 لتر AWD-i','دفع كلي ذكي e-CVT','4.8 لتر / 100 كم'],
+    ftabPrado:'لاند كروزر برادو',ftabCorolla:'كورولا سيدان',ftabCross:'كورولا كروس',
     finHintPrado:'ابتداءً من 9,850 درهم / شهر · احسب التمويل ←',
     finHintCorolla:'ابتداءً من 3,744 درهم / شهر · احسب التمويل ←',
     finHintCross:'ابتداءً من 5,639 درهم / شهر · احسب التمويل ←',
@@ -1397,15 +1411,21 @@ const D={
     finLblEst:'القسط الشهري التقديري',finUnit:'درهم / شهر',
     finDCar:'سعر السيارة',finDApp:'الدفعة الأولى',finDDur:'المدة',
     finLblApport:'الدفعة الأولى (التسبيق)',finLblDuration:'مدة السداد بالشهور',
+    finMonths:'شهر',finMin:'10% (أدنى)',finMax:'60% (أقصى)',
     finLblName:'الاسم الكامل',finLblPhone:'واتساب / الهاتف',
     finBtnText:'طلب هذا العرض التمويلي عبر واتساب',
     cmpTitle:'المقارن',cmpSub:'الأسعار بالدرهم شاملة الضريبة',cmpBook:'طلب تجربة',
     bkTitle:'طلب تجربة قيادة',bkSub:'تأكيد فوري عبر واتساب',
     bkLblType:'نوع الطلب',rb1:'تجربة قيادة',rb2:'عرض سعر وتمويل',
-    bkLblCar:'الموديل المطلوب',bkLblDate:'التاريخ',bkLblTime:'الوقت',
+    bkLblCar:'الموديل المطلوب',
+    bkCarOpt1:'تويوتا لاند كروزر برادو (204 حصان · 4×4)',
+    bkCarOpt2:'تويوتا كورولا سيدان هجين (140 حصان)',
+    bkCarOpt3:'تويوتا كورولا كروس AWD هجين (197 حصان)',
+    bkLblDate:'التاريخ',bkLblTime:'الوقت',
     bkLblName:'الاسم الكامل',bkLblPhone:'واتساب / الهاتف',bkSubmit:'إرسال عبر واتساب',
+    phName:'الاسم الكامل',phPhone:'06 XX XX XX XX',phModel:'مثال: تويوتا ياريس 2020',
     tmTitle:'مستشارو المبيعات',tmSub:'فريق Auto Meknès Ismailia',
-    tm1r:'مبيعات الجديدة · هجين ودفع رباعي',tm2r:'التمويل · الائتمان والليزينغ',tmCall:'اتصال',
+    tm1r:'مبيعات الجديدة · هجين ودفع رباعي',tm2r:'التمويل · الائتمان والليزينغ',tmCall:'اتصال',tmWa:'واتساب',
     trTitle:'تقييم سيارتك للاستبدال',trSub:'عرض نهائي خلال ساعتين',
     trLblM:'الماركة والموديل',trLblY:'سنة الصنع',trLblK:'الكيلومترات',trLblP:'هاتفك / واتساب',trSubmit:'احسب عرض الاستبدال',
     dtSub:'المواصفات الكاملة',dtClose:'إغلاق',dtBook:'طلب تجربة هذا الموديل',
@@ -1594,6 +1614,11 @@ function setLang(l){
   s('corolla-fiche',d.fiche);s('corolla-book',d.book);s('fin-hint-corolla',d.finHintCorolla);
   s('cross-fiche',d.fiche);s('cross-book',d.book);s('fin-hint-cross',d.finHintCross);
   
+  // Specs pills
+  s('prado-sp1',d.pradoSp[0]);s('prado-sp2',d.pradoSp[1]);s('prado-sp3',d.pradoSp[2]);
+  s('corolla-sp1',d.corollaSp[0]);s('corolla-sp2',d.corollaSp[1]);s('corolla-sp3',d.corollaSp[2]);
+  s('cross-sp1',d.crossSp[0]);s('cross-sp2',d.crossSp[1]);s('cross-sp3',d.crossSp[2]);
+  
   // Car names, categories & localized prices
   const isAr=l==='ar';
   s('prado-cat',isAr?CARS[0].catAr:CARS[0].cat);
@@ -1613,16 +1638,34 @@ function setLang(l){
   s('fin-d-car',d.finDCar);s('fin-d-app',d.finDApp);s('fin-d-dur',d.finDDur);
   s('fin-lbl-apport',d.finLblApport);s('fin-lbl-duration',d.finLblDuration);
   s('fin-lbl-name',d.finLblName);s('fin-lbl-phone',d.finLblPhone);s('fin-btn-text',d.finBtnText);
+  s('ftab-prado',d.ftabPrado);s('ftab-corolla',d.ftabCorolla);s('ftab-cross',d.ftabCross);
   s('fd-24',d.finMonths);s('fd-36',d.finMonths);s('fd-48',d.finMonths);s('fd-60',d.finMonths);
+  s('fin-smin',d.finMin);s('fin-smax',d.finMax);
   
-  // Other Modals
-  s('cmp-title',d.cmpTitle);s('cmp-sub',d.cmpSub);
+  // Placeholders
+  const setPh=(id,val)=>{const el=document.getElementById(id);if(el)el.setAttribute('placeholder',val);};
+  setPh('fin-name',d.phName);setPh('fin-phone',d.phPhone);
+  setPh('bk-name',d.phName);setPh('bk-phone',d.phPhone);
+  setPh('tr-model',d.phModel);setPh('tr-phone',d.phPhone);
+  
+  // Booking modal strings & options
   s('bk-title',d.bkTitle);s('bk-sub',d.bkSub);
   s('bk-lbl-type',d.bkLblType);s('rb-1',d.rb1);s('rb-2',d.rb2);
   s('bk-lbl-car',d.bkLblCar);s('bk-lbl-date',d.bkLblDate);s('bk-lbl-time',d.bkLblTime);
   s('bk-lbl-name',d.bkLblName);s('bk-lbl-phone',d.bkLblPhone);s('bk-submit',d.bkSubmit);
+  const bkCarEl=document.getElementById('bk-car');
+  if(bkCarEl&&bkCarEl.options.length>=3){
+    bkCarEl.options[0].text=d.bkCarOpt1;
+    bkCarEl.options[1].text=d.bkCarOpt2;
+    bkCarEl.options[2].text=d.bkCarOpt3;
+  }
+  
+  // Other Modals
+  s('cmp-title',d.cmpTitle);s('cmp-sub',d.cmpSub);
   s('tm-title',d.tmTitle);s('tm-sub',d.tmSub);
-  s('tm-1r',d.tm1r);s('tm-2r',d.tm2r);s('tm-c1',d.tmCall);s('tm-c2',d.tmCall);
+  s('tm-1r',d.tm1r);s('tm-2r',d.tm2r);
+  s('tm-c1',d.tmCall);s('tm-c2',d.tmCall);
+  s('tm-w1',d.tmWa);s('tm-w2',d.tmWa);
   s('tr-title',d.trTitle);s('tr-sub',d.trSub);
   s('tr-lbl-m',d.trLblM);s('tr-lbl-y',d.trLblY);s('tr-lbl-k',d.trLblK);s('tr-lbl-p',d.trLblP);s('tr-submit',d.trSubmit);
   s('dt-sub',d.dtSub);s('dt-close',d.dtClose);s('dt-book',d.dtBook);
@@ -1647,6 +1690,9 @@ function openCarDetail(id){
   const formattedNum=new Intl.NumberFormat('fr-FR').format(car.price);
   const badgeText=isAr?`<bdi>${formattedNum}</bdi> درهم`:`${formattedNum} DH`;
   document.getElementById('dt-title').textContent=isAr?car.nameAr:car.name;
+  document.getElementById('dt-sub').textContent=d.dtSub;
+  document.getElementById('dt-close').textContent=d.dtClose;
+  document.getElementById('dt-book').textContent=d.dtBook;
   document.getElementById('dt-body').innerHTML=`
     <div class="dt-stage">
       <img src="${activeImg}" alt="${car.name}">
@@ -1654,7 +1700,7 @@ function openCarDetail(id){
       <div class="dt-cat"><span class="sc-cat" style="background:rgba(8,8,12,.85);border:1px solid rgba(255,255,255,.2);color:#fff;backdrop-filter:blur(10px);margin:0">${isAr?car.catAr:car.cat} · ${colNameStr}</span></div>
     </div>
     <div style="display:flex;justify-content:center;margin-bottom:14px">
-      <button onclick="closeModal('modal-detail');openFinForCar('${car.id}')" class="sc-finance-hint" style="margin:0">💳 ${isAr?'حاسبة التمويل والأقساط':'Simulateur Financement & Mensualités →'}</button>
+      <button onclick="closeModal('modal-detail');openFinForCar('${car.id}')" class="sc-finance-hint" style="margin:0">💳 ${isAr?'حاسبة التمويل والأقساط ←':'Simulateur Financement & Mensualités →'}</button>
     </div>
     <div class="specs-grid2">
       ${car.specs[lang].map(s=>{const p=s.split(':');return`<div class="spc"><div class="spc-label">${p[0]}</div><div class="spc-val">${p[1]||s}</div></div>`}).join('')}
