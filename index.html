@@ -73,7 +73,7 @@ section{position:relative;z-index:1}
 .header.scrolled{background:rgba(8,8,12,.94);border-bottom-color:var(--border2)}
 .header-inner{
   display:flex;align-items:center;justify-content:space-between;
-  padding:12px 20px;max-width:1080px;margin:0 auto;
+  padding:12px 20px;max-width:1080px;margin:0 auto;position:relative;
 }
 @media(min-width:768px){.header-inner{padding:14px 40px}}
 .logo-group{
@@ -90,14 +90,23 @@ section{position:relative;z-index:1}
 .logo-group:hover .logo-img{border-color:rgba(255,255,255,.25);transform:scale(1.03)}
 .logo-group:active .logo-img{transform:scale(.96)}
 .logo-img img{width:100%;height:100%;object-fit:contain}
+.header-center{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  display:flex;align-items:center;justify-content:center;
+  pointer-events:none;
+}
+.header-center .pill{pointer-events:auto}
 .header-actions{display:flex;align-items:center;gap:8px}
 .pill{
   display:inline-flex;align-items:center;gap:6px;
-  padding:6px 12px;border-radius:99px;font-size:10px;font-weight:700;
-  border:1px solid;white-space:nowrap;
+  padding:6px 14px;border-radius:99px;font-size:10.5px;font-weight:700;
+  border:1px solid;white-space:nowrap;transition:all .3s;
 }
 .pill-open{background:rgba(52,211,153,.08);border-color:rgba(52,211,153,.25);color:var(--emerald)}
-.pill-dot{width:6px;height:6px;border-radius:50%;background:currentColor;animation:blink 2s infinite}
+.pill-closed{background:rgba(235,10,30,.08);border-color:rgba(235,10,30,.28);color:#FF6B7A}
+.pill-dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0}
+.pill-open .pill-dot{animation:blink 2s infinite}
+.pill-closed .pill-dot{opacity:0.85}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
 .lang-toggle{
   display:flex;background:var(--surface2);
@@ -680,10 +689,10 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
 @media(max-width:767px){
   body{padding-bottom:calc(72px + env(safe-area-inset-bottom))}
   .container{padding:0 20px}
-  .header-inner{padding:10px 16px}
-  .logo-img{width:48px;height:48px;border-radius:12px;padding:3px}
-  .pill-open{padding:6px 11px;font-size:10px}
-  .lang-btn{padding:5px 11px;font-size:11px}
+  .header-inner{padding:10px 14px}
+  .logo-img{width:44px;height:44px;border-radius:12px;padding:3px}
+  .header-center .pill{padding:5px 10px;font-size:9.5px}
+  .lang-btn{padding:4px 9px;font-size:10.5px}
   
   /* Centered Section Headings */
   .sec-label, .sec-title, .sec-desc{
@@ -834,11 +843,13 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
     <a href="#" class="logo-group" aria-label="Auto Meknès Ismailia">
       <div class="logo-img"><img src="logo.webp" alt="Auto Meknès Ismailia" width="56" height="56" fetchpriority="high"></div>
     </a>
-    <div class="header-actions">
-      <div class="pill pill-open">
+    <div class="header-center">
+      <div class="pill pill-open" id="header-status-pill">
         <span class="pill-dot"></span>
         <span id="h-status">Ouvert · 08:30 — 19:00</span>
       </div>
+    </div>
+    <div class="header-actions">
       <div class="lang-toggle">
         <button class="lang-btn on" id="btn-fr" onclick="setLang('fr')">FR</button>
         <button class="lang-btn" id="btn-ar" onclick="setLang('ar')">AR</button>
@@ -1730,7 +1741,8 @@ function setLang(l){
   document.getElementById('btn-ar').classList.toggle('on',l==='ar');
   const d=D[l];
   const s=(id,v)=>{const e=document.getElementById(id);if(e){if(v.includes('<br>')||v.includes('<small>')||v.includes('<bdi>')){e.innerHTML=v}else{e.textContent=v}}};
-  s('h-badge',d.badge);s('h-status',d.status);s('h-location',d.location);
+  s('h-badge',d.badge);s('h-location',d.location);
+  updateLiveOpeningStatus();
   s('hero-tag',d.heroTag);s('hero-title',d.heroTitle);s('hero-sub',d.heroSub);
   document.querySelector('#hero-cta1 span').textContent=d.heroCta1;
   document.querySelector('#hero-cta2 span').textContent=d.heroCta2;
@@ -2088,6 +2100,61 @@ function applyConfig(cfg){
 
   setLang(lang);
 }
+
+/* ─── Real-Time Opening Hours & Live Status ─── */
+function getMoroccoDate(){
+  try {
+    const s = new Date().toLocaleString("en-US", { timeZone: "Africa/Casablanca" });
+    return new Date(s);
+  } catch(e){
+    return new Date();
+  }
+}
+
+function updateLiveOpeningStatus(){
+  const now = getMoroccoDate();
+  const day = now.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+  const mins = now.getHours() * 60 + now.getMinutes();
+  
+  // Showroom Hours:
+  // Mon-Sat: 08:30 (510 min) - 19:00 (1140 min)
+  // Sun: Closed
+  const openMins = 8 * 60 + 30; // 08:30
+  const closeMins = 19 * 60;    // 19:00
+  
+  const isSunday = (day === 0);
+  const isOpen = !isSunday && (mins >= openMins && mins < closeMins);
+  
+  const isAr = lang === 'ar';
+  let statusText = '';
+  
+  if(isOpen){
+    statusText = isAr ? 'مفتوح · يغلق عند 19:00' : 'Ouvert · 08:30 — 19:00';
+  } else {
+    if(isSunday){
+      statusText = isAr ? 'مغلق · يفتح الإثنين 08:30' : 'Fermé · Ouvre Lundi 08:30';
+    } else if(mins < openMins){
+      statusText = isAr ? 'مغلق · يفتح عند 08:30' : 'Fermé · Ouvre à 08:30';
+    } else {
+      const nextDayText = (day === 6) 
+        ? (isAr ? 'مغلق · يفتح الإثنين 08:30' : 'Fermé · Ouvre Lundi 08:30')
+        : (isAr ? 'مغلق · يفتح غداً 08:30' : 'Fermé · Ouvre Demain 08:30');
+      statusText = nextDayText;
+    }
+  }
+  
+  const pillEl = document.getElementById('header-status-pill');
+  if(pillEl){
+    pillEl.classList.toggle('pill-open', isOpen);
+    pillEl.classList.toggle('pill-closed', !isOpen);
+  }
+  
+  const textEl = document.getElementById('h-status');
+  if(textEl){
+    textEl.textContent = statusText;
+  }
+}
+setInterval(updateLiveOpeningStatus, 30000);
 
 async function loadConfigAndInit(){
   const localSaved = localStorage.getItem('auto_saved_data');
