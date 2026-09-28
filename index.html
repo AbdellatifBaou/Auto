@@ -356,69 +356,48 @@ body.ar .reel-bottom{text-align:right}
 .exp-header{text-align:center;margin-bottom:32px}
 .exp-header .sec-desc{margin:8px auto 0}
 .exp-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:22px;
 }
-@media(max-width:820px){
+@media(max-width:860px){
   .exp-grid{grid-template-columns:1fr;gap:20px;max-width:440px;margin:0 auto}
 }
 .exp-card{
-  background:linear-gradient(180deg,var(--surface2) 0%,var(--surface) 100%);
-  border:1px solid var(--border);border-radius:24px;
+  background:var(--surface2);
+  border:1px solid var(--border);border-radius:22px;
   overflow:hidden;display:flex;flex-direction:column;
-  box-shadow:0 12px 32px rgba(0,0,0,.5);
+  box-shadow:0 12px 30px rgba(0,0,0,.5);
   transition:transform .3s cubic-bezier(.16,1,.3,1), border-color .3s, box-shadow .3s;
 }
 .exp-card:hover{
-  transform:translateY(-6px);
+  transform:translateY(-5px);
   border-color:rgba(255,255,255,.2);
-  box-shadow:0 20px 48px rgba(0,0,0,.7), 0 0 24px rgba(235,10,30,.15);
+  box-shadow:0 18px 40px rgba(0,0,0,.7), 0 0 20px rgba(235,10,30,.12);
 }
 .exp-img-wrap{
   position:relative;width:100%;aspect-ratio:3/4;overflow:hidden;
-  background:#0d0d12;
+  background:#000;
 }
 .exp-img{
   width:100%;height:100%;object-fit:cover;object-position:center top;
   display:block;transition:transform .5s cubic-bezier(.16,1,.3,1);
 }
-.exp-card:hover .exp-img{transform:scale(1.04)}
-.exp-tag{
-  position:absolute;top:12px;inset-inline-start:12px;
-  background:rgba(8,8,12,.8);backdrop-filter:blur(10px);
-  border:1px solid rgba(255,255,255,.15);
-  padding:4px 10px;border-radius:99px;
-  font-size:10px;font-weight:800;color:var(--gold);
-  letter-spacing:.05em;text-transform:uppercase;
-}
-.exp-badge-star{
-  position:absolute;bottom:12px;inset-inline-end:12px;
-  background:rgba(8,8,12,.85);backdrop-filter:blur(10px);
-  border:1px solid rgba(245,185,66,.3);
-  padding:4px 10px;border-radius:99px;
-  font-size:10.5px;font-weight:700;color:var(--gold);
-  display:flex;align-items:center;gap:4px;
-}
+.exp-card:hover .exp-img{transform:scale(1.03)}
 .exp-content{
-  padding:20px;display:flex;flex-direction:column;flex:1;justify-content:space-between;
+  padding:18px 20px 20px;display:flex;flex-direction:column;flex:1;
+  background:var(--surface);
 }
-.exp-quote{
-  font-size:13px;line-height:1.55;color:var(--text);font-weight:500;
-  font-style:italic;margin-bottom:14px;position:relative;
+.exp-top-row{
+  display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px;
 }
-.exp-quote::before{
-  content:'“';font-size:24px;font-weight:900;color:var(--red);
-  line-height:0;vertical-align:-6px;margin-inline-end:4px;
+.exp-model-title{
+  font-size:15px;font-weight:900;color:var(--text);letter-spacing:-.01em;
 }
-.exp-footer{
-  display:flex;align-items:center;justify-content:space-between;
-  padding-top:12px;border-top:1px solid rgba(255,255,255,.06);
-  gap:10px;
+.exp-loc{
+  font-size:11px;font-weight:700;color:var(--gold);
 }
-.exp-author{font-size:12px;font-weight:800;color:var(--text)}
-.exp-car-tag{
-  font-size:10px;font-weight:700;padding:3px 8px;border-radius:6px;
-  background:rgba(235,10,30,.1);color:#FF6B7A;border:1px solid rgba(235,10,30,.2);
-  white-space:nowrap;
+.exp-desc{
+  font-size:12.5px;line-height:1.55;color:var(--text2);font-weight:500;
+  margin:0;
 }
 
 /* ═══ CAR SHOWCASES ═══ */
@@ -1036,60 +1015,54 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
   </div>
 </section>
 
-<!-- ═══ EXPÉRIENCE CLIENTS / LIVRAISONS ═══ -->
+<!-- ═══ EXPÉRIENCE & LIVRAISONS CLIENTS ═══ -->
 <section class="exp-sec" id="experience">
   <div class="container">
     <div class="exp-header reveal">
-      <div class="sec-label" id="sec-exp-label">VOS MOMENTS PRIVILÉGIÉS</div>
-      <div class="sec-title" id="sec-exp-title">Expérience & Satisfaction Clients</div>
-      <p class="sec-desc" id="sec-exp-desc">La confiance de nos clients et la joie de la remise des clés au showroom de Meknès.</p>
+      <div class="sec-label" id="sec-exp-label">LIVRAISONS SHOWROOM</div>
+      <div class="sec-title" id="sec-exp-title">Moments de Livraison à Meknès</div>
+      <p class="sec-desc" id="sec-exp-desc">Chaque remise de clés est une célébration. Bienvenue dans la famille Toyota.</p>
     </div>
     <div class="exp-grid reveal reveal-delay-1">
-      <!-- Client 1: kunde1.webp -->
+      <!-- Moment 1: kunde1.webp -->
       <div class="exp-card">
         <div class="exp-img-wrap">
-          <img src="kunde1.webp" alt="Livraison Client Toyota Corolla" class="exp-img" loading="lazy" decoding="async">
-          <span class="exp-tag" id="exp-tag-1">Livraison Showroom</span>
-          <div class="exp-badge-star">★ 100% Satisfait</div>
+          <img src="kunde1.webp" alt="Livraison Toyota Corolla Berline" class="exp-img" loading="lazy" decoding="async">
         </div>
         <div class="exp-content">
-          <p class="exp-quote" id="exp-quote-1">Un accueil chaleureux et une remise des clés inoubliable avec toute l'équipe Auto Meknès Ismailia.</p>
-          <div class="exp-footer">
-            <span class="exp-author" id="exp-auth-1">Client Toyota Ismailia</span>
-            <span class="exp-car-tag" id="exp-car-1">Toyota Corolla</span>
+          <div class="exp-top-row">
+            <span class="exp-model-title" id="exp-m1-title">Toyota Corolla Berline</span>
+            <span class="exp-loc" id="exp-m1-loc">Showroom Meknès</span>
           </div>
+          <p class="exp-desc" id="exp-m1-desc">Remise des clés et accueil privilégié par l'équipe commerciale pour cette nouvelle Corolla Berline.</p>
         </div>
       </div>
 
-      <!-- Client 2: kunde2.webp -->
+      <!-- Moment 2: kunde2.webp -->
       <div class="exp-card">
         <div class="exp-img-wrap">
-          <img src="kunde2.webp" alt="Livraison Client Toyota Corolla Cross" class="exp-img" loading="lazy" decoding="async">
-          <span class="exp-tag" id="exp-tag-2">Nouvelle Hybride</span>
-          <div class="exp-badge-star">★ Expérience 5★</div>
+          <img src="kunde2.webp" alt="Livraison Toyota Corolla Cross Hybride" class="exp-img" loading="lazy" decoding="async">
         </div>
         <div class="exp-content">
-          <p class="exp-quote" id="exp-quote-2">Conseil expert et accompagnement parfait de M. Khalid pour mon passage à l'hybride Toyota.</p>
-          <div class="exp-footer">
-            <span class="exp-author" id="exp-auth-2">Client Heureux</span>
-            <span class="exp-car-tag" id="exp-car-2">Corolla Cross AWD</span>
+          <div class="exp-top-row">
+            <span class="exp-model-title" id="exp-m2-title">Corolla Cross AWD Hybride</span>
+            <span class="exp-loc" id="exp-m2-loc">Nouvelle Acquisition</span>
           </div>
+          <p class="exp-desc" id="exp-m2-desc">Félicitations à notre client pour son choix de la technologie hybride avec l'accompagnement de Khalid Alami.</p>
         </div>
       </div>
 
-      <!-- Client 3: kunde3.webp -->
+      <!-- Moment 3: kunde3.webp -->
       <div class="exp-card">
         <div class="exp-img-wrap">
-          <img src="kunde3.webp" alt="Livraison Client Land Cruiser Prado" class="exp-img" loading="lazy" decoding="async">
-          <span class="exp-tag" id="exp-tag-3">Prado 4x4 Neuf</span>
-          <div class="exp-badge-star">★ Remise des Clés</div>
+          <img src="kunde3.webp" alt="Préparation & Livraison Land Cruiser Prado" class="exp-img" loading="lazy" decoding="async">
         </div>
         <div class="exp-content">
-          <p class="exp-quote" id="exp-quote-3">Installation de la plaque WW et livraison impeccable de mon Land Cruiser Prado.</p>
-          <div class="exp-footer">
-            <span class="exp-author" id="exp-auth-3">Propriétaire Prado</span>
-            <span class="exp-car-tag" id="exp-car-3">Land Cruiser Prado</span>
+          <div class="exp-top-row">
+            <span class="exp-model-title" id="exp-m3-title">Nouveau Land Cruiser Prado</span>
+            <span class="exp-loc" id="exp-m3-loc">Plaque WW & Remise</span>
           </div>
+          <p class="exp-desc" id="exp-m3-desc">Pose de la plaque WW et mise en main complète du légendaire baroudeur Toyota 4×4.</p>
         </div>
       </div>
     </div>
@@ -1605,10 +1578,10 @@ const D={
     secReelsLabel:'EXPÉRIENCE SHOWROOM',secReelsTitle:'Immersion Vidéo',secReelsDesc:"Découvrez l'atmosphère de notre showroom et l'excellence Toyota en mouvement.",
     reelB1Title:'Land Cruiser Prado',reelB1Sub:"L'icône tout-terrain à Meknès",
     reelB2Title:'Gamme Hybride Toyota',reelB2Sub:'Innovation, confort & efficience',
-    secExpLabel:'VOS MOMENTS PRIVILÉGIÉS',secExpTitle:'Expérience & Satisfaction Clients',secExpDesc:'La confiance de nos clients et la joie de la remise des clés au showroom de Meknès.',
-    expTag1:'Livraison Showroom',expQuote1:"Un accueil chaleureux et une remise des clés inoubliable avec toute l'équipe Auto Meknès Ismailia.",expAuth1:'Client Toyota Ismailia',expCar1:'Toyota Corolla',
-    expTag2:'Nouvelle Hybride',expQuote2:"Conseil expert et accompagnement parfait de M. Khalid pour mon passage à l'hybride Toyota.",expAuth2:'Client Heureux',expCar2:'Corolla Cross AWD',
-    expTag3:'Prado 4x4 Neuf',expQuote3:'Installation de la plaque WW et livraison impeccable de mon Land Cruiser Prado.',expAuth3:'Propriétaire Prado',expCar3:'Land Cruiser Prado',
+    secExpLabel:'LIVRAISONS SHOWROOM',secExpTitle:'Moments de Livraison à Meknès',secExpDesc:'Chaque remise de clés est une célébration. Bienvenue dans la famille Toyota.',
+    expM1Title:'Toyota Corolla Berline',expM1Loc:'Showroom Meknès',expM1Desc:"Remise des clés et accueil privilégié par l'équipe commerciale pour cette nouvelle Corolla Berline.",
+    expM2Title:'Corolla Cross AWD Hybride',expM2Loc:'Nouvelle Acquisition',expM2Desc:"Félicitations à notre client pour son choix de la technologie hybride avec l'accompagnement de Khalid Alami.",
+    expM3Title:'Nouveau Land Cruiser Prado',expM3Loc:'Plaque WW & Remise',expM3Desc:'Pose de la plaque WW et mise en main complète du légendaire baroudeur Toyota 4×4.',
     secCarsLabel:'SHOWROOM',secCarsName:'Nos Modèles',secCarsDesc:'Trois véhicules Toyota de dernière génération, disponibles immédiatement.',
     catCollapse:'Réduire le catalogue',catExpand:'Découvrir nos 3 modèles Toyota',catBadgeCount:'3 Modèles',
     secSvcLabel:'SERVICES',secSvcName:'Comment pouvons-nous vous aider ?',
@@ -1661,10 +1634,10 @@ const D={
     secReelsLabel:'تجربة المعرض',secReelsTitle:'جولة فيديو حصرية',secReelsDesc:'اكتشفوا أجواء صالة العرض وتميز سيارات تويوتا عن قرب وبشكل ديناميكي.',
     reelB1Title:'لاند كروزر برادو',reelB1Sub:'أيقونة الدفع الرباعي في مكناس',
     reelB2Title:'تشكيلة تويوتا الهجينة',reelB2Sub:'ابتكار، راحة واقتصاد مثالي',
-    secExpLabel:'لحظات استثنائية',secExpTitle:'تجارب ورضا زبنائنا الكرام',secExpDesc:'ثقة زبنائنا وفرحة تسليم مفاتيح السيارات الجديدة في صالة العرض بمكناس.',
-    expTag1:'تسليم في المعرض',expQuote1:'استقبال حار وخدمة احترافية مميزة من فريق العمل، تجربة شراء رائعة وممتازة.',expAuth1:'زبون تويوتا مكناس',expCar1:'تويوتا كورولا',
-    expTag2:'سيارة هجينة جديدة',expQuote2:'مرافقة ممتازة واستشارة دقيقة من السيد خالد لاختيار السيارة الهجينة المناسبة.',expAuth2:'زبون سعيد',expCar2:'كورولا كروس AWD',
-    expTag3:'برادو 4x4 جديد',expQuote3:'لحظة تركيب لوحة الترقيم WW واستلام لاند كروزر برادو بكل فخامة وإتقان.',expAuth3:'مالك لاند كروزر برادو',expCar3:'لاند كروزر برادو',
+    secExpLabel:'تسليم السيارات في المعرض',secExpTitle:'لحظات تسليم السيارات بمكناس',secExpDesc:'كل تسليم مفاتيح هو احتفال خاص. مرحباً بكم في عائلة تويوتا.',
+    expM1Title:'تويوتا كورولا سيدان',expM1Loc:'صالة العرض بمكناس',expM1Desc:'تسليم مفاتيح السيارة واستقبال خاص لزبوننا الكريم رفقة فريق المبيعات.',
+    expM2Title:'كورولا كروس AWD هجينة',expM2Loc:'سيارة جديدة',expM2Desc:'تهانينا لزبوننا العزيز لاختياره التكنولوجيا الهجينة المتطورة مع مرافقة السيد خالد العلمي.',
+    expM3Title:'لاند كروزر برادو الجديد',expM3Loc:'تركيب لوحة WW والتسليم',expM3Desc:'لحظة تركيب لوحة الترقيم المؤقتة WW وإعداد سيارة لاند كروزر برادو للتسليم.',
     secCarsLabel:'المعرض',secCarsName:'موديلاتنا',secCarsDesc:'ثلاث سيارات تويوتا من أحدث جيل، متوفرة فوراً.',
     catCollapse:'طي الكتالوج',catExpand:'عرض موديلات تويوتا (3)',catBadgeCount:'3 موديلات',
     secSvcLabel:'الخدمات',secSvcName:'كيف يمكننا مساعدتك؟',
@@ -1976,11 +1949,11 @@ function setLang(l){
   s('reel-b1-title',d.reelB1Title);s('reel-b1-sub',d.reelB1Sub);
   s('reel-b2-title',d.reelB2Title);s('reel-b2-sub',d.reelB2Sub);
 
-  // Experience Clients Section
+  // Experience & Livraisons Section
   s('sec-exp-label',d.secExpLabel);s('sec-exp-title',d.secExpTitle);s('sec-exp-desc',d.secExpDesc);
-  s('exp-tag-1',d.expTag1);s('exp-quote-1',d.expQuote1);s('exp-auth-1',d.expAuth1);s('exp-car-1',d.expCar1);
-  s('exp-tag-2',d.expTag2);s('exp-quote-2',d.expQuote2);s('exp-auth-2',d.expAuth2);s('exp-car-2',d.expCar2);
-  s('exp-tag-3',d.expTag3);s('exp-quote-3',d.expQuote3);s('exp-auth-3',d.expAuth3);s('exp-car-3',d.expCar3);
+  s('exp-m1-title',d.expM1Title);s('exp-m1-loc',d.expM1Loc);s('exp-m1-desc',d.expM1Desc);
+  s('exp-m2-title',d.expM2Title);s('exp-m2-loc',d.expM2Loc);s('exp-m2-desc',d.expM2Desc);
+  s('exp-m3-title',d.expM3Title);s('exp-m3-loc',d.expM3Loc);s('exp-m3-desc',d.expM3Desc);
 
   // Showroom
   s('sec-cars-label',d.secCarsLabel);s('sec-cars-name',d.secCarsName);s('sec-cars-desc',d.secCarsDesc);
