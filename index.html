@@ -1287,42 +1287,52 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
 /* ─── DATA ─── */
 const CARS=[
   {id:'prado',name:'Toyota Land Cruiser Prado',nameAr:'تويوتا لاند كروزر برادو',
-   cat:'SUV 4×4 Luxe',catAr:'دفع رباعي فاخر',price:645000,img:'prado.webp',pc:'#FF6B7A',
+   cat:'SUV 4×4 Luxe',catAr:'دفع رباعي فاخر',price:645000,img:'prado-white.webp',pc:'#FF6B7A',
    colors:[
-     {id:'white',name:'Blanc Nacré',nameAr:'أبيض لؤلؤي',hex:'#F5F6F8'},
-     {id:'black',name:'Noir Attitude',nameAr:'أسود ميتاليك',hex:'#1C1D21'},
-     {id:'grey',name:'Gris Graphite',nameAr:'رمادي جرافيت',hex:'#555961'},
-     {id:'bronze',name:'Bronze Vintage',nameAr:'برونزي فينتيج',hex:'#8C7853'}
+     {id:'white',name:'Blanc Nacré',nameAr:'أبيض لؤلؤي',hex:'#F5F6F8',img:'prado-white.webp'},
+     {id:'black',name:'Noir Attitude',nameAr:'أسود ميتاليك',hex:'#1C1D21',img:'prado-black.webp'},
+     {id:'grey',name:'Gris Graphite',nameAr:'رمادي جرافيت',hex:'#555961',img:'prado-grey.webp'},
+     {id:'bronze',name:'Bronze Vintage',nameAr:'برونزي فينتيج',hex:'#8C7853',img:'prado-bronze.webp'}
    ],
    specs:{fr:['204 ch / 2.8L D-4D Turbo Diesel','Boîte Auto 6 rapports + 4×4','7.9 L/100km cycle mixte','0–100 km/h : 9.9s','Vitesse max : 175 km/h','Garantie 3 ans / 100 000 km'],
           ar:['204 حصان / 2.8 لتر ديزل توربو','ناقل أوتوماتيكي 6 سرعات + دفع رباعي','7.9 لتر / 100 كم','0-100 كم/س : 9.9 ث','السرعة القصوى: 175 كم/س','ضمان 3 سنوات / 100,000 كم']},
    feats:{fr:['4×4 permanent avec différentiel Torsen','Suspension KDSS + Crawl Control','Cuir perforé, sièges ventilés & chauffants','Écran 12.3", Apple CarPlay & Android Auto','Caméras 360° Multi-Terrain Monitor','Toyota Safety Sense 3.0'],
           ar:['دفع رباعي دائم مع قفل تفاضلي Torsen','تعليق KDSS ونظام Crawl Control','جلد فاخر مع مقاعد مهواة ومدفأة','شاشة 12.3 بوصة مع Apple CarPlay','كاميرات محيطية 360 درجة','Toyota Safety Sense 3.0']}},
   {id:'corolla',name:'Toyota Corolla Berline',nameAr:'تويوتا كورولا سيدان',
-   cat:'Berline Hybride',catAr:'سيدان هجينة',price:245000,img:'corolla.webp',pc:'#22D3EE',
+   cat:'Berline Hybride',catAr:'سيدان هجينة',price:245000,img:'corolla-white.webp',pc:'#22D3EE',
    colors:[
-     {id:'white',name:'Blanc Pur',nameAr:'أبيض ناصع',hex:'#F0F1F5'},
-     {id:'silver',name:'Gris Argent',nameAr:'فضي ميتاليك',hex:'#A8A9AD'},
-     {id:'blue',name:'Bleu Céleste',nameAr:'أزرق سماوي',hex:'#5D707F'},
-     {id:'black',name:'Noir Ébène',nameAr:'أسود أبنوس',hex:'#18181A'}
+     {id:'white',name:'Blanc Pur',nameAr:'أبيض ناصع',hex:'#F0F1F5',img:'corolla-white.webp'},
+     {id:'silver',name:'Gris Argent',nameAr:'فضي ميتاليك',hex:'#A8A9AD',img:'corolla-silver.webp'},
+     {id:'blue',name:'Bleu Céleste',nameAr:'أزرق سماوي',hex:'#385B7A',img:'corolla-blue.webp'},
+     {id:'black',name:'Noir Ébène',nameAr:'أسود أبنوس',hex:'#18181A',img:'corolla-black.webp'}
    ],
    specs:{fr:['140 ch / 1.8L Hybride Auto-Rechargeable','e-CVT Automatique','4.1 L/100km (ultra-économique)','0–100 km/h : 9.2s','Vitesse max : 180 km/h','Hybride 5 ans / 100 000 km'],
           ar:['140 حصان / 1.8 لتر هجين ذاتي الشحن','ناقل e-CVT أوتوماتيكي','4.1 لتر / 100 كم','0-100 كم/س : 9.2 ث','السرعة القصوى: 180 كم/س','ضمان هجين 5 سنوات / 100,000 كم']},
    feats:{fr:['Hybride 5ème génération à recharge automatique','Mode 100% électrique EV en ville','Tableau de bord digital 12.3" + écran 10.5"','Climatisation bi-zone Nanoe-X Toyota','Régulateur adaptatif + maintien de voie actif','Full LED & jantes 17" alliage bi-ton'],
           ar:['الجيل الخامس من الهجين ذاتي الشحن','وضع كهربائي كامل EV داخل المدينة','شاشة قيادة 12.3 + شاشة مركزية 10.5','مكيف مزدوج مع Nanoe-X','مثبت سرعة متكيف + البقاء في المسار','مصابيح Full LED وجنوط 17 بوصة']}},
   {id:'corolla-cross',name:'Toyota Corolla Cross AWD',nameAr:'تويوتا كورولا كروس AWD',
-   cat:'SUV Crossover AWD',catAr:'كروس أوفر دفع رباعي',price:369000,img:'corolla-cross.webp',pc:'#F5B942',
+   cat:'SUV Crossover AWD',catAr:'كروس أوفر دفع رباعي',price:369000,img:'corolla-cross-white.webp',pc:'#F5B942',
    colors:[
-     {id:'white',name:'Blanc Lunaire',nameAr:'أبيض قمري',hex:'#F2F2F4'},
-     {id:'red',name:'Rouge Intense',nameAr:'أحمر قرمزي',hex:'#C41220'},
-     {id:'grey',name:'Gris Platine',nameAr:'رمادي بلاتيني',hex:'#7D838A'},
-     {id:'green',name:'Vert Urbain',nameAr:'أخضر كاكي',hex:'#4E5851'}
+     {id:'white',name:'Blanc Lunaire',nameAr:'أبيض قمري',hex:'#F2F2F4',img:'corolla-cross-white.webp'},
+     {id:'red',name:'Rouge Intense',nameAr:'أحمر قرمزي',hex:'#C41220',img:'corolla-cross-red.webp'},
+     {id:'grey',name:'Gris Platine',nameAr:'رمادي بلاتيني',hex:'#7D838A',img:'corolla-cross-grey.webp'},
+     {id:'green',name:'Vert Urbain',nameAr:'أخضر كاكي',hex:'#4E5851',img:'corolla-cross-green.webp'}
    ],
    specs:{fr:['197 ch / 2.0L Hybride AWD-i Intégrale','e-CVT Intégrale intelligente AWD-i','4.8 L/100km','0–100 km/h : 7.5s','Vitesse max : 180 km/h','Hybride 5 ans / 100 000 km'],
           ar:['197 حصان / 2.0 لتر هجين دفع رباعي ذكي','دفع رباعي ذكي AWD-i مع e-CVT','4.8 لتر / 100 كم','0-100 كم/س : 7.5 ث','السرعة القصوى: 180 كم/س','ضمان هجين 5 سنوات / 100,000 كم']},
    feats:{fr:['AWD-i avec moteur électrique arrière indépendant','Toit panoramique & hayon mains-libres','Position surélevée, visibilité optimale','Chargeur induction + 4 ports USB-C','Angle mort BSM + alerte trafic arrière RCTA','Garde au sol parfaite pour routes marocaines'],
           ar:['دفع رباعي ذكي AWD-i مع محرك خلفي مستقل','سقف بانورامي وباب خلفي كهربائي ذكي','وضعية مرتفعة ورؤية شاملة','شاحن لاسلكي ومنافذ USB-C سريعة','نظام مراقبة النقطة العمياء BSM','ارتفاع مثالي للطرق المغربية']}}
 ];
+
+// Preload all color variants for zero delay
+CARS.forEach(car => {
+  car.colors.forEach(col => {
+    if(col.img){
+      const img = new Image();
+      img.src = col.img;
+    }
+  });
+});
 
 const D={
   fr:{badge:'CONCESSIONNAIRE TOYOTA',status:'Ouvert · 08:30 — 19:00',location:'Meknès · Toyota Officiel',
@@ -1427,27 +1437,6 @@ function formatPrice(val, l){
 }
 
 /* ─── Color Picker Logic ─── */
-const COLOR_FILTERS = {
-  prado: {
-    white: 'brightness(1.06) contrast(1.02) saturate(0.95)',
-    black: 'brightness(0.36) contrast(1.4) saturate(0.15)',
-    grey: 'brightness(0.68) contrast(1.15) saturate(0.1)',
-    bronze: 'sepia(0.7) hue-rotate(340deg) saturate(2.2) brightness(0.82) contrast(1.2)'
-  },
-  corolla: {
-    white: 'brightness(1.06) contrast(1.02) saturate(0.95)',
-    silver: 'brightness(0.92) contrast(1.1) saturate(0.1)',
-    blue: 'hue-rotate(185deg) saturate(2.4) brightness(0.88) contrast(1.18)',
-    black: 'brightness(0.35) contrast(1.45) saturate(0.15)'
-  },
-  'corolla-cross': {
-    white: 'brightness(1.06) contrast(1.02) saturate(0.95)',
-    red: 'hue-rotate(320deg) saturate(3.0) brightness(0.92) contrast(1.25)',
-    grey: 'brightness(0.72) contrast(1.15) saturate(0.1)',
-    green: 'hue-rotate(85deg) saturate(1.5) brightness(0.75) contrast(1.18)'
-  }
-};
-
 function selectCarColor(carId, colorIndex){
   const car = CARS.find(c => c.id === carId);
   if(!car || !car.colors[colorIndex]) return;
@@ -1463,9 +1452,14 @@ function selectCarColor(carId, colorIndex){
   chips.forEach((c, idx) => c.classList.toggle('active', idx === colorIndex));
   
   const imgEl = document.getElementById(`img-${key}`);
-  if(imgEl){
-    const filterVal = (COLOR_FILTERS[carId] && COLOR_FILTERS[carId][col.id]) || 'none';
-    imgEl.style.filter = `drop-shadow(0 20px 40px rgba(0,0,0,.9)) ${filterVal}`;
+  if(imgEl && col.img){
+    imgEl.style.opacity = '0.35';
+    imgEl.style.transform = 'scale(0.96)';
+    setTimeout(() => {
+      imgEl.src = col.img;
+      imgEl.style.opacity = '1';
+      imgEl.style.transform = 'scale(1)';
+    }, 90);
   }
 }
 
@@ -1489,9 +1483,8 @@ function renderColorChips(){
     if(colLblEl) colLblEl.textContent = D[lang].lblCol;
     
     const imgEl = document.getElementById(`img-${key}`);
-    if(imgEl){
-      const filterVal = (COLOR_FILTERS[car.id] && COLOR_FILTERS[car.id][activeCol.id]) || 'none';
-      imgEl.style.filter = `drop-shadow(0 20px 40px rgba(0,0,0,.9)) ${filterVal}`;
+    if(imgEl && activeCol.img){
+      imgEl.src = activeCol.img;
     }
   });
 }
@@ -1651,14 +1644,17 @@ document.querySelectorAll('.modal-bg').forEach(o=>{o.addEventListener('click',e=
 function openCarDetail(id){
   const car=CARS.find(c=>c.id===id);if(!car)return;currentCar=car;
   const d=D[lang],isAr=lang==='ar';
+  const activeCol=selectedColors[car.id]||car.colors[0];
+  const activeImg=(activeCol&&activeCol.img)?activeCol.img:car.img;
+  const colNameStr=isAr?activeCol.nameAr:activeCol.name;
   const formattedNum=new Intl.NumberFormat('fr-FR').format(car.price);
   const badgeText=isAr?`<bdi>${formattedNum}</bdi> درهم`:`${formattedNum} DH`;
   document.getElementById('dt-title').textContent=isAr?car.nameAr:car.name;
   document.getElementById('dt-body').innerHTML=`
     <div class="dt-stage">
-      <img src="${car.img}" alt="${car.name}">
+      <img src="${activeImg}" alt="${car.name}">
       <div class="dt-badge" style="color:${car.pc}">${badgeText}</div>
-      <div class="dt-cat"><span class="sc-cat" style="background:rgba(8,8,12,.85);border:1px solid rgba(255,255,255,.2);color:#fff;backdrop-filter:blur(10px);margin:0">${isAr?car.catAr:car.cat}</span></div>
+      <div class="dt-cat"><span class="sc-cat" style="background:rgba(8,8,12,.85);border:1px solid rgba(255,255,255,.2);color:#fff;backdrop-filter:blur(10px);margin:0">${isAr?car.catAr:car.cat} · ${colNameStr}</span></div>
     </div>
     <div style="display:flex;justify-content:center;margin-bottom:14px">
       <button onclick="closeModal('modal-detail');openFinForCar('${car.id}')" class="sc-finance-hint" style="margin:0">💳 ${isAr?'حاسبة التمويل والأقساط':'Simulateur Financement & Mensualités →'}</button>
@@ -1680,9 +1676,11 @@ function renderCompare(){
   document.getElementById('cmp-body').innerHTML=CARS.map(c=>{
     const formattedNum=new Intl.NumberFormat('fr-FR').format(c.price);
     const priceText=isAr?`<bdi>${formattedNum}</bdi> درهم`:`${formattedNum} DH`;
+    const activeCol=selectedColors[c.id]||c.colors[0];
+    const activeImg=(activeCol&&activeCol.img)?activeCol.img:c.img;
     return `
     <div class="cmp-col">
-      <div class="cmp-img"><img src="${c.img}" alt="${c.name}"></div>
+      <div class="cmp-img"><img src="${activeImg}" alt="${c.name}"></div>
       <div class="cmp-info">
         <div class="cmp-name">${isAr?c.nameAr:c.name}</div>
         <div class="cmp-price" style="color:${c.pc}">${priceText}</div>
@@ -1702,10 +1700,12 @@ function bookCar(name){
 function submitBooking(e){
   e.preventDefault();
   const type=document.querySelector('input[name="type"]:checked').value;
-  const car=document.getElementById('bk-car').value;
+  const carName=document.getElementById('bk-car').value;
+  const carObj=CARS.find(c=>c.name===carName);
+  const chosenColor=carObj&&selectedColors[carObj.id]?` (Couleur: ${selectedColors[carObj.id].name})`:'';
   const name=document.getElementById('bk-name').value;
   const phone=document.getElementById('bk-phone').value;
-  const msg=`Bonjour Auto Meknès Ismailia — ${type}: ${car}. Nom: ${name}, Tél: ${phone}`;
+  const msg=`Bonjour Auto Meknès Ismailia — ${type}: ${carName}${chosenColor}. Nom: ${name}, Tél: ${phone}`;
   window.open(`https://wa.me/212535524768?text=${encodeURIComponent(msg)}`,'_blank');
   closeModal('modal-booking');
 }
