@@ -253,77 +253,103 @@ section{position:relative;z-index:1}
 }
 .sec-desc{font-size:14px;color:var(--text2);margin-top:8px;max-width:500px}
 
-/* Catalogue Collapse & Compact Grid */
+/* Catalogue Collapse & Custom Button */
 .sec-head-row{
   display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:12px;
 }
 .btn-toggle-cat{
-  font-size:12px;padding:9px 16px;border-radius:99px;display:inline-flex;align-items:center;gap:8px;
-  background:rgba(255,255,255,.05);border:1px solid var(--border2);color:var(--text);cursor:pointer;
-  transition:all .2s;
+  font-size:12px;font-weight:700;padding:10px 20px;border-radius:99px;
+  display:inline-flex;align-items:center;gap:10px;
+  background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.03));
+  border:1px solid var(--border2);color:var(--text);cursor:pointer;
+  box-shadow:0 4px 16px rgba(0,0,0,.3);
+  transition:all .3s cubic-bezier(.16,1,.3,1);
 }
-.btn-toggle-cat:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.25)}
-.btn-toggle-cat svg{transition:transform .3s cubic-bezier(.16,1,.3,1)}
+.btn-toggle-cat:hover{
+  background:linear-gradient(135deg,rgba(235,10,30,.15),rgba(255,255,255,.08));
+  border-color:rgba(235,10,30,.4);
+  transform:translateY(-2px);
+  box-shadow:0 6px 20px rgba(235,10,30,.2);
+}
+.btn-toggle-cat:active{transform:scale(.96)}
+.btn-toggle-cat svg{transition:transform .35s cubic-bezier(.16,1,.3,1)}
+.cat-badge-count{
+  background:var(--red);color:#fff;font-size:10px;font-weight:800;
+  padding:2px 8px;border-radius:99px;line-height:1.4;
+}
 #showroom.collapsed .btn-toggle-cat svg{transform:rotate(180deg)}
-#showroom.collapsed .showcase{display:none}
-#showroom.collapsed .cat-compact-wrap{display:block}
+#showroom.collapsed .showcase{display:none !important}
+#showroom.collapsed .cat-compact-wrap{display:none !important}
 
-.cat-compact-wrap{display:none;padding:16px 0 40px}
-.cat-compact-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:16px;
+/* ═══ REELS / VIDEOS SECTION (9:16 VERTICAL) ═══ */
+.reels-sec{padding:30px 0 50px;position:relative;z-index:1}
+.reels-header{text-align:center;margin-bottom:28px}
+.reels-header .sec-desc{margin:8px auto 0}
+.reels-grid{
+  display:grid;grid-template-columns:repeat(2,minmax(0,320px));
+  justify-content:center;gap:24px;
 }
-@media(max-width:767px){
-  .sec-head-row{justify-content:center;text-align:center}
-  .cat-compact-grid{grid-template-columns:1fr;gap:14px}
+@media(max-width:680px){
+  .reels-grid{grid-template-columns:repeat(2,1fr);gap:12px}
 }
-.cat-compact-card{
-  background:var(--surface2);border:1px solid var(--border);border-radius:20px;
-  padding:20px 16px;display:flex;flex-direction:column;align-items:center;text-align:center;
-  transition:transform .25s,border-color .25s,box-shadow .25s;position:relative;
+@media(max-width:380px){
+  .reels-grid{grid-template-columns:1fr;max-width:300px;margin:0 auto}
 }
-.cat-compact-card:hover{transform:translateY(-4px);border-color:var(--border2);box-shadow:0 12px 30px rgba(0,0,0,.6)}
-.cat-compact-img{
-  width:100%;max-width:240px;aspect-ratio:4/3;object-fit:contain;margin:6px auto 12px;
-  filter:drop-shadow(0 12px 24px rgba(0,0,0,.8));transition:transform .3s;
+.reel-card{
+  position:relative;border-radius:24px;overflow:hidden;
+  background:var(--surface2);border:1px solid var(--border2);
+  box-shadow:0 16px 40px rgba(0,0,0,.6), 0 0 24px rgba(235,10,30,.08);
+  aspect-ratio:9/16;cursor:pointer;
+  transition:transform .35s cubic-bezier(.16,1,.3,1), border-color .3s, box-shadow .35s;
 }
-.cat-compact-card:hover .cat-compact-img{transform:scale(1.05)}
-.cat-compact-cat{font-size:9.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:99px;margin-bottom:8px}
-.cat-compact-name{font-size:16px;font-weight:800;margin-bottom:4px}
-.cat-compact-price{font-size:16px;font-weight:900;margin-bottom:14px}
-.cat-compact-actions{display:flex;gap:8px;width:100%}
-.cat-compact-actions .btn{flex:1;padding:10px 8px;font-size:11.5px}
-
-/* ═══ GOOGLE REVIEW ═══ */
-.review-strip{
-  margin:0 auto;max-width:1080px;padding:0 20px;
-  position:relative;z-index:1;
+.reel-card:hover{
+  transform:translateY(-6px);
+  border-color:rgba(255,255,255,.3);
+  box-shadow:0 24px 50px rgba(0,0,0,.8), 0 0 30px rgba(235,10,30,.2);
 }
-@media(min-width:768px){.review-strip{padding:0 40px}}
-.review-card{
-  display:flex;align-items:center;justify-content:space-between;gap:16px;
-  background:linear-gradient(135deg,rgba(245,185,66,.06),rgba(245,185,66,.02));
-  border:1px solid rgba(245,185,66,.15);border-radius:16px;
-  padding:16px 22px;text-decoration:none;
-  transition:border-color .3s,box-shadow .3s,transform .3s;flex-wrap:wrap;
+.reel-media{width:100%;height:100%;position:relative}
+.reel-video{
+  width:100%;height:100%;object-fit:cover;display:block;
+  background:#000;
 }
-.review-card:hover{border-color:rgba(245,185,66,.35);box-shadow:0 8px 40px rgba(245,185,66,.08);transform:translateY(-2px)}
-.rv-left{display:flex;align-items:center;gap:14px}
-.rv-g{
-  width:42px;height:42px;border-radius:12px;background:#fff;
-  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+.reel-overlay{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;justify-content:space-between;
+  padding:14px;
+  background:linear-gradient(180deg,rgba(0,0,0,.6) 0%,rgba(0,0,0,0) 35%,rgba(0,0,0,0) 55%,rgba(0,0,0,.85) 100%);
+  pointer-events:none;
 }
-.rv-stars{color:var(--gold);font-size:14px;letter-spacing:2px}
-.rv-title{font-size:14px;font-weight:700;color:var(--text)}
-.rv-sub{font-size:11px;color:var(--text2);margin-top:1px}
-.rv-cta{
-  display:inline-flex;align-items:center;gap:6px;
-  padding:9px 18px;border-radius:99px;
-  background:rgba(245,185,66,.1);border:1px solid rgba(245,185,66,.22);
-  color:var(--gold);font-size:12px;font-weight:700;
-  white-space:nowrap;flex-shrink:0;
-  transition:background .2s;
+.reel-top{
+  display:flex;align-items:center;justify-content:space-between;
+  width:100%;pointer-events:auto;
 }
-.rv-cta:hover{background:rgba(245,185,66,.18)}
+.reel-tag{
+  font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+  padding:4px 10px;border-radius:99px;
+  background:rgba(8,8,12,.75);backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.15);color:#fff;
+}
+.reel-audio-btn{
+  width:36px;height:36px;border-radius:50%;
+  background:rgba(8,8,12,.8);backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.2);
+  color:#fff;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:transform .2s, background .2s, border-color .2s;
+}
+.reel-audio-btn:hover{transform:scale(1.1);border-color:#fff;background:rgba(235,10,30,.85)}
+.reel-audio-btn:active{transform:scale(.92)}
+.reel-bottom{
+  text-align:left;pointer-events:auto;
+}
+body.ar .reel-bottom{text-align:right}
+.reel-badge-car{
+  font-size:clamp(13px,2.2vw,16px);font-weight:900;color:#fff;
+  text-shadow:0 2px 8px rgba(0,0,0,.9);line-height:1.2;
+}
+.reel-sub{
+  font-size:10.5px;font-weight:600;color:rgba(255,255,255,.8);
+  margin-top:2px;text-shadow:0 1px 4px rgba(0,0,0,.8);
+}
 
 /* ═══ CAR SHOWCASES ═══ */
 .showcase{padding:60px 0}
@@ -770,28 +796,6 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
   }
   .sc-actions .btn{flex:1 1 50%;padding:11px 8px;font-size:11.5px;justify-content:center}
 
-  /* Centered Google Review */
-  .review-strip{padding:0 20px}
-  .review-card{
-    padding:16px;
-    border-radius:16px;
-    gap:12px;
-    flex-direction:column;
-    align-items:center;
-    text-align:center;
-  }
-  .rv-left{
-    flex-direction:column;
-    align-items:center;
-    text-align:center;
-    gap:8px;
-  }
-  .rv-g{margin:0 auto}
-  .rv-stars{text-align:center}
-  .rv-title{text-align:center;font-size:13.5px}
-  .rv-sub{text-align:center;font-size:11px}
-  .rv-cta{width:100%;max-width:280px;justify-content:center;padding:10px 16px;margin:2px auto 0 auto}
-
   /* Centered Services */
   .services{padding:36px 0}
   .svc-grid{gap:10px;margin-top:16px}
@@ -910,8 +914,60 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
   </div>
 </section>
 
+<!-- ═══ SHOWROOM REELS / VIDEOS ═══ -->
+<section class="reels-sec" id="reels">
+  <div class="container">
+    <div class="reels-header reveal">
+      <div class="sec-label" id="sec-reels-label">EXPÉRIENCE SHOWROOM</div>
+      <div class="sec-title" id="sec-reels-title">Immersion Vidéo</div>
+      <p class="sec-desc" id="sec-reels-desc">Découvrez l'atmosphère de notre showroom et l'excellence Toyota en mouvement.</p>
+    </div>
+    <div class="reels-grid reveal reveal-delay-1">
+      <!-- Reel 1: Video1.mp4 -->
+      <div class="reel-card" onclick="toggleReelPlay(1)">
+        <div class="reel-media">
+          <video id="reel-vid-1" src="Video1.mp4" playsinline muted autoplay loop preload="metadata" class="reel-video"></video>
+          <div class="reel-overlay">
+            <div class="reel-top">
+              <span class="reel-tag">Toyota Ismailia</span>
+              <button type="button" class="reel-audio-btn" onclick="event.stopPropagation();toggleReelSound(1)" id="btn-sound-1" aria-label="Activer le son">
+                <svg id="sound-icon-muted-1" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+                <svg id="sound-icon-on-1" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="display:none"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+              </button>
+            </div>
+            <div class="reel-bottom">
+              <div class="reel-badge-car" id="reel-b1-title">Land Cruiser Prado</div>
+              <div class="reel-sub" id="reel-b1-sub">L'icône tout-terrain à Meknès</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reel 2: Video2.mp4 -->
+      <div class="reel-card" onclick="toggleReelPlay(2)">
+        <div class="reel-media">
+          <video id="reel-vid-2" src="Video2.mp4" playsinline muted autoplay loop preload="metadata" class="reel-video"></video>
+          <div class="reel-overlay">
+            <div class="reel-top">
+              <span class="reel-tag">Toyota Ismailia</span>
+              <button type="button" class="reel-audio-btn" onclick="event.stopPropagation();toggleReelSound(2)" id="btn-sound-2" aria-label="Activer le son">
+                <svg id="sound-icon-muted-2" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+                <svg id="sound-icon-on-2" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="display:none"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+              </button>
+            </div>
+            <div class="reel-bottom">
+              <div class="reel-badge-car" id="reel-b2-title">Gamme Hybride Toyota</div>
+              <div class="reel-sub" id="reel-b2-sub">Innovation, confort & efficience</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ═══ SHOWROOM — 3 CAR SHOWCASES ═══ -->
-<section id="showroom" style="padding-top:40px">
+<section id="showroom" style="padding-top:20px">
   <div class="container">
     <div class="sec-head-row reveal">
       <div>
@@ -920,50 +976,10 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
         <p class="sec-desc" id="sec-cars-desc">Trois véhicules Toyota de dernière génération, disponibles immédiatement.</p>
       </div>
       <button type="button" class="btn-toggle-cat" onclick="toggleCatalog()" id="btn-toggle-cat" aria-label="Réduire ou développer le catalogue">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" id="cat-toggle-icon"><polyline points="18 15 12 9 6 15"/></svg>
+        <span class="cat-badge-count" id="cat-badge-count">3 Modèles</span>
         <span id="txt-toggle-cat">Réduire le catalogue</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" id="cat-toggle-icon"><polyline points="18 15 12 9 6 15"/></svg>
       </button>
-    </div>
-  </div>
-
-  <!-- COMPACT CATALOGUE VIEW (Shown when collapsed) -->
-  <div class="container cat-compact-wrap" id="cat-compact-wrap">
-    <div class="cat-compact-grid">
-      <!-- PRADO COMPACT -->
-      <div class="cat-compact-card" onclick="openCarDetail('prado')">
-        <span class="cat-compact-cat" style="background:rgba(235,10,30,.1);color:#FF6B7A;border:1px solid rgba(235,10,30,.2)" id="cmpc-prado-cat">SUV 4×4 Luxe</span>
-        <img src="prado_Farbe_F5F6F8.webp" alt="Land Cruiser Prado" class="cat-compact-img" id="cmpc-img-prado" loading="lazy" decoding="async">
-        <div class="cat-compact-name" id="cmpc-prado-name">Land Cruiser Prado</div>
-        <div class="cat-compact-price" style="color:#FF6B7A" id="cmpc-prado-price">645 000 DH <small>TTC</small></div>
-        <div class="cat-compact-actions" onclick="event.stopPropagation()">
-          <button type="button" class="btn btn-glass" onclick="openCarDetail('prado')" id="cmpc-btn-prado-fiche">Fiche</button>
-          <button type="button" class="btn btn-red" onclick="bookCar('Toyota Land Cruiser Prado')" id="cmpc-btn-prado-book">Conseil</button>
-        </div>
-      </div>
-
-      <!-- COROLLA COMPACT -->
-      <div class="cat-compact-card" onclick="openCarDetail('corolla')">
-        <span class="cat-compact-cat" style="background:rgba(34,211,238,.08);color:var(--cyan);border:1px solid rgba(34,211,238,.18)" id="cmpc-corolla-cat">Berline Hybride</span>
-        <img src="corolla_Farbe_F0F1F5.webp" alt="Corolla Berline" class="cat-compact-img" id="cmpc-img-corolla" loading="lazy" decoding="async">
-        <div class="cat-compact-name" id="cmpc-corolla-name">Corolla Berline</div>
-        <div class="cat-compact-price" style="color:var(--cyan)" id="cmpc-corolla-price">245 000 DH <small>TTC</small></div>
-        <div class="cat-compact-actions" onclick="event.stopPropagation()">
-          <button type="button" class="btn btn-glass" onclick="openCarDetail('corolla')" id="cmpc-btn-corolla-fiche">Fiche</button>
-          <button type="button" class="btn btn-red" onclick="bookCar('Toyota Corolla Berline')" id="cmpc-btn-corolla-book">Conseil</button>
-        </div>
-      </div>
-
-      <!-- COROLLA CROSS COMPACT -->
-      <div class="cat-compact-card" onclick="openCarDetail('corolla-cross')">
-        <span class="cat-compact-cat" style="background:rgba(245,185,66,.08);color:var(--gold);border:1px solid rgba(245,185,66,.18)" id="cmpc-cross-cat">SUV Crossover AWD</span>
-        <img src="corolla-cross_Farbe_7D838A.webp" alt="Corolla Cross AWD" class="cat-compact-img" id="cmpc-img-cross" loading="lazy" decoding="async">
-        <div class="cat-compact-name" id="cmpc-cross-name">Corolla Cross AWD</div>
-        <div class="cat-compact-price" style="color:var(--gold)" id="cmpc-cross-price">369 000 DH <small>TTC</small></div>
-        <div class="cat-compact-actions" onclick="event.stopPropagation()">
-          <button type="button" class="btn btn-glass" onclick="openCarDetail('corolla-cross')" id="cmpc-btn-cross-fiche">Fiche</button>
-          <button type="button" class="btn btn-red" onclick="bookCar('Toyota Corolla Cross AWD')" id="cmpc-btn-cross-book">Conseil</button>
-        </div>
-      </div>
     </div>
   </div>
 
@@ -1125,26 +1141,6 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
   </div>
 </section>
 
-<!-- ═══ GOOGLE REVIEW (Under Services) ═══ -->
-<div class="review-strip reveal" style="margin:24px auto 40px auto">
-  <a href="https://search.google.com/local/writereview?placeid=ChIJn56vFYVFoA0R52LRpst-CSE" target="_blank" rel="noopener noreferrer" class="review-card" id="top-review-link">
-    <div class="rv-left">
-      <div class="rv-g">
-        <svg width="22" height="22" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.34 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.99 0 12s.45 3.82 1.25 5.42l4.03-3.15z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/></svg>
-      </div>
-      <div>
-        <div class="rv-stars">★★★★★</div>
-        <div class="rv-title" id="rv-title">Donnez votre Avis Google</div>
-        <div class="rv-sub" id="rv-sub">Votre satisfaction au cœur de nos priorités</div>
-      </div>
-    </div>
-    <div class="rv-cta">
-      <span id="rv-cta">Laisser un Avis</span>
-      <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
-    </div>
-  </a>
-</div>
-
 <!-- ═══ FOOTER ═══ -->
 <footer class="footer">
   <div class="container">
@@ -1177,9 +1173,9 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
       <div>
         <div class="ft-heading" id="ft-nav-title">Navigation</div>
         <ul class="ft-links">
+          <li><a href="#reels" id="ft-l0">Vidéos</a></li>
           <li><a href="#showroom" id="ft-l1">Showroom</a></li>
           <li><a href="#services" id="ft-l2">Services</a></li>
-          <li><a href="https://search.google.com/local/writereview?placeid=ChIJn56vFYVFoA0R52LRpst-CSE" target="_blank" rel="noopener noreferrer" id="ft-l3">Avis Google</a></li>
           <li><a href="https://share.google/qjgfQifJ4eAU9GInu" target="_blank" rel="noopener noreferrer" id="ft-l4">Nous trouver</a></li>
         </ul>
       </div>
@@ -1218,10 +1214,6 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
   <a href="https://share.google/qjgfQifJ4eAU9GInu" target="_blank" class="mob-btn" id="mb-maps-link">
     <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
     <span id="mb-maps">Maps</span>
-  </a>
-  <a href="https://search.google.com/local/writereview?placeid=ChIJn56vFYVFoA0R52LRpst-CSE" target="_blank" rel="noopener noreferrer" class="mob-btn gold" id="mb-review-link">
-    <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-    <span id="mb-review">Avis</span>
   </a>
 </nav>
 
@@ -1479,10 +1471,11 @@ const D={
     heroTag:"L'EXCELLENCE AUTOMOBILE, NOTRE ENGAGEMENT",heroTitle:'Auto Meknès<br>Ismailia',
     heroSub:'Votre concessionnaire agréé Toyota à Meknès. Découvrez la nouvelle génération.',
     heroCta1:'Voir les Modèles',heroCta2:'WhatsApp Direct',
-    rvTitle:'Donnez votre Avis Google',rvSub:'Votre satisfaction au cœur de nos priorités',rvCta:'Laisser un Avis',
+    secReelsLabel:'EXPÉRIENCE SHOWROOM',secReelsTitle:'Immersion Vidéo',secReelsDesc:"Découvrez l'atmosphère de notre showroom et l'excellence Toyota en mouvement.",
+    reelB1Title:'Land Cruiser Prado',reelB1Sub:"L'icône tout-terrain à Meknès",
+    reelB2Title:'Gamme Hybride Toyota',reelB2Sub:'Innovation, confort & efficience',
     secCarsLabel:'SHOWROOM',secCarsName:'Nos Modèles',secCarsDesc:'Trois véhicules Toyota de dernière génération, disponibles immédiatement.',
-    catCollapse:'Réduire le catalogue',catExpand:'Développer le catalogue',
-    cmpcBtnFiche:'Fiche',cmpcBtnBook:'Conseil',
+    catCollapse:'Réduire le catalogue',catExpand:'Découvrir nos 3 modèles Toyota',catBadgeCount:'3 Modèles',
     secSvcLabel:'SERVICES',secSvcName:'Comment pouvons-nous vous aider ?',
     svc1:'Rendez-vous Conseil',svc1s:'Confirmation sous 30 min',
     svc5:'Simulateur Crédit',svc5s:'Calculer mes mensualités',
@@ -1491,9 +1484,9 @@ const D={
     svc4:'Reprise Auto',svc4s:'Offre ferme sous 2h',
     slogan:"L'excellence automobile,<br>notre engagement.",
     ftSav:'Showroom & SAV Agréé Toyota',ftNav:'Navigation',ftContact:'Contact Direct',
-    ftL1:'Showroom',ftL2:'Services',ftL3:'Avis Google',ftL4:'Nous trouver',ftWa:'WhatsApp Direct',
+    ftL0:'Vidéos',ftL1:'Showroom',ftL2:'Services',ftL4:'Nous trouver',ftWa:'WhatsApp Direct',
     ftCopy:'© 2026 Auto Meknès Ismailia · Concessionnaire Agréé Toyota · Marketif',
-    mbCall:'Appeler',mbBook:'RDV',mbMaps:'Maps',mbReview:'Avis',
+    mbCall:'Appeler',mbBook:'RDV',mbMaps:'Maps',
     fiche:'Fiche Technique',book:'Prendre Rendez-vous',
     lblCol:'Couleur :',
     pradoSp:['204 ch · 2.8L D-4D','Auto 6 · 4×4','7.9 L/100km'],
@@ -1530,10 +1523,11 @@ const D={
     heroTag:'التميز في عالم السيارات، التزامنا الدائم',heroTitle:'Auto Meknès<br>Ismailia',
     heroSub:'وكيلكم المعتمد لتويوتا في مكناس. اكتشفوا الجيل الجديد.',
     heroCta1:'اكتشف الموديلات',heroCta2:'واتساب مباشر',
-    rvTitle:'أضف تقييمك على Google',rvSub:'رضاكم هو أولويتنا دائماً',rvCta:'أضف تقييمك',
+    secReelsLabel:'تجربة المعرض',secReelsTitle:'جولة فيديو حصرية',secReelsDesc:'اكتشفوا أجواء صالة العرض وتميز سيارات تويوتا عن قرب وبشكل ديناميكي.',
+    reelB1Title:'لاند كروزر برادو',reelB1Sub:'أيقونة الدفع الرباعي في مكناس',
+    reelB2Title:'تشكيلة تويوتا الهجينة',reelB2Sub:'ابتكار، راحة واقتصاد مثالي',
     secCarsLabel:'المعرض',secCarsName:'موديلاتنا',secCarsDesc:'ثلاث سيارات تويوتا من أحدث جيل، متوفرة فوراً.',
-    catCollapse:'طي الكتالوج',catExpand:'عرض الكتالوج',
-    cmpcBtnFiche:'المواصفات',cmpcBtnBook:'استشارة',
+    catCollapse:'طي الكتالوج',catExpand:'عرض موديلات تويوتا (3)',catBadgeCount:'3 موديلات',
     secSvcLabel:'الخدمات',secSvcName:'كيف يمكننا مساعدتك؟',
     svc1:'حجز موعد استشارة',svc1s:'تأكيد فوري خلال 30 دقيقة',
     svc5:'حاسبة التمويل',svc5s:'احسب القسط الشهري',
@@ -1542,9 +1536,9 @@ const D={
     svc4:'استبدال سيارتك',svc4s:'عرض خلال ساعتين',
     slogan:'التميز في عالم السيارات،<br>التزامنا الدائم.',
     ftSav:'معرض وخدمة ما بعد البيع المعتمدة',ftNav:'التنقل',ftContact:'تواصل مباشر',
-    ftL1:'المعرض',ftL2:'الخدمات',ftL3:'تقييم Google',ftL4:'موقعنا',ftWa:'واتساب مباشر',
+    ftL0:'الفيديوهات',ftL1:'المعرض',ftL2:'الخدمات',ftL4:'موقعنا',ftWa:'واتساب مباشر',
     ftCopy:'© 2026 Auto Meknès Ismailia · وكيل تويوتا المعتمد · Marketif',
-    mbCall:'اتصال',mbBook:'استشارة',mbMaps:'الخريطة',mbReview:'تقييم',
+    mbCall:'اتصال',mbBook:'استشارة',mbMaps:'الخريطة',
     fiche:'المواصفات التقنية',book:'طلب موعد واستشارة',
     lblCol:'اللون :',
     pradoSp:['204 حصان · 2.8 لتر ديزل','أوتوماتيك 6 · 4×4','7.9 لتر / 100 كم'],
@@ -1590,6 +1584,35 @@ function toggleCatalog(){
   if(txt){
     const d = D[lang];
     txt.textContent = catalogCollapsed ? d.catExpand : d.catCollapse;
+  }
+  const badge = document.getElementById('cat-badge-count');
+  if(badge){
+    const d = D[lang];
+    badge.textContent = d.catBadgeCount;
+  }
+}
+
+/* ─── Video Reels Controls ─── */
+function toggleReelSound(num){
+  const vid = document.getElementById(`reel-vid-${num}`);
+  const iconMuted = document.getElementById(`sound-icon-muted-${num}`);
+  const iconOn = document.getElementById(`sound-icon-on-${num}`);
+  if(!vid) return;
+  vid.muted = !vid.muted;
+  if(iconMuted) iconMuted.style.display = vid.muted ? 'block' : 'none';
+  if(iconOn) iconOn.style.display = vid.muted ? 'none' : 'block';
+  if(!vid.muted && vid.paused){
+    vid.play().catch(()=>{});
+  }
+}
+
+function toggleReelPlay(num){
+  const vid = document.getElementById(`reel-vid-${num}`);
+  if(!vid) return;
+  if(vid.paused){
+    vid.play().catch(()=>{});
+  } else {
+    vid.pause();
   }
 }
 
@@ -1787,8 +1810,19 @@ function setLang(l){
   s('hero-tag',d.heroTag);s('hero-title',d.heroTitle);s('hero-sub',d.heroSub);
   document.querySelector('#hero-cta1 span').textContent=d.heroCta1;
   document.querySelector('#hero-cta2 span').textContent=d.heroCta2;
-  s('rv-title',d.rvTitle);s('rv-sub',d.rvSub);s('rv-cta',d.rvCta);
+
+  // Video Reels section
+  s('sec-reels-label',d.secReelsLabel);s('sec-reels-title',d.secReelsTitle);s('sec-reels-desc',d.secReelsDesc);
+  s('reel-b1-title',d.reelB1Title);s('reel-b1-sub',d.reelB1Sub);
+  s('reel-b2-title',d.reelB2Title);s('reel-b2-sub',d.reelB2Sub);
+
+  // Showroom
   s('sec-cars-label',d.secCarsLabel);s('sec-cars-name',d.secCarsName);s('sec-cars-desc',d.secCarsDesc);
+  s('cat-badge-count',d.catBadgeCount);
+  const txtToggle = document.getElementById('txt-toggle-cat');
+  if(txtToggle) txtToggle.textContent = catalogCollapsed ? d.catExpand : d.catCollapse;
+
+  // Services
   s('sec-svc-label',d.secSvcLabel);s('sec-svc-name',d.secSvcName);
   s('svc-1',d.svc1);s('svc-1s',d.svc1s);
   s('svc-5',d.svc5);s('svc-5s',d.svc5s);
@@ -1796,19 +1830,13 @@ function setLang(l){
   s('svc-3',d.svc3);s('svc-3s',d.svc3s);
   s('svc-4',d.svc4);s('svc-4s',d.svc4s);
   s('slogan-text',d.slogan);
-  s('ft-sav',d.ftSav);s('ft-nav-title',d.ftNav);s('ft-contact-title',d.ftContact);
-  s('ft-l1',d.ftL1);s('ft-l2',d.ftL2);s('ft-l3',d.ftL3);s('ft-l4',d.ftL4);
-  s('ft-wa',d.ftWa);s('ft-copy',d.ftCopy);
-  s('mb-call',d.mbCall);s('mb-book',d.mbBook);s('mb-maps',d.mbMaps);s('mb-review',d.mbReview);
-  
-  // Catalogue toggle button & Compact cards
-  const txtToggle = document.getElementById('txt-toggle-cat');
-  if(txtToggle) txtToggle.textContent = catalogCollapsed ? d.catExpand : d.catCollapse;
-  
-  s('cmpc-btn-prado-fiche',d.cmpcBtnFiche);s('cmpc-btn-prado-book',d.cmpcBtnBook);
-  s('cmpc-btn-corolla-fiche',d.cmpcBtnFiche);s('cmpc-btn-corolla-book',d.cmpcBtnBook);
-  s('cmpc-btn-cross-fiche',d.cmpcBtnFiche);s('cmpc-btn-cross-book',d.cmpcBtnBook);
 
+  // Footer & Mobile Bar
+  s('ft-sav',d.ftSav);s('ft-nav-title',d.ftNav);s('ft-contact-title',d.ftContact);
+  s('ft-l0',d.ftL0);s('ft-l1',d.ftL1);s('ft-l2',d.ftL2);s('ft-l4',d.ftL4);
+  s('ft-wa',d.ftWa);s('ft-copy',d.ftCopy);
+  s('mb-call',d.mbCall);s('mb-book',d.mbBook);s('mb-maps',d.mbMaps);
+  
   // Car buttons & Finance hints
   s('prado-fiche',d.fiche);s('prado-book',d.book);s('fin-hint-prado',d.finHintPrado);
   s('corolla-fiche',d.fiche);s('corolla-book',d.book);s('fin-hint-corolla',d.finHintCorolla);
@@ -1824,23 +1852,14 @@ function setLang(l){
   s('prado-cat',isAr?CARS[0].catAr:CARS[0].cat);
   s('prado-name',isAr?CARS[0].nameAr:'Land Cruiser Prado');
   s('prado-price',formatPrice(CARS[0].price,l));
-  s('cmpc-prado-cat',isAr?CARS[0].catAr:CARS[0].cat);
-  s('cmpc-prado-name',isAr?CARS[0].nameAr:'Land Cruiser Prado');
-  s('cmpc-prado-price',formatPrice(CARS[0].price,l));
   
   s('corolla-cat',isAr?CARS[1].catAr:CARS[1].cat);
   s('corolla-name',isAr?CARS[1].nameAr:'Corolla Berline');
   s('corolla-price',formatPrice(CARS[1].price,l));
-  s('cmpc-corolla-cat',isAr?CARS[1].catAr:CARS[1].cat);
-  s('cmpc-corolla-name',isAr?CARS[1].nameAr:'Corolla Berline');
-  s('cmpc-corolla-price',formatPrice(CARS[1].price,l));
   
   s('cross-cat',isAr?CARS[2].catAr:CARS[2].cat);
   s('cross-name',isAr?CARS[2].nameAr:'Corolla Cross AWD');
   s('cross-price',formatPrice(CARS[2].price,l));
-  s('cmpc-cross-cat',isAr?CARS[2].catAr:CARS[2].cat);
-  s('cmpc-cross-name',isAr?CARS[2].nameAr:'Corolla Cross AWD');
-  s('cmpc-cross-price',formatPrice(CARS[2].price,l));
   
   // Finance Modal Strings
   s('fin-title',d.finTitle);s('fin-sub',d.finSub);s('fin-lbl-est',d.finLblEst);s('fin-unit',d.finUnit);
@@ -2047,8 +2066,7 @@ let CONFIG = {
     facebook: "https://web.facebook.com/profile.php?id=61574334633685&sk=followers&locale&_rdc=1&_rdr#",
     youtube: "https://www.youtube.com/@AutoMeknesIsmailia",
     tiktok: "https://tiktok.com/@auto_meknes_ismailia",
-    googleMaps: "https://share.google/qjgfQifJ4eAU9GInu",
-    googleReviews: "https://search.google.com/local/writereview?placeid=ChIJn56vFYVFoA0R52LRpst-CSE"
+    googleMaps: "https://share.google/qjgfQifJ4eAU9GInu"
   },
   cars: [
     { id: "prado", price: 645000 },
@@ -2110,14 +2128,6 @@ function applyConfig(cfg){
   if(ftMaps && CONFIG.socials.googleMaps) ftMaps.href = CONFIG.socials.googleMaps;
   const mbMaps = document.getElementById('mb-maps-link');
   if(mbMaps && CONFIG.socials.googleMaps) mbMaps.href = CONFIG.socials.googleMaps;
-
-  // Reviews
-  const topRev = document.getElementById('top-review-link');
-  if(topRev && CONFIG.socials.googleReviews) topRev.href = CONFIG.socials.googleReviews;
-  const ftRev = document.getElementById('ft-l3');
-  if(ftRev && CONFIG.socials.googleReviews) ftRev.href = CONFIG.socials.googleReviews;
-  const mbRev = document.getElementById('mb-review-link');
-  if(mbRev && CONFIG.socials.googleReviews) mbRev.href = CONFIG.socials.googleReviews;
 
   // Team
   if(CONFIG.team[0]){
