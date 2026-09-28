@@ -323,7 +323,7 @@ body.ar .sc-price, body.ar .dt-badge, body.ar .cmp-price{direction:rtl}
 body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin-inline-start:6px}
 
 /* Spec pills */
-.sc-specs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.sc-specs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
 .spec-pill{
   display:inline-flex;align-items:center;gap:6px;
   padding:8px 14px;border-radius:12px;
@@ -331,8 +331,80 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
   font-size:11px;font-weight:600;color:var(--text2);
 }
 .spec-pill-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
+
+/* Color Switcher */
+.sc-colors{
+  margin-bottom:18px;display:flex;flex-direction:column;gap:8px;
+}
+.color-header{
+  font-size:11px;font-weight:700;color:var(--text2);display:flex;align-items:center;gap:6px;
+}
+.color-title-val{color:var(--text);font-weight:700}
+.color-chips{display:flex;align-items:center;gap:8px}
+.c-chip{
+  width:26px;height:26px;border-radius:50%;
+  border:2px solid rgba(255,255,255,.25);
+  cursor:pointer;position:relative;
+  transition:all .2s cubic-bezier(.16,1,.3,1);
+  padding:0;outline:none;
+}
+.c-chip:hover{transform:scale(1.15);border-color:rgba(255,255,255,.6)}
+.c-chip.active{
+  transform:scale(1.22);
+  border-color:#fff;
+  box-shadow:0 0 14px rgba(255,255,255,.5), 0 0 0 2px var(--bg);
+}
+
+/* Finance Hint Badge */
+.sc-finance-hint{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(245,185,66,.08);border:1px solid rgba(245,185,66,.22);
+  color:var(--gold);font-size:11px;font-weight:700;
+  padding:6px 12px;border-radius:99px;margin-bottom:14px;
+  cursor:pointer;transition:all .2s;text-decoration:none;
+}
+.sc-finance-hint:hover{background:rgba(245,185,66,.15);transform:translateY(-1px)}
+.sc-finance-hint bdi{font-variant-numeric:tabular-nums}
+
 .sc-actions{display:flex;gap:10px;flex-wrap:wrap}
 .sc-actions .btn{padding:12px 22px;font-size:12px}
+
+/* Finance Simulator Modal */
+.fin-car-tabs{display:flex;gap:6px;background:var(--surface2);padding:4px;border-radius:14px;border:1px solid var(--border);margin-bottom:18px}
+.fin-tab{flex:1;padding:9px 8px;border-radius:10px;border:none;background:transparent;color:var(--text2);font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;transition:all .2s;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}
+.fin-tab.active{background:var(--surface);color:#fff;box-shadow:0 2px 10px rgba(0,0,0,.4)}
+.fin-result-card{
+  background:linear-gradient(135deg,rgba(245,185,66,.12),rgba(235,10,30,.08));
+  border:1px solid rgba(245,185,66,.25);border-radius:18px;padding:18px 20px;
+  text-align:center;position:relative;overflow:hidden;
+}
+.frc-sub{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.frc-amount{font-size:clamp(26px,5vw,36px);font-weight:900;color:#fff;line-height:1.1}
+.frc-amount small{font-size:13px;font-weight:600;color:var(--text2);margin-inline-start:4px}
+.frc-amount bdi{font-variant-numeric:tabular-nums}
+.frc-details{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,.08);font-size:11px}
+.frc-d-lbl{display:block;font-size:9px;color:var(--text2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px}
+.frc-details strong{color:var(--text);font-size:11.5px;font-weight:700}
+.fin-slider{
+  width:100%;height:8px;border-radius:99px;
+  background:var(--surface3);outline:none;
+  -webkit-appearance:none;appearance:none;cursor:pointer;
+  accent-color:var(--gold);
+}
+.fin-slider::-webkit-slider-thumb{
+  -webkit-appearance:none;appearance:none;width:22px;height:22px;border-radius:50%;
+  background:var(--gold);border:2px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.5);cursor:pointer;
+}
+.fin-dur-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:6px}
+.fin-dur-btn{
+  padding:12px 8px;border-radius:12px;background:var(--surface2);border:1px solid var(--border2);
+  color:var(--text);font-family:inherit;font-size:14px;font-weight:800;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+  transition:all .2s;
+}
+.fin-dur-btn small{font-size:10px;font-weight:600;color:var(--text2)}
+.fin-dur-btn.active{border-color:var(--gold);background:rgba(245,185,66,.1);color:var(--gold)}
+.fin-dur-btn.active small{color:var(--gold)}
 
 /* ═══ SERVICES SECTION ═══ */
 .services{padding:80px 0}
@@ -793,14 +865,21 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
       <div class="sc-visual">
         <div class="sc-stage">
           <div class="sc-stage-bg"></div>
-          <img src="prado.webp" alt="Land Cruiser Prado" loading="lazy" decoding="async">
-          <div class="sc-beam"></div>
+          <img src="prado.webp" alt="Land Cruiser Prado" id="img-prado" loading="lazy" decoding="async">
+          <div class="sc-beam" id="beam-prado"></div>
         </div>
       </div>
       <div class="sc-info">
         <div class="sc-cat" id="prado-cat">SUV 4×4 Luxe</div>
         <div class="sc-name" id="prado-name">Land Cruiser Prado</div>
         <div class="sc-price" id="prado-price">645 000 DH <small>TTC</small></div>
+        <div class="sc-finance-hint" onclick="openFinForCar('prado')">
+          <span>💳</span> <span id="fin-hint-prado">Dès 9 850 DH / mois · Simuler Financement →</span>
+        </div>
+        <div class="sc-colors">
+          <div class="color-header"><span id="lbl-col-prado">Couleur :</span> <span class="color-title-val" id="col-name-prado">Blanc Nacré</span></div>
+          <div class="color-chips" id="chips-prado"></div>
+        </div>
         <div class="sc-specs">
           <span class="spec-pill"><span class="spec-pill-dot" style="background:#FF6B7A"></span><span id="prado-sp1">204 ch · 2.8L D-4D</span></span>
           <span class="spec-pill"><span class="spec-pill-dot" style="background:var(--text2)"></span><span id="prado-sp2">Auto 6 · 4×4</span></span>
@@ -820,14 +899,21 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
       <div class="sc-visual">
         <div class="sc-stage">
           <div class="sc-stage-bg"></div>
-          <img src="corolla.webp" alt="Corolla Berline Hybride" loading="lazy" decoding="async">
-          <div class="sc-beam"></div>
+          <img src="corolla.webp" alt="Corolla Berline Hybride" id="img-corolla" loading="lazy" decoding="async">
+          <div class="sc-beam" id="beam-corolla"></div>
         </div>
       </div>
       <div class="sc-info">
         <div class="sc-cat" id="corolla-cat">Berline Hybride</div>
         <div class="sc-name" id="corolla-name">Corolla Berline</div>
         <div class="sc-price" id="corolla-price">245 000 DH <small>TTC</small></div>
+        <div class="sc-finance-hint" onclick="openFinForCar('corolla')">
+          <span>💳</span> <span id="fin-hint-corolla">Dès 3 744 DH / mois · Simuler Financement →</span>
+        </div>
+        <div class="sc-colors">
+          <div class="color-header"><span id="lbl-col-corolla">Couleur :</span> <span class="color-title-val" id="col-name-corolla">Blanc Pur</span></div>
+          <div class="color-chips" id="chips-corolla"></div>
+        </div>
         <div class="sc-specs">
           <span class="spec-pill"><span class="spec-pill-dot" style="background:var(--cyan)"></span><span id="corolla-sp1">140 ch · 1.8L Hybride</span></span>
           <span class="spec-pill"><span class="spec-pill-dot" style="background:var(--text2)"></span><span id="corolla-sp2">e-CVT Automatique</span></span>
@@ -847,14 +933,21 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
       <div class="sc-visual">
         <div class="sc-stage">
           <div class="sc-stage-bg"></div>
-          <img src="corolla-cross.webp" alt="Corolla Cross AWD Hybride" loading="lazy" decoding="async">
-          <div class="sc-beam"></div>
+          <img src="corolla-cross.webp" alt="Corolla Cross AWD Hybride" id="img-cross" loading="lazy" decoding="async">
+          <div class="sc-beam" id="beam-cross"></div>
         </div>
       </div>
       <div class="sc-info">
         <div class="sc-cat" id="cross-cat">SUV Crossover AWD</div>
         <div class="sc-name" id="cross-name">Corolla Cross AWD</div>
         <div class="sc-price" id="cross-price">369 000 DH <small>TTC</small></div>
+        <div class="sc-finance-hint" onclick="openFinForCar('corolla-cross')">
+          <span>💳</span> <span id="fin-hint-cross">Dès 5 639 DH / mois · Simuler Financement →</span>
+        </div>
+        <div class="sc-colors">
+          <div class="color-header"><span id="lbl-col-cross">Couleur :</span> <span class="color-title-val" id="col-name-cross">Blanc Lunaire</span></div>
+          <div class="color-chips" id="chips-cross"></div>
+        </div>
         <div class="sc-specs">
           <span class="spec-pill"><span class="spec-pill-dot" style="background:var(--gold)"></span><span id="cross-sp1">197 ch · 2.0L AWD-i</span></span>
           <span class="spec-pill"><span class="spec-pill-dot" style="background:var(--text2)"></span><span id="cross-sp2">e-CVT Intégrale</span></span>
@@ -891,6 +984,13 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
         </div>
         <div class="svc-name" id="svc-1">Réserver un Essai</div>
         <div class="svc-sub" id="svc-1s">Confirmation sous 30 min</div>
+      </div>
+      <div class="svc-card reveal reveal-delay-2" onclick="openFinForCar('prado')">
+        <div class="svc-icon-wrap" style="background:rgba(245,185,66,.08);color:var(--gold)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+        </div>
+        <div class="svc-name" id="svc-5">Simulateur Crédit</div>
+        <div class="svc-sub" id="svc-5s">Calculer mes mensualités</div>
       </div>
       <div class="svc-card reveal reveal-delay-2" onclick="openModal('modal-compare')">
         <div class="svc-icon-wrap" style="background:rgba(34,211,238,.08);color:var(--cyan)">
@@ -1012,6 +1112,71 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
       <button class="btn btn-red" onclick="bookFromDetail()" id="dt-book">Réserver cet Essai</button>
     </div>
   </div>
+<!-- Finance Simulator Modal -->
+<div class="modal-bg" id="modal-finance">
+  <div class="modal-box" style="max-width:620px">
+    <div class="modal-head">
+      <div>
+        <div class="mh-title" id="fin-title">Simulateur de Financement</div>
+        <div class="mh-sub" id="fin-sub">Crédit auto & Mourabaha · Réponse immédiate</div>
+      </div>
+      <button class="modal-x" onclick="closeModal('modal-finance')">✕</button>
+    </div>
+    <div class="modal-body">
+      <!-- Car tabs -->
+      <div class="fin-car-tabs">
+        <button class="fin-tab active" onclick="setFinCar('prado')" id="ftab-prado">Land Cruiser Prado</button>
+        <button class="fin-tab" onclick="setFinCar('corolla')" id="ftab-corolla">Corolla Berline</button>
+        <button class="fin-tab" onclick="setFinCar('corolla-cross')" id="ftab-cross">Corolla Cross</button>
+      </div>
+
+      <!-- Live Calculation Card -->
+      <div class="fin-result-card">
+        <div class="frc-sub" id="fin-lbl-est">Mensualité Estimée TTC</div>
+        <div class="frc-amount"><span id="fin-monthly">0</span> <small id="fin-unit">DH / mois</small></div>
+        <div class="frc-details">
+          <div><span class="frc-d-lbl" id="fin-d-car">Prix du véhicule</span><strong id="fin-car-price">645 000 DH</strong></div>
+          <div><span class="frc-d-lbl" id="fin-d-app">Apport initial</span><strong id="fin-app-val">129 000 DH (20%)</strong></div>
+          <div><span class="frc-d-lbl" id="fin-d-dur">Durée</span><strong id="fin-dur-val">48 mois</strong></div>
+        </div>
+      </div>
+
+      <!-- Apport Slider -->
+      <div class="fg" style="margin-top:20px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+          <label id="fin-lbl-apport" style="margin:0">Apport initial (Acompte)</label>
+          <span style="font-size:12px;font-weight:800;color:var(--gold)" id="fin-slider-pct">20% · 129 000 DH</span>
+        </div>
+        <input type="range" class="fin-slider" id="fin-range-app" min="10" max="60" step="5" value="20" oninput="updateFinCalc()">
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text3);margin-top:4px">
+          <span>10% (Min)</span>
+          <span>30%</span>
+          <span>60% (Max)</span>
+        </div>
+      </div>
+
+      <!-- Duration Selector -->
+      <div class="fg" style="margin-top:16px">
+        <label id="fin-lbl-duration">Durée de remboursement</label>
+        <div class="fin-dur-grid">
+          <button type="button" class="fin-dur-btn" data-months="24" onclick="setFinDur(24)">24 <small id="fd-24">mois</small></button>
+          <button type="button" class="fin-dur-btn" data-months="36" onclick="setFinDur(36)">36 <small id="fd-36">mois</small></button>
+          <button type="button" class="fin-dur-btn active" data-months="48" onclick="setFinDur(48)">48 <small id="fd-48">mois</small></button>
+          <button type="button" class="fin-dur-btn" data-months="60" onclick="setFinDur(60)">60 <small id="fd-60">mois</small></button>
+        </div>
+      </div>
+
+      <!-- Lead submission -->
+      <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border)">
+        <div class="fg"><label id="fin-lbl-name">Votre Nom et Prénom</label><input type="text" class="finput" id="fin-name" placeholder="Votre nom complet"></div>
+        <div class="fg"><label id="fin-lbl-phone">WhatsApp / Téléphone</label><input type="tel" class="finput" id="fin-phone" placeholder="06 XX XX XX XX"></div>
+        <button onclick="submitFinLead()" class="btn btn-red" style="width:100%;padding:14px;font-size:13px" id="fin-submit">
+          <svg fill="currentColor" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.699c.983.537 1.956.822 2.796.822 3.179 0 5.767-2.586 5.768-5.766 0-3.18-2.589-5.768-5.768-5.768zm7.394 5.766c0 4.079-3.315 7.394-7.394 7.394-1.284 0-2.484-.33-3.535-.905l-4.14 1.086 1.106-4.037c-.675-1.12-1.031-2.415-1.031-3.738 0-4.079 3.315-7.394 7.394-7.394 4.079 0 7.394 3.315 7.394 7.394z"/></svg>
+          <span id="fin-btn-text">Demander cette Offre de Financement</span>
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- Compare -->
@@ -1121,18 +1286,36 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
 const CARS=[
   {id:'prado',name:'Toyota Land Cruiser Prado',nameAr:'تويوتا لاند كروزر برادو',
    cat:'SUV 4×4 Luxe',catAr:'دفع رباعي فاخر',price:645000,img:'prado.webp',pc:'#FF6B7A',
+   colors:[
+     {id:'white',name:'Blanc Nacré',nameAr:'أبيض لؤلؤي',hex:'#F5F6F8'},
+     {id:'black',name:'Noir Attitude',nameAr:'أسود ميتاليك',hex:'#1C1D21'},
+     {id:'grey',name:'Gris Graphite',nameAr:'رمادي جرافيت',hex:'#555961'},
+     {id:'bronze',name:'Bronze Vintage',nameAr:'برونزي فينتيج',hex:'#8C7853'}
+   ],
    specs:{fr:['204 ch / 2.8L D-4D Turbo Diesel','Boîte Auto 6 rapports + 4×4','7.9 L/100km cycle mixte','0–100 km/h : 9.9s','Vitesse max : 175 km/h','Garantie 3 ans / 100 000 km'],
           ar:['204 حصان / 2.8 لتر ديزل توربو','ناقل أوتوماتيكي 6 سرعات + دفع رباعي','7.9 لتر / 100 كم','0-100 كم/س : 9.9 ث','السرعة القصوى: 175 كم/س','ضمان 3 سنوات / 100,000 كم']},
    feats:{fr:['4×4 permanent avec différentiel Torsen','Suspension KDSS + Crawl Control','Cuir perforé, sièges ventilés & chauffants','Écran 12.3", Apple CarPlay & Android Auto','Caméras 360° Multi-Terrain Monitor','Toyota Safety Sense 3.0'],
           ar:['دفع رباعي دائم مع قفل تفاضلي Torsen','تعليق KDSS ونظام Crawl Control','جلد فاخر مع مقاعد مهواة ومدفأة','شاشة 12.3 بوصة مع Apple CarPlay','كاميرات محيطية 360 درجة','Toyota Safety Sense 3.0']}},
   {id:'corolla',name:'Toyota Corolla Berline',nameAr:'تويوتا كورولا سيدان',
    cat:'Berline Hybride',catAr:'سيدان هجينة',price:245000,img:'corolla.webp',pc:'#22D3EE',
+   colors:[
+     {id:'white',name:'Blanc Pur',nameAr:'أبيض ناصع',hex:'#F0F1F5'},
+     {id:'silver',name:'Gris Argent',nameAr:'فضي ميتاليك',hex:'#A8A9AD'},
+     {id:'blue',name:'Bleu Céleste',nameAr:'أزرق سماوي',hex:'#5D707F'},
+     {id:'black',name:'Noir Ébène',nameAr:'أسود أبنوس',hex:'#18181A'}
+   ],
    specs:{fr:['140 ch / 1.8L Hybride Auto-Rechargeable','e-CVT Automatique','4.1 L/100km (ultra-économique)','0–100 km/h : 9.2s','Vitesse max : 180 km/h','Hybride 5 ans / 100 000 km'],
           ar:['140 حصان / 1.8 لتر هجين ذاتي الشحن','ناقل e-CVT أوتوماتيكي','4.1 لتر / 100 كم','0-100 كم/س : 9.2 ث','السرعة القصوى: 180 كم/س','ضمان هجين 5 سنوات / 100,000 كم']},
    feats:{fr:['Hybride 5ème génération à recharge automatique','Mode 100% électrique EV en ville','Tableau de bord digital 12.3" + écran 10.5"','Climatisation bi-zone Nanoe-X Toyota','Régulateur adaptatif + maintien de voie actif','Full LED & jantes 17" alliage bi-ton'],
           ar:['الجيل الخامس من الهجين ذاتي الشحن','وضع كهربائي كامل EV داخل المدينة','شاشة قيادة 12.3 + شاشة مركزية 10.5','مكيف مزدوج مع Nanoe-X','مثبت سرعة متكيف + البقاء في المسار','مصابيح Full LED وجنوط 17 بوصة']}},
   {id:'corolla-cross',name:'Toyota Corolla Cross AWD',nameAr:'تويوتا كورولا كروس AWD',
    cat:'SUV Crossover AWD',catAr:'كروس أوفر دفع رباعي',price:369000,img:'corolla-cross.webp',pc:'#F5B942',
+   colors:[
+     {id:'white',name:'Blanc Lunaire',nameAr:'أبيض قمري',hex:'#F2F2F4'},
+     {id:'red',name:'Rouge Intense',nameAr:'أحمر قرمزي',hex:'#C41220'},
+     {id:'grey',name:'Gris Platine',nameAr:'رمادي بلاتيني',hex:'#7D838A'},
+     {id:'green',name:'Vert Urbain',nameAr:'أخضر كاكي',hex:'#4E5851'}
+   ],
    specs:{fr:['197 ch / 2.0L Hybride AWD-i Intégrale','e-CVT Intégrale intelligente AWD-i','4.8 L/100km','0–100 km/h : 7.5s','Vitesse max : 180 km/h','Hybride 5 ans / 100 000 km'],
           ar:['197 حصان / 2.0 لتر هجين دفع رباعي ذكي','دفع رباعي ذكي AWD-i مع e-CVT','4.8 لتر / 100 كم','0-100 كم/س : 7.5 ث','السرعة القصوى: 180 كم/س','ضمان هجين 5 سنوات / 100,000 كم']},
    feats:{fr:['AWD-i avec moteur électrique arrière indépendant','Toit panoramique & hayon mains-libres','Position surélevée, visibilité optimale','Chargeur induction + 4 ports USB-C','Angle mort BSM + alerte trafic arrière RCTA','Garde au sol parfaite pour routes marocaines'],
@@ -1148,6 +1331,7 @@ const D={
     secCarsLabel:'SHOWROOM',secCarsName:'Nos Modèles',secCarsDesc:'Trois véhicules Toyota de dernière génération, disponibles immédiatement.',
     secSvcLabel:'SERVICES',secSvcName:'Comment pouvons-nous vous aider ?',
     svc1:'Réserver un Essai',svc1s:'Confirmation sous 30 min',
+    svc5:'Simulateur Crédit',svc5s:'Calculer mes mensualités',
     svc2:'Comparateur',svc2s:'3 modèles côte à côte',
     svc3:'Notre Équipe',svc3s:'2 conseillers dédiés',
     svc4:'Reprise Auto',svc4s:'Offre ferme sous 2h',
@@ -1157,6 +1341,16 @@ const D={
     ftCopy:'© 2026 Auto Meknès Ismailia · Concessionnaire Agréé Toyota · Marketif',
     mbCall:'Appeler',mbBook:'Essai',mbMaps:'Maps',mbReview:'Avis',
     fiche:'Fiche Technique',book:'Réserver un Essai',
+    lblCol:'Couleur :',
+    finHintPrado:'Dès 9 850 DH / mois · Simuler Financement →',
+    finHintCorolla:'Dès 3 744 DH / mois · Simuler Financement →',
+    finHintCross:'Dès 5 639 DH / mois · Simuler Financement →',
+    finTitle:'Simulateur de Financement',finSub:'Crédit auto & Mourabaha · Réponse immédiate',
+    finLblEst:'Mensualité Estimée TTC',finUnit:'DH / mois',
+    finDCar:'Prix véhicule',finDApp:'Apport initial',finDDur:'Durée',
+    finLblApport:'Apport initial (Acompte)',finLblDuration:'Durée de remboursement',
+    finLblName:'Votre Nom et Prénom',finLblPhone:'WhatsApp / Téléphone',
+    finBtnText:'Demander cette Offre de Financement',
     cmpTitle:'Comparateur',cmpSub:'Tarifs en Dirhams TTC',cmpBook:'Réserver',
     bkTitle:'Réserver un Essai',bkSub:'Confirmation immédiate par WhatsApp',
     bkLblType:'Type de demande',rb1:'Essai sur Route',rb2:'Devis & Financement',
@@ -1176,6 +1370,7 @@ const D={
     secCarsLabel:'المعرض',secCarsName:'موديلاتنا',secCarsDesc:'ثلاث سيارات تويوتا من أحدث جيل، متوفرة فوراً.',
     secSvcLabel:'الخدمات',secSvcName:'كيف يمكننا مساعدتك؟',
     svc1:'طلب تجربة قيادة',svc1s:'تأكيد خلال 30 دقيقة',
+    svc5:'حاسبة التمويل',svc5s:'احسب القسط الشهري',
     svc2:'المقارن',svc2s:'3 موديلات جنباً إلى جنب',
     svc3:'فريق المبيعات',svc3s:'مستشاران في خدمتكم',
     svc4:'استبدال سيارتك',svc4s:'عرض خلال ساعتين',
@@ -1185,6 +1380,16 @@ const D={
     ftCopy:'© 2026 Auto Meknès Ismailia · وكيل تويوتا المعتمد · Marketif',
     mbCall:'اتصال',mbBook:'تجربة',mbMaps:'الخريطة',mbReview:'تقييم',
     fiche:'المواصفات التقنية',book:'طلب تجربة',
+    lblCol:'اللون :',
+    finHintPrado:'ابتداءً من 9,850 درهم / شهر · احسب التمويل ←',
+    finHintCorolla:'ابتداءً من 3,744 درهم / شهر · احسب التمويل ←',
+    finHintCross:'ابتداءً من 5,639 درهم / شهر · احسب التمويل ←',
+    finTitle:'حاسبة تمويل السيارات',finSub:'تمويل مرابحة وقروض سيارات · تأكيد فوري',
+    finLblEst:'القسط الشهري التقديري',finUnit:'درهم / شهر',
+    finDCar:'سعر السيارة',finDApp:'الدفعة الأولى',finDDur:'المدة',
+    finLblApport:'الدفعة الأولى (التسبيق)',finLblDuration:'مدة السداد بالشهور',
+    finLblName:'الاسم الكامل',finLblPhone:'واتساب / الهاتف',
+    finBtnText:'طلب هذا العرض التمويلي عبر واتساب',
     cmpTitle:'المقارن',cmpSub:'الأسعار بالدرهم شاملة الضريبة',cmpBook:'طلب تجربة',
     bkTitle:'طلب تجربة قيادة',bkSub:'تأكيد فوري عبر واتساب',
     bkLblType:'نوع الطلب',rb1:'تجربة قيادة',rb2:'عرض سعر وتمويل',
@@ -1199,6 +1404,17 @@ const D={
 };
 
 let lang='fr',currentCar=null;
+let selectedColors={
+  prado: CARS[0].colors[0],
+  corolla: CARS[1].colors[0],
+  'corolla-cross': CARS[2].colors[0]
+};
+
+let finState={
+  carId: 'prado',
+  appPct: 20,
+  months: 48
+};
 
 function formatPrice(val, l){
   const num = new Intl.NumberFormat('fr-FR').format(val);
@@ -1206,6 +1422,125 @@ function formatPrice(val, l){
     return `<bdi>${num}</bdi> درهم <small>شامل الضريبة</small>`;
   }
   return `${num} DH <small>TTC</small>`;
+}
+
+/* ─── Color Picker Logic ─── */
+function selectCarColor(carId, colorIndex){
+  const car = CARS.find(c => c.id === carId);
+  if(!car || !car.colors[colorIndex]) return;
+  const col = car.colors[colorIndex];
+  selectedColors[carId] = col;
+  const isAr = lang === 'ar';
+  
+  const key = carId === 'corolla-cross' ? 'cross' : carId;
+  const colNameEl = document.getElementById(`col-name-${key}`);
+  if(colNameEl) colNameEl.textContent = isAr ? col.nameAr : col.name;
+  
+  const chips = document.querySelectorAll(`#chips-${key} .c-chip`);
+  chips.forEach((c, idx) => c.classList.toggle('active', idx === colorIndex));
+  
+  const imgEl = document.getElementById(`img-${key}`);
+  if(imgEl){
+    imgEl.style.filter = `drop-shadow(0 20px 40px rgba(0,0,0,.9)) drop-shadow(0 0 20px ${col.hex}44)`;
+  }
+}
+
+function renderColorChips(){
+  CARS.forEach(car => {
+    const key = car.id === 'corolla-cross' ? 'cross' : car.id;
+    const cont = document.getElementById(`chips-${key}`);
+    if(!cont) return;
+    const isAr = lang === 'ar';
+    const activeCol = selectedColors[car.id] || car.colors[0];
+    
+    cont.innerHTML = car.colors.map((c, idx) => {
+      const isActive = c.id === activeCol.id;
+      const title = isAr ? c.nameAr : c.name;
+      return `<button type="button" class="c-chip ${isActive ? 'active' : ''}" style="background:${c.hex}" title="${title}" onclick="selectCarColor('${car.id}', ${idx})" aria-label="${title}"></button>`;
+    }).join('');
+    
+    const colNameEl = document.getElementById(`col-name-${key}`);
+    if(colNameEl) colNameEl.textContent = isAr ? activeCol.nameAr : activeCol.name;
+    const colLblEl = document.getElementById(`lbl-col-${key}`);
+    if(colLblEl) colLblEl.textContent = D[lang].lblCol;
+  });
+}
+
+/* ─── Finance Simulator Logic ─── */
+function calcMonthly(price, appPct, months, annualRate = 0.055){
+  const downPayment = price * (appPct / 100);
+  const principal = price - downPayment;
+  const monthlyRate = annualRate / 12;
+  const monthly = (principal * monthlyRate * Math.pow(1 + monthlyRate, months)) / (Math.pow(1 + monthlyRate, months) - 1);
+  return {
+    downPayment: Math.round(downPayment),
+    principal: Math.round(principal),
+    monthly: Math.round(monthly)
+  };
+}
+
+function setFinCar(id){
+  finState.carId = id;
+  const tabKey = id === 'corolla-cross' ? 'cross' : id;
+  document.querySelectorAll('.fin-tab').forEach(t => t.classList.toggle('active', t.id === `ftab-${tabKey}`));
+  updateFinCalc();
+}
+
+function setFinDur(m){
+  finState.months = m;
+  document.querySelectorAll('.fin-dur-btn').forEach(b => b.classList.toggle('active', parseInt(b.dataset.months) === m));
+  updateFinCalc();
+}
+
+function openFinForCar(id){
+  setFinCar(id);
+  openModal('modal-finance');
+}
+
+function updateFinCalc(){
+  const slider = document.getElementById('fin-range-app');
+  if(slider) finState.appPct = parseInt(slider.value) || 20;
+  
+  const car = CARS.find(c => c.id === finState.carId) || CARS[0];
+  const isAr = lang === 'ar';
+  const res = calcMonthly(car.price, finState.appPct, finState.months);
+  
+  const fNum = n => new Intl.NumberFormat('fr-FR').format(n);
+  
+  const mEl = document.getElementById('fin-monthly');
+  if(mEl){
+    mEl.innerHTML = isAr ? `<bdi>${fNum(res.monthly)}</bdi>` : fNum(res.monthly);
+  }
+  
+  const pctEl = document.getElementById('fin-slider-pct');
+  if(pctEl){
+    pctEl.innerHTML = isAr 
+      ? `${finState.appPct}% · <bdi>${fNum(res.downPayment)}</bdi> درهم` 
+      : `${finState.appPct}% · ${fNum(res.downPayment)} DH`;
+  }
+  
+  const cpEl = document.getElementById('fin-car-price');
+  if(cpEl) cpEl.innerHTML = isAr ? `<bdi>${fNum(car.price)}</bdi> درهم` : `${fNum(car.price)} DH`;
+  
+  const avEl = document.getElementById('fin-app-val');
+  if(avEl) avEl.innerHTML = isAr ? `<bdi>${fNum(res.downPayment)}</bdi> درهم (${finState.appPct}%)` : `${fNum(res.downPayment)} DH (${finState.appPct}%)`;
+  
+  const dvEl = document.getElementById('fin-dur-val');
+  if(dvEl) dvEl.textContent = isAr ? `${finState.months} شهر` : `${finState.months} mois`;
+}
+
+function submitFinLead(){
+  const car = CARS.find(c => c.id === finState.carId) || CARS[0];
+  const res = calcMonthly(car.price, finState.appPct, finState.months);
+  const name = document.getElementById('fin-name').value || 'Client Showroom';
+  const phone = document.getElementById('fin-phone').value || '-';
+  const chosenColor = selectedColors[car.id] || car.colors[0];
+  const colText = chosenColor ? ` (Couleur: ${chosenColor.name})` : '';
+  const fNum = n => new Intl.NumberFormat('fr-FR').format(n);
+  
+  const msg = `Bonjour Auto Meknès Ismailia — Simulation Financement: ${car.name}${colText}. Apport: ${fNum(res.downPayment)} DH (${finState.appPct}%), Durée: ${finState.months} mois. Mensualité estimée: ${fNum(res.monthly)} DH/mois. Nom: ${name}, Tél: ${phone}`;
+  window.open(`https://wa.me/212535524768?text=${encodeURIComponent(msg)}`, '_blank');
+  closeModal('modal-finance');
 }
 
 function setLang(l){
@@ -1224,6 +1559,7 @@ function setLang(l){
   s('sec-cars-label',d.secCarsLabel);s('sec-cars-name',d.secCarsName);s('sec-cars-desc',d.secCarsDesc);
   s('sec-svc-label',d.secSvcLabel);s('sec-svc-name',d.secSvcName);
   s('svc-1',d.svc1);s('svc-1s',d.svc1s);
+  s('svc-5',d.svc5);s('svc-5s',d.svc5s);
   s('svc-2',d.svc2);s('svc-2s',d.svc2s);
   s('svc-3',d.svc3);s('svc-3s',d.svc3s);
   s('svc-4',d.svc4);s('svc-4s',d.svc4s);
@@ -1233,10 +1569,10 @@ function setLang(l){
   s('ft-wa',d.ftWa);s('ft-copy',d.ftCopy);
   s('mb-call',d.mbCall);s('mb-book',d.mbBook);s('mb-maps',d.mbMaps);s('mb-review',d.mbReview);
   
-  // Car buttons
-  s('prado-fiche',d.fiche);s('prado-book',d.book);
-  s('corolla-fiche',d.fiche);s('corolla-book',d.book);
-  s('cross-fiche',d.fiche);s('cross-book',d.book);
+  // Car buttons & Finance hints
+  s('prado-fiche',d.fiche);s('prado-book',d.book);s('fin-hint-prado',d.finHintPrado);
+  s('corolla-fiche',d.fiche);s('corolla-book',d.book);s('fin-hint-corolla',d.finHintCorolla);
+  s('cross-fiche',d.fiche);s('cross-book',d.book);s('fin-hint-cross',d.finHintCross);
   
   // Car names, categories & localized prices
   const isAr=l==='ar';
@@ -1252,7 +1588,14 @@ function setLang(l){
   s('cross-name',isAr?CARS[2].nameAr:'Corolla Cross AWD');
   s('cross-price',formatPrice(CARS[2].price,l));
   
-  // Modals
+  // Finance Modal Strings
+  s('fin-title',d.finTitle);s('fin-sub',d.finSub);s('fin-lbl-est',d.finLblEst);s('fin-unit',d.finUnit);
+  s('fin-d-car',d.finDCar);s('fin-d-app',d.finDApp);s('fin-d-dur',d.finDDur);
+  s('fin-lbl-apport',d.finLblApport);s('fin-lbl-duration',d.finLblDuration);
+  s('fin-lbl-name',d.finLblName);s('fin-lbl-phone',d.finLblPhone);s('fin-btn-text',d.finBtnText);
+  s('fd-24',d.finMonths);s('fd-36',d.finMonths);s('fd-48',d.finMonths);s('fd-60',d.finMonths);
+  
+  // Other Modals
   s('cmp-title',d.cmpTitle);s('cmp-sub',d.cmpSub);
   s('bk-title',d.bkTitle);s('bk-sub',d.bkSub);
   s('bk-lbl-type',d.bkLblType);s('rb-1',d.rb1);s('rb-2',d.rb2);
@@ -1263,6 +1606,9 @@ function setLang(l){
   s('tr-title',d.trTitle);s('tr-sub',d.trSub);
   s('tr-lbl-m',d.trLblM);s('tr-lbl-y',d.trLblY);s('tr-lbl-k',d.trLblK);s('tr-lbl-p',d.trLblP);s('tr-submit',d.trSubmit);
   s('dt-sub',d.dtSub);s('dt-close',d.dtClose);s('dt-book',d.dtBook);
+  
+  renderColorChips();
+  updateFinCalc();
   renderCompare();
 }
 
@@ -1283,6 +1629,9 @@ function openCarDetail(id){
       <img src="${car.img}" alt="${car.name}">
       <div class="dt-badge" style="color:${car.pc}">${badgeText}</div>
       <div class="dt-cat"><span class="sc-cat" style="background:rgba(8,8,12,.85);border:1px solid rgba(255,255,255,.2);color:#fff;backdrop-filter:blur(10px);margin:0">${isAr?car.catAr:car.cat}</span></div>
+    </div>
+    <div style="display:flex;justify-content:center;margin-bottom:14px">
+      <button onclick="closeModal('modal-detail');openFinForCar('${car.id}')" class="sc-finance-hint" style="margin:0">💳 ${isAr?'حاسبة التمويل والأقساط':'Simulateur Financement & Mensualités →'}</button>
     </div>
     <div class="specs-grid2">
       ${car.specs[lang].map(s=>{const p=s.split(':');return`<div class="spc"><div class="spc-label">${p[0]}</div><div class="spc-val">${p[1]||s}</div></div>`}).join('')}
@@ -1354,6 +1703,8 @@ window.addEventListener('scroll',()=>{
 },{passive:true});
 
 /* init */
+renderColorChips();
+updateFinCalc();
 renderCompare();
 </script>
 </body>
