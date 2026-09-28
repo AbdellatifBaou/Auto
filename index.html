@@ -1883,16 +1883,26 @@ function applyConfig(cfg){
 }
 
 async function loadConfigAndInit(){
-  try {
-    const res = await fetch('data.json?t=' + Date.now());
-    if(res.ok){
-      const data = await res.json();
-      applyConfig(data);
-    } else {
+  const localSaved = localStorage.getItem('auto_saved_data');
+  if(localSaved){
+    try {
+      const parsed = JSON.parse(localSaved);
+      applyConfig(parsed);
+    } catch(e){
       applyConfig(CONFIG);
     }
-  } catch(e){
-    applyConfig(CONFIG);
+  } else {
+    try {
+      const res = await fetch('data.json?t=' + Date.now());
+      if(res.ok){
+        const data = await res.json();
+        applyConfig(data);
+      } else {
+        applyConfig(CONFIG);
+      }
+    } catch(e){
+      applyConfig(CONFIG);
+    }
   }
   renderColorChips();
   updateFinCalc();
