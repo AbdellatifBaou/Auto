@@ -2730,6 +2730,22 @@ function updateFinCalc(){
   
   const fNum = n => new Intl.NumberFormat('fr-FR').format(n);
   
+  // 1. Update Spotlight Top Vehicle Card
+  const prevImg = document.getElementById('fin-car-preview-img');
+  const chosenColObj = selectedColors[car.id] || car.colors[0];
+  const activeCarImg = (chosenColObj && chosenColObj.img) ? chosenColObj.img : car.img;
+  if(prevImg) prevImg.src = activeCarImg;
+
+  const prevCat = document.getElementById('fin-car-preview-cat');
+  if(prevCat) prevCat.textContent = isAr ? car.catAr : car.cat;
+
+  const prevName = document.getElementById('fin-car-preview-name');
+  if(prevName) prevName.textContent = isAr ? car.nameAr : car.name;
+
+  const prevPrice = document.getElementById('fin-car-preview-price');
+  if(prevPrice) prevPrice.innerHTML = isAr ? `<bdi>${fNum(car.price)}</bdi> درهم شامل الضريبة` : `${fNum(car.price)} DH TTC`;
+
+  // 2. Update Live Calculation Results
   const mEl = document.getElementById('fin-monthly');
   if(mEl){
     mEl.innerHTML = isAr ? `<bdi>${fNum(res.monthly)}</bdi>` : fNum(res.monthly);
