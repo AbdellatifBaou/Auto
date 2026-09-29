@@ -433,32 +433,13 @@ body.ar .reel-bottom{text-align:right}
   perspective:1000px;
   transform-style:preserve-3d;
 }
-/* Studio Floor Ambient Glow & Specular Reflection */
-.sc-stage::before{
-  content:'';position:absolute;bottom:4%;left:50%;transform:translateX(-50%);
-  width:84%;height:38px;border-radius:50%;
-  background:radial-gradient(ellipse at center, var(--stage-glow, rgba(235,10,30,.28)) 0%, rgba(0,0,0,0.65) 58%, transparent 80%);
-  filter:blur(14px);
-  transition:background .6s cubic-bezier(.16,1,.3,1), opacity .6s ease;
-  z-index:1;pointer-events:none;
-}
-/* Studio Spotlight Overhead Cone */
-.sc-stage::after{
-  content:'';position:absolute;top:5%;left:50%;transform:translateX(-50%);
-  width:78%;height:130px;border-radius:50%;
-  background:radial-gradient(ellipse at center, var(--studio-light, rgba(255,255,255,.07)) 0%, transparent 72%);
-  filter:blur(24px);
-  transition:background .6s cubic-bezier(.16,1,.3,1);
-  z-index:0;pointer-events:none;
-}
 .sc-stage img{
   width:100%;height:100%;object-fit:contain;object-position:center;
   position:relative;z-index:2;display:block;
-  filter:drop-shadow(0 20px 38px rgba(0,0,0,.9)) drop-shadow(0 4px 16px var(--stage-rim, rgba(255,255,255,.05)));
-  transition:filter .4s cubic-bezier(.16,1,.3,1), transform .35s cubic-bezier(.16,1,.3,1), opacity .25s ease;
-  will-change:transform, filter;
+  filter:drop-shadow(0 16px 32px rgba(0,0,0,.65));
+  transition:transform .3s ease, opacity .25s ease;
 }
-.sc-stage:hover img{filter:drop-shadow(0 26px 44px rgba(0,0,0,.95)) drop-shadow(0 6px 20px var(--stage-rim, rgba(255,255,255,.12)))}
+.sc-stage:hover img{transform:scale(1.02);filter:drop-shadow(0 20px 38px rgba(0,0,0,.75))}
 .sc-stage-bg{display:none}
 .sc-beam{display:none}
 
@@ -2604,33 +2585,6 @@ function formatPrice(val, l){
   return `${num} DH <small>TTC</small>`;
 }
 
-/* ─── Studio Lighting & Dynamic Ambient Floor Reflection (Idee 1) ─── */
-function applyStudioLighting(key, hex){
-  const stageEl = document.getElementById(`stage-${key}`) || document.querySelector(`.sc-${key} .sc-stage`);
-  if(!stageEl) return;
-  stageEl.style.setProperty('--stage-glow', `${hex}55`);
-  stageEl.style.setProperty('--studio-light', `${hex}1F`);
-  stageEl.style.setProperty('--stage-rim', `${hex}3D`);
-}
-
-function initStudioTilt(){
-  document.querySelectorAll('.sc-stage').forEach(stage => {
-    const img = stage.querySelector('img');
-    if(!img) return;
-    
-    stage.addEventListener('mousemove', (e) => {
-      const rect = stage.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width - 0.5;
-      const y = (e.clientY - rect.top) / rect.height - 0.5;
-      img.style.transform = `perspective(900px) rotateY(${x * 12}deg) rotateX(${-y * 8}deg) scale(1.03) translateY(-4px)`;
-    });
-    
-    stage.addEventListener('mouseleave', () => {
-      img.style.transform = 'perspective(900px) rotateY(0deg) rotateX(0deg) scale(1) translateY(0)';
-    });
-  });
-}
-
 /* ─── Color Picker Logic ─── */
 function selectCarColor(carId, colorIndex){
   const car = CARS.find(c => c.id === carId);
@@ -2646,8 +2600,7 @@ function selectCarColor(carId, colorIndex){
   const chips = document.querySelectorAll(`#chips-${key} .c-chip`);
   chips.forEach((c, idx) => c.classList.toggle('active', idx === colorIndex));
   
-  // Apply Studio Light & Ambient Floor Reflection matching color
-  applyStudioLighting(key, col.hex);
+
   
   const imgEl = document.getElementById(`img-${key}`);
   if(imgEl && col.img){
@@ -2680,7 +2633,7 @@ function renderColorChips(){
     const colLblEl = document.getElementById(`lbl-col-${key}`);
     if(colLblEl) colLblEl.textContent = D[lang].lblCol;
     
-    applyStudioLighting(key, activeCol.hex);
+
     
     const imgEl = document.getElementById(`img-${key}`);
     if(imgEl && activeCol.img){
@@ -4214,7 +4167,6 @@ async function loadConfigAndInit(){
     }
   }
   renderColorChips();
-  initStudioTilt();
   updateFinCalc();
   onEcoCarChange(ecoState.targetCar);
   initCompareSelects();
