@@ -2816,8 +2816,7 @@ function openCarDetail(id){
   document.getElementById('dt-close').textContent=d.dtClose;
   document.getElementById('dt-book').textContent=d.dtBook;
   
-  const pdfBtnText = isAr ? '📄 تحميل كـ PDF (صفحة واحدة)' : '📄 Télécharger la Fiche PDF';
-  const waBtnText = isAr ? '📲 استلام الكتالوج عبر واتساب' : '📲 Brochure sur WhatsApp';
+  const pdfBtnText = isAr ? '📄 تحميل الفيش تكنيك (PDF)' : '📄 Télécharger la Fiche Technique (PDF)';
   
   document.getElementById('dt-body').innerHTML=`
     <div class="dt-stage">
@@ -2825,17 +2824,13 @@ function openCarDetail(id){
       <div class="dt-badge" style="color:${car.pc}">${badgeText}</div>
     </div>
     
-    <!-- Action buttons inside modal only -->
-    <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:16px">
-      <button onclick="printLuxuryDatasheet()" class="btn btn-glass" style="font-size:12px;padding:10px 16px;color:#fff;border-color:rgba(255,255,255,0.2)">
+    <!-- Action buttons inside modal -->
+    <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:18px">
+      <button onclick="printLuxuryDatasheet()" class="btn btn-red" style="font-size:12.5px;padding:11px 20px;gap:8px">
         <span>${pdfBtnText}</span>
       </button>
-      <button onclick="shareCarDatasheetWa()" class="btn btn-glass" style="font-size:12px;padding:10px 16px;color:#25D366;border-color:rgba(37,211,102,0.3)">
-        <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.699c.983.537 1.956.822 2.796.822 3.179 0 5.767-2.586 5.768-5.768-5.768zm7.394 5.766c0 4.079-3.315 7.394-7.394 7.394-1.284 0-2.484-.33-3.535-.905l-4.14 1.086 1.106-4.037c-.675-1.12-1.031-2.415-1.031-3.738 0-4.079 3.315-7.394 7.394-7.394 4.079 0 7.394 3.315 7.394 7.394z"/></svg>
-        <span>${waBtnText}</span>
-      </button>
-      <button onclick="closeModal('modal-detail');openFinForCar('${car.id}')" class="btn btn-glass" style="font-size:12px;padding:10px 16px;color:var(--gold);border-color:rgba(245,185,66,.3)">
-        <span>💳 ${isAr?'حاسبة التمويل':'Financement'}</span>
+      <button onclick="closeModal('modal-detail');openFinForCar('${car.id}')" class="btn btn-glass" style="font-size:12.5px;padding:11px 18px;color:var(--gold);border-color:rgba(245,185,66,.3)">
+        <span>💳 ${isAr?'حاسبة التمويل':'Simulateur Financement'}</span>
       </button>
     </div>
 
@@ -3657,17 +3652,17 @@ function printLuxuryDatasheet(){
     const label = parts[0] || '';
     const val = parts[1] || s;
     return `
-      <div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:8px 12px">
-        <div style="font-size:8.5px;text-transform:uppercase;letter-spacing:0.06em;color:#64748B;font-weight:700">${label}</div>
-        <div style="font-size:11.5px;font-weight:800;color:#0F172A;margin-top:2px">${val}</div>
+      <div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:10px;padding:11px 14px">
+        <div style="font-size:9.5px;text-transform:uppercase;letter-spacing:0.06em;color:#64748B;font-weight:700">${label}</div>
+        <div style="font-size:13px;font-weight:800;color:#0F172A;margin-top:3px">${val}</div>
       </div>`;
   }).join('');
 
   // Feats Rows
   const featsRows = (car.feats[lang] || car.feats.fr).map(f => {
     return `
-      <div style="display:flex;align-items:center;gap:6px;font-size:10px;color:#334155;margin-bottom:4px">
-        <span style="color:#EB0A1E;font-weight:900;font-size:11px">✓</span>
+      <div style="display:flex;align-items:flex-start;gap:8px;font-size:11px;color:#334155;line-height:1.5">
+        <span style="color:#EB0A1E;font-weight:900;font-size:13px;line-height:1">✓</span>
         <span>${f}</span>
       </div>`;
   }).join('');
@@ -3691,7 +3686,7 @@ function printLuxuryDatasheet(){
       <title>${carName} — Fiche Technique Auto Meknès Ismailia</title>
       <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
       <style>
-        @page { size: A4 portrait; margin: 8mm 10mm; }
+        @page { size: A4 portrait; margin: 10mm 12mm; }
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html, body {
           background-color: #FFFFFF !important;
@@ -3699,63 +3694,80 @@ function printLuxuryDatasheet(){
           font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
           -webkit-print-color-adjust: exact !important;
           print-color-adjust: exact !important;
-          line-height: 1.35;
-          font-size: 11px;
+          line-height: 1.4;
+          height: 100%;
         }
-        .container { width: 100%; max-width: 100%; margin: 0 auto; }
+        .page-wrap {
+          display: flex; flex-direction: column; justify-content: space-between;
+          min-height: 100%; gap: 14px;
+        }
         .hdr {
           display: flex; align-items: center; justify-content: space-between;
-          padding-bottom: 10px; border-bottom: 2px solid #EB0A1E;
+          padding-bottom: 12px; border-bottom: 2.5px solid #EB0A1E;
         }
-        .logo-wrap { display: flex; align-items: center; gap: 10px; }
+        .logo-wrap { display: flex; align-items: center; gap: 12px; }
         .logo-box {
-          width: 44px; height: 44px; background: #000; border-radius: 8px;
-          display: flex; align-items: center; justify-content: center; padding: 2px;
+          width: 52px; height: 52px; background: #000; border-radius: 10px;
+          display: flex; align-items: center; justify-content: center; padding: 3px;
         }
         .logo-box img { width: 100%; height: 100%; object-fit: contain; }
-        .dealership-title { font-size: 15px; font-weight: 900; color: #0F172A; letter-spacing: -0.01em; }
-        .dealership-sub { font-size: 9.5px; color: #64748B; font-weight: 600; }
+        .dealership-title { font-size: 17px; font-weight: 900; color: #0F172A; letter-spacing: -0.01em; }
+        .dealership-sub { font-size: 10.5px; color: #64748B; font-weight: 600; }
         
         .badge-official {
           border: 1.5px solid #EB0A1E; color: #EB0A1E; background: rgba(235,10,30,0.06);
-          font-size: 9px; font-weight: 800; padding: 4px 10px; border-radius: 99px; text-transform: uppercase; letter-spacing: 0.04em;
+          font-size: 10px; font-weight: 800; padding: 6px 14px; border-radius: 99px; text-transform: uppercase; letter-spacing: 0.05em;
         }
 
         .hero-box {
-          display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 14px; align-items: center;
-          background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px;
-          padding: 12px 16px; margin: 10px 0;
+          display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 18px; align-items: center;
+          background: #F8FAFC; border: 1.5px solid #E2E8F0; border-radius: 16px;
+          padding: 16px 20px;
         }
         .car-img-wrap {
-          display: flex; align-items: center; justify-content: center; height: 145px;
+          display: flex; align-items: center; justify-content: center; height: 175px;
         }
-        .car-img-wrap img { max-width: 100%; max-height: 100%; object-fit: contain; filter: drop-shadow(0 6px 14px rgba(0,0,0,0.2)); }
+        .car-img-wrap img { max-width: 100%; max-height: 100%; object-fit: contain; filter: drop-shadow(0 8px 18px rgba(0,0,0,0.18)); }
         
-        .car-title { font-size: 20px; font-weight: 900; color: #0F172A; line-height: 1.2; }
-        .car-cat { font-size: 9.5px; font-weight: 800; color: #EB0A1E; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 3px; }
-        .car-price { font-size: 19px; font-weight: 900; color: #B91C1C; margin: 4px 0 2px; }
-        .color-indicator { font-size: 9.5px; color: #64748B; font-weight: 600; }
+        .car-title { font-size: 24px; font-weight: 900; color: #0F172A; line-height: 1.15; }
+        .car-cat { font-size: 11px; font-weight: 800; color: #EB0A1E; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 4px; }
+        .car-price { font-size: 22px; font-weight: 900; color: #B91C1C; margin: 6px 0 4px; }
+        .color-indicator { font-size: 11px; color: #64748B; font-weight: 600; }
+
+        .sec-title {
+          font-size: 10.5px; font-weight: 800; text-transform: uppercase; color: #475569; letter-spacing: 0.06em; margin-bottom: 8px;
+          display: flex; align-items: center; gap: 8px;
+        }
+        .sec-title::after { content: ''; flex: 1; height: 1px; background: #E2E8F0; }
 
         .specs-grid {
-          display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; margin-bottom: 10px;
+          display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
         }
 
         .feat-card {
-          background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 10px;
-          padding: 10px 14px; margin-bottom: 10px;
+          background: #FFFFFF; border: 1.5px solid #E2E8F0; border-radius: 14px;
+          padding: 14px 18px;
         }
-        .feat-hdr { font-size: 9px; font-weight: 800; text-transform: uppercase; color: #EB0A1E; letter-spacing: 0.08em; margin-bottom: 6px; }
-        .feat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 14px; }
+        .feat-hdr { font-size: 10.5px; font-weight: 800; text-transform: uppercase; color: #EB0A1E; letter-spacing: 0.08em; margin-bottom: 10px; }
+        .feat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 20px; }
+
+        .banner-guarantee {
+          background: #FEF2F2; border: 1px solid #FECACA; border-radius: 12px;
+          padding: 11px 16px; display: flex; align-items: center; gap: 12px;
+        }
+        .banner-icon { font-size: 20px; flex-shrink: 0; }
+        .banner-title { font-size: 11px; font-weight: 800; color: #991B1B; }
+        .banner-desc { font-size: 9.5px; color: #7F1D1D; margin-top: 1px; }
 
         .ftr {
-          border-top: 1px solid #E2E8F0; padding-top: 8px; margin-top: 4px;
-          display: flex; align-items: center; justify-content: space-between; font-size: 9px; color: #64748B;
+          border-top: 2px solid #E2E8F0; padding-top: 10px;
+          display: grid; grid-template-columns: 1.2fr 1fr; gap: 12px; font-size: 10px; color: #64748B;
         }
         .ftr strong { color: #0F172A; font-weight: 700; }
       </style>
     </head>
     <body>
-      <div class="container">
+      <div class="page-wrap">
         <!-- Header -->
         <div class="hdr">
           <div class="logo-wrap">
@@ -3765,7 +3777,7 @@ function printLuxuryDatasheet(){
               <div class="dealership-sub">Concessionnaire Agréé Toyota · Showroom & SAV Officiel</div>
             </div>
           </div>
-          <div class="badge-official">Fiche Technique Officielle</div>
+          <div class="badge-official">${isAr ? 'وثيقة المواصفات الرسمية' : 'Fiche Technique Officielle'}</div>
         </div>
 
         <!-- Car Hero -->
@@ -3774,7 +3786,7 @@ function printLuxuryDatasheet(){
             <div class="car-cat">${carCat}</div>
             <div class="car-title">${carName}</div>
             <div class="car-price">${priceStr}</div>
-            <div class="color-indicator">Finition & Teinte sélectionnée : <strong style="color:#0F172A">${colName}</strong></div>
+            <div class="color-indicator">${isAr ? 'اللون والتجهيز :' : 'Finition & Teinte sélectionnée :'} <strong style="color:#0F172A">${colName}</strong></div>
           </div>
           <div class="car-img-wrap">
             <img src="${carImgAbs}" alt="${carName}">
@@ -3782,26 +3794,37 @@ function printLuxuryDatasheet(){
         </div>
 
         <!-- Specs Grid -->
-        <div style="font-size:9px;font-weight:800;text-transform:uppercase;color:#64748B;letter-spacing:0.06em;margin-bottom:5px">Spécifications Techniques Homologuées</div>
-        <div class="specs-grid">
-          ${specsRows}
+        <div>
+          <div class="sec-title">${isAr ? 'المواصفات التقنية المعتمدة' : 'Spécifications Techniques Homologuées'}</div>
+          <div class="specs-grid">
+            ${specsRows}
+          </div>
         </div>
 
         <!-- Equipments -->
         <div class="feat-card">
-          <div class="feat-hdr">Équipements & Confort de Série</div>
+          <div class="feat-hdr">${isAr ? 'أبرز التجهيزات وأنظمة الأمان القياسية' : 'Équipements de Série & Sécurité Active'}</div>
           <div class="feat-grid">
             ${featsRows}
+          </div>
+        </div>
+
+        <!-- Guarantee Banner -->
+        <div class="banner-guarantee">
+          <div class="banner-icon">🛡️</div>
+          <div>
+            <div class="banner-title">${isAr ? 'ضمان تويوتا الرسمي وخدمة ما بعد البيع المعتمدة' : 'Garantie Constructeur Officielle & SAV Certifié'}</div>
+            <div class="banner-desc">${isAr ? 'سيارة جديدة مطابقة للمواصفات الرسمية · ضمان حتى 5 سنوات أو 100,000 كم · قطع غيار أصلية 100% في مكناس' : 'Véhicule neuf homologué Toyota · Garantie constructeur officielle 5 ans / 100 000 km · Atelier SAV & Pièces d\'origine à Meknès.'}</div>
           </div>
         </div>
 
         <!-- Footer -->
         <div class="ftr">
           <div>
-            📍 <strong>Showroom Meknès :</strong> RDC Angle Bd. Yacoub El Mansour & Ave. des FAR
+            📍 <strong>Showroom & SAV :</strong> RDC Angle Bd. Yacoub El Mansour & Ave. des FAR, Meknès
           </div>
-          <div>
-            📞 <strong>Tél :</strong> 05 35 52 47 68 · 📲 <strong>WhatsApp :</strong> 06 66 97 93 12
+          <div style="text-align:${isAr ? 'left' : 'right'}">
+            📞 <strong>Tél :</strong> 05 35 52 47 68 &nbsp;|&nbsp; 📲 <strong>WhatsApp :</strong> 06 66 97 93 12
           </div>
         </div>
       </div>
@@ -3839,11 +3862,9 @@ function printLuxuryDatasheet(){
         };
       }
     });
-    // Safety fallback
     setTimeout(triggerPrint, 1200);
   }
 }
-
 function shareCarDatasheetWa(){
   if(!currentCar) return;
   const isAr = lang === 'ar';
