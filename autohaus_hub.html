@@ -816,14 +816,22 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
 .fin-dur-btn.active small{color:var(--gold)}
 
 /* ═══ 360 COCKPIT TOUR BUTTON & MODAL ═══ */
+.sc-hints-row{
+  display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:14px;
+}
+.sc-hints-row .sc-finance-hint,
+.sc-hints-row .sc-eco-hint,
+.sc-hints-row .sc-tour-hint{
+  margin-bottom:0 !important;
+}
 .sc-tour-hint{
   display:inline-flex;align-items:center;gap:6px;
   background:rgba(235,10,30,.08);border:1px solid rgba(235,10,30,.25);
   color:#FF4A5A;font-size:11px;font-weight:700;
-  padding:7px 12px;border-radius:99px;margin-bottom:14px;
+  padding:7px 12px;border-radius:99px;
   cursor:pointer;transition:all .2s;text-decoration:none;
 }
-.sc-tour-hint:hover{background:rgba(235,10,30,.16);transform:translateY(-1px)}
+.sc-tour-hint:hover{background:rgba(235,10,30,.18);border-color:rgba(235,10,30,.5);transform:translateY(-1px);box-shadow:0 4px 14px rgba(235,10,30,.25)}
 
 /* ═══ FAQ SECTION ═══ */
 .faq-sec{padding:60px 0;position:relative;z-index:1}
@@ -1418,8 +1426,13 @@ body.ar .fselect{
         <div class="sc-cat" id="prado-cat">SUV 4×4 Luxe</div>
         <div class="sc-name" id="prado-name">Land Cruiser 250</div>
         <div class="sc-price" id="prado-price">645 000 DH <small>TTC</small></div>
-        <div class="sc-finance-hint" onclick="openFinForCar('prado')">
-          <span>💳</span> <span id="fin-hint-prado">Dès 9 850 DH / mois · Simuler Financement →</span>
+        <div class="sc-hints-row">
+          <div class="sc-finance-hint" onclick="openFinForCar('prado')">
+            <span>💳</span> <span id="fin-hint-prado">Dès 9 850 DH / mois · Simuler Financement →</span>
+          </div>
+          <div class="sc-tour-hint" onclick="openTour360('prado')">
+            <span>👁️</span> <span id="tour-hint-prado">Visite 360° du Cockpit →</span>
+          </div>
         </div>
         <div class="sc-colors">
           <div class="color-header"><span id="lbl-col-prado">Couleur :</span> <span class="color-title-val" id="col-name-prado">Blanc Nacré</span></div>
@@ -1452,11 +1465,17 @@ body.ar .fselect{
         <div class="sc-cat" id="corolla-cat">Berline Hybride</div>
         <div class="sc-name" id="corolla-name">Corolla Berline</div>
         <div class="sc-price" id="corolla-price">245 000 DH <small>TTC</small></div>
-        <div class="sc-finance-hint" onclick="openFinForCar('corolla')">
-          <span>💳</span> <span id="fin-hint-corolla">Dès 3 744 DH / mois · Simuler Financement →</span>
+        <div class="sc-hints-row">
+          <div class="sc-finance-hint" onclick="openFinForCar('corolla')">
+            <span>💳</span> <span id="fin-hint-corolla">Dès 3 744 DH / mois · Simuler Financement →</span>
+          </div>
+          <div class="sc-eco-hint" onclick="openEcoForCar('corolla')">
+            <span>🌱</span> <span id="eco-hint-corolla">Simuler Économies Carburant & Énergie →</span>
+          </div>
+          <div class="sc-tour-hint" onclick="openTour360('corolla')">
+            <span>👁️</span> <span id="tour-hint-corolla">Visite 360° du Cockpit →</span>
+          </div>
         </div>
-        <div class="sc-eco-hint" onclick="openEcoForCar('corolla')"><span>🌱</span> <span id="eco-hint-corolla">Simuler Économies Carburant & Énergie →</span></div>
-        <div class="sc-tour-hint" onclick="openTour360('corolla')"><span>👁️</span> <span id="tour-hint-corolla">Visite 360° du Cockpit →</span></div>
         <div class="sc-colors">
           <div class="color-header"><span id="lbl-col-corolla">Couleur :</span> <span class="color-title-val" id="col-name-corolla">Blanc Pur</span></div>
           <div class="color-chips" id="chips-corolla"></div>
@@ -1488,11 +1507,17 @@ body.ar .fselect{
         <div class="sc-cat" id="cross-cat">SUV Crossover AWD</div>
         <div class="sc-name" id="cross-name">Corolla Cross AWD</div>
         <div class="sc-price" id="cross-price">369 000 DH <small>TTC</small></div>
-        <div class="sc-finance-hint" onclick="openFinForCar('corolla-cross')">
-          <span>💳</span> <span id="fin-hint-cross">Dès 5 639 DH / mois · Simuler Financement →</span>
+        <div class="sc-hints-row">
+          <div class="sc-finance-hint" onclick="openFinForCar('corolla-cross')">
+            <span>💳</span> <span id="fin-hint-cross">Dès 5 639 DH / mois · Simuler Financement →</span>
+          </div>
+          <div class="sc-eco-hint" onclick="openEcoForCar('corolla-cross')">
+            <span>🌱</span> <span id="eco-hint-corolla">Simuler Économies Carburant & Énergie →</span>
+          </div>
+          <div class="sc-tour-hint" onclick="openTour360('corolla-cross')">
+            <span>👁️</span> <span id="tour-hint-cross">Visite 360° du Cockpit →</span>
+          </div>
         </div>
-        <div class="sc-eco-hint" onclick="openEcoForCar('corolla-cross')"><span>🌱</span> <span id="eco-hint-cross">Simuler Économies Carburant & Énergie →</span></div>
-        <div class="sc-tour-hint" onclick="openTour360('corolla-cross')"><span>👁️</span> <span id="tour-hint-cross">Visite 360° du Cockpit →</span></div>
         <div class="sc-colors">
           <div class="color-header"><span id="lbl-col-cross">Couleur :</span> <span class="color-title-val" id="col-name-cross">Gris Platine</span></div>
           <div class="color-chips" id="chips-cross"></div>
@@ -1546,10 +1571,16 @@ body.ar .fselect{
         <div class="svc-sub" id="svc-5s">Calculer mes mensualités</div>
       </div>
 
-      <!-- 4. Économies Hybride -->
-      <div class="svc-name" id="svc-tour">Visite 360° Cockpit</div>
+      <!-- 4. Visite 360° Cockpit -->
+      <div class="svc-card reveal reveal-delay-2" onclick="openTour360('corolla-cross')">
+        <div class="svc-icon-wrap" style="background:rgba(235,10,30,.1);color:#FF4A5A">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <div class="svc-name" id="svc-tour">Visite 360° Cockpit</div>
         <div class="svc-sub" id="svc-tour-sub">Immersion intérieure & écrans</div>
       </div>
+
+      <!-- 5. Économies Hybride -->
       <div class="svc-card reveal reveal-delay-2" onclick="openEcoForCar('corolla')">
         <div class="svc-icon-wrap" style="background:rgba(52,211,153,.08);color:var(--emerald)">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v8"/><path d="M4.93 10.93a10 10 0 1 0 14.14 0"/><path d="M12 18v-4"/><path d="M8 14h8"/></svg>
@@ -1902,8 +1933,8 @@ body.ar .fselect{
       </div>
 
       <div style="display:flex;gap:10px;flex-wrap:wrap">
-        <a href="https://www.toyota.com/corollacross/interior-tour/" target="_blank" rel="noopener noreferrer" class="btn btn-glass" style="flex:1;font-size:12px;padding:12px;justify-content:center;gap:6px" id="tour-link-btn">
-          <span>🌐 Visite 3D Officielle Toyota.com ↗</span>
+        <a href="https://www.toyota.com/landcruiser/" target="_blank" rel="noopener noreferrer" class="btn btn-glass" style="flex:1;font-size:12px;padding:12px;justify-content:center;gap:6px" id="tour-link-btn">
+          <span id="tour-link-text">🌐 Visite 3D Officielle Toyota.com ↗</span>
         </a>
         <button onclick="bookCarFromTourModal()" class="btn btn-red" style="flex:1.2;font-size:12px;padding:12px;justify-content:center" id="tour-book-btn">
           Prendre RDV pour Essai Réel
@@ -2381,7 +2412,10 @@ const D={
     faqA4:'Notre atelier agréé assure l\'ensemble des interventions : vidanges certifiées, diagnostic moteur & systèmes hybrides, freinage, transmission, climatisation et pneumatiques, avec l\'utilisation exclusive de pièces d\'origine Toyota garanties constructeur.',
     faqQ5:'Quels sont les délais de livraison pour un véhicule neuf ?',
     faqA5:'Nous disposons de plusieurs modèles immédiatement disponibles en stock showroom à Meknès. Pour les configurations et coloris spécifiques sur commande, la livraison est effectuée dans les meilleurs délais avec suivi personnalisé par nos conseillers.',
-    svcTour:'Visite 360° Cockpit',svcTourSub:'Immersion intérieure & écrans',svcSav:'Atelier SAV & Entretien',svcSavSub:'Vidange, Diagnostic, Pneus & Pièces',
+    svcTour:'Visite 360° Cockpit',svcTourSub:'Immersion intérieure & écrans',
+    tourHint:'Visite 360° du Cockpit →',tourTitle:'Visite Virtuelle 360° du Cockpit',tourSub:'Immersion intérieure · Technologies & Finitions',
+    tourTechLabel:'Technologies Intérieures Clés :',tourLinkText:'🌐 Visite 3D Officielle Toyota.com ↗',tourBookBtn:'Prendre RDV pour Essai Réel',
+    svcSav:'Atelier SAV & Entretien',svcSavSub:'Vidange, Diagnostic, Pneus & Pièces',
     savTitle:'Atelier SAV & Entretien Officiel',savSub:'Techniciens certifiés Toyota · Pièces d\'origine constructeur',
     savLblServices:'Sélectionnez les prestations souhaitées :',
     savS1:'🛢️ Vidange & Filtres Officiels',savS2:'💻 Diagnostic Électronique & Hybride',savS3:'🛑 Freinage (Plaquettes / Disques)',
@@ -2475,7 +2509,10 @@ const D={
     faqA4:'تغطي ورشتنا المعتمدة جميع خدمات الصيانة: تغيير الزيوت المعتمدة والفلاتر، الفحص الإلكتروني للمحرك ومنظومة الهايبرد، الفرامل، ناقل الحركة، التكييف، مع استخدام حصري لقطع الغيار الأصلية 100% المضمونة من تويوتا.',
     faqQ5:'ما هي مواعيد وآجال تسليم السيارات الجديدة؟',
     faqA5:'نوفر العديد من الموديلات الجاهزة للتسليم الفوري من المخزون وصالة العرض بمكناس. بالنسبة للطلبات المخصصة ذات الألوان والتجهيزات المحددة، يتم التسليم في أسرع وقت مع متابعة شخصية من مستشارينا.',
-    svcTour:'جولة 360° داخل السيارة',svcTourSub:'استكشف القمرة والشاشات',svcSav:'ورشة الصيانة وخدمة ما بعد البيع',svcSavSub:'تغيير الزيوت، الفحص، العجلات وقطع الغيار',
+    svcTour:'جولة 360° داخل السيارة',svcTourSub:'استكشف القمرة والشاشات',
+    tourHint:'جولة 360° في المقصورة ←',tourTitle:'جولة افتراضية 360° في المقصورة',tourSub:'استكشاف التصميم الداخلي · التكنولوجيا والتجهيزات',
+    tourTechLabel:'أبرز التقنيات والتجهيزات الداخلية :',tourLinkText:'🌐 جولة 3D الرسمية على Toyota.com ↗',tourBookBtn:'حجز موعد لتجربة القيادة الواقعية',
+    svcSav:'ورشة الصيانة وخدمة ما بعد البيع',svcSavSub:'تغيير الزيوت، الفحص، العجلات وقطع الغيار',
     savTitle:'ورشة الصيانة وخدمة ما بعد البيع الرسمية',savSub:'تقنيون معتمدون من تويوتا · قطع غيار أصلية ومضمونة',
     savLblServices:'اختر الخدمات المطلوبة :',
     savS1:'🛢️ تغيير الزيت والفلاتر الأصلية',savS2:'💻 الفحص الإلكتروني للمحرك والهايبرد',savS3:'🛑 الفرامل والأمان (صفائح / أقراص)',
@@ -2807,6 +2844,21 @@ function setLang(l){
   s('eco-hint-corolla',d.ecoHintCorolla);
   s('eco-hint-cross',d.ecoHintCross);
 
+  // Tour Hints on Cars
+  s('tour-hint-prado',d.tourHint);
+  s('tour-hint-corolla',d.tourHint);
+  s('tour-hint-cross',d.tourHint);
+
+  // 360 Tour Modal Strings
+  s('tour-title',d.tourTitle);
+  s('tour-sub',d.tourSub);
+  s('ttab-prado',d.ftabPrado);
+  s('ttab-corolla',d.ftabCorolla);
+  s('ttab-cross',d.ftabCross);
+  s('tour-tech-label',d.tourTechLabel);
+  s('tour-link-text',d.tourLinkText);
+  s('tour-book-btn',d.tourBookBtn);
+
   // Eco Calculator Strings
   s('eco-title',d.ecoTitle);s('eco-sub',d.ecoSub);
   s('eco-lbl-target',d.ecoLblTarget);
@@ -2974,6 +3026,9 @@ function openCarDetail(id){
     <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:18px">
       <button onclick="printLuxuryDatasheet()" class="btn btn-red" style="font-size:12.5px;padding:11px 20px;gap:8px">
         <span>${pdfBtnText}</span>
+      </button>
+      <button onclick="closeModal('modal-detail');openTour360('${car.id}')" class="btn btn-glass" style="font-size:12.5px;padding:11px 18px;color:#FF4A5A;border-color:rgba(235,10,30,.3)">
+        <span>👁️ ${isAr?'جولة 360° في المقصورة':'Visite 360° Cockpit'}</span>
       </button>
       <button onclick="closeModal('modal-detail');openFinForCar('${car.id}')" class="btn btn-glass" style="font-size:12.5px;padding:11px 18px;color:var(--gold);border-color:rgba(245,185,66,.3)">
         <span>💳 ${isAr?'حاسبة التمويل':'Simulateur Financement'}</span>
@@ -3708,6 +3763,142 @@ function applyConfig(cfg){
   setLang(lang);
 }
 
+
+
+/* ─── 360° Cockpit Virtual Tour ─── */
+const TOUR_DATA = {
+  prado: {
+    name: 'Land Cruiser 250',
+    nameAr: 'تويوتا لاند كروزر 250',
+    cat: 'SUV 4×4 Franchisseur Luxe',
+    catAr: 'دفع رباعي فاخر للطرق الوعرة',
+    title: 'Double Écran 12.3" & Multi-Terrain Monitor',
+    titleAr: 'شاشتان رقميتان 12.3 بوصة ونظام مراقبة التضاريس',
+    desc: 'Cockpit de haute précision avec affichage tête haute, sellerie cuir ventilé et commandes 4×4 ergonomiques.',
+    descAr: 'مقصورة قيادة فائقة الفخامة مع شاشات رقمية عالية الدقة، مقاعد جلدية مهواة وأزرار تحكم دفع رباعي متطورة.',
+    img: 'land_cruiser_Farbe_F5F6F8.webp',
+    link: 'https://www.toyota.com/landcruiser/',
+    tech: {
+      fr: [
+        '🖥️ <strong>Double Écran Digital 12.3" :</strong> Combiné d’instrumentation numérique personnalisable & écran central tactile HD.',
+        '🕹️ <strong>Multi-Terrain Select & Crawl Control :</strong> Molette de sélection de terrain avec caméras sous-châssis 360° PVM.',
+        '🪑 <strong>Sellerie Cuir Premium Ventilé :</strong> Sièges électriques à mémoire, chauffants et ventilés avec maintien dynamique.',
+        '🛡️ <strong>Toyota Safety Sense 3.0 :</strong> Détection piétons de nuit, franchissement de ligne et régulateur adaptatif radar.'
+      ],
+      ar: [
+        '🖥️ <strong>شاشتان رقميتان 12.3 بوصة :</strong> لوحة عدادات رقمية مخصصة وشاشة ترفيه مركزية عالية الدقة بنظام آبل كاربلاي وأندرويد أوتو.',
+        '🕹️ <strong>نظام Multi-Terrain Select والزحف :</strong> مفتاح دائري لاختيار نمط التضاريس مع كاميرات محيطية 360 درجة لمشاهدة أسفل الهيكل.',
+        '🪑 <strong>جلد فاخر مع تبريد وتسخين :</strong> مقاعد كهربائية بذاكرة وتبريد وتدفئة متكاملة لراحة مطلقة في المسافات الطويلة.',
+        '🛡️ <strong>نظام السلامة النشط Toyota Safety Sense 3.0 :</strong> فرملة طوارئ تلقائية، رادار تثبيت السرعة ومساعد البقاء في المسار.'
+      ]
+    }
+  },
+  corolla: {
+    name: 'Corolla Berline Hybride',
+    nameAr: 'تويوتا كورولا سيدان هجين',
+    cat: 'Berline Hybride 140 ch',
+    catAr: 'سيدان هجينة 140 حصان',
+    title: 'Cockpit Connecté 12.3" & Climatisation Nanoe-X',
+    titleAr: 'مقصورة رقمية 12.3 بوصة ومكيف ذكي Nanoe-X',
+    desc: 'Ergonomie raffinée, écran tactile nouvelle génération fluide, insonorisation feutrée et confort de conduite silencieux 100% électrique.',
+    descAr: 'تصميم داخلي عصري وأنيق، شاشة لمس سريعة الاستجابة، عزل صوتي متطور وقيادة هادئة بنظام الهايبرد.',
+    img: 'corolla_Farbe_F0F1F5.webp',
+    link: 'https://www.toyota.com/corolla/',
+    tech: {
+      fr: [
+        '📱 <strong>Écran Tactile Multimédia HD :</strong> Navigation cloud connectée, Apple CarPlay sans fil et commande vocale "Hey Toyota".',
+        '🌿 <strong>Purificateur d’Air Nanoe-X™ :</strong> Climatisation bi-zone intelligente neutralisant les particules et odeurs.',
+        '🔇 <strong>Acoustique Insonorisée & Silence Hybride :</strong> Démarrage et roulage urbain dans un silence absolu en mode EV.',
+        '🛡️ <strong>Aide au Maintien dans la Voie (LTA) :</strong> Guidage actif et freinage pré-collision proactif.'
+      ],
+      ar: [
+        '📱 <strong>شاشة وسائط ذكية HD :</strong> نظام ملاحة متصل، آبل كاربلاي وأندرويد أوتو وأوامر صوتية ذكية "Hey Toyota".',
+        '🌿 <strong>منقي الهواء المتطور Nanoe-X™ :</strong> تكييف هواء أوتوماتيكي مزدوج لتنقية الهواء من الجسيمات والروائح.',
+        '🔇 <strong>هدوء استثنائي وعزل صوتي :</strong> قيادة صامتة وسلسة بالكامل في المدينة بالاعتماد على المحرك الكهربائي.',
+        '🛡️ <strong>نظام التوجيه والمحافظة على المسار :</strong> توجيه نشط ومساعد تجنب الاصطدام لحماية كاملة.'
+      ]
+    }
+  },
+  'corolla-cross': {
+    name: 'Corolla Cross AWD Hybride',
+    nameAr: 'تويوتا كورولا كروس AWD هجين',
+    cat: 'SUV Crossover AWD 197 ch',
+    catAr: 'كروس أوفر دفع رباعي 197 حصان',
+    title: 'Visite 360° Cockpit & Toit Panoramique Lumineux',
+    titleAr: 'جولة 360 درجة في المقصورة وسقف بانورامي رحب',
+    desc: 'Position de conduite surélevée, habitabilité généreuse pour toute la famille, toit vitré panoramique et connectivité complète.',
+    descAr: 'وضعية قيادة مرتفعة ومريحة، مساحة داخلية واسعة للعائلة، سقف بانورامي زجاجي وشواحن لاسلكية سريعة.',
+    img: 'corolla-cross_Farbe_7D838A.webp',
+    link: 'https://www.toyota.com/corollacross/interior-tour/',
+    tech: {
+      fr: [
+        '🌐 <strong>Visite 360° Interactive Officielle :</strong> Explorez chaque angle du cockpit, de la console et des places arrière.',
+        '☀️ <strong>Toit Panoramique & Habitabilité SUV :</strong> Luminosité exceptionnelle, coffre spacieux et banquette rabattable 60/40.',
+        '⚡ <strong>Cockpit Numérique & Chargeur Sans Fil :</strong> Tableau de bord haute résolution, 4 ports USB-C et recharge par induction.',
+        '🛡️ <strong>Surveillance des Angles Morts (BSM) & RCTA :</strong> Détection des véhicules en approche lors des manœuvres.'
+      ],
+      ar: [
+        '🌐 <strong>جولة 360° تفاعلية رسمية :</strong> استكشف المقصورة بجميع الزوايا ثلاثية الأبعاد (3D Tour).',
+        '☀️ <strong>سقف بانورامي ومساحة رحبة :</strong> إضاءة طبيعية ومساحة ركوب مريحة جداً لجميع أفراد الأسرة.',
+        '⚡ <strong>لوحة عدادات رقمية وشاحن لاسلكي :</strong> منافذ شحن USB-C سريعة ولوحة قيادة عالية الوضوح.',
+        '🛡️ <strong>رصد النقطة العمياء وتنبيه حركة المرور :</strong> حساسات متقدمة لحماية قصوى أثناء القيادة والرجوع للخلف.'
+      ]
+    }
+  }
+};
+
+let currentTourCarId = 'prado';
+
+function switchTourModalCar(carId){
+  currentTourCarId = carId;
+  const isAr = lang === 'ar';
+  const data = TOUR_DATA[carId] || TOUR_DATA.prado;
+  
+  // Tab states
+  ['prado', 'corolla', 'cross'].forEach(k => {
+    const tabEl = document.getElementById(`ttab-${k}`);
+    if(tabEl){
+      const isMatch = (k === carId) || (k === 'cross' && carId === 'corolla-cross');
+      tabEl.classList.toggle('active', isMatch);
+    }
+  });
+
+  const imgEl = document.getElementById('tour-car-img');
+  if(imgEl) imgEl.src = data.img;
+  
+  const catEl = document.getElementById('tour-car-cat');
+  if(catEl) catEl.textContent = isAr ? data.catAr : data.cat;
+
+  const titleEl = document.getElementById('tour-car-title');
+  if(titleEl) titleEl.textContent = isAr ? data.titleAr : data.title;
+
+  const descEl = document.getElementById('tour-car-desc');
+  if(descEl) descEl.textContent = isAr ? data.descAr : data.desc;
+
+  const listEl = document.getElementById('tour-tech-list');
+  if(listEl){
+    const techItems = isAr ? data.tech.ar : data.tech.fr;
+    listEl.innerHTML = techItems.map(item => `<div>${item}</div>`).join('');
+  }
+
+  const linkEl = document.getElementById('tour-link-btn');
+  if(linkEl){
+    linkEl.href = data.link;
+  }
+}
+
+function openTour360(carId){
+  const targetId = (carId === 'corolla' || carId === 'corolla-cross') ? carId : 'prado';
+  switchTourModalCar(targetId);
+  openModal('modal-360-tour');
+}
+
+function bookCarFromTourModal(){
+  closeModal('modal-360-tour');
+  const carName = (currentTourCarId === 'corolla') ? 'Toyota Corolla Berline' : 
+                  (currentTourCarId === 'corolla-cross') ? 'Toyota Corolla Cross AWD' : 'Toyota Land Cruiser 250';
+  bookCar(carName);
+}
 
 /* ─── FAQ Accordion ─── */
 function toggleFaq(cardEl){
