@@ -1524,6 +1524,13 @@ body.ar .fselect{
       </div>
 
       <!-- 4. Économies Hybride -->
+      <div class="svc-card reveal reveal-delay-2" onclick="openTour360('corolla-cross')">
+        <div class="svc-icon-wrap" style="background:rgba(235,10,30,.12);color:var(--red)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+        </div>
+        <div class="svc-name" id="svc-tour">Visite 360° Cockpit</div>
+        <div class="svc-sub" id="svc-tour-sub">Immersion intérieure & écrans</div>
+      </div>
       <div class="svc-card reveal reveal-delay-2" onclick="openEcoForCar('corolla')">
         <div class="svc-icon-wrap" style="background:rgba(52,211,153,.08);color:var(--emerald)">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v8"/><path d="M4.93 10.93a10 10 0 1 0 14.14 0"/><path d="M12 18v-4"/><path d="M8 14h8"/></svg>
@@ -2358,7 +2365,7 @@ const D={
     faqA4:'Notre atelier agréé assure l\'ensemble des interventions : vidanges certifiées, diagnostic moteur & systèmes hybrides, freinage, transmission, climatisation et pneumatiques, avec l\'utilisation exclusive de pièces d\'origine Toyota garanties constructeur.',
     faqQ5:'Quels sont les délais de livraison pour un véhicule neuf ?',
     faqA5:'Nous disposons de plusieurs modèles immédiatement disponibles en stock showroom à Meknès. Pour les configurations et coloris spécifiques sur commande, la livraison est effectuée dans les meilleurs délais avec suivi personnalisé par nos conseillers.',
-    svcSav:'Atelier SAV & Entretien',svcSavSub:'Vidange, Diagnostic, Pneus & Pièces',
+    svcTour:'Visite 360° Cockpit',svcTourSub:'Immersion intérieure & écrans',svcSav:'Atelier SAV & Entretien',svcSavSub:'Vidange, Diagnostic, Pneus & Pièces',
     savTitle:'Atelier SAV & Entretien Officiel',savSub:'Techniciens certifiés Toyota · Pièces d\'origine constructeur',
     savLblServices:'Sélectionnez les prestations souhaitées :',
     savS1:'🛢️ Vidange & Filtres Officiels',savS2:'💻 Diagnostic Électronique & Hybride',savS3:'🛑 Freinage (Plaquettes / Disques)',
@@ -2452,7 +2459,7 @@ const D={
     faqA4:'تغطي ورشتنا المعتمدة جميع خدمات الصيانة: تغيير الزيوت المعتمدة والفلاتر، الفحص الإلكتروني للمحرك ومنظومة الهايبرد، الفرامل، ناقل الحركة، التكييف، مع استخدام حصري لقطع الغيار الأصلية 100% المضمونة من تويوتا.',
     faqQ5:'ما هي مواعيد وآجال تسليم السيارات الجديدة؟',
     faqA5:'نوفر العديد من الموديلات الجاهزة للتسليم الفوري من المخزون وصالة العرض بمكناس. بالنسبة للطلبات المخصصة ذات الألوان والتجهيزات المحددة، يتم التسليم في أسرع وقت مع متابعة شخصية من مستشارينا.',
-    svcSav:'ورشة الصيانة وخدمة ما بعد البيع',svcSavSub:'تغيير الزيوت، الفحص، العجلات وقطع الغيار',
+    svcTour:'جولة 360° داخل السيارة',svcTourSub:'استكشف القمرة والشاشات',svcSav:'ورشة الصيانة وخدمة ما بعد البيع',svcSavSub:'تغيير الزيوت، الفحص، العجلات وقطع الغيار',
     savTitle:'ورشة الصيانة وخدمة ما بعد البيع الرسمية',savSub:'تقنيون معتمدون من تويوتا · قطع غيار أصلية ومضمونة',
     savLblServices:'اختر الخدمات المطلوبة :',
     savS1:'🛢️ تغيير الزيت والفلاتر الأصلية',savS2:'💻 الفحص الإلكتروني للمحرك والهايبرد',savS3:'🛑 الفرامل والأمان (صفائح / أقراص)',
@@ -2887,7 +2894,7 @@ function setLang(l){
   s('faq-q5', d.faqQ5);s('faq-a5', d.faqA5);
 
   // SAV Translations
-  s('svc-sav', d.svcSav);s('svc-sav-sub', d.svcSavSub);
+  s('svc-tour', d.svcTour);s('svc-tour-sub', d.svcTourSub);s('svc-sav', d.svcSav);s('svc-sav-sub', d.svcSavSub);
   s('sav-title', d.savTitle);s('sav-sub', d.savSub);
   s('sav-lbl-services', d.savLblServices);
   s('sav-s1', d.savS1);s('sav-s2', d.savS2);s('sav-s3', d.savS3);
