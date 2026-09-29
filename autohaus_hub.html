@@ -741,6 +741,67 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
 .mob-btn:active svg, .mob-btn.active svg{stroke:var(--red);color:var(--red)}
 
 
+
+/* ═══ 360 INTERIOR TOUR ═══ */
+.sc-tour-hint{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(235,10,30,.08);border:1px solid rgba(235,10,30,.25);
+  color:#FF4A5A;font-size:11px;font-weight:700;
+  padding:7px 12px;border-radius:99px;margin-bottom:14px;
+  cursor:pointer;transition:all .2s;text-decoration:none;
+}
+.sc-tour-hint:hover{background:rgba(235,10,30,.16);transform:translateY(-1px)}
+
+.tour-stage{
+  position:relative;width:100%;height:380px;border-radius:18px;overflow:hidden;
+  background:#050508;cursor:grab;user-select:none;touch-action:none;
+  border:1px solid var(--border2);
+  box-shadow:inset 0 0 40px rgba(0,0,0,.8);
+}
+.tour-stage:active{cursor:grabbing}
+.tour-pano-img{
+  position:absolute;top:0;left:0;height:100%;width:auto;min-width:300%;
+  object-fit:cover;pointer-events:none;transition:none;
+}
+.tour-overlay-badge{
+  position:absolute;top:14px;left:14px;z-index:2;
+  background:rgba(8,8,12,.85);backdrop-filter:blur(10px);
+  border:1px solid var(--border2);border-radius:99px;padding:6px 14px;
+  font-size:11px;font-weight:800;color:var(--text);display:flex;align-items:center;gap:8px;
+}
+body.ar .tour-overlay-badge{left:auto;right:14px}
+.tour-hint-drag{
+  position:absolute;bottom:14px;left:50%;transform:translateX(-50%);z-index:2;
+  background:rgba(8,8,12,.85);backdrop-filter:blur(10px);
+  border:1px solid var(--border2);border-radius:99px;padding:6px 16px;
+  font-size:11px;font-weight:700;color:var(--text2);pointer-events:none;
+  display:flex;align-items:center;gap:8px;animation:floatHint 3s ease-in-out infinite;
+}
+@keyframes floatHint{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-4px)}}
+
+.tour-hotspot{
+  position:absolute;width:28px;height:28px;border-radius:50%;
+  background:rgba(235,10,30,.35);border:2px solid #fff;
+  cursor:pointer;z-index:3;display:flex;align-items:center;justify-content:center;
+  transform:translate(-50%,-50%);transition:transform .2s;
+  box-shadow:0 0 14px var(--red);
+}
+.tour-hotspot::after{
+  content:'';position:absolute;inset:-6px;border-radius:50%;
+  border:1.5px solid var(--red);animation:pulseSpot 2s infinite;
+}
+@keyframes pulseSpot{0%{transform:scale(0.8);opacity:1}100%{transform:scale(1.6);opacity:0}}
+.tour-hotspot:hover{transform:translate(-50%,-50%) scale(1.25);background:var(--red)}
+
+.tour-info-card{
+  background:var(--surface2);border:1px solid var(--border2);border-radius:14px;
+  padding:14px 18px;margin-top:14px;display:flex;align-items:center;justify-content:space-between;
+  gap:16px;animation:fadeInUp .3s ease;
+}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.tour-info-title{font-size:13.5px;font-weight:800;color:#fff}
+.tour-info-desc{font-size:11.5px;color:var(--text2);margin-top:2px}
+
 /* ═══ FAQ SECTION ═══ */
 .faq-sec{padding:60px 0;position:relative;z-index:1}
 .faq-grid{max-width:820px;margin:32px auto 0;display:flex;flex-direction:column;gap:12px}
@@ -1371,9 +1432,8 @@ body.ar .fselect{
         <div class="sc-finance-hint" onclick="openFinForCar('corolla')">
           <span>💳</span> <span id="fin-hint-corolla">Dès 3 744 DH / mois · Simuler Financement →</span>
         </div>
-        <div class="sc-eco-hint" onclick="openEcoForCar('corolla')">
-          <span>🌱</span> <span id="eco-hint-corolla">Simuler Économies Carburant & Énergie →</span>
-        </div>
+        <div class="sc-eco-hint" onclick="openEcoForCar('corolla')"><span>🌱</span> <span id="eco-hint-corolla">Simuler Économies Carburant & Énergie →</span></div>
+        <div class="sc-tour-hint" onclick="openTour360('corolla')"><span>👁️</span> <span id="tour-hint-corolla">Visite 360° du Cockpit Hybride →</span></div>
         <div class="sc-colors">
           <div class="color-header"><span id="lbl-col-corolla">Couleur :</span> <span class="color-title-val" id="col-name-corolla">Blanc Pur</span></div>
           <div class="color-chips" id="chips-corolla"></div>
@@ -1408,9 +1468,8 @@ body.ar .fselect{
         <div class="sc-finance-hint" onclick="openFinForCar('corolla-cross')">
           <span>💳</span> <span id="fin-hint-cross">Dès 5 639 DH / mois · Simuler Financement →</span>
         </div>
-        <div class="sc-eco-hint" onclick="openEcoForCar('corolla-cross')">
-          <span>🌱</span> <span id="eco-hint-cross">Simuler Économies Carburant & Énergie →</span>
-        </div>
+        <div class="sc-eco-hint" onclick="openEcoForCar('corolla-cross')"><span>🌱</span> <span id="eco-hint-cross">Simuler Économies Carburant & Énergie →</span></div>
+        <div class="sc-tour-hint" onclick="openTour360('corolla-cross')"><span>👁️</span> <span id="tour-hint-cross">Visite 360° du Cockpit Crossover →</span></div>
         <div class="sc-colors">
           <div class="color-header"><span id="lbl-col-cross">Couleur :</span> <span class="color-title-val" id="col-name-cross">Gris Platine</span></div>
           <div class="color-chips" id="chips-cross"></div>
@@ -1774,6 +1833,69 @@ body.ar .fselect{
         <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.699c.983.537 1.956.822 2.796.822 3.179 0 5.767-2.586 5.768-5.768 0-3.18-2.589-5.768-5.768-5.768zm7.394 5.766c0 4.079-3.315 7.394-7.394 7.394-1.284 0-2.484-.33-3.535-.905l-4.14 1.086 1.106-4.037c-.675-1.12-1.031-2.415-1.031-3.738 0-4.079 3.315-7.394 7.394-7.394 4.079 0 7.394 3.315 7.394 7.394z"/></svg>
         <span id="sav-btn-text">Demander Devis / RDV Atelier via WhatsApp</span>
       </button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ MODAL 360 INTERIOR TOUR ═══ -->
+<div class="modal-bg" id="modal-360-tour">
+  <div class="modal-box" style="max-width:840px">
+    <div class="modal-head">
+      <div>
+        <div class="mh-title" id="tour-modal-title">Visite Virtuelle 360° du Cockpit</div>
+        <div class="mh-sub" id="tour-modal-sub">Explorez les finitions intérieures, écrans tactiles et technologies de bord</div>
+      </div>
+      <button class="modal-x" onclick="closeModal('modal-360-tour')">✕</button>
+    </div>
+    <div class="modal-body">
+      <!-- Model Selector Tabs -->
+      <div class="fin-car-tabs" style="margin-bottom:14px">
+        <button class="fin-tab active" onclick="switchTourCar('corolla-cross')" id="ttab-cross">Corolla Cross AWD</button>
+        <button class="fin-tab" onclick="switchTourCar('prado')" id="ttab-prado">Land Cruiser 250</button>
+        <button class="fin-tab" onclick="switchTourCar('corolla')" id="ttab-corolla">Corolla Berline</button>
+      </div>
+
+      <!-- 360 Interactive Panorama Stage -->
+      <div class="tour-stage" id="tour-stage">
+        <div class="tour-overlay-badge">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--red)"></span>
+          <span id="tour-car-badge">Toyota Corolla Cross AWD · Cockpit Hybride</span>
+        </div>
+        
+        <img src="https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/relative/interior-tour/2026/base.png?wid=2400&fmt=jpg&fit=crop" class="tour-pano-img" id="tour-pano-img" alt="360 Interior Panorama">
+        
+        <!-- Interactive Hotspots -->
+        <div class="tour-hotspot" style="top:42%;left:48%" onclick="showTourHotspot('screen')" title="Écran 12.3 HD">🖥️</div>
+        <div class="tour-hotspot" style="top:58%;left:28%" onclick="showTourHotspot('wheel')" title="Toyota Safety Sense">🛡️</div>
+        <div class="tour-hotspot" style="top:74%;left:52%" onclick="showTourHotspot('gear')" title="Transmission & Modes">🕹️</div>
+        <div class="tour-hotspot" style="top:62%;left:76%" onclick="showTourHotspot('seats')" title="Confort & Cuir">🛋️</div>
+
+        <div class="tour-hint-drag" id="tour-drag-hint">
+          <span>🔄</span> <span id="tour-drag-text">Glissez pour pivoter à 360° dans le cockpit</span>
+        </div>
+      </div>
+
+      <!-- Selected Hotspot Info Card -->
+      <div class="tour-info-card" id="tour-info-card">
+        <div>
+          <div class="tour-info-title" id="tour-spot-title">🖥️ Écran Tactile Haute Définition 12.3"</div>
+          <div class="tour-info-desc" id="tour-spot-desc">Système multimédia connecté Toyota Smart Connect avec Apple CarPlay™ sans fil, Android Auto™ et caméra de recul dynamique.</div>
+        </div>
+        <button onclick="bookCarFromTour()" class="btn btn-red" style="font-size:11.5px;padding:10px 16px;white-space:nowrap" id="tour-spot-btn">
+          Tester en Showroom
+        </button>
+      </div>
+
+      <!-- External High-Res Official Link -->
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;flex-wrap:wrap;gap:10px">
+        <a href="https://www.toyota.com/corollacross/interior-tour/" target="_blank" rel="noopener noreferrer" class="btn btn-glass" style="font-size:12px;padding:10px 16px;gap:6px" id="tour-ext-link">
+          <span>🌐 Visite 3D Officielle Toyota.com ↗</span>
+        </a>
+        <button onclick="bookCarFromTour()" class="btn btn-red" style="font-size:12px;padding:10px 18px" id="tour-book-btn">
+          Prendre RDV pour Essai Réel
+        </button>
+      </div>
     </div>
   </div>
 </div>
@@ -2627,6 +2749,7 @@ function setLang(l){
   const s=(id,v)=>{const e=document.getElementById(id);if(e){if(v.includes('<br>')||v.includes('<small>')||v.includes('<bdi>')){e.innerHTML=v}else{e.textContent=v}}};
   s('h-badge',d.badge);s('h-location',d.location);
   updateLiveOpeningStatus();
+  init360DragInteraction();
   s('hero-tag',d.heroTag);s('hero-title',d.heroTitle);s('hero-sub',d.heroSub);
   document.querySelector('#hero-cta1 span').textContent=d.heroCta1;
   document.querySelector('#hero-cta2 span').textContent=d.heroCta2;
@@ -3901,6 +4024,195 @@ function shareCarDatasheetWa(){
   }
   
   window.open(`https://wa.me/${waNum}?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+
+/* ─── 360 Virtual Interior Tour Logic ─── */
+let currentTourCar = 'corolla-cross';
+let isPanoDragging = false;
+let panoStartX = 0;
+let panoCurrentOffset = -25; // percentage
+
+const TOUR_DATA = {
+  'corolla-cross': {
+    titleFr: 'Toyota Corolla Cross AWD · Cockpit Hybride',
+    titleAr: 'تويوتا كورولا كروس AWD · قمرة القيادة الهجينة',
+    img: 'https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/relative/interior-tour/2026/base.png?wid=2400&fmt=jpg&fit=crop',
+    link: 'https://www.toyota.com/corollacross/interior-tour/',
+    carName: 'Toyota Corolla Cross AWD',
+    spots: {
+      screen: {
+        titleFr: '🖥️ Écran Multimédia Haute Définition 12.3"',
+        titleAr: '🖥️ شاشة لمس عالية الدقة 12.3 بوصة',
+        descFr: 'Apple CarPlay™ sans fil, Android Auto™, navigation connectée et vue panoramique 360° pour les manœuvres.',
+        descAr: 'تدعم Apple CarPlay اللاسلكي و Android Auto مع نظام ملاحة متطور وكاميرات رؤية شاملة 360 درجة.'
+      },
+      wheel: {
+        titleFr: '🛡️ Volant Cuir & Toyota Safety Sense 3.0',
+        titleAr: '🛡️ مقود جلدي وأنظمة الأمان Toyota Safety Sense',
+        descFr: 'Commandes au volant, régulateur adaptatif intelligent, maintien dans la voie et freinage autonome d\'urgence.',
+        descAr: 'أزرار تحكم كاملة، مثبت سرعة ذكي متكيف، نظام الحفاظ على المسار ونظام فرملة الطوارئ الذاتية.'
+      },
+      gear: {
+        titleFr: '🕹️ Sélecteur AWD-i & Modes Hybrides',
+        titleAr: '🕹️ ناقل الحركة وأوضاع القيادة والدفع الكلي',
+        descFr: 'Passage instantané en Mode 100% Électrique EV, mode Sport dynamique ou mode Trail pour le tout-chemin.',
+        descAr: 'التبديل الفوري بين الوضع الكهربائي الصامت EV، الوضع الرياضي وضع الطرق الوعرة Trail.'
+      },
+      seats: {
+        titleFr: '🛋️ Sellerie Cuir & Toit Panoramique',
+        titleAr: '🛋️ مقاعد جلدية فاخرة وسقف بانورامي',
+        descFr: 'Sièges enveloppants réglables électriquement avec fonction chauffante et matériaux insonorisants haut de gamme.',
+        descAr: 'مقاعد مريحة قابلة للتعديل كهربائياً مع مواد عازلة للصوت فائقة الجودة لراحة قصوى.'
+      }
+    }
+  },
+  prado: {
+    titleFr: 'Toyota Land Cruiser 250 · Cockpit Franchisseur Luxe',
+    titleAr: 'تويوتا لاند كروزر 250 · قمرة الدفع الرباعي الفاخرة',
+    img: 'https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/relative/interior-tour/2026/base.png?wid=2400&fmt=jpg&fit=crop',
+    link: 'https://www.toyota.com/landcruiser/interior-tour/',
+    carName: 'Toyota Land Cruiser 250',
+    spots: {
+      screen: {
+        titleFr: '🖥️ Double Écran 12.3" & Multi-Terrain Monitor',
+        titleAr: '🖥️ شاشتان 12.3 بوصة ونظام مراقبة التضاريس',
+        descFr: 'Affichage tête haute et caméras tout-terrain sous-châssis avec lignes de guidage dynamiques.',
+        descAr: 'شاشات متطورة مع كاميرات سفلية لعرض التضاريس بدقة فائقة أثناء القيادة على الطرق الوعرة.'
+      },
+      wheel: {
+        titleFr: '🛡️ Système de Déconnexion de Barre SDM',
+        titleAr: '🛡️ أزرار التحكم والتعليق المتطور SDM',
+        descFr: 'Bouton de déconnexion électronique de la barre stabilisatrice avant pour une articulation extrême en 4x4.',
+        descAr: 'زر فصل عمود التوازن إلكترونياً لتحقيق أقصى مرونة والتصاق بالعجلات في الطرق الوعرة.'
+      },
+      gear: {
+        titleFr: '🕹️ Boîte Direct Shift 8 & Blocages Différentiels',
+        titleAr: '🕹️ أوتوماتيك 8 سرعات مع قفل الدفرنس',
+        descFr: 'Commandes de blocage de différentiel central & arrière Torsen, réducteur de vitesse (L4/H4) et Crawl Control.',
+        descAr: 'أقفال دفرنس مركزية وخلفية Torsen ونظام الزحف الذاتي Crawl Control للرمال والصخور.'
+      },
+      seats: {
+        titleFr: '🛋️ Sièges Cuir Perforé Ventilés & Chauffants',
+        titleAr: '🛋️ مقاعد جلد طبيعي مهواة ومدفأة',
+        descFr: 'Espace spacieux 7 places avec climatisation tri-zone indépendante et finitions ultra-robustes.',
+        descAr: 'مقصورة رحبة بـ 7 مقاعد مع تكييف مستقل ثلاثي المناطق وخامات فاخرة متينة.'
+      }
+    }
+  },
+  corolla: {
+    titleFr: 'Toyota Corolla Berline · Cockpit Épuré & Silencieux',
+    titleAr: 'تويوتا كورولا سيدان · قمرة هادئة ومريحة',
+    img: 'https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/relative/interior-tour/2026/base.png?wid=2400&fmt=jpg&fit=crop',
+    link: 'https://www.toyota.com/corolla/interior-tour/',
+    carName: 'Toyota Corolla Berline',
+    spots: {
+      screen: {
+        titleFr: '🖥️ Écran Tactile 10.5" Toyota Smart Connect',
+        titleAr: '🖥️ شاشة لمس 10.5 بوصة ذكية',
+        descFr: 'Interface intuitive ultra-réactive avec commandes vocales et Bluetooth mains-libres.',
+        descAr: 'واجهة سلسة مع أوامر صوتية وتوصيل بلوتوث فوري.'
+      },
+      wheel: {
+        titleFr: '🛡️ Volant avec Palettes et Aides à la Conduite',
+        titleAr: '🛡️ مقود بأزرار مساعدة السائق',
+        descFr: 'Contrôle direct du tableau de bord numérique personnalisable et détection des piétons.',
+        descAr: 'تحكم مباشر في العدادات الرقمية القابلة للتخصيص ونظام رصد المشاة.'
+      },
+      gear: {
+        titleFr: '🕹️ Sélecteur e-CVT & Mode Éco/Sport',
+        titleAr: '🕹️ ناقل الحركة e-CVT وأوضاع القيادة',
+        descFr: 'Gestion optimale du groupe motopropulseur hybride pour une consommation minimale de 4.1 L/100km.',
+        descAr: 'إدارة ذكية للمحرك الهجين لتحقيق أعلى اقتصاد باستهلاك 4.1 لتر فقط لكل 100 كم.'
+      },
+      seats: {
+        titleFr: '🛋️ Confort Ergonomique & Insonorisation',
+        titleAr: '🛋️ مقاعد مريحة وعزل صوتي فائق',
+        descFr: 'Excellente visibilité périphérique, vitrage acoustique et grand coffre familial de 471 litres.',
+        descAr: 'رؤية محيطية ممتازة مع زجاج عازل وصندوق أمتعة عائلي واسع سعة 471 لتراً.'
+      }
+    }
+  }
+};
+
+function openTour360(carId){
+  switchTourCar(carId || 'corolla-cross');
+  openModal('modal-360-tour');
+}
+
+function switchTourCar(carId){
+  currentTourCar = carId || 'corolla-cross';
+  const isAr = lang === 'ar';
+  const data = TOUR_DATA[currentTourCar] || TOUR_DATA['corolla-cross'];
+  
+  // Update Tab active states
+  ['cross', 'prado', 'corolla'].forEach(k => {
+    const btn = document.getElementById(`ttab-${k}`);
+    if(btn) btn.classList.toggle('active', (k === 'cross' && currentTourCar === 'corolla-cross') || (k === currentTourCar));
+  });
+
+  const badgeEl = document.getElementById('tour-car-badge');
+  if(badgeEl) badgeEl.textContent = isAr ? data.titleAr : data.titleFr;
+
+  const linkEl = document.getElementById('tour-ext-link');
+  if(linkEl) linkEl.href = data.link;
+
+  showTourHotspot('screen');
+}
+
+function showTourHotspot(spotKey){
+  const isAr = lang === 'ar';
+  const data = TOUR_DATA[currentTourCar] || TOUR_DATA['corolla-cross'];
+  const spot = data.spots[spotKey] || data.spots.screen;
+
+  const titleEl = document.getElementById('tour-spot-title');
+  const descEl = document.getElementById('tour-spot-desc');
+
+  if(titleEl) titleEl.textContent = isAr ? spot.titleAr : spot.titleFr;
+  if(descEl) descEl.textContent = isAr ? spot.descAr : spot.descFr;
+}
+
+function bookCarFromTour(){
+  const data = TOUR_DATA[currentTourCar] || TOUR_DATA['corolla-cross'];
+  closeModal('modal-360-tour');
+  bookCar(data.carName);
+}
+
+// 360 Drag Interaction
+function init360DragInteraction(){
+  const stage = document.getElementById('tour-stage');
+  const img = document.getElementById('tour-pano-img');
+  if(!stage || !img) return;
+
+  const onPointerDown = (e) => {
+    isPanoDragging = true;
+    panoStartX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
+  };
+
+  const onPointerMove = (e) => {
+    if(!isPanoDragging) return;
+    const currentX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
+    const diffX = currentX - panoStartX;
+    panoStartX = currentX;
+
+    panoCurrentOffset += (diffX * 0.15);
+    if(panoCurrentOffset > 0) panoCurrentOffset = -60;
+    if(panoCurrentOffset < -66) panoCurrentOffset = -5;
+
+    img.style.transform = `translateX(${panoCurrentOffset}%)`;
+  };
+
+  const onPointerUp = () => {
+    isPanoDragging = false;
+  };
+
+  stage.addEventListener('mousedown', onPointerDown);
+  window.addEventListener('mousemove', onPointerMove);
+  window.addEventListener('mouseup', onPointerUp);
+
+  stage.addEventListener('touchstart', onPointerDown, {passive: true});
+  window.addEventListener('touchmove', onPointerMove, {passive: true});
+  window.addEventListener('touchend', onPointerUp);
 }
 
 /* ─── Real-Time Opening Hours & Live Status ─── */
