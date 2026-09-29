@@ -3627,7 +3627,8 @@ function submitSavBooking(){
 
 /* ─── Share Fiche Technique & Brochure on WhatsApp ─── */
 
-/* ─── 1-Page Luxury Dark PDF Datasheet Generator ─── */
+
+/* ─── 1-Page Official Toyota White-Theme PDF Datasheet Generator ─── */
 function printLuxuryDatasheet(){
   if(!currentCar) return;
   const car = currentCar;
@@ -3640,22 +3641,32 @@ function printLuxuryDatasheet(){
   const carCat = isAr ? car.catAr : car.cat;
   const priceStr = isAr ? `${fNum(car.price)} درهم شامل الضريبة` : `${fNum(car.price)} DH TTC`;
 
+  // Absolute URL helper
+  const getAbs = u => {
+    const a = document.createElement('a');
+    a.href = u;
+    return a.href;
+  };
+
+  const logoAbs = getAbs('logo.webp');
+  const carImgAbs = getAbs(activeImg);
+
   // Specs Rows
   const specsRows = (car.specs[lang] || car.specs.fr).map(s => {
     const parts = s.split(':');
     const label = parts[0] || '';
     const val = parts[1] || s;
     return `
-      <div style="background:#13131c;border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:8px 12px">
-        <div style="font-size:8.5px;text-transform:uppercase;letter-spacing:0.06em;color:#8E8EA8;font-weight:700">${label}</div>
-        <div style="font-size:11.5px;font-weight:800;color:#FFFFFF;margin-top:2px">${val}</div>
+      <div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:8px 12px">
+        <div style="font-size:8.5px;text-transform:uppercase;letter-spacing:0.06em;color:#64748B;font-weight:700">${label}</div>
+        <div style="font-size:11.5px;font-weight:800;color:#0F172A;margin-top:2px">${val}</div>
       </div>`;
   }).join('');
 
   // Feats Rows
   const featsRows = (car.feats[lang] || car.feats.fr).map(f => {
     return `
-      <div style="display:flex;align-items:center;gap:6px;font-size:10px;color:#C4C4D8;margin-bottom:5px">
+      <div style="display:flex;align-items:center;gap:6px;font-size:10px;color:#334155;margin-bottom:4px">
         <span style="color:#EB0A1E;font-weight:900;font-size:11px">✓</span>
         <span>${f}</span>
       </div>`;
@@ -3680,69 +3691,67 @@ function printLuxuryDatasheet(){
       <title>${carName} — Fiche Technique Auto Meknès Ismailia</title>
       <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
       <style>
-        @page { size: A4 portrait; margin: 8mm; }
+        @page { size: A4 portrait; margin: 8mm 10mm; }
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-          background-color: #08080C !important;
-          color: #F2F2F8 !important;
-          font-family: 'Montserrat', system-ui, sans-serif;
+        html, body {
+          background-color: #FFFFFF !important;
+          color: #0F172A !important;
+          font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
           -webkit-print-color-adjust: exact !important;
           print-color-adjust: exact !important;
-          padding: 16px 20px;
-          line-height: 1.4;
-          height: 100%;
+          line-height: 1.35;
+          font-size: 11px;
         }
-        .container { max-width: 100%; margin: 0 auto; }
+        .container { width: 100%; max-width: 100%; margin: 0 auto; }
         .hdr {
           display: flex; align-items: center; justify-content: space-between;
-          padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.12);
+          padding-bottom: 10px; border-bottom: 2px solid #EB0A1E;
         }
-        .logo-wrap { display: flex; align-items: center; gap: 12px; }
+        .logo-wrap { display: flex; align-items: center; gap: 10px; }
         .logo-box {
-          width: 44px; height: 44px; background: #000; border-radius: 10px;
-          border: 1px solid rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center;
-          padding: 3px;
+          width: 44px; height: 44px; background: #000; border-radius: 8px;
+          display: flex; align-items: center; justify-content: center; padding: 2px;
         }
         .logo-box img { width: 100%; height: 100%; object-fit: contain; }
-        .dealership-title { font-size: 14px; font-weight: 900; color: #FFF; letter-spacing: -0.02em; }
-        .dealership-sub { font-size: 9.5px; color: #8E8EA8; font-weight: 600; }
+        .dealership-title { font-size: 15px; font-weight: 900; color: #0F172A; letter-spacing: -0.01em; }
+        .dealership-sub { font-size: 9.5px; color: #64748B; font-weight: 600; }
         
         .badge-official {
-          background: rgba(235,10,30,0.15); border: 1px solid #EB0A1E; color: #FF4A5A;
-          font-size: 9px; font-weight: 800; padding: 5px 10px; border-radius: 99px; text-transform: uppercase;
+          border: 1.5px solid #EB0A1E; color: #EB0A1E; background: rgba(235,10,30,0.06);
+          font-size: 9px; font-weight: 800; padding: 4px 10px; border-radius: 99px; text-transform: uppercase; letter-spacing: 0.04em;
         }
 
         .hero-box {
-          display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 16px; align-items: center;
-          background: linear-gradient(135deg, #13131c, #1a1a26);
-          border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 14px 18px; margin: 12px 0;
+          display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 14px; align-items: center;
+          background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px;
+          padding: 12px 16px; margin: 10px 0;
         }
         .car-img-wrap {
-          display: flex; align-items: center; justify-content: center; height: 160px;
+          display: flex; align-items: center; justify-content: center; height: 145px;
         }
-        .car-img-wrap img { max-width: 100%; max-height: 100%; object-fit: contain; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.9)); }
+        .car-img-wrap img { max-width: 100%; max-height: 100%; object-fit: contain; filter: drop-shadow(0 6px 14px rgba(0,0,0,0.2)); }
         
-        .car-title { font-size: 20px; font-weight: 900; color: #FFF; line-height: 1.2; }
-        .car-cat { font-size: 10px; font-weight: 700; color: #EB0A1E; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
-        .car-price { font-size: 19px; font-weight: 900; color: #F5B942; margin-top: 6px; }
-        .color-indicator { font-size: 10px; color: #8E8EA8; font-weight: 600; margin-top: 4px; }
+        .car-title { font-size: 20px; font-weight: 900; color: #0F172A; line-height: 1.2; }
+        .car-cat { font-size: 9.5px; font-weight: 800; color: #EB0A1E; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 3px; }
+        .car-price { font-size: 19px; font-weight: 900; color: #B91C1C; margin: 4px 0 2px; }
+        .color-indicator { font-size: 9.5px; color: #64748B; font-weight: 600; }
 
         .specs-grid {
-          display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 12px;
+          display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; margin-bottom: 10px;
         }
 
         .feat-card {
-          background: #111118; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px;
-          padding: 10px 14px; margin-bottom: 12px;
+          background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 10px;
+          padding: 10px 14px; margin-bottom: 10px;
         }
-        .feat-hdr { font-size: 9px; font-weight: 800; text-transform: uppercase; color: #EB0A1E; letter-spacing: 0.08em; margin-bottom: 8px; }
-        .feat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 16px; }
+        .feat-hdr { font-size: 9px; font-weight: 800; text-transform: uppercase; color: #EB0A1E; letter-spacing: 0.08em; margin-bottom: 6px; }
+        .feat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 14px; }
 
         .ftr {
-          border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px;
-          display: flex; align-items: center; justify-content: space-between; font-size: 9.5px; color: #8E8EA8;
+          border-top: 1px solid #E2E8F0; padding-top: 8px; margin-top: 4px;
+          display: flex; align-items: center; justify-content: space-between; font-size: 9px; color: #64748B;
         }
-        .ftr strong { color: #FFF; font-weight: 700; }
+        .ftr strong { color: #0F172A; font-weight: 700; }
       </style>
     </head>
     <body>
@@ -3750,7 +3759,7 @@ function printLuxuryDatasheet(){
         <!-- Header -->
         <div class="hdr">
           <div class="logo-wrap">
-            <div class="logo-box"><img src="logo.webp" alt="Toyota Logo"></div>
+            <div class="logo-box"><img src="${logoAbs}" alt="Toyota"></div>
             <div>
               <div class="dealership-title">Auto Meknès Ismailia</div>
               <div class="dealership-sub">Concessionnaire Agréé Toyota · Showroom & SAV Officiel</div>
@@ -3765,15 +3774,15 @@ function printLuxuryDatasheet(){
             <div class="car-cat">${carCat}</div>
             <div class="car-title">${carName}</div>
             <div class="car-price">${priceStr}</div>
-            <div class="color-indicator">Finition & Teinte : <strong style="color:#FFF">${colName}</strong></div>
+            <div class="color-indicator">Finition & Teinte sélectionnée : <strong style="color:#0F172A">${colName}</strong></div>
           </div>
           <div class="car-img-wrap">
-            <img src="${activeImg}" alt="${carName}">
+            <img src="${carImgAbs}" alt="${carName}">
           </div>
         </div>
 
         <!-- Specs Grid -->
-        <div style="font-size:9.5px;font-weight:800;text-transform:uppercase;color:#8E8EA8;letter-spacing:0.06em;margin-bottom:6px">Spécifications Techniques Homologuées</div>
+        <div style="font-size:9px;font-weight:800;text-transform:uppercase;color:#64748B;letter-spacing:0.06em;margin-bottom:5px">Spécifications Techniques Homologuées</div>
         <div class="specs-grid">
           ${specsRows}
         </div>
@@ -3801,11 +3810,38 @@ function printLuxuryDatasheet(){
   `);
   doc.close();
 
-  iframe.contentWindow.focus();
-  setTimeout(() => {
+  // Ensure images are loaded before print
+  const imgs = Array.from(doc.images);
+  let loadedCount = 0;
+  let printed = false;
+
+  const triggerPrint = () => {
+    if (printed) return;
+    printed = true;
+    iframe.contentWindow.focus();
     iframe.contentWindow.print();
-    setTimeout(() => { document.body.removeChild(iframe); }, 2000);
-  }, 400);
+    setTimeout(() => {
+      if (iframe.parentNode) document.body.removeChild(iframe);
+    }, 2000);
+  };
+
+  if (imgs.length === 0) {
+    setTimeout(triggerPrint, 300);
+  } else {
+    imgs.forEach(img => {
+      if (img.complete) {
+        loadedCount++;
+        if (loadedCount === imgs.length) setTimeout(triggerPrint, 250);
+      } else {
+        img.onload = img.onerror = () => {
+          loadedCount++;
+          if (loadedCount === imgs.length) setTimeout(triggerPrint, 250);
+        };
+      }
+    });
+    // Safety fallback
+    setTimeout(triggerPrint, 1200);
+  }
 }
 
 function shareCarDatasheetWa(){
