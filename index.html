@@ -625,21 +625,7 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
   pointer-events:none;
 }
 
-/* ═══ SLOGAN BAND ═══ */
-.slogan{
-  padding:60px 0;text-align:center;position:relative;z-index:1;
-}
-.slogan-text{
-  font-size:clamp(18px,3.5vw,32px);font-weight:900;
-  line-height:1.3;letter-spacing:-.01em;
-  background:linear-gradient(90deg,var(--text),var(--text2));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  background-clip:text;max-width:600px;margin:0 auto;
-}
-.slogan-divider{
-  width:60px;height:3px;border-radius:99px;
-  background:var(--red);margin:20px auto 0;
-}
+
 
 /* ═══ FOOTER ═══ */
 .footer{
@@ -933,9 +919,7 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
   .svc-name{font-size:12.5px;text-align:center}
   .svc-sub{font-size:9.5px;text-align:center}
 
-  /* Slogan */
-  .slogan{padding:32px 0}
-  .slogan-text{font-size:clamp(15px,4.2vw,20px);text-align:center}
+
 
   /* Centered Footer */
   .footer{padding:28px 0 16px}
@@ -1016,7 +1000,7 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
   <div class="hero-logo-wrap">
     <img src="logo.webp" alt="Auto Meknès Ismailia Logo" class="hero-logo" width="84" height="84" fetchpriority="high">
   </div>
-  <div class="hero-tagline" id="hero-tag">L'EXCELLENCE AUTOMOBILE, NOTRE ENGAGEMENT</div>
+  <div class="hero-tagline" id="hero-tag">CONCESSIONNAIRE AGRÉÉ TOYOTA</div>
   <h1 class="hero-title" id="hero-title">Auto Meknès<br>Ismailia</h1>
   <p class="hero-subtitle" id="hero-sub">Votre concessionnaire agréé Toyota à Meknès.</p>
   <div class="hero-cta-row">
@@ -1252,13 +1236,7 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
   </div>
 </section>
 
-<!-- ═══ SLOGAN ═══ -->
-<section class="slogan reveal">
-  <div class="container">
-    <p class="slogan-text" id="slogan-text">L'excellence automobile,<br>notre engagement.</p>
-    <div class="slogan-divider"></div>
-  </div>
-</section>
+
 
 <!-- ═══ SERVICES ═══ -->
 <section class="services" id="services">
@@ -1702,7 +1680,7 @@ CARS.forEach(car => {
 
 const D={
   fr:{badge:'CONCESSIONNAIRE TOYOTA',status:'Ouvert · 08:30 — 19:00',location:'Meknès · Toyota Officiel',
-    heroTag:"L'EXCELLENCE AUTOMOBILE, NOTRE ENGAGEMENT",heroTitle:'Auto Meknès<br>Ismailia',
+    heroTag:'CONCESSIONNAIRE AGRÉÉ TOYOTA',heroTitle:'Auto Meknès<br>Ismailia',
     heroSub:'Votre concessionnaire agréé Toyota à Meknès. Découvrez la nouvelle génération.',
     heroCta1:'Voir les Modèles',heroCta2:'WhatsApp Direct',
     secReelsLabel:'EXPÉRIENCE SHOWROOM',secReelsTitle:'Immersion Vidéo',secReelsDesc:"Découvrez l'atmosphère de notre showroom et l'excellence Toyota en mouvement.",
@@ -1720,7 +1698,6 @@ const D={
     svc2:'Comparateur',svc2s:'3 modèles côte à côte',
     svc3:'Notre Équipe',svc3s:'2 conseillers dédiés',
     svc4:'Reprise Auto',svc4s:'Offre ferme sous 2h',
-    slogan:"L'excellence automobile,<br>notre engagement.",
     secLocLabel:'ACCÈS & SHOWROOM',secLocTitle:'Horaires & Localisation',secLocDesc:'Venez nous rendre visite à Meknès. Calculez votre itinéraire en un clic.',
     locTag:'Concessionnaire Officiel',locHTitle:"Horaires d'Ouverture",
     locDWeek:'Lundi – Vendredi',locDSat:'Samedi',locDSun:'Dimanche',locTClosed:'Fermé',
@@ -1762,7 +1739,7 @@ const D={
     dtSub:'Spécifications complètes',dtClose:'Fermer',dtBook:'Demander Conseil',
     specsT:'Spécifications',featT:'Équipements'},
   ar:{badge:'وكيل تويوتا المعتمد',status:'مفتوح · 08:30 — 19:00',location:'مكناس · تويوتا الرسمي',
-    heroTag:'التميز في عالم السيارات، التزامنا الدائم',heroTitle:'Auto Meknès<br>Ismailia',
+    heroTag:'وكيل تويوتا المعتمد بمكناس',heroTitle:'Auto Meknès<br>Ismailia',
     heroSub:'وكيلكم المعتمد لتويوتا في مكناس. اكتشفوا الجيل الجديد.',
     heroCta1:'اكتشف الموديلات',heroCta2:'واتساب مباشر',
     secReelsLabel:'تجربة المعرض',secReelsTitle:'جولة فيديو حصرية',secReelsDesc:'اكتشفوا أجواء صالة العرض وتميز سيارات تويوتا عن قرب وبشكل ديناميكي.',
@@ -1780,7 +1757,6 @@ const D={
     svc2:'المقارن',svc2s:'3 موديلات جنباً إلى جنب',
     svc3:'فريق المبيعات',svc3s:'مستشاران في خدمتكم',
     svc4:'استبدال سيارتك',svc4s:'عرض خلال ساعتين',
-    slogan:'التميز في عالم السيارات،<br>التزامنا الدائم.',
     secLocLabel:'الموقع وأوقات العمل',secLocTitle:'صالة العرض بمكناس',secLocDesc:'تفضلوا بزيارتنا في مكناس. احصلوا على مسار الطريق بنقرة واحدة.',
     locTag:'وكيل رسمي معتمد',locHTitle:'أوقات العمل واستقبال الزبناء',
     locDWeek:'الإثنين – الجمعة',locDSat:'السبت',locDSun:'الأحد',locTClosed:'مغلق',
@@ -2106,7 +2082,6 @@ function setLang(l){
   s('svc-2',d.svc2);s('svc-2s',d.svc2s);
   s('svc-3',d.svc3);s('svc-3s',d.svc3s);
   s('svc-4',d.svc4);s('svc-4s',d.svc4s);
-  s('slogan-text',d.slogan);
 
   // Location & Horaires Section
   s('sec-loc-label',d.secLocLabel);s('sec-loc-title',d.secLocTitle);s('sec-loc-desc',d.secLocDesc);
