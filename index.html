@@ -1347,7 +1347,7 @@ body.ar .fselect{
           <span class="spec-pill"><span class="spec-pill-dot" style="background:var(--emerald)"></span><span id="prado-sp3">8.1 L/100km</span></span>
         </div>
         <div class="sc-actions">
-          <button class="btn btn-glass" onclick="openCarDetail('prado')" id="prado-fiche">📄 Fiche & Brochure PDF</button>
+          <button class="btn btn-glass" onclick="openCarDetail('prado')" id="prado-fiche">Fiche Technique</button>
           <button class="btn btn-red" onclick="bookCar('Toyota Land Cruiser 250')" id="prado-book">Prendre Rendez-vous</button>
         </div>
       </div>
@@ -1384,7 +1384,7 @@ body.ar .fselect{
           <span class="spec-pill"><span class="spec-pill-dot" style="background:var(--emerald)"></span><span id="corolla-sp3">4.1 L/100km</span></span>
         </div>
         <div class="sc-actions">
-          <button class="btn btn-glass" onclick="openCarDetail('corolla')" id="corolla-fiche">📄 Fiche & Brochure PDF</button>
+          <button class="btn btn-glass" onclick="openCarDetail('corolla')" id="corolla-fiche">Fiche Technique</button>
           <button class="btn btn-red" onclick="bookCar('Toyota Corolla Berline')" id="corolla-book">Prendre Rendez-vous</button>
         </div>
       </div>
@@ -1421,7 +1421,7 @@ body.ar .fselect{
           <span class="spec-pill"><span class="spec-pill-dot" style="background:var(--emerald)"></span><span id="cross-sp3">4.8 L/100km</span></span>
         </div>
         <div class="sc-actions">
-          <button class="btn btn-glass" onclick="openCarDetail('corolla-cross')" id="cross-fiche">📄 Fiche & Brochure PDF</button>
+          <button class="btn btn-glass" onclick="openCarDetail('corolla-cross')" id="cross-fiche">Fiche Technique</button>
           <button class="btn btn-red" onclick="bookCar('Toyota Corolla Cross AWD')" id="cross-book">Prendre Rendez-vous</button>
         </div>
       </div>
@@ -2190,7 +2190,7 @@ const D={
     ftL0:'Vidéos',ftLExp:'Expérience',ftL1:'Showroom',ftL2:'Services',ftL4:'Nous trouver',ftLFaq:'FAQ & Conseils',ftWa:'WhatsApp Direct',
     ftCopy:'© 2026 Auto Meknès Ismailia · Concessionnaire Agréé Toyota · Marketif',
     mbCall:'Appeler',mbBook:'RDV',mbMaps:'Maps',
-    fiche:'📄 Fiche & Brochure PDF',book:'Prendre Rendez-vous',
+    fiche:'Fiche Technique',book:'Prendre Rendez-vous',
     lblCol:'Couleur :',
     pradoSp:['204 ch · 2.8L Turbo','Auto 8 · 4×4 Torsen','8.1 L/100km'],
     corollaSp:['140 ch · 1.8L Hybride','e-CVT Automatique','4.1 L/100km'],
@@ -2284,7 +2284,7 @@ const D={
     ftL0:'الفيديوهات',ftLExp:'تجارب الزبناء',ftL1:'المعرض',ftL2:'الخدمات',ftL4:'موقعنا',ftLFaq:'الأسئلة الشائعة',ftWa:'واتساب مباشر',
     ftCopy:'© 2026 Auto Meknès Ismailia · وكيل تويوتا المعتمد · Marketif',
     mbCall:'اتصال',mbBook:'استشارة',mbMaps:'الخريطة',
-    fiche:'📄 الكتالوج والمواصفات (PDF)',book:'طلب موعد واستشارة',
+    fiche:'المواصفات والكتالوج',book:'طلب موعد واستشارة',
     lblCol:'اللون :',
     pradoSp:['204 حصان · 2.8 لتر ديزل توربو','أوتوماتيك 8 · دفع رباعي دائم','8.1 لتر / 100 كم'],
     corollaSp:['140 حصان · 1.8 لتر هجين','ناقل e-CVT أوتوماتيكي','4.1 لتر / 100 كم'],
@@ -2812,12 +2812,12 @@ function openCarDetail(id){
   const formattedNum=new Intl.NumberFormat('fr-FR').format(car.price);
   const badgeText=isAr?`<bdi>${formattedNum}</bdi> درهم`:`${formattedNum} DH`;
   document.getElementById('dt-title').textContent=isAr?car.nameAr:car.name;
-  document.getElementById('dt-sub').textContent=isAr?'المواصفات الفنية والكتالوج الرسمي':'Fiche technique & Brochure constructeur';
+  document.getElementById('dt-sub').textContent=isAr?'المواصفات الفنية والكتالوج الرسمي':'Fiche technique & Spécifications';
   document.getElementById('dt-close').textContent=d.dtClose;
   document.getElementById('dt-book').textContent=d.dtBook;
   
-  const waBtnText = isAr ? '📲 استلام الكتالوج (PDF) عبر واتساب' : '📲 Recevoir la Brochure PDF sur WhatsApp';
-  const printBtnText = isAr ? '🖨️ طباعة / حفظ كـ PDF' : '🖨️ Télécharger / Imprimer en PDF';
+  const pdfBtnText = isAr ? '📄 تحميل كـ PDF (صفحة واحدة)' : '📄 Télécharger la Fiche PDF';
+  const waBtnText = isAr ? '📲 استلام الكتالوج عبر واتساب' : '📲 Brochure sur WhatsApp';
   
   document.getElementById('dt-body').innerHTML=`
     <div class="dt-stage">
@@ -2825,17 +2825,17 @@ function openCarDetail(id){
       <div class="dt-badge" style="color:${car.pc}">${badgeText}</div>
     </div>
     
-    <!-- Quick Action Bar -->
+    <!-- Action buttons inside modal only -->
     <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:16px">
-      <button onclick="shareCarDatasheetWa()" class="btn btn-red" style="font-size:12px;padding:10px 16px;gap:6px">
-        <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.699c.983.537 1.956.822 2.796.822 3.179 0 5.767-2.586 5.768-5.768 0-3.18-2.589-5.768-5.768-5.768zm7.394 5.766c0 4.079-3.315 7.394-7.394 7.394-1.284 0-2.484-.33-3.535-.905l-4.14 1.086 1.106-4.037c-.675-1.12-1.031-2.415-1.031-3.738 0-4.079 3.315-7.394 7.394-7.394 4.079 0 7.394 3.315 7.394 7.394z"/></svg>
+      <button onclick="printLuxuryDatasheet()" class="btn btn-glass" style="font-size:12px;padding:10px 16px;color:#fff;border-color:rgba(255,255,255,0.2)">
+        <span>${pdfBtnText}</span>
+      </button>
+      <button onclick="shareCarDatasheetWa()" class="btn btn-glass" style="font-size:12px;padding:10px 16px;color:#25D366;border-color:rgba(37,211,102,0.3)">
+        <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.699c.983.537 1.956.822 2.796.822 3.179 0 5.767-2.586 5.768-5.768-5.768zm7.394 5.766c0 4.079-3.315 7.394-7.394 7.394-1.284 0-2.484-.33-3.535-.905l-4.14 1.086 1.106-4.037c-.675-1.12-1.031-2.415-1.031-3.738 0-4.079 3.315-7.394 7.394-7.394 4.079 0 7.394 3.315 7.394 7.394z"/></svg>
         <span>${waBtnText}</span>
       </button>
-      <button onclick="window.print()" class="btn btn-glass" style="font-size:12px;padding:10px 16px;gap:6px">
-        <span>${printBtnText}</span>
-      </button>
       <button onclick="closeModal('modal-detail');openFinForCar('${car.id}')" class="btn btn-glass" style="font-size:12px;padding:10px 16px;color:var(--gold);border-color:rgba(245,185,66,.3)">
-        <span>💳 ${isAr?'حاسبة الأقساط':'Financement'}</span>
+        <span>💳 ${isAr?'حاسبة التمويل':'Financement'}</span>
       </button>
     </div>
 
@@ -3626,6 +3626,188 @@ function submitSavBooking(){
 }
 
 /* ─── Share Fiche Technique & Brochure on WhatsApp ─── */
+
+/* ─── 1-Page Luxury Dark PDF Datasheet Generator ─── */
+function printLuxuryDatasheet(){
+  if(!currentCar) return;
+  const car = currentCar;
+  const isAr = lang === 'ar';
+  const activeCol = selectedColors[car.id] || car.colors[0];
+  const activeImg = (activeCol && activeCol.img) ? activeCol.img : car.img;
+  const fNum = n => new Intl.NumberFormat('fr-FR').format(n);
+  const colName = activeCol ? (isAr ? activeCol.nameAr : activeCol.name) : '-';
+  const carName = isAr ? car.nameAr : car.name;
+  const carCat = isAr ? car.catAr : car.cat;
+  const priceStr = isAr ? `${fNum(car.price)} درهم شامل الضريبة` : `${fNum(car.price)} DH TTC`;
+
+  // Specs Rows
+  const specsRows = (car.specs[lang] || car.specs.fr).map(s => {
+    const parts = s.split(':');
+    const label = parts[0] || '';
+    const val = parts[1] || s;
+    return `
+      <div style="background:#13131c;border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:8px 12px">
+        <div style="font-size:8.5px;text-transform:uppercase;letter-spacing:0.06em;color:#8E8EA8;font-weight:700">${label}</div>
+        <div style="font-size:11.5px;font-weight:800;color:#FFFFFF;margin-top:2px">${val}</div>
+      </div>`;
+  }).join('');
+
+  // Feats Rows
+  const featsRows = (car.feats[lang] || car.feats.fr).map(f => {
+    return `
+      <div style="display:flex;align-items:center;gap:6px;font-size:10px;color:#C4C4D8;margin-bottom:5px">
+        <span style="color:#EB0A1E;font-weight:900;font-size:11px">✓</span>
+        <span>${f}</span>
+      </div>`;
+  }).join('');
+
+  const iframe = document.createElement('iframe');
+  iframe.style.position = 'fixed';
+  iframe.style.right = '0';
+  iframe.style.bottom = '0';
+  iframe.style.width = '0';
+  iframe.style.height = '0';
+  iframe.style.border = '0';
+  document.body.appendChild(iframe);
+
+  const doc = iframe.contentWindow.document;
+  doc.open();
+  doc.write(`
+    <!DOCTYPE html>
+    <html lang="${lang}" dir="${isAr ? 'rtl' : 'ltr'}">
+    <head>
+      <meta charset="UTF-8">
+      <title>${carName} — Fiche Technique Auto Meknès Ismailia</title>
+      <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+      <style>
+        @page { size: A4 portrait; margin: 8mm; }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+          background-color: #08080C !important;
+          color: #F2F2F8 !important;
+          font-family: 'Montserrat', system-ui, sans-serif;
+          -webkit-print-color-adjust: exact !important;
+          print-color-adjust: exact !important;
+          padding: 16px 20px;
+          line-height: 1.4;
+          height: 100%;
+        }
+        .container { max-width: 100%; margin: 0 auto; }
+        .hdr {
+          display: flex; align-items: center; justify-content: space-between;
+          padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.12);
+        }
+        .logo-wrap { display: flex; align-items: center; gap: 12px; }
+        .logo-box {
+          width: 44px; height: 44px; background: #000; border-radius: 10px;
+          border: 1px solid rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center;
+          padding: 3px;
+        }
+        .logo-box img { width: 100%; height: 100%; object-fit: contain; }
+        .dealership-title { font-size: 14px; font-weight: 900; color: #FFF; letter-spacing: -0.02em; }
+        .dealership-sub { font-size: 9.5px; color: #8E8EA8; font-weight: 600; }
+        
+        .badge-official {
+          background: rgba(235,10,30,0.15); border: 1px solid #EB0A1E; color: #FF4A5A;
+          font-size: 9px; font-weight: 800; padding: 5px 10px; border-radius: 99px; text-transform: uppercase;
+        }
+
+        .hero-box {
+          display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 16px; align-items: center;
+          background: linear-gradient(135deg, #13131c, #1a1a26);
+          border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 14px 18px; margin: 12px 0;
+        }
+        .car-img-wrap {
+          display: flex; align-items: center; justify-content: center; height: 160px;
+        }
+        .car-img-wrap img { max-width: 100%; max-height: 100%; object-fit: contain; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.9)); }
+        
+        .car-title { font-size: 20px; font-weight: 900; color: #FFF; line-height: 1.2; }
+        .car-cat { font-size: 10px; font-weight: 700; color: #EB0A1E; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+        .car-price { font-size: 19px; font-weight: 900; color: #F5B942; margin-top: 6px; }
+        .color-indicator { font-size: 10px; color: #8E8EA8; font-weight: 600; margin-top: 4px; }
+
+        .specs-grid {
+          display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 12px;
+        }
+
+        .feat-card {
+          background: #111118; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px;
+          padding: 10px 14px; margin-bottom: 12px;
+        }
+        .feat-hdr { font-size: 9px; font-weight: 800; text-transform: uppercase; color: #EB0A1E; letter-spacing: 0.08em; margin-bottom: 8px; }
+        .feat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 16px; }
+
+        .ftr {
+          border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px;
+          display: flex; align-items: center; justify-content: space-between; font-size: 9.5px; color: #8E8EA8;
+        }
+        .ftr strong { color: #FFF; font-weight: 700; }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <!-- Header -->
+        <div class="hdr">
+          <div class="logo-wrap">
+            <div class="logo-box"><img src="logo.webp" alt="Toyota Logo"></div>
+            <div>
+              <div class="dealership-title">Auto Meknès Ismailia</div>
+              <div class="dealership-sub">Concessionnaire Agréé Toyota · Showroom & SAV Officiel</div>
+            </div>
+          </div>
+          <div class="badge-official">Fiche Technique Officielle</div>
+        </div>
+
+        <!-- Car Hero -->
+        <div class="hero-box">
+          <div>
+            <div class="car-cat">${carCat}</div>
+            <div class="car-title">${carName}</div>
+            <div class="car-price">${priceStr}</div>
+            <div class="color-indicator">Finition & Teinte : <strong style="color:#FFF">${colName}</strong></div>
+          </div>
+          <div class="car-img-wrap">
+            <img src="${activeImg}" alt="${carName}">
+          </div>
+        </div>
+
+        <!-- Specs Grid -->
+        <div style="font-size:9.5px;font-weight:800;text-transform:uppercase;color:#8E8EA8;letter-spacing:0.06em;margin-bottom:6px">Spécifications Techniques Homologuées</div>
+        <div class="specs-grid">
+          ${specsRows}
+        </div>
+
+        <!-- Equipments -->
+        <div class="feat-card">
+          <div class="feat-hdr">Équipements & Confort de Série</div>
+          <div class="feat-grid">
+            ${featsRows}
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="ftr">
+          <div>
+            📍 <strong>Showroom Meknès :</strong> RDC Angle Bd. Yacoub El Mansour & Ave. des FAR
+          </div>
+          <div>
+            📞 <strong>Tél :</strong> 05 35 52 47 68 · 📲 <strong>WhatsApp :</strong> 06 66 97 93 12
+          </div>
+        </div>
+      </div>
+    </body>
+    </html>
+  `);
+  doc.close();
+
+  iframe.contentWindow.focus();
+  setTimeout(() => {
+    iframe.contentWindow.print();
+    setTimeout(() => { document.body.removeChild(iframe); }, 2000);
+  }, 400);
+}
+
 function shareCarDatasheetWa(){
   if(!currentCar) return;
   const isAr = lang === 'ar';
