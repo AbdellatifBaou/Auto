@@ -427,14 +427,35 @@ body.ar .reel-bottom{text-align:right}
   position:relative;width:100%;aspect-ratio:4/3;max-height:360px;
   display:flex;align-items:center;justify-content:center;
   background:transparent;
+  perspective:1000px;
+  transform-style:preserve-3d;
+}
+/* Studio Floor Ambient Glow & Specular Reflection */
+.sc-stage::before{
+  content:'';position:absolute;bottom:4%;left:50%;transform:translateX(-50%);
+  width:84%;height:38px;border-radius:50%;
+  background:radial-gradient(ellipse at center, var(--stage-glow, rgba(235,10,30,.28)) 0%, rgba(0,0,0,0.65) 58%, transparent 80%);
+  filter:blur(14px);
+  transition:background .6s cubic-bezier(.16,1,.3,1), opacity .6s ease;
+  z-index:1;pointer-events:none;
+}
+/* Studio Spotlight Overhead Cone */
+.sc-stage::after{
+  content:'';position:absolute;top:5%;left:50%;transform:translateX(-50%);
+  width:78%;height:130px;border-radius:50%;
+  background:radial-gradient(ellipse at center, var(--studio-light, rgba(255,255,255,.07)) 0%, transparent 72%);
+  filter:blur(24px);
+  transition:background .6s cubic-bezier(.16,1,.3,1);
+  z-index:0;pointer-events:none;
 }
 .sc-stage img{
   width:100%;height:100%;object-fit:contain;object-position:center;
   position:relative;z-index:2;display:block;
-  filter:drop-shadow(0 20px 40px rgba(0,0,0,.9));
-  transition:filter .4s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1);
+  filter:drop-shadow(0 20px 38px rgba(0,0,0,.9)) drop-shadow(0 4px 16px var(--stage-rim, rgba(255,255,255,.05)));
+  transition:filter .4s cubic-bezier(.16,1,.3,1), transform .35s cubic-bezier(.16,1,.3,1), opacity .25s ease;
+  will-change:transform, filter;
 }
-.sc-stage:hover img{transform:scale(1.04) translateY(-6px)}
+.sc-stage:hover img{filter:drop-shadow(0 26px 44px rgba(0,0,0,.95)) drop-shadow(0 6px 20px var(--stage-rim, rgba(255,255,255,.12)))}
 .sc-stage-bg{display:none}
 .sc-beam{display:none}
 
@@ -1122,7 +1143,7 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
               </button>
             </div>
             <div class="reel-bottom">
-              <div class="reel-badge-car" id="reel-b1-title">Land Cruiser Prado</div>
+              <div class="reel-badge-car" id="reel-b1-title">Land Cruiser 250</div>
               <div class="reel-sub" id="reel-b1-sub">L'icône tout-terrain à Meknès</div>
             </div>
           </div>
@@ -1186,11 +1207,11 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
       <!-- Moment 3: kunde3.webp -->
       <div class="exp-card">
         <div class="exp-img-wrap">
-          <img src="kunde3.webp" alt="Préparation & Livraison Land Cruiser Prado" class="exp-img" loading="lazy" decoding="async">
+          <img src="kunde3.webp" alt="Préparation & Livraison Land Cruiser 250" class="exp-img" loading="lazy" decoding="async">
         </div>
         <div class="exp-content">
-          <div class="exp-model-title" id="exp-m3-title">Nouveau Land Cruiser Prado</div>
-          <p class="exp-desc" id="exp-m3-desc">Pose de la plaque WW et mise en main complète du légendaire baroudeur Toyota 4×4.</p>
+          <div class="exp-model-title" id="exp-m3-title">Nouveau Land Cruiser 250</div>
+          <p class="exp-desc" id="exp-m3-desc">Pose de la plaque WW et mise en main complète du tout nouveau Land Cruiser 250.</p>
         </div>
       </div>
     </div>
@@ -1214,19 +1235,19 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
     </div>
   </div>
 
-  <!-- PRADO -->
+  <!-- LAND CRUISER 250 -->
   <div class="container showcase sc-prado reveal" id="sc-prado">
     <div class="showcase-inner">
       <div class="sc-visual">
-        <div class="sc-stage">
+        <div class="sc-stage" id="stage-prado">
           <div class="sc-stage-bg"></div>
-          <img src="prado_Farbe_F5F6F8.webp" alt="Land Cruiser Prado" id="img-prado" loading="lazy" decoding="async">
+          <img src="prado_Farbe_F5F6F8.webp" alt="Toyota Land Cruiser 250" id="img-prado" loading="lazy" decoding="async">
           <div class="sc-beam" id="beam-prado"></div>
         </div>
       </div>
       <div class="sc-info">
         <div class="sc-cat" id="prado-cat">SUV 4×4 Luxe</div>
-        <div class="sc-name" id="prado-name">Land Cruiser Prado</div>
+        <div class="sc-name" id="prado-name">Land Cruiser 250</div>
         <div class="sc-price" id="prado-price">645 000 DH <small>TTC</small></div>
         <div class="sc-finance-hint" onclick="openFinForCar('prado')">
           <span>💳</span> <span id="fin-hint-prado">Dès 9 850 DH / mois · Simuler Financement →</span>
@@ -1236,13 +1257,13 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
           <div class="color-chips" id="chips-prado"></div>
         </div>
         <div class="sc-specs">
-          <span class="spec-pill"><span class="spec-pill-dot" style="background:#FF6B7A"></span><span id="prado-sp1">204 ch · 2.8L D-4D</span></span>
-          <span class="spec-pill"><span class="spec-pill-dot" style="background:var(--text2)"></span><span id="prado-sp2">Auto 6 · 4×4</span></span>
-          <span class="spec-pill"><span class="spec-pill-dot" style="background:var(--emerald)"></span><span id="prado-sp3">7.9 L/100km</span></span>
+          <span class="spec-pill"><span class="spec-pill-dot" style="background:#FF6B7A"></span><span id="prado-sp1">204 ch · 2.8L Turbo</span></span>
+          <span class="spec-pill"><span class="spec-pill-dot" style="background:var(--text2)"></span><span id="prado-sp2">Auto 8 · 4×4 Torsen</span></span>
+          <span class="spec-pill"><span class="spec-pill-dot" style="background:var(--emerald)"></span><span id="prado-sp3">8.1 L/100km</span></span>
         </div>
         <div class="sc-actions">
           <button class="btn btn-glass" onclick="openCarDetail('prado')" id="prado-fiche">Fiche Technique</button>
-          <button class="btn btn-red" onclick="bookCar('Toyota Land Cruiser Prado')" id="prado-book">Prendre Rendez-vous</button>
+          <button class="btn btn-red" onclick="bookCar('Toyota Land Cruiser 250')" id="prado-book">Prendre Rendez-vous</button>
         </div>
       </div>
     </div>
@@ -1252,7 +1273,7 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
   <div class="container showcase flip sc-corolla reveal" id="sc-corolla">
     <div class="showcase-inner">
       <div class="sc-visual">
-        <div class="sc-stage">
+        <div class="sc-stage" id="stage-corolla">
           <div class="sc-stage-bg"></div>
           <img src="corolla_Farbe_F0F1F5.webp" alt="Corolla Berline Hybride" id="img-corolla" loading="lazy" decoding="async">
           <div class="sc-beam" id="beam-corolla"></div>
@@ -1289,7 +1310,7 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
   <div class="container showcase sc-cross reveal" id="sc-cross">
     <div class="showcase-inner">
       <div class="sc-visual">
-        <div class="sc-stage">
+        <div class="sc-stage" id="stage-cross">
           <div class="sc-stage-bg"></div>
           <img src="corolla-cross_Farbe_7D838A.webp" alt="Corolla Cross AWD Hybride" id="img-cross" loading="lazy" decoding="async">
           <div class="sc-beam" id="beam-cross"></div>
@@ -1551,7 +1572,7 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
     <div class="modal-body">
       <!-- Car tabs -->
       <div class="fin-car-tabs">
-        <button class="fin-tab active" onclick="setFinCar('prado')" id="ftab-prado">Land Cruiser Prado</button>
+        <button class="fin-tab active" onclick="setFinCar('prado')" id="ftab-prado">Land Cruiser 250</button>
         <button class="fin-tab" onclick="setFinCar('corolla')" id="ftab-corolla">Corolla Berline</button>
         <button class="fin-tab" onclick="setFinCar('corolla-cross')" id="ftab-cross">Corolla Cross</button>
       </div>
@@ -1654,7 +1675,7 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
         <div class="fg">
           <label id="bk-lbl-car">Modèle souhaité</label>
           <select class="fselect" id="bk-car">
-            <option value="Toyota Land Cruiser Prado">Land Cruiser Prado (204ch · 4×4)</option>
+            <option value="Toyota Land Cruiser 250">Land Cruiser 250 (204ch · 4×4 Auto 8)</option>
             <option value="Toyota Corolla Berline">Corolla Berline Hybride (140ch)</option>
             <option value="Toyota Corolla Cross AWD">Corolla Cross AWD Hybride (197ch)</option>
           </select>
@@ -1849,17 +1870,17 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
 <script>
 /* ─── DATA ─── */
 const CARS=[
-  {id:'prado',name:'Toyota Land Cruiser Prado',nameAr:'تويوتا لاند كروزر برادو',
+  {id:'prado',name:'Toyota Land Cruiser 250',nameAr:'تويوتا لاند كروزر 250',
    cat:'SUV 4×4 Luxe',catAr:'دفع رباعي فاخر',price:645000,img:'prado_Farbe_F5F6F8.webp',pc:'#FF6B7A',
    colors:[
      {id:'white',name:'Blanc Nacré',nameAr:'أبيض لؤلؤي',hex:'#F5F6F8',img:'prado_Farbe_F5F6F8.webp'},
      {id:'grey',name:'Gris Graphite',nameAr:'رمادي جرافيت',hex:'#555961',img:'prado_Farbe_555961.webp'},
      {id:'bronze',name:'Bronze Vintage',nameAr:'برونزي فينتيج',hex:'#8C7853',img:'prado_Farbe_8C7853.webp'}
    ],
-   specs:{fr:['204 ch / 2.8L D-4D Turbo Diesel','Boîte Auto 6 rapports + 4×4','7.9 L/100km cycle mixte','0–100 km/h : 9.9s','Vitesse max : 175 km/h','Garantie 3 ans / 100 000 km'],
-          ar:['204 حصان / 2.8 لتر ديزل توربو','ناقل أوتوماتيكي 6 سرعات + دفع رباعي','7.9 لتر / 100 كم','0-100 كم/س : 9.9 ث','السرعة القصوى: 175 كم/س','ضمان 3 سنوات / 100,000 كم']},
-   feats:{fr:['4×4 permanent avec différentiel Torsen','Suspension KDSS + Crawl Control','Cuir perforé, sièges ventilés & chauffants','Écran 12.3", Apple CarPlay & Android Auto','Caméras 360° Multi-Terrain Monitor','Toyota Safety Sense 3.0'],
-          ar:['دفع رباعي دائم مع قفل تفاضلي Torsen','تعليق KDSS ونظام Crawl Control','جلد فاخر مع مقاعد مهواة ومدفأة','شاشة 12.3 بوصة مع Apple CarPlay','كاميرات محيطية 360 درجة','Toyota Safety Sense 3.0']}},
+   specs:{fr:['204 ch / 2.8L D-4D Turbo Diesel (500 Nm)','Boîte Auto Direct Shift 8 + 4×4 Permanent','8.1 L/100km cycle mixte','Châssis GA-F ultra-rigide + Barre SDM déconnectable','Multi-Terrain Select (MTS) & Crawl Control Tout-Terrain','Garantie 3 ans / 100 000 km (Remorquage 3 500 kg)'],
+          ar:['204 حصان / 2.8 لتر ديزل توربو (500 نيوتن.متر)','ناقل أوتوماتيكي Direct Shift 8 سرعات + دفع رباعي دائم','8.1 لتر / 100 كم','شاسيه GA-F فائق الصلابة + نظام فصل عمود التوازن SDM','نظام Multi-Terrain Select والزحف Crawl Control للتضاريس','ضمان 3 سنوات / 100,000 كم (قدرة سحب 3,500 كغ)']},
+   feats:{fr:['4×4 permanent avec blocages de différentiel central & arrière Torsen','Système SDM de déconnexion électronique de barre stabilisatrice avant','Sellerie cuir perforé premium, sièges chauffants & ventilés','Double écran digital 12.3" haute définition avec Apple CarPlay & Android Auto','Système de vision panoramique 360° PVM Multi-Terrain sous-châssis','Toyota Safety Sense 3.0 avec sécurité active proactive'],
+          ar:['دفع رباعي دائم مع أقفال تفاضلية مركزية وخلفية Torsen','نظام SDM الإلكتروني لفصل عمود التوازن الأمامي بضغطة زر','جلد فاخر مثقوب مع مقاعد مهواة ومدفأة بالكامل','شاشة لمس 12.3 بوصة وشاشة عدادات رقمية 12.3 بوصة','نظام كاميرات محيطية 360 درجة مع رؤية التضاريس تحت الهيكل','باقة الأمان الذكية المتقدمة Toyota Safety Sense 3.0']}},
   {id:'corolla',name:'Toyota Corolla Berline',nameAr:'تويوتا كورولا سيدان',
    cat:'Berline Hybride',catAr:'سيدان هجينة',price:245000,img:'corolla_Farbe_F0F1F5.webp',pc:'#22D3EE',
    colors:[
@@ -1900,12 +1921,12 @@ const D={
     heroSub:'Votre concessionnaire agréé Toyota à Meknès. Découvrez la nouvelle génération.',
     heroCta1:'Voir les Modèles',heroCta2:'WhatsApp Direct',
     secReelsLabel:'EXPÉRIENCE SHOWROOM',secReelsTitle:'Immersion Vidéo',secReelsDesc:"Découvrez l'atmosphère de notre showroom et l'excellence Toyota en mouvement.",
-    reelB1Title:'Land Cruiser Prado',reelB1Sub:"L'icône tout-terrain à Meknès",
+    reelB1Title:'Land Cruiser 250',reelB1Sub:"L'icône tout-terrain à Meknès",
     reelB2Title:'Gamme Hybride Toyota',reelB2Sub:'Innovation, confort & efficience',
     secExpLabel:'LIVRAISONS CLIENTS',secExpTitle:'Moments de Livraison Clients',secExpDesc:'La joie et la fierté de nos clients lors de la remise des clés. Bienvenue dans la famille Toyota.',
     expM1Title:'Toyota Corolla Berline',expM1Desc:"Remise des clés et accueil privilégié par l'équipe commerciale pour cette nouvelle Corolla Berline.",
     expM2Title:'Corolla Cross AWD Hybride',expM2Desc:"Félicitations à notre client pour son choix de la technologie hybride avec l'accompagnement de Khalid Alami.",
-    expM3Title:'Nouveau Land Cruiser Prado',expM3Desc:'Pose de la plaque WW et mise en main complète du légendaire baroudeur Toyota 4×4.',
+    expM3Title:'Nouveau Land Cruiser 250',expM3Desc:'Pose de la plaque WW et mise en main complète du tout nouveau Land Cruiser 250.',
     secCarsLabel:'SHOWROOM',secCarsName:'Nos Modèles',secCarsDesc:'Trois véhicules Toyota de dernière génération, disponibles immédiatement.',
     catCollapse:'Réduire le catalogue',catExpand:'Découvrir nos 3 modèles Toyota',catBadgeCount:'3 Modèles',
     secSvcLabel:'SERVICES',secSvcName:'Comment pouvons-nous vous aider ?',
@@ -1937,10 +1958,10 @@ const D={
     mbCall:'Appeler',mbBook:'RDV',mbMaps:'Maps',
     fiche:'Fiche Technique',book:'Prendre Rendez-vous',
     lblCol:'Couleur :',
-    pradoSp:['204 ch · 2.8L D-4D','Auto 6 · 4×4','7.9 L/100km'],
+    pradoSp:['204 ch · 2.8L Turbo','Auto 8 · 4×4 Torsen','8.1 L/100km'],
     corollaSp:['140 ch · 1.8L Hybride','e-CVT Automatique','4.1 L/100km'],
     crossSp:['197 ch · 2.0L AWD-i','e-CVT Intégrale','4.8 L/100km'],
-    ftabPrado:'Land Cruiser Prado',ftabCorolla:'Corolla Berline',ftabCross:'Corolla Cross',
+    ftabPrado:'Land Cruiser 250',ftabCorolla:'Corolla Berline',ftabCross:'Corolla Cross',
     finHintPrado:'Dès 9 850 DH / mois · Simuler Financement →',
     finHintCorolla:'Dès 3 744 DH / mois · Simuler Financement →',
     finHintCross:'Dès 5 639 DH / mois · Simuler Financement →',
@@ -1958,7 +1979,7 @@ const D={
     bkTitle:'Prendre Rendez-vous Conseil',bkSub:'Confirmation immédiate par WhatsApp',
     bkLblType:'Type de demande',rb1:'Conseil & Achat',rb2:'Devis & Financement',
     bkLblCar:'Modèle souhaité',
-    bkCarOpt1:'Land Cruiser Prado (204ch · 4×4)',
+    bkCarOpt1:'Land Cruiser 250 (204ch · 4×4 Auto 8)',
     bkCarOpt2:'Corolla Berline Hybride (140ch)',
     bkCarOpt3:'Corolla Cross AWD Hybride (197ch)',
     bkLblDate:'Date',bkLblTime:'Créneau',
@@ -1975,12 +1996,12 @@ const D={
     heroSub:'وكيلكم المعتمد لتويوتا في مكناس. اكتشفوا الجيل الجديد.',
     heroCta1:'اكتشف الموديلات',heroCta2:'واتساب مباشر',
     secReelsLabel:'تجربة المعرض',secReelsTitle:'جولة فيديو حصرية',secReelsDesc:'اكتشفوا أجواء صالة العرض وتميز سيارات تويوتا عن قرب وبشكل ديناميكي.',
-    reelB1Title:'لاند كروزر برادو',reelB1Sub:'أيقونة الدفع الرباعي في مكناس',
+    reelB1Title:'لاند كروزر 250',reelB1Sub:'أيقونة الدفع الرباعي بالجيل الجديد في مكناس',
     reelB2Title:'تشكيلة تويوتا الهجينة',reelB2Sub:'ابتكار، راحة واقتصاد مثالي',
     secExpLabel:'تسليم سيارات الزبناء',secExpTitle:'لحظات تسليم سيارات زبنائنا الكرام',secExpDesc:'فرحة وثقة زبنائنا الكرام عند استلام مفاتيح سياراتهم الجديدة. مرحباً بكم في عائلة تويوتا.',
     expM1Title:'تويوتا كورولا سيدان',expM1Desc:'تسليم مفاتيح السيارة واستقبال خاص لزبوننا الكريم رفقة فريق المبيعات.',
     expM2Title:'كورولا كروس AWD هجينة',expM2Desc:'تهانينا لزبوننا العزيز لاختياره التكنولوجيا الهجينة المتطورة مع مرافقة السيد خالد العلمي.',
-    expM3Title:'لاند كروزر برادو الجديد',expM3Desc:'لحظة تركيب لوحة الترقيم المؤقتة WW وإعداد سيارة لاند كروزر برادو للتسليم.',
+    expM3Title:'لاند كروزر 250 الجديد',expM3Desc:'لحظة تركيب لوحة الترقيم المؤقتة WW وإعداد سيارة لاند كروزر 250 الجديدة كلياً للتسليم.',
     secCarsLabel:'المعرض',secCarsName:'موديلاتنا',secCarsDesc:'ثلاث سيارات تويوتا من أحدث جيل، متوفرة فوراً.',
     catCollapse:'طي الكتالوج',catExpand:'عرض موديلات تويوتا (3)',catBadgeCount:'3 موديلات',
     secSvcLabel:'الخدمات',secSvcName:'كيف يمكننا مساعدتك؟',
@@ -2012,10 +2033,10 @@ const D={
     mbCall:'اتصال',mbBook:'استشارة',mbMaps:'الخريطة',
     fiche:'المواصفات التقنية',book:'طلب موعد واستشارة',
     lblCol:'اللون :',
-    pradoSp:['204 حصان · 2.8 لتر ديزل','أوتوماتيك 6 · 4×4','7.9 لتر / 100 كم'],
+    pradoSp:['204 حصان · 2.8 لتر ديزل توربو','أوتوماتيك 8 · دفع رباعي دائم','8.1 لتر / 100 كم'],
     corollaSp:['140 حصان · 1.8 لتر هجين','ناقل e-CVT أوتوماتيكي','4.1 لتر / 100 كم'],
     crossSp:['197 حصان · 2.0 لتر AWD-i','دفع كلي ذكي e-CVT','4.8 لتر / 100 كم'],
-    ftabPrado:'لاند كروزر برادو',ftabCorolla:'كورولا سيدان',ftabCross:'كورولا كروس',
+    ftabPrado:'لاند كروزر 250',ftabCorolla:'كورولا سيدان',ftabCross:'كورولا كروس',
     finHintPrado:'ابتداءً من 9,850 درهم / شهر · احسب التمويل ←',
     finHintCorolla:'ابتداءً من 3,744 درهم / شهر · احسب التمويل ←',
     finHintCross:'ابتداءً من 5,639 درهم / شهر · احسب التمويل ←',
@@ -2033,7 +2054,7 @@ const D={
     bkTitle:'حجز موعد استشارة وتواصل',bkSub:'تأكيد فوري عبر واتساب',
     bkLblType:'نوع الموعد',rb1:'استشارة وشراء سيارة',rb2:'عرض سعر وتمويل',
     bkLblCar:'الموديل المطلوب',
-    bkCarOpt1:'تويوتا لاند كروزر برادو (204 حصان · 4×4)',
+    bkCarOpt1:'تويوتا لاند كروزر 250 (204 حصان · 4×4 أوتوماتيك 8)',
     bkCarOpt2:'تويوتا كورولا سيدان هجين (140 حصان)',
     bkCarOpt3:'تويوتا كورولا كروس AWD هجين (197 حصان)',
     bkLblDate:'التاريخ',bkLblTime:'الوقت',
@@ -2131,6 +2152,33 @@ function formatPrice(val, l){
   return `${num} DH <small>TTC</small>`;
 }
 
+/* ─── Studio Lighting & Dynamic Ambient Floor Reflection (Idee 1) ─── */
+function applyStudioLighting(key, hex){
+  const stageEl = document.getElementById(`stage-${key}`) || document.querySelector(`.sc-${key} .sc-stage`);
+  if(!stageEl) return;
+  stageEl.style.setProperty('--stage-glow', `${hex}55`);
+  stageEl.style.setProperty('--studio-light', `${hex}1F`);
+  stageEl.style.setProperty('--stage-rim', `${hex}3D`);
+}
+
+function initStudioTilt(){
+  document.querySelectorAll('.sc-stage').forEach(stage => {
+    const img = stage.querySelector('img');
+    if(!img) return;
+    
+    stage.addEventListener('mousemove', (e) => {
+      const rect = stage.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      img.style.transform = `perspective(900px) rotateY(${x * 12}deg) rotateX(${-y * 8}deg) scale(1.03) translateY(-4px)`;
+    });
+    
+    stage.addEventListener('mouseleave', () => {
+      img.style.transform = 'perspective(900px) rotateY(0deg) rotateX(0deg) scale(1) translateY(0)';
+    });
+  });
+}
+
 /* ─── Color Picker Logic ─── */
 function selectCarColor(carId, colorIndex){
   const car = CARS.find(c => c.id === carId);
@@ -2145,6 +2193,9 @@ function selectCarColor(carId, colorIndex){
   
   const chips = document.querySelectorAll(`#chips-${key} .c-chip`);
   chips.forEach((c, idx) => c.classList.toggle('active', idx === colorIndex));
+  
+  // Apply Studio Light & Ambient Floor Reflection matching color
+  applyStudioLighting(key, col.hex);
   
   const imgEl = document.getElementById(`img-${key}`);
   if(imgEl && col.img){
@@ -2176,6 +2227,8 @@ function renderColorChips(){
     if(colNameEl) colNameEl.textContent = isAr ? activeCol.nameAr : activeCol.name;
     const colLblEl = document.getElementById(`lbl-col-${key}`);
     if(colLblEl) colLblEl.textContent = D[lang].lblCol;
+    
+    applyStudioLighting(key, activeCol.hex);
     
     const imgEl = document.getElementById(`img-${key}`);
     if(imgEl && activeCol.img){
@@ -2377,7 +2430,7 @@ function setLang(l){
   // Car names, categories & localized prices
   const isAr=l==='ar';
   s('prado-cat',isAr?CARS[0].catAr:CARS[0].cat);
-  s('prado-name',isAr?CARS[0].nameAr:'Land Cruiser Prado');
+  s('prado-name',isAr?CARS[0].nameAr:'Land Cruiser 250');
   s('prado-price',formatPrice(CARS[0].price,l));
   
   s('corolla-cat',isAr?CARS[1].catAr:CARS[1].cat);
@@ -2531,29 +2584,29 @@ const COMPARISON_MODELS = [
   },
   {
     id: 'prado',
-    name: 'Land Cruiser Prado 2024',
-    nameAr: 'تويوتا لاند كروزر برادو 2024',
+    name: 'Land Cruiser 250',
+    nameAr: 'تويوتا لاند كروزر 250',
     cat: 'SUV 4×4 Franchisseur Luxe',
     catAr: 'دفع رباعي فاخر للطرق الوعرة',
     price: 645000,
     powerNum: 204,
     power: '204 ch · 500 Nm Couple',
     powerAr: '204 حصان · 500 نيوتن.متر',
-    motor: '2.8L Turbo Diesel D-4D',
-    motorAr: '2.8 لتر توربو ديزل D-4D',
-    trans: 'Boîte Auto 6 + 4×4 Permanent Torsen',
-    transAr: 'أوتوماتيك 6 + دفع رباعي دائم',
-    consNum: 7.9,
-    cons: '7.9 L / 100km',
-    consAr: '7.9 لتر / 100 كم',
-    accel: '9.9 s (0–100 km/h)',
-    accelAr: '9.9 ثوانٍ',
-    trunk: '620 Litres',
-    trunkAr: '620 لتر',
+    motor: '2.8L Turbo Diesel D-4D (500 Nm)',
+    motorAr: '2.8 لتر توربو ديزل D-4D (500 نيوتن.متر)',
+    trans: 'Boîte Auto Direct Shift 8 + 4×4 Permanent',
+    transAr: 'أوتوماتيك Direct Shift 8 + دفع رباعي دائم',
+    consNum: 8.1,
+    cons: '8.1 L / 100km',
+    consAr: '8.1 لتر / 100 كم',
+    accel: '9.8 s (0–100 km/h)',
+    accelAr: '9.8 ثوانٍ',
+    trunk: '640 Litres',
+    trunkAr: '640 لتر',
     warranty: '3 ans / 100 000 km',
     warrantyAr: '3 سنوات / 100,000 كم',
-    ideal: 'Prestige, tout-terrain extrême & voyages longue distance',
-    idealAr: 'الفخامة والهيبة، الطرق الوعرة الصعبة والرحلات الطويلة',
+    ideal: 'Prestige, tout-terrain extrême, remorquage 3.5T & grands voyages',
+    idealAr: 'الفخامة والهيبة، الطرق الوعرة القاسية، سحب 3.5 طن والرحلات الطويلة',
     img: 'prado_Farbe_F5F6F8.webp'
   }
 ];
@@ -3233,6 +3286,7 @@ async function loadConfigAndInit(){
     }
   }
   renderColorChips();
+  initStudioTilt();
   updateFinCalc();
   onEcoCarChange(ecoState.targetCar);
   initCompareSelects();
