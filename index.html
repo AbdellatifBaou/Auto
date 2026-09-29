@@ -1896,54 +1896,6 @@ body.ar .fselect{
 
 
 
-<!-- ═══ MODAL 360 COCKPIT TOUR ═══ -->
-<div class="modal-bg" id="modal-360-tour">
-  <div class="modal-box" style="max-width:680px">
-    <div class="modal-head">
-      <div>
-        <div class="mh-title" id="tour-title">Visite Virtuelle 360° du Cockpit</div>
-        <div class="mh-sub" id="tour-sub">Immersion intérieure · Technologies & Finitions</div>
-      </div>
-      <button class="modal-x" onclick="closeModal('modal-360-tour')">✕</button>
-    </div>
-    <div class="modal-body">
-      <div class="fin-car-card">
-        <img src="land_cruiser_Farbe_F5F6F8.webp" class="fin-car-img" id="tour-car-img" alt="Cockpit">
-        <div class="fin-car-info">
-          <div class="fin-car-cat" id="tour-car-cat">Toyota Land Cruiser 250</div>
-          <div class="fin-car-name" id="tour-car-title">Double Écran 12.3" & Multi-Terrain Monitor</div>
-          <div style="font-size:12px;color:var(--text2);margin-top:3px" id="tour-car-desc">Cockpit de haute précision avec affichage tête haute, sellerie cuir ventilé et commandes 4×4 ergonomiques.</div>
-        </div>
-      </div>
-
-      <div class="fin-car-tabs">
-        <button class="fin-tab active" onclick="switchTourModalCar('prado')" id="ttab-prado">Land Cruiser 250</button>
-        <button class="fin-tab" onclick="switchTourModalCar('corolla')" id="ttab-corolla">Corolla Berline</button>
-        <button class="fin-tab" onclick="switchTourModalCar('corolla-cross')" id="ttab-cross">Corolla Cross AWD</button>
-      </div>
-
-      <!-- Feature Highlight Points -->
-      <div style="background:var(--surface2);border:1px solid var(--border2);border-radius:16px;padding:16px;margin-bottom:16px" id="tour-highlights-box">
-        <div style="font-size:11px;font-weight:800;text-transform:uppercase;color:var(--red);letter-spacing:.06em;margin-bottom:10px" id="tour-tech-label">Technologies Intérieures Clés :</div>
-        <div id="tour-tech-list" style="display:flex;flex-direction:column;gap:8px;font-size:12px;color:var(--text2)">
-          <div>🖥️ <strong>Écran Tactile 12.3" HD :</strong> Apple CarPlay™ sans fil, Android Auto™ et navigation connectée.</div>
-          <div>🛡️ <strong>Toyota Safety Sense 3.0 :</strong> Régulateur adaptatif et maintien dans la voie.</div>
-          <div>🕹️ <strong>Sélecteur 4×4 & Modes de conduite :</strong> Multi-Terrain Select, Crawl Control et blocages.</div>
-        </div>
-      </div>
-
-      <div style="display:flex;gap:10px;flex-wrap:wrap">
-        <a href="https://www.toyota.com/landcruiser/" target="_blank" rel="noopener noreferrer" class="btn btn-glass" style="flex:1;font-size:12px;padding:12px;justify-content:center;gap:6px" id="tour-link-btn">
-          <span id="tour-link-text">🌐 Visite 3D Officielle Toyota.com ↗</span>
-        </a>
-        <button onclick="bookCarFromTourModal()" class="btn btn-red" style="flex:1.2;font-size:12px;padding:12px;justify-content:center" id="tour-book-btn">
-          Prendre RDV pour Essai Réel
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!-- Detail -->
 <div class="modal-bg" id="modal-detail">
   <div class="modal-box" style="max-width:640px">
@@ -2413,7 +2365,7 @@ const D={
     faqQ5:'Quels sont les délais de livraison pour un véhicule neuf ?',
     faqA5:'Nous disposons de plusieurs modèles immédiatement disponibles en stock showroom à Meknès. Pour les configurations et coloris spécifiques sur commande, la livraison est effectuée dans les meilleurs délais avec suivi personnalisé par nos conseillers.',
     svcTour:'Visite 360° Cockpit',svcTourSub:'Immersion intérieure & écrans',
-    tourHint:'Visite 360° du Cockpit →',tourTitle:'Visite Virtuelle 360° du Cockpit',tourSub:'Immersion intérieure · Technologies & Finitions',
+    tourHint:'Visite 360° Officielle Toyota ↗',tourTitle:'Visite Virtuelle 360° du Cockpit',tourSub:'Immersion intérieure · Technologies & Finitions',
     tourTechLabel:'Technologies Intérieures Clés :',tourLinkText:'🌐 Visite 3D Officielle Toyota.com ↗',tourBookBtn:'Prendre RDV pour Essai Réel',
     svcSav:'Atelier SAV & Entretien',svcSavSub:'Vidange, Diagnostic, Pneus & Pièces',
     savTitle:'Atelier SAV & Entretien Officiel',savSub:'Techniciens certifiés Toyota · Pièces d\'origine constructeur',
@@ -2510,7 +2462,7 @@ const D={
     faqQ5:'ما هي مواعيد وآجال تسليم السيارات الجديدة؟',
     faqA5:'نوفر العديد من الموديلات الجاهزة للتسليم الفوري من المخزون وصالة العرض بمكناس. بالنسبة للطلبات المخصصة ذات الألوان والتجهيزات المحددة، يتم التسليم في أسرع وقت مع متابعة شخصية من مستشارينا.',
     svcTour:'جولة 360° داخل السيارة',svcTourSub:'استكشف القمرة والشاشات',
-    tourHint:'جولة 360° في المقصورة ←',tourTitle:'جولة افتراضية 360° في المقصورة',tourSub:'استكشاف التصميم الداخلي · التكنولوجيا والتجهيزات',
+    tourHint:'جولة 360° الرسمية تويوتا ↗',tourTitle:'جولة افتراضية 360° في المقصورة',tourSub:'استكشاف التصميم الداخلي · التكنولوجيا والتجهيزات',
     tourTechLabel:'أبرز التقنيات والتجهيزات الداخلية :',tourLinkText:'🌐 جولة 3D الرسمية على Toyota.com ↗',tourBookBtn:'حجز موعد لتجربة القيادة الواقعية',
     svcSav:'ورشة الصيانة وخدمة ما بعد البيع',svcSavSub:'تغيير الزيوت، الفحص، العجلات وقطع الغيار',
     savTitle:'ورشة الصيانة وخدمة ما بعد البيع الرسمية',savSub:'تقنيون معتمدون من تويوتا · قطع غيار أصلية ومضمونة',
@@ -2849,15 +2801,7 @@ function setLang(l){
   s('tour-hint-corolla',d.tourHint);
   s('tour-hint-cross',d.tourHint);
 
-  // 360 Tour Modal Strings
-  s('tour-title',d.tourTitle);
-  s('tour-sub',d.tourSub);
-  s('ttab-prado',d.ftabPrado);
-  s('ttab-corolla',d.ftabCorolla);
-  s('ttab-cross',d.ftabCross);
-  s('tour-tech-label',d.tourTechLabel);
-  s('tour-link-text',d.tourLinkText);
-  s('tour-book-btn',d.tourBookBtn);
+
 
   // Eco Calculator Strings
   s('eco-title',d.ecoTitle);s('eco-sub',d.ecoSub);
@@ -3765,139 +3709,17 @@ function applyConfig(cfg){
 
 
 
-/* ─── 360° Cockpit Virtual Tour ─── */
-const TOUR_DATA = {
-  prado: {
-    name: 'Land Cruiser 250',
-    nameAr: 'تويوتا لاند كروزر 250',
-    cat: 'SUV 4×4 Franchisseur Luxe',
-    catAr: 'دفع رباعي فاخر للطرق الوعرة',
-    title: 'Double Écran 12.3" & Multi-Terrain Monitor',
-    titleAr: 'شاشتان رقميتان 12.3 بوصة ونظام مراقبة التضاريس',
-    desc: 'Cockpit de haute précision avec affichage tête haute, sellerie cuir ventilé et commandes 4×4 ergonomiques.',
-    descAr: 'مقصورة قيادة فائقة الفخامة مع شاشات رقمية عالية الدقة، مقاعد جلدية مهواة وأزرار تحكم دفع رباعي متطورة.',
-    img: 'land_cruiser_Farbe_F5F6F8.webp',
-    link: 'https://www.toyota.com/landcruiser/',
-    tech: {
-      fr: [
-        '🖥️ <strong>Double Écran Digital 12.3" :</strong> Combiné d’instrumentation numérique personnalisable & écran central tactile HD.',
-        '🕹️ <strong>Multi-Terrain Select & Crawl Control :</strong> Molette de sélection de terrain avec caméras sous-châssis 360° PVM.',
-        '🪑 <strong>Sellerie Cuir Premium Ventilé :</strong> Sièges électriques à mémoire, chauffants et ventilés avec maintien dynamique.',
-        '🛡️ <strong>Toyota Safety Sense 3.0 :</strong> Détection piétons de nuit, franchissement de ligne et régulateur adaptatif radar.'
-      ],
-      ar: [
-        '🖥️ <strong>شاشتان رقميتان 12.3 بوصة :</strong> لوحة عدادات رقمية مخصصة وشاشة ترفيه مركزية عالية الدقة بنظام آبل كاربلاي وأندرويد أوتو.',
-        '🕹️ <strong>نظام Multi-Terrain Select والزحف :</strong> مفتاح دائري لاختيار نمط التضاريس مع كاميرات محيطية 360 درجة لمشاهدة أسفل الهيكل.',
-        '🪑 <strong>جلد فاخر مع تبريد وتسخين :</strong> مقاعد كهربائية بذاكرة وتبريد وتدفئة متكاملة لراحة مطلقة في المسافات الطويلة.',
-        '🛡️ <strong>نظام السلامة النشط Toyota Safety Sense 3.0 :</strong> فرملة طوارئ تلقائية، رادار تثبيت السرعة ومساعد البقاء في المسار.'
-      ]
-    }
-  },
-  corolla: {
-    name: 'Corolla Berline Hybride',
-    nameAr: 'تويوتا كورولا سيدان هجين',
-    cat: 'Berline Hybride 140 ch',
-    catAr: 'سيدان هجينة 140 حصان',
-    title: 'Cockpit Connecté 12.3" & Climatisation Nanoe-X',
-    titleAr: 'مقصورة رقمية 12.3 بوصة ومكيف ذكي Nanoe-X',
-    desc: 'Ergonomie raffinée, écran tactile nouvelle génération fluide, insonorisation feutrée et confort de conduite silencieux 100% électrique.',
-    descAr: 'تصميم داخلي عصري وأنيق، شاشة لمس سريعة الاستجابة، عزل صوتي متطور وقيادة هادئة بنظام الهايبرد.',
-    img: 'corolla_Farbe_F0F1F5.webp',
-    link: 'https://www.toyota.com/corolla/',
-    tech: {
-      fr: [
-        '📱 <strong>Écran Tactile Multimédia HD :</strong> Navigation cloud connectée, Apple CarPlay sans fil et commande vocale "Hey Toyota".',
-        '🌿 <strong>Purificateur d’Air Nanoe-X™ :</strong> Climatisation bi-zone intelligente neutralisant les particules et odeurs.',
-        '🔇 <strong>Acoustique Insonorisée & Silence Hybride :</strong> Démarrage et roulage urbain dans un silence absolu en mode EV.',
-        '🛡️ <strong>Aide au Maintien dans la Voie (LTA) :</strong> Guidage actif et freinage pré-collision proactif.'
-      ],
-      ar: [
-        '📱 <strong>شاشة وسائط ذكية HD :</strong> نظام ملاحة متصل، آبل كاربلاي وأندرويد أوتو وأوامر صوتية ذكية "Hey Toyota".',
-        '🌿 <strong>منقي الهواء المتطور Nanoe-X™ :</strong> تكييف هواء أوتوماتيكي مزدوج لتنقية الهواء من الجسيمات والروائح.',
-        '🔇 <strong>هدوء استثنائي وعزل صوتي :</strong> قيادة صامتة وسلسة بالكامل في المدينة بالاعتماد على المحرك الكهربائي.',
-        '🛡️ <strong>نظام التوجيه والمحافظة على المسار :</strong> توجيه نشط ومساعد تجنب الاصطدام لحماية كاملة.'
-      ]
-    }
-  },
-  'corolla-cross': {
-    name: 'Corolla Cross AWD Hybride',
-    nameAr: 'تويوتا كورولا كروس AWD هجين',
-    cat: 'SUV Crossover AWD 197 ch',
-    catAr: 'كروس أوفر دفع رباعي 197 حصان',
-    title: 'Visite 360° Cockpit & Toit Panoramique Lumineux',
-    titleAr: 'جولة 360 درجة في المقصورة وسقف بانورامي رحب',
-    desc: 'Position de conduite surélevée, habitabilité généreuse pour toute la famille, toit vitré panoramique et connectivité complète.',
-    descAr: 'وضعية قيادة مرتفعة ومريحة، مساحة داخلية واسعة للعائلة، سقف بانورامي زجاجي وشواحن لاسلكية سريعة.',
-    img: 'corolla-cross_Farbe_7D838A.webp',
-    link: 'https://www.toyota.com/corollacross/interior-tour/',
-    tech: {
-      fr: [
-        '🌐 <strong>Visite 360° Interactive Officielle :</strong> Explorez chaque angle du cockpit, de la console et des places arrière.',
-        '☀️ <strong>Toit Panoramique & Habitabilité SUV :</strong> Luminosité exceptionnelle, coffre spacieux et banquette rabattable 60/40.',
-        '⚡ <strong>Cockpit Numérique & Chargeur Sans Fil :</strong> Tableau de bord haute résolution, 4 ports USB-C et recharge par induction.',
-        '🛡️ <strong>Surveillance des Angles Morts (BSM) & RCTA :</strong> Détection des véhicules en approche lors des manœuvres.'
-      ],
-      ar: [
-        '🌐 <strong>جولة 360° تفاعلية رسمية :</strong> استكشف المقصورة بجميع الزوايا ثلاثية الأبعاد (3D Tour).',
-        '☀️ <strong>سقف بانورامي ومساحة رحبة :</strong> إضاءة طبيعية ومساحة ركوب مريحة جداً لجميع أفراد الأسرة.',
-        '⚡ <strong>لوحة عدادات رقمية وشاحن لاسلكي :</strong> منافذ شحن USB-C سريعة ولوحة قيادة عالية الوضوح.',
-        '🛡️ <strong>رصد النقطة العمياء وتنبيه حركة المرور :</strong> حساسات متقدمة لحماية قصوى أثناء القيادة والرجوع للخلف.'
-      ]
-    }
-  }
+/* ─── 360° Cockpit Direct Tour ─── */
+const TOYOTA_360_LINKS = {
+  'prado': 'https://www.toyota.com/landcruiser/',
+  'corolla': 'https://www.toyota.com/corolla/',
+  'corolla-cross': 'https://www.toyota.com/corollacross/interior-tour/'
 };
 
-let currentTourCarId = 'prado';
-
-function switchTourModalCar(carId){
-  currentTourCarId = carId;
-  const isAr = lang === 'ar';
-  const data = TOUR_DATA[carId] || TOUR_DATA.prado;
-  
-  // Tab states
-  ['prado', 'corolla', 'cross'].forEach(k => {
-    const tabEl = document.getElementById(`ttab-${k}`);
-    if(tabEl){
-      const isMatch = (k === carId) || (k === 'cross' && carId === 'corolla-cross');
-      tabEl.classList.toggle('active', isMatch);
-    }
-  });
-
-  const imgEl = document.getElementById('tour-car-img');
-  if(imgEl) imgEl.src = data.img;
-  
-  const catEl = document.getElementById('tour-car-cat');
-  if(catEl) catEl.textContent = isAr ? data.catAr : data.cat;
-
-  const titleEl = document.getElementById('tour-car-title');
-  if(titleEl) titleEl.textContent = isAr ? data.titleAr : data.title;
-
-  const descEl = document.getElementById('tour-car-desc');
-  if(descEl) descEl.textContent = isAr ? data.descAr : data.desc;
-
-  const listEl = document.getElementById('tour-tech-list');
-  if(listEl){
-    const techItems = isAr ? data.tech.ar : data.tech.fr;
-    listEl.innerHTML = techItems.map(item => `<div>${item}</div>`).join('');
-  }
-
-  const linkEl = document.getElementById('tour-link-btn');
-  if(linkEl){
-    linkEl.href = data.link;
-  }
-}
-
 function openTour360(carId){
-  const targetId = (carId === 'corolla' || carId === 'corolla-cross') ? carId : 'prado';
-  switchTourModalCar(targetId);
-  openModal('modal-360-tour');
-}
-
-function bookCarFromTourModal(){
-  closeModal('modal-360-tour');
-  const carName = (currentTourCarId === 'corolla') ? 'Toyota Corolla Berline' : 
-                  (currentTourCarId === 'corolla-cross') ? 'Toyota Corolla Cross AWD' : 'Toyota Land Cruiser 250';
-  bookCar(carName);
+  const target = carId || 'corolla-cross';
+  const url = TOYOTA_360_LINKS[target] || 'https://www.toyota.com/corollacross/interior-tour/';
+  window.open(url, '_blank', 'noopener,noreferrer');
 }
 
 /* ─── FAQ Accordion ─── */
