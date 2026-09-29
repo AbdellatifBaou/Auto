@@ -1268,6 +1268,146 @@ body.ar .fselect{
 ::-webkit-scrollbar{width:4px}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:99px}
+
+/* ═══ TOYOTA HYBRID 5TH GEN VISUALIZER SECTION ═══ */
+.hybrid-sec{padding:60px 0 80px;position:relative;background:radial-gradient(ellipse 80% 50% at 50% 0%, rgba(34,211,238,.04) 0%, transparent 70%)}
+.hybrid-header{text-align:center;margin-bottom:36px}
+.hybrid-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:99px;font-size:11px;font-weight:700;background:rgba(34,211,238,.1);border:1px solid rgba(34,211,238,.25);color:var(--cyan);margin-bottom:12px;letter-spacing:.5px;text-transform:uppercase}
+
+.hybrid-tabs-wrap{display:grid;grid-template-columns:repeat(4, 1fr);gap:10px;margin-bottom:24px}
+@media(max-width:860px){.hybrid-tabs-wrap{grid-template-columns:repeat(2, 1fr)}}
+@media(max-width:480px){.hybrid-tabs-wrap{grid-template-columns:1fr}}
+
+.htab-btn{
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  padding:14px 16px;text-align:left;cursor:pointer;transition:all .3s cubic-bezier(.16,1,.3,1);
+  display:flex;align-items:center;gap:12px;position:relative;overflow:hidden;
+}
+body.ar .htab-btn{text-align:right}
+.htab-btn:hover{background:var(--surface2);border-color:var(--border2);transform:translateY(-2px)}
+.htab-btn.active{
+  background:linear-gradient(135deg, rgba(34,211,238,.12) 0%, rgba(17,17,24,.95) 100%);
+  border-color:var(--cyan);box-shadow:0 8px 24px rgba(34,211,238,.15);
+}
+.htab-btn.active::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg, var(--cyan), var(--emerald));
+}
+.htab-icon{
+  width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.05);
+  display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;
+  border:1px solid rgba(255,255,255,.06);transition:all .3s;
+}
+.htab-btn.active .htab-icon{background:rgba(34,211,238,.2);border-color:var(--cyan);transform:scale(1.08)}
+.htab-num{font-size:9.5px;font-weight:800;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
+.htab-btn.active .htab-num{color:var(--cyan)}
+.htab-title{font-size:12.5px;font-weight:700;color:var(--text);line-height:1.3}
+
+/* Visualizer Glass Card */
+.hybrid-viz-card{
+  background:var(--surface);border:1px solid var(--border2);border-radius:24px;
+  padding:28px;box-shadow:0 16px 48px rgba(0,0,0,.4);position:relative;overflow:hidden;
+}
+@media(min-width:960px){
+  .hybrid-viz-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:32px;align-items:center}
+}
+@media(max-width:959px){
+  .hybrid-viz-grid{display:flex;flex-direction:column;gap:28px}
+}
+
+/* SVG Interactive Energy Architecture */
+.hybrid-diagram-box{
+  background:#0B0B10;border:1px solid rgba(255,255,255,.06);border-radius:18px;
+  padding:20px;position:relative;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;min-height:360px;overflow:hidden;
+}
+.diagram-svg{width:100%;max-width:440px;height:auto;display:block}
+
+/* Energy Flow Keyframes */
+@keyframes flowForward{
+  0%{stroke-dashoffset:40}
+  100%{stroke-dashoffset:0}
+}
+@keyframes flowReverse{
+  0%{stroke-dashoffset:0}
+  100%{stroke-dashoffset:40}
+}
+@keyframes pulseGlow{
+  0%,100%{filter:drop-shadow(0 0 4px currentColor);opacity:.85}
+  50%{filter:drop-shadow(0 0 12px currentColor);opacity:1}
+}
+.flow-line{stroke-dasharray:6, 6;stroke-linecap:round;transition:all .5s ease}
+.flow-line.flow-active-cyan{stroke:var(--cyan);animation:flowForward 1.2s linear infinite;stroke-width:3}
+.flow-line.flow-active-gold{stroke:var(--gold);animation:flowForward 1.4s linear infinite;stroke-width:3}
+.flow-line.flow-active-emerald{stroke:var(--emerald);animation:flowReverse 1.2s linear infinite;stroke-width:3}
+.flow-line.flow-inactive{stroke:rgba(255,255,255,.1);stroke-dasharray:none;stroke-width:1.5}
+
+.diag-node{transition:all .4s ease;cursor:pointer}
+.diag-node.active .node-bg{stroke-width:2;filter:drop-shadow(0 0 10px rgba(34,211,238,.35))}
+.diag-node.active-gold .node-bg{stroke:var(--gold);stroke-width:2;filter:drop-shadow(0 0 10px rgba(245,185,66,.4))}
+.diag-node.active-emerald .node-bg{stroke:var(--emerald);stroke-width:2;filter:drop-shadow(0 0 10px rgba(52,211,153,.4))}
+
+/* Status HUD Panel */
+.hybrid-hud-panel{display:flex;flex-direction:column;gap:18px}
+.hud-phase-header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.hud-badge{
+  font-size:11px;font-weight:800;padding:5px 12px;border-radius:99px;
+  background:rgba(52,211,153,.12);color:var(--emerald);border:1px solid rgba(52,211,153,.25);
+}
+.hud-phase-title{font-size:20px;font-weight:800;color:#fff;line-height:1.3;margin-top:6px}
+.hud-phase-desc{font-size:13px;color:var(--text2);line-height:1.6}
+
+/* Live HUD Metrics Grid */
+.hud-metrics-grid{
+  display:grid;grid-template-columns:repeat(2, 1fr);gap:12px;margin:8px 0;
+}
+@media(max-width:440px){.hud-metrics-grid{grid-template-columns:1fr}}
+.hud-metric-card{
+  background:var(--surface2);border:1px solid var(--border);border-radius:14px;
+  padding:12px 14px;display:flex;flex-direction:column;gap:4px;
+}
+.hud-m-label{font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.4px}
+.hud-m-val{font-size:14.5px;font-weight:800;color:var(--text);display:flex;align-items:center;gap:6px}
+
+/* Autoplay and Action Bar */
+.hybrid-controls-row{
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
+  margin-top:16px;padding-top:18px;border-top:1px solid var(--border);flex-wrap:wrap;
+}
+.hybrid-autoplay-btn{
+  display:inline-flex;align-items:center;gap:8px;font-size:11.5px;font-weight:700;
+  color:var(--text2);background:transparent;border:none;cursor:pointer;padding:6px 10px;
+  border-radius:8px;transition:all .2s;
+}
+.hybrid-autoplay-btn:hover{color:#fff;background:var(--surface2)}
+.hybrid-progress-track{
+  flex:1;max-width:140px;height:4px;background:rgba(255,255,255,.08);
+  border-radius:99px;overflow:hidden;position:relative;
+}
+.hybrid-progress-bar{
+  height:100%;width:0%;background:linear-gradient(90deg, var(--cyan), var(--emerald));
+  border-radius:99px;transition:width .1s linear;
+}
+
+/* 4 Pillars Benefit Cards */
+.hybrid-pillars-grid{
+  display:grid;grid-template-columns:repeat(4, 1fr);gap:14px;margin-top:28px;
+}
+@media(max-width:960px){.hybrid-pillars-grid{grid-template-columns:repeat(2, 1fr)}}
+@media(max-width:540px){.hybrid-pillars-grid{grid-template-columns:1fr}}
+
+.hp-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:16px;
+  padding:18px;transition:all .3s ease;display:flex;flex-direction:column;gap:8px;
+}
+.hp-card:hover{border-color:var(--border2);transform:translateY(-3px);background:var(--surface2)}
+.hp-icon{
+  width:36px;height:36px;border-radius:10px;background:rgba(34,211,238,.08);
+  color:var(--cyan);display:flex;align-items:center;justify-content:center;font-size:18px;
+}
+.hp-title{font-size:13.5px;font-weight:800;color:#fff}
+.hp-desc{font-size:11.5px;color:var(--text2);line-height:1.5}
+
 </style>
 </head>
 <body>
@@ -1563,6 +1703,215 @@ body.ar .fselect{
   </div>
 </section>
 
+<!-- ═══ TOYOTA HYBRID 5TH GEN INTERACTIVE ANIMATION & EXPLAINER ═══ -->
+<section class="hybrid-sec" id="hybrid-tech">
+  <div class="container">
+    <div class="hybrid-header reveal">
+      <div class="hybrid-badge" id="hyb-badge">⚡ TECHNOLOGIE & INNOVATION</div>
+      <div class="sec-title" id="hyb-title">Comment Fonctionne l'Hybride Toyota 5e Génération ?</div>
+      <p class="sec-desc" id="hyb-desc">Auto-rechargeable sans jamais brancher · 4 phases intelligentes de gestion de l'énergie pour un silence absolu et jusqu'à 50% d'économie de carburant.</p>
+    </div>
+
+    <!-- Phase Selector Tabs (4 Buttons) -->
+    <div class="hybrid-tabs-wrap reveal reveal-delay-1">
+      <button type="button" class="htab-btn active" id="htab-0" onclick="selectHybridPhase(0, true)">
+        <div class="htab-icon">🌱</div>
+        <div>
+          <div class="htab-num" id="htab-num-0">Phase 1</div>
+          <div class="htab-title" id="htab-t-0">Démarrage 100% EV</div>
+        </div>
+      </button>
+
+      <button type="button" class="htab-btn" id="htab-1" onclick="selectHybridPhase(1, true)">
+        <div class="htab-icon">⚡</div>
+        <div>
+          <div class="htab-num" id="htab-num-1">Phase 2</div>
+          <div class="htab-title" id="htab-t-1">Accélération Synergie</div>
+        </div>
+      </button>
+
+      <button type="button" class="htab-btn" id="htab-2" onclick="selectHybridPhase(2, true)">
+        <div class="htab-icon">🛣️</div>
+        <div>
+          <div class="htab-num" id="htab-num-2">Phase 3</div>
+          <div class="htab-title" id="htab-t-2">Vitesse de Croisière</div>
+        </div>
+      </button>
+
+      <button type="button" class="htab-btn" id="htab-3" onclick="selectHybridPhase(3, true)">
+        <div class="htab-icon">🔄</div>
+        <div>
+          <div class="htab-num" id="htab-num-3">Phase 4</div>
+          <div class="htab-title" id="htab-t-3">Freinage Régénératif</div>
+        </div>
+      </button>
+    </div>
+
+    <!-- Main Visualizer Box -->
+    <div class="hybrid-viz-card reveal reveal-delay-2">
+      <div class="hybrid-viz-grid">
+        
+        <!-- Left: Interactive High-Tech SVG Schematic -->
+        <div class="hybrid-diagram-box">
+          <svg viewBox="0 0 420 320" class="diagram-svg" id="hybrid-svg">
+            <defs>
+              <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#22D3EE" stop-opacity="0.8"/>
+                <stop offset="100%" stop-color="#0284C7" stop-opacity="0.3"/>
+              </linearGradient>
+              <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#F5B942" stop-opacity="0.8"/>
+                <stop offset="100%" stop-color="#D97706" stop-opacity="0.3"/>
+              </linearGradient>
+              <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#34D399" stop-opacity="0.8"/>
+                <stop offset="100%" stop-color="#059669" stop-opacity="0.3"/>
+              </linearGradient>
+            </defs>
+
+            <!-- Flow Connecting Lines -->
+            <!-- 1. Engine to Transaxle/Motor -->
+            <path id="flow-eng-motor" class="flow-line flow-inactive" d="M120,95 L210,135" />
+            <!-- 2. Battery to Motor -->
+            <path id="flow-bat-motor" class="flow-line flow-active-cyan" d="M300,95 L210,135" />
+            <!-- 3. Motor to Wheels -->
+            <path id="flow-motor-wheels" class="flow-line flow-active-cyan" d="M210,165 L210,230" />
+            <!-- 4. Wheels to Rear / Front Axle Distribution -->
+            <path id="flow-wheels-axle" class="flow-line flow-active-cyan" d="M140,245 L280,245" />
+
+            <!-- NODE 1: Moteur Thermique Essence Dynamic Force (Top Left) -->
+            <g class="diag-node" id="node-engine" onclick="selectHybridPhase(1, true)">
+              <rect x="50" y="55" width="110" height="65" rx="12" class="node-bg" fill="#181822" stroke="rgba(255,255,255,0.12)" stroke-width="1.5" />
+              <circle cx="75" cy="87" r="14" fill="rgba(245,185,66,0.15)" />
+              <text x="75" y="92" font-size="14" text-anchor="middle" fill="#F5B942">⛽</text>
+              <text x="100" y="80" font-size="11" font-weight="700" fill="#fff" font-family="'Montserrat', sans-serif" id="svg-lbl-eng">Moteur Essence</text>
+              <text x="100" y="96" font-size="9" font-weight="600" fill="#7B7B96" font-family="'Montserrat', sans-serif" id="svg-stat-eng">Éteint (0L/100)</text>
+            </g>
+
+            <!-- NODE 2: Batterie Lithium-Ion Hybride (Top Right) -->
+            <g class="diag-node active" id="node-battery" onclick="selectHybridPhase(0, true)">
+              <rect x="260" y="55" width="110" height="65" rx="12" class="node-bg" fill="#181822" stroke="#22D3EE" stroke-width="1.5" />
+              <circle cx="285" cy="87" r="14" fill="rgba(34,211,238,0.15)" />
+              <text x="285" y="92" font-size="14" text-anchor="middle" fill="#22D3EE">🔋</text>
+              <text x="310" y="80" font-size="11" font-weight="700" fill="#fff" font-family="'Montserrat', sans-serif" id="svg-lbl-bat">Batterie Hybride</text>
+              <text x="310" y="96" font-size="9" font-weight="600" fill="#22D3EE" font-family="'Montserrat', sans-serif" id="svg-stat-bat">Décharge EV</text>
+            </g>
+
+            <!-- NODE 3: Moteur Électrique & Transaxle e-CVT (Center Hub) -->
+            <g class="diag-node active" id="node-motor">
+              <rect x="150" y="130" width="120" height="60" rx="14" class="node-bg" fill="#181822" stroke="#22D3EE" stroke-width="1.5" />
+              <circle cx="175" cy="160" r="14" fill="rgba(34,211,238,0.15)" />
+              <text x="175" y="165" font-size="14" text-anchor="middle" fill="#22D3EE">⚡</text>
+              <text x="198" y="153" font-size="11" font-weight="700" fill="#fff" font-family="'Montserrat', sans-serif" id="svg-lbl-mot">Moteur Électrique</text>
+              <text x="198" y="169" font-size="9" font-weight="600" fill="#22D3EE" font-family="'Montserrat', sans-serif" id="svg-stat-mot">Actif 100% EV</text>
+            </g>
+
+            <!-- NODE 4: Roues Motrices & Transmission (Bottom) -->
+            <g class="diag-node active" id="node-wheels">
+              <!-- Left Wheel -->
+              <rect x="90" y="225" width="45" height="40" rx="8" fill="#111118" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+              <text x="112" y="250" font-size="14" text-anchor="middle">🛞</text>
+              
+              <!-- Axle Tube -->
+              <line x1="135" y1="245" x2="285" y2="245" stroke="#22D3EE" stroke-width="3"/>
+              
+              <!-- Right Wheel -->
+              <rect x="285" y="225" width="45" height="40" rx="8" fill="#111118" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+              <text x="307" y="250" font-size="14" text-anchor="middle">🛞</text>
+
+              <rect x="160" y="230" width="100" height="30" rx="8" class="node-bg" fill="#181822" stroke="rgba(255,255,255,0.15)"/>
+              <text x="210" y="250" font-size="10.5" font-weight="700" text-anchor="middle" fill="#fff" font-family="'Montserrat', sans-serif" id="svg-lbl-whl">Traction Motrice</text>
+            </g>
+          </svg>
+        </div>
+
+        <!-- Right: Real-Time HUD Status & Dynamic Explanations -->
+        <div class="hybrid-hud-panel">
+          <div>
+            <div class="hud-phase-header">
+              <span class="hud-badge" id="hud-badge">🌱 Phase 1 · Démarrage & Ville</span>
+              <span style="font-size:11px;font-weight:700;color:var(--text3)" id="hud-sub-ind">Toyota 5th Gen Hybrid System</span>
+            </div>
+            <div class="hud-phase-title" id="hud-title">100% Électrique EV : Silence Absolu et 0L d'Essence</div>
+            <p class="hud-phase-desc" id="hud-desc">Au démarrage et jusqu'à vitesse modérée en ville, seule la batterie hybride alimente le moteur électrique. Le moteur à essence reste totalement éteint pour une consommation nulle et zéro vibration.</p>
+          </div>
+
+          <!-- Dynamic 4 Gauges -->
+          <div class="hud-metrics-grid">
+            <div class="hud-metric-card">
+              <span class="hud-m-label" id="lbl-m-cons">Consommation Instantanée</span>
+              <span class="hud-m-val" id="val-m-cons" style="color:var(--emerald)">0.0 L / 100km</span>
+            </div>
+            <div class="hud-metric-card">
+              <span class="hud-m-label" id="lbl-m-mode">Mode de Conduite</span>
+              <span class="hud-m-val" id="val-m-mode" style="color:var(--cyan)">100% Électrique EV</span>
+            </div>
+            <div class="hud-metric-card">
+              <span class="hud-m-label" id="lbl-m-eng">Moteur Thermique</span>
+              <span class="hud-m-val" id="val-m-eng" style="color:var(--text2)">Éteint (Repos)</span>
+            </div>
+            <div class="hud-metric-card">
+              <span class="hud-m-label" id="lbl-m-bat">Batterie Hybride</span>
+              <span class="hud-m-val" id="val-m-bat" style="color:var(--cyan)">Alimentation Moteur</span>
+            </div>
+          </div>
+
+          <!-- Direct CTAs -->
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:4px">
+            <button onclick="openEcoForCar('corolla')" class="btn btn-red" style="font-size:12.5px;padding:11px 18px" id="hyb-btn-calc">
+              <svg fill="currentColor" viewBox="0 0 24 24" style="width:14px;height:14px"><path d="M12 2v8"/><path d="M4.93 10.93a10 10 0 1 0 14.14 0"/><path d="M12 18v-4"/><path d="M8 14h8"/></svg>
+              <span id="hyb-btn-calc-txt">Calculer Mes Économies en DH</span>
+            </button>
+            <button onclick="openModal('modal-booking')" class="btn btn-glass" style="font-size:12.5px;padding:11px 18px" id="hyb-btn-book">
+              <span id="hyb-btn-book-txt">Réserver un Essai Hybride</span>
+            </button>
+          </div>
+
+          <!-- Autoplay Bar & Manual Controls -->
+          <div class="hybrid-controls-row">
+            <button type="button" class="hybrid-autoplay-btn" onclick="toggleHybridAutoplay()" id="btn-hyb-play">
+              <span id="hyb-play-icon">⏸️</span>
+              <span id="hyb-play-txt">Défilement Automatique</span>
+            </button>
+            <div class="hybrid-progress-track">
+              <div class="hybrid-progress-bar" id="hyb-prog-bar"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 4 Key Advantages Pillars -->
+    <div class="hybrid-pillars-grid reveal reveal-delay-3">
+      <div class="hp-card">
+        <div class="hp-icon">🔌</div>
+        <div class="hp-title" id="hp-t1">Zéro Contrainte de Prise</div>
+        <p class="hp-desc" id="hp-d1">Aucune borne de recharge ni câble nécessaire. La batterie se recharge 100% toute seule en roulant et au freinage.</p>
+      </div>
+
+      <div class="hp-card">
+        <div class="hp-icon">🏙️</div>
+        <div class="hp-title" id="hp-t2">50% du Temps en Ville en EV</div>
+        <p class="hp-desc" id="hp-d2">Dans les embouteillages et en circulation urbaine à Meknès, roulez jusqu'à la moitié du temps sans consommer une goutte de carburant.</p>
+      </div>
+
+      <div class="hp-card">
+        <div class="hp-icon">🛡️</div>
+        <div class="hp-title" id="hp-t3">Garantie jusqu'à 10 Ans</div>
+        <p class="hp-desc" id="hp-d3">Fiabilité légendaire Toyota. Sans démarreur, alternateur ou courroie d'accessoire classique à remplacer : entretien économique.</p>
+      </div>
+
+      <div class="hp-card">
+        <div class="hp-icon">🪙</div>
+        <div class="hp-title" id="hp-t4">Exonération Vignette au Maroc</div>
+        <p class="hp-desc" id="hp-d4">Bénéficiez de la gratuité totale de la Taxe Spéciale Annuelle sur les Véhicules Automobiles (Vignette) et d'un coût au kilomètre imbattable.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
 <!-- ═══ SERVICES ═══ -->
 <section class="services" id="services">
   <div class="container">
@@ -1818,6 +2167,7 @@ body.ar .fselect{
           <li><a href="#reels" id="ft-l0">Vidéos</a></li>
           <li><a href="#experience" id="ft-l-exp">Expérience</a></li>
           <li><a href="#showroom" id="ft-l1">Showroom</a></li>
+          <li><a href="#hybrid-tech" id="ft-l-hyb">Technologie Hybride</a></li>
           <li><a href="#services" id="ft-l2">Services</a></li>
           <li><a href="#faq" id="ft-l-faq">FAQ & Conseils</a></li>
           <li><a href="#location" id="ft-l4">Nous trouver</a></li>
@@ -2401,6 +2751,33 @@ const D={
     savS4:'⚙️ Transmission & Boîte Auto',savS5:'🛞 Pneumatiques & Parallélisme',savS6:'❄️ Climatisation & Habitacle',
     savLblModel:'Modèle / Immatriculation',savLblKm:'Kilométrage Actuel',savLblName:'Nom et Prénom',savLblPhone:'WhatsApp / Téléphone',
     savSubmit:'RDV Atelier via WhatsApp',
+        hybBadge:'⚡ TECHNOLOGIE & INNOVATION',
+    hybTitle:'Comment Fonctionne l\'Hybride Toyota 5e Génération ?',
+    hybDesc:'Auto-rechargeable sans jamais brancher · 4 phases intelligentes de gestion de l\'énergie pour un silence absolu et jusqu\'à 50% d\'économie de carburant.',
+    htabNum0:'Phase 1',htabT0:'Démarrage 100% EV',
+    htabNum1:'Phase 2',htabT1:'Accélération Synergie',
+    htabNum2:'Phase 3',htabT2:'Vitesse de Croisière',
+    htabNum3:'Phase 4',htabT3:'Freinage Régénératif',
+    hudBadge0:'🌱 Phase 1 · Démarrage & Ville',
+    hudTitle0:'100% Électrique EV : Silence Absolu et 0L d\'Essence',
+    hudDesc0:'Au démarrage et jusqu\'à vitesse modérée en ville, seule la batterie hybride alimente le moteur électrique. Le moteur à essence reste totalement éteint pour une consommation nulle et zéro vibration.',
+    hudBadge1:'⚡ Phase 2 · Dépassement & Puissance',
+    hudTitle1:'Synergie Hybride : Puissance Combinée Essence + Électrique',
+    hudDesc1:'Lors des fortes accélérations, le moteur thermique et le moteur électrique unissent leurs couples instantanément. Vous bénéficiez d\'une relance dynamique sans aucun à-coup.',
+    hudBadge2:'🛣️ Phase 3 · Vitesse de Croisière',
+    hudTitle2:'Efficience Maximale & Recharge Continue de la Batterie',
+    hudDesc2:'Sur voie rapide ou autoroute, le moteur thermique fonctionne à son rendement énergétique optimal tout en entraînant le générateur pour recharger la batterie en continu.',
+    hudBadge3:'🔄 Phase 4 · Décélération & Freinage',
+    hudTitle3:'Freinage Régénératif : Auto-Recharge Gratuite Sans Prise',
+    hudDesc3:'Dès le freinage ou la décélération, le moteur électrique capte l\'énergie cinétique des roues et la réinjecte dans la batterie. 100% autonome sans câble ni borne.',
+    lblMCons:'Consommation Instantanée',lblMMode:'Mode de Conduite',lblMEng:'Moteur Thermique',lblMBat:'Batterie Hybride',
+    hybBtnCalc:'Calculer Mes Économies en DH',hybBtnBook:'Réserver un Essai Hybride',
+    hybPlayAuto:'Défilement Automatique',hybPlayPause:'Pause',
+    hpT1:'Zéro Contrainte de Prise',hpD1:'Aucune borne de recharge ni câble nécessaire. La batterie se recharge 100% toute seule en roulant et au freinage.',
+    hpT2:'50% du Temps en Ville en EV',hpD2:'Dans les embouteillages et en circulation urbaine à Meknès, roulez jusqu\'à la moitié du temps sans consommer une goutte de carburant.',
+    hpT3:'Garantie jusqu\'à 10 Ans',hpD3:'Fiabilité légendaire Toyota. Sans démarreur, alternateur ou courroie d\'accessoire classique à remplacer : entretien économique.',
+    hpT4:'Exonération Vignette au Maroc',hpD4:'Bénéficiez de la gratuité totale de la Taxe Spéciale Annuelle sur les Véhicules Automobiles (Vignette) et d\'un coût au kilomètre imbattable.',
+    ftLHyb:'Technologie Hybride',
     dtWaBtn:'Recevoir Brochure & Fiche sur WhatsApp',specsT:'Spécifications',featT:'Équipements'},
   ar:{badge:'وكيل تويوتا المعتمد',status:'مفتوح · 08:30 — 19:00',location:'مكناس · تويوتا الرسمي',
     heroTag:'وكيل تويوتا المعتمد بمكناس',heroTitle:'Auto Meknès<br>Ismailia',
@@ -2498,6 +2875,33 @@ const D={
     savS4:'⚙️ ناقل الحركة والعلبة الأوتوماتيكية',savS5:'🛞 العجلات وضبط التوازي',savS6:'❄️ التكييف وتنقية الهواء',
     savLblModel:'الموديل / رقم اللوحة',savLblKm:'الكيلومترات الحالية',savLblName:'الاسم الكامل',savLblPhone:'واتساب / الهاتف',
     savSubmit:'حجز موعد الورشة عبر واتساب',
+        hybBadge:'⚡ التكنولوجيا والابتكار',
+    hybTitle:'كيف تعمل تكنولوجيا تويوتا الهايبرد الجيل الخامس؟',
+    hybDesc:'شحن ذاتي تلقائي بدون كابل أو قابس كهربائي · 4 وضعيات ذكية لقيادة صامتة واقتصاد يصل حتى 50% في استهلاك الوقود.',
+    htabNum0:'المرحلة 1',htabT0:'الانطلاق 100% كهربائي',
+    htabNum1:'المرحلة 2',htabT1:'التسارع وقوة الهايبرد',
+    htabNum2:'المرحلة 3',htabT2:'السرعة الثابتة والكفاءة',
+    htabNum3:'المرحلة 4',htabT3:'الفرملة وإعادة الشحن',
+    hudBadge0:'🌱 المرحلة 1 · الانطلاق ووسط المدينة',
+    hudTitle0:'قيادة كهربائية 100% EV : صمت تام و 0 لتر بنزين',
+    hudDesc0:'عند الانطلاق والسرعات المنخفضة داخل مكناس، تعمل السيارة بالطاقة الكهربائية النقية المخزنة في البطارية. محرك البنزين متوقف تماماً (0 استهلاك و0 اهتزاز).',
+    hudBadge1:'⚡ المرحلة 2 · التسارع والتجاوز',
+    hudTitle1:'القوة المشتركة : تفاعل فوري بين محرك البنزين والكهرباء',
+    hudDesc1:'عند الضغط على دواسة السرعة للتجاوز، يتحد محرك البنزين والمحرك الكهربائي معاً لتقديم عزم تسارع فوري واستجابة فائقة السلاسة.',
+    hudBadge2:'🛣️ المرحلة 3 · السرعة الثابتة على الطرق السريعة',
+    hudTitle2:'أعلى كفاءة استهلاك وشحن مستمر للبطارية في آن واحد',
+    hudDesc2:'على الطرق السريعة، يعمل محرك البنزين بأعلى مردودية واقتصاد، ويقوم المولد بشحن البطارية الهجينة تلقائياً وبشكل مستمر دون أي مجهود من السائق.',
+    hudBadge3:'🔄 المرحلة 4 · التباطؤ والفرملة الذكية',
+    hudTitle3:'إعادة الشحن الذاتي : توليد طاقة مجانية بدون قابس كهربائي',
+    hudDesc3:'عند الضغط على الفرامل أو رفع القدم عن دواسة الوقود، يستعيد النظام الطاقة الحركية للعجلات ويحولها إلى كهرباء لشحن البطارية ذاتياً 100%.',
+    lblMCons:'الاستهلاك اللحظي',lblMMode:'وضعية القيادة',lblMEng:'محرك البنزين',lblMBat:'البطارية الهجينة',
+    hybBtnCalc:'احسب التوفير بالدرهم',hybBtnBook:'حجز تجربة قيادة هايبرد',
+    hybPlayAuto:'تشغيل تلقائي',hybPlayPause:'إيقاف مؤقت',
+    hpT1:'شحن ذاتي بدون قابس',hpD1:'لا تحتاج لأي كابل أو محطة شحن. تشحن البطارية نفسها تلقائياً أثناء القيادة والفرملة.',
+    hpT2:'50% من القيادة في المدينة كهربائية',hpD2:'في شوارع مكناس والازدحام المروري، تقود نصف الوقت في وضع كهربائي صامت واقتصادي 100%.',
+    hpT3:'ضمان رسمي حتى 10 سنوات',hpD3:'اعتمادية تويوتا الأسطورية. صيانة اقتصادية خالية من قطع التآكل التقليدية كالدينامو ومارش التشغيل.',
+    hpT4:'إعفاء كلي من الضريبة (Vignette)',hpD4:'استفد من الإعفاء الكلي من الضريبة السنوية على السيارات بالمغرب وتكلفة كيلومترية هي الأوفر في السوق.',
+    ftLHyb:'تكنولوجيا الهايبرد',
     dtWaBtn:'إرسال الكتالوج والمواصفات عبر واتساب',specsT:'المواصفات',featT:'التجهيزات'}
 };
 
@@ -2793,6 +3197,22 @@ function setLang(l){
   s('exp-m3-title',d.expM3Title);s('exp-m3-desc',d.expM3Desc);
 
   // Showroom
+  
+  // Hybrid Section
+  s('hyb-badge',d.hybBadge);s('hyb-title',d.hybTitle);s('hyb-desc',d.hybDesc);
+  s('htab-num-0',d.htabNum0);s('htab-t-0',d.htabT0);
+  s('htab-num-1',d.htabNum1);s('htab-t-1',d.htabT1);
+  s('htab-num-2',d.htabNum2);s('htab-t-2',d.htabT2);
+  s('htab-num-3',d.htabNum3);s('htab-t-3',d.htabT3);
+  s('lbl-m-cons',d.lblMCons);s('lbl-m-mode',d.lblMMode);s('lbl-m-eng',d.lblMEng);s('lbl-m-bat',d.lblMBat);
+  s('hyb-btn-calc-txt',d.hybBtnCalc);s('hyb-btn-book-txt',d.hybBtnBook);
+  s('hp-t1',d.hpT1);s('hp-d1',d.hpD1);
+  s('hp-t2',d.hpT2);s('hp-d2',d.hpD2);
+  s('hp-t3',d.hpT3);s('hp-d3',d.hpD3);
+  s('hp-t4',d.hpT4);s('hp-d4',d.hpD4);
+  s('ft-l-hyb',d.ftLHyb);
+  selectHybridPhase(currentHybridPhase, false);
+
   s('sec-cars-label',d.secCarsLabel);s('sec-cars-name',d.secCarsName);s('sec-cars-desc',d.secCarsDesc);
   s('cat-badge-count',d.catBadgeCount);
   const txtToggle = document.getElementById('txt-toggle-cat');
@@ -4143,6 +4563,210 @@ function updateLiveOpeningStatus(){
   }
 }
 setInterval(updateLiveOpeningStatus, 30000);
+
+
+/* ─── TOYOTA HYBRID 5TH GEN VISUALIZER JAVASCRIPT ENGINE ─── */
+const HYBRID_DATA = [
+  {
+    phase: 0,
+    cons: '0.0 L / 100km',
+    consAr: '0.0 لتر / 100 كم',
+    consColor: 'var(--emerald)',
+    mode: '100% Électrique EV',
+    modeAr: '100% كهربائي EV',
+    modeColor: 'var(--cyan)',
+    engine: 'Éteint (0L · 0dB)',
+    engineAr: 'متوقف (0 لتر · 0 اهتزاز)',
+    battery: 'Alimentation Moteur EV',
+    batteryAr: 'تغذية المحرك الكهربائي',
+    nodes: { engine: 'inactive', battery: 'active-cyan', motor: 'active-cyan', wheels: 'active' },
+    flows: { engMotor: 'flow-inactive', batMotor: 'flow-active-cyan', motorWheels: 'flow-active-cyan', axle: 'flow-active-cyan' },
+    svgStats: { eng: 'Éteint (0L/100)', engAr: 'متوقف (0 لتر)', bat: 'Décharge EV', batAr: 'تغذية EV', mot: 'Actif 100% EV', motAr: 'نشط 100%' }
+  },
+  {
+    phase: 1,
+    cons: '5.2 L / 100km',
+    consAr: '5.2 لتر / 100 كم',
+    consColor: 'var(--gold)',
+    mode: 'Synergie Pleine Puissance',
+    modeAr: 'قوة هجينة مشتركة قصوى',
+    modeColor: 'var(--gold)',
+    engine: 'Actif (Couple Instantané)',
+    engineAr: 'نشط (عزم دوران فوري)',
+    battery: 'Boost Électrique Actif',
+    batteryAr: 'دعم كهربائي فوري',
+    nodes: { engine: 'active-gold', battery: 'active-cyan', motor: 'active-gold', wheels: 'active' },
+    flows: { engMotor: 'flow-active-gold', batMotor: 'flow-active-cyan', motorWheels: 'flow-active-gold', axle: 'flow-active-gold' },
+    svgStats: { eng: 'Pleine Puissance', engAr: 'قوة قصوى', bat: 'Boost Puissance', batAr: 'دعم فوري', mot: 'Synergie Boost', motAr: 'تفاعل مشترك' }
+  },
+  {
+    phase: 2,
+    cons: '3.8 L / 100km',
+    consAr: '3.8 لتر / 100 كم',
+    consColor: 'var(--emerald)',
+    mode: 'Vitesse de Croisière Eco',
+    modeAr: 'سرعة ثابتة اقتصادية',
+    modeColor: 'var(--emerald)',
+    engine: 'Régime Optimal (41% Rendement)',
+    engineAr: 'كفاءة تشغيل مثالية',
+    battery: 'Recharge Continue (Générateur)',
+    batteryAr: 'شحن مستمر عبر المولد',
+    nodes: { engine: 'active-gold', battery: 'active-emerald', motor: 'active-gold', wheels: 'active' },
+    flows: { engMotor: 'flow-active-gold', batMotor: 'flow-active-emerald', motorWheels: 'flow-active-gold', axle: 'flow-active-gold' },
+    svgStats: { eng: 'Régime Optimal', engAr: 'مردودية قصوى', bat: 'Recharge +++', batAr: 'شحن مستمر', mot: 'Entraînement + Charge', motAr: 'دفع وشحن' }
+  },
+  {
+    phase: 3,
+    cons: '0.0 L / 100km',
+    consAr: '0.0 لتر / 100 كم',
+    consColor: 'var(--emerald)',
+    mode: 'Régénération Cinétique',
+    modeAr: 'استعادة طاقة الفرملة',
+    modeColor: 'var(--emerald)',
+    engine: 'Éteint (Consommation Nulle)',
+    engineAr: 'متوقف (استهلاك منعدم)',
+    battery: 'Auto-Recharge Rapide Sans Prise',
+    batteryAr: 'إعادة شحن ذاتي سريع بدون قابس',
+    nodes: { engine: 'inactive', battery: 'active-emerald', motor: 'active-emerald', wheels: 'active' },
+    flows: { engMotor: 'flow-inactive', batMotor: 'flow-active-emerald', motorWheels: 'flow-active-emerald', axle: 'flow-active-emerald' },
+    svgStats: { eng: 'Éteint (0 Conso)', engAr: 'متوقف', bat: 'Charge Rapide ⚡', batAr: 'شحن سريع ⚡', mot: 'Générateur Actif', motAr: 'مولد نشط' }
+  }
+];
+
+let currentHybridPhase = 0;
+let hybridAutoplayInterval = null;
+let hybridProgressInterval = null;
+let hybridAutoplayActive = true;
+const HYBRID_CYCLE_DURATION = 4500; // 4.5 seconds per phase
+let hybridProgressStart = Date.now();
+
+function selectHybridPhase(idx, manual = false){
+  currentHybridPhase = idx;
+  const isAr = lang === 'ar';
+  const d = D[lang];
+  const pData = HYBRID_DATA[idx];
+
+  // 1. Update Buttons Active State
+  for(let i = 0; i < 4; i++){
+    const btn = document.getElementById(`htab-${i}`);
+    if(btn) btn.classList.toggle('active', i === idx);
+  }
+
+  // 2. Update HUD Badge, Title, Desc
+  const badgeEl = document.getElementById('hud-badge');
+  const titleEl = document.getElementById('hud-title');
+  const descEl = document.getElementById('hud-desc');
+  if(badgeEl && d[`hudBadge${idx}`]) badgeEl.textContent = d[`hudBadge${idx}`];
+  if(titleEl && d[`hudTitle${idx}`]) titleEl.textContent = d[`hudTitle${idx}`];
+  if(descEl && d[`hudDesc${idx}`]) descEl.textContent = d[`hudDesc${idx}`];
+
+  // 3. Update HUD Metrics
+  const consEl = document.getElementById('val-m-cons');
+  const modeEl = document.getElementById('val-m-mode');
+  const engEl = document.getElementById('val-m-eng');
+  const batEl = document.getElementById('val-m-bat');
+
+  if(consEl){
+    consEl.textContent = isAr ? pData.consAr : pData.cons;
+    consEl.style.color = pData.consColor;
+  }
+  if(modeEl){
+    modeEl.textContent = isAr ? pData.modeAr : pData.mode;
+    modeEl.style.color = pData.modeColor;
+  }
+  if(engEl){
+    engEl.textContent = isAr ? pData.engineAr : pData.engine;
+  }
+  if(batEl){
+    batEl.textContent = isAr ? pData.batteryAr : pData.battery;
+    batEl.style.color = (idx === 3 || idx === 2) ? 'var(--emerald)' : 'var(--cyan)';
+  }
+
+  // 4. Update SVG Diagram Nodes
+  const nodeEng = document.getElementById('node-engine');
+  const nodeBat = document.getElementById('node-battery');
+  const nodeMot = document.getElementById('node-motor');
+  const nodeWhl = document.getElementById('node-wheels');
+
+  if(nodeEng){
+    nodeEng.className = `diag-node ${pData.nodes.engine === 'active-gold' ? 'active active-gold' : ''}`;
+  }
+  if(nodeBat){
+    nodeBat.className = `diag-node ${pData.nodes.battery === 'active-emerald' ? 'active active-emerald' : 'active'}`;
+    const rect = nodeBat.querySelector('.node-bg');
+    if(rect) rect.setAttribute('stroke', (idx === 2 || idx === 3) ? '#34D399' : '#22D3EE');
+  }
+  if(nodeMot){
+    nodeMot.className = `diag-node ${pData.nodes.motor === 'active-gold' ? 'active active-gold' : (pData.nodes.motor === 'active-emerald' ? 'active active-emerald' : 'active')}`;
+    const rect = nodeMot.querySelector('.node-bg');
+    if(rect) rect.setAttribute('stroke', idx === 1 ? '#F5B942' : ((idx === 2 || idx === 3) ? '#34D399' : '#22D3EE'));
+  }
+
+  // 5. Update SVG Stats Text
+  const statEng = document.getElementById('svg-stat-eng');
+  const statBat = document.getElementById('svg-stat-bat');
+  const statMot = document.getElementById('svg-stat-mot');
+  if(statEng) statEng.textContent = isAr ? pData.svgStats.engAr : pData.svgStats.eng;
+  if(statBat) statBat.textContent = isAr ? pData.svgStats.batAr : pData.svgStats.bat;
+  if(statMot) statMot.textContent = isAr ? pData.svgStats.motAr : pData.svgStats.mot;
+
+  // 6. Update SVG Flow Lines
+  const flowEngMotor = document.getElementById('flow-eng-motor');
+  const flowBatMotor = document.getElementById('flow-bat-motor');
+  const flowMotorWheels = document.getElementById('flow-motor-wheels');
+  const flowWheelsAxle = document.getElementById('flow-wheels-axle');
+
+  if(flowEngMotor) flowEngMotor.className = `flow-line ${pData.flows.engMotor}`;
+  if(flowBatMotor) flowBatMotor.className = `flow-line ${pData.flows.batMotor}`;
+  if(flowMotorWheels) flowMotorWheels.className = `flow-line ${pData.flows.motorWheels}`;
+  if(flowWheelsAxle) flowWheelsAxle.className = `flow-line ${pData.flows.axle}`;
+
+  // Reset Progress Bar
+  hybridProgressStart = Date.now();
+  if(manual){
+    startHybridAutoplay();
+  }
+}
+
+function startHybridAutoplay(){
+  clearInterval(hybridAutoplayInterval);
+  clearInterval(hybridProgressInterval);
+  if(!hybridAutoplayActive) return;
+
+  hybridProgressStart = Date.now();
+  
+  hybridProgressInterval = setInterval(() => {
+    const elapsed = Date.now() - hybridProgressStart;
+    const pct = Math.min(100, (elapsed / HYBRID_CYCLE_DURATION) * 100);
+    const progBar = document.getElementById('hyb-prog-bar');
+    if(progBar) progBar.style.width = `${pct}%`;
+  }, 40);
+
+  hybridAutoplayInterval = setInterval(() => {
+    const nextPhase = (currentHybridPhase + 1) % 4;
+    selectHybridPhase(nextPhase, false);
+  }, HYBRID_CYCLE_DURATION);
+}
+
+function toggleHybridAutoplay(){
+  hybridAutoplayActive = !hybridAutoplayActive;
+  const isAr = lang === 'ar';
+  const icon = document.getElementById('hyb-play-icon');
+  const txt = document.getElementById('hyb-play-txt');
+  
+  if(hybridAutoplayActive){
+    if(icon) icon.textContent = '⏸️';
+    if(txt) txt.textContent = isAr ? 'إيقاف مؤقت' : 'Défilement Automatique';
+    startHybridAutoplay();
+  } else {
+    clearInterval(hybridAutoplayInterval);
+    clearInterval(hybridProgressInterval);
+    if(icon) icon.textContent = '▶️';
+    if(txt) txt.textContent = isAr ? 'تشغيل العرض' : 'Lancer l\'Animation';
+    const progBar = document.getElementById('hyb-prog-bar');
+    if(progBar) progBar.style.width = '0%';
+  }
+}
 
 async function loadConfigAndInit(){
   const localSaved = localStorage.getItem('auto_saved_data');
