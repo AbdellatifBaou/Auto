@@ -104,7 +104,10 @@ section{position:relative;z-index:1}
   pointer-events:none;
 }
 @media(max-width:640px){
-  .header-center{display:none}
+  .header-center{
+    position:static;transform:none;
+    display:flex;margin:0 auto;
+  }
 }
 .header-center .pill{pointer-events:auto}
 .header-actions{display:flex;align-items:center;gap:8px}
@@ -716,27 +719,28 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
   background:rgba(8,8,12,.94);backdrop-filter:blur(24px);
   -webkit-backdrop-filter:blur(24px);
   border-top:1px solid var(--border2);
-  padding:6px 8px calc(6px + env(safe-area-inset-bottom));
-  gap:4px;
+  padding:6px 10px calc(6px + env(safe-area-inset-bottom));
+  gap:6px;
 }
 @media(min-width:768px){.mob-bar{display:none}}
 .mob-btn{
   flex:1;display:flex;flex-direction:column;align-items:center;
-  justify-content:center;gap:3px;padding:8px 4px;
-  border-radius:12px;border:none;min-height:48px;
-  font-family:inherit;font-size:9px;font-weight:700;
+  justify-content:center;gap:3px;padding:7px 4px;
+  border-radius:14px;border:none;min-height:50px;
+  font-family:inherit;font-size:10px;font-weight:700;
   cursor:pointer;text-decoration:none;color:var(--text2);background:transparent;
-  transition:transform .15s, background .15s, color .15s;
+  transition:all .2s cubic-bezier(.16,1,.3,1);
   -webkit-tap-highlight-color:transparent;
 }
-.mob-btn:active{transform:scale(.92);background:rgba(255,255,255,.05)}
-.mob-btn svg{width:20px;height:20px;flex-shrink:0}
-.mob-btn.accent{
-  background:var(--red);color:#fff;border-radius:14px;
-  box-shadow:0 2px 12px var(--red-glow);
+.mob-btn:hover{color:var(--text);background:rgba(255,255,255,.05)}
+.mob-btn:active, .mob-btn.active{
+  transform:scale(.94);
+  color:#fff;
+  background:rgba(235,10,30,.18);
+  box-shadow:0 0 16px rgba(235,10,30,.3);
 }
-.mob-btn.accent:active{transform:scale(.92);background:#d0091a}
-.mob-btn.gold{color:var(--gold)}
+.mob-btn svg{width:22px;height:22px;flex-shrink:0;transition:stroke .2s, color .2s}
+.mob-btn:active svg, .mob-btn.active svg{stroke:var(--red);color:var(--red)}
 
 /* ═══ MODALS ═══ */
 .modal-bg{
@@ -782,14 +786,46 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
 /* Forms */
 .fg{margin-bottom:16px}
 .fg label{display:block;font-size:11px;font-weight:700;color:var(--text2);margin-bottom:6px}
-.finput,.fselect{
-  width:100%;padding:13px 16px;border-radius:12px;
+.finput{
+  width:100%;padding:13px 16px;border-radius:14px;
   background:var(--surface2);border:1px solid var(--border2);
-  color:var(--text);font-family:inherit;font-size:16px; /* Prevents auto-zoom on iOS Safari */
-  outline:none;transition:border-color .2s;-webkit-appearance:none;
+  color:var(--text);font-family:inherit;font-size:15px;
+  outline:none;transition:all .2s;-webkit-appearance:none;
 }
 .finput::placeholder{color:var(--text3)}
-.finput:focus,.fselect:focus{border-color:var(--red)}
+.finput:focus{border-color:var(--red);box-shadow:0 0 0 3px var(--red-glow)}
+.fselect{
+  width:100%;padding:13px 40px 13px 16px;border-radius:14px;
+  background-color:var(--surface2);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23EB0A1E' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 14px center;
+  border:1px solid var(--border2);
+  color:var(--text);font-family:inherit;font-size:14px;font-weight:600;
+  outline:none;cursor:pointer;
+  transition:all .25s cubic-bezier(.16,1,.3,1);
+  -webkit-appearance:none;-moz-appearance:none;appearance:none;
+  box-shadow:inset 0 1px 2px rgba(0,0,0,.4);
+}
+body.ar .fselect{
+  background-position:left 14px center;
+  padding:13px 16px 13px 40px;
+}
+.fselect:hover{
+  border-color:rgba(235,10,30,.45);
+  background-color:var(--surface3);
+}
+.fselect:focus{
+  border-color:var(--red);
+  box-shadow:0 0 0 3px var(--red-glow), inset 0 1px 2px rgba(0,0,0,.4);
+  background-color:var(--surface3);
+}
+.fselect option{
+  background:#14141c;color:#fff;padding:12px 14px;font-size:14px;font-weight:500;
+}
+.fselect option:disabled{
+  color:rgba(255,255,255,.35);background:#0c0c12;
+}
 .frow{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .radio-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}
 .rcard input{display:none}
@@ -1440,15 +1476,7 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
             RDC Angle Boulevard Yacoub El Mansour, &, Ave des Forces Armees Royales, Meknes 50000, Marokko
           </p>
           <a href="https://share.google/qjgfQifJ4eAU9GInu" target="_blank" rel="noopener noreferrer" class="btn btn-glass" style="margin-top:14px;display:inline-flex;align-items:center;gap:8px;font-size:12px;padding:10px 18px" id="loc-btn-maps">
-            <svg viewBox="0 0 32 32" width="18" height="18" style="flex-shrink:0">
-              <path fill="#4285F4" d="M16 2.5C9.65 2.5 4.5 7.65 4.5 14c0 8.2 10.3 16.7 10.75 17.06.44.35 1.06.35 1.5 0 .45-.36 10.75-8.86 10.75-17.06 0-6.35-5.15-11.5-11.5-11.5z"/>
-              <path fill="#EA4335" d="M16 2.5C9.65 2.5 4.5 7.65 4.5 14c0 3.3 1.4 6.3 3.65 8.4L16 14V2.5z"/>
-              <path fill="#FBBC04" d="M16 14l-7.85 8.4c1.8 1.7 4.2 3.8 7.85 7.1V14z"/>
-              <path fill="#34A853" d="M16 29.5c3.65-3.3 6.05-5.4 7.85-7.1L16 14v15.5z"/>
-              <path fill="#1A73E8" d="M16 2.5V14l7.85 8.4c2.25-2.1 3.65-5.1 3.65-8.4 0-6.35-5.15-11.5-11.5-11.5z"/>
-              <circle cx="16" cy="14" r="4.5" fill="#FFFFFF"/>
-              <circle cx="16" cy="14" r="2.8" fill="#4285F4"/>
-            </svg>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
             <span id="loc-btn-text">Itinéraire Google Maps</span>
           </a>
         </div>
@@ -1468,7 +1496,7 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
             referrerpolicy="no-referrer-when-downgrade">
           </iframe>
           <div class="loc-map-overlay-badge">
-            <svg viewBox="0 0 32 32" width="16" height="16" style="flex-shrink:0"><path fill="#4285F4" d="M16 2.5C9.65 2.5 4.5 7.65 4.5 14c0 8.2 10.3 16.7 10.75 17.06.44.35 1.06.35 1.5 0 .45-.36 10.75-8.86 10.75-17.06 0-6.35-5.15-11.5-11.5-11.5z"/><path fill="#EA4335" d="M16 2.5C9.65 2.5 4.5 7.65 4.5 14c0 3.3 1.4 6.3 3.65 8.4L16 14V2.5z"/><path fill="#FBBC04" d="M16 14l-7.85 8.4c1.8 1.7 4.2 3.8 7.85 7.1V14z"/><path fill="#34A853" d="M16 29.5c3.65-3.3 6.05-5.4 7.85-7.1L16 14v15.5z"/><circle cx="16" cy="14" r="4.5" fill="#FFFFFF"/><circle cx="16" cy="14" r="2.8" fill="#4285F4"/></svg>
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
             <span id="loc-map-hint">Meknès · Angle Bd. Yacoub El Mansour & Ave. des FAR</span>
           </div>
         </div>
@@ -1502,15 +1530,7 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
             <svg viewBox="0 0 24 24" width="19" height="19" fill="#ffffff"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.89 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.35 0 .68.06.98.17V9.45a6.34 6.34 0 0 0-.98-.08A6.33 6.33 0 0 0 3 15.67a6.33 6.33 0 0 0 6.34 6.33 6.33 6.33 0 0 0 6.33-6.33V9.12a8.16 8.16 0 0 0 3.92.98v-3.41z"/></svg>
           </a>
           <a href="https://share.google/qjgfQifJ4eAU9GInu" target="_blank" rel="noopener noreferrer" class="social-link sl-maps" id="social-maps" title="Google Maps">
-            <svg viewBox="0 0 32 32" width="20" height="20">
-              <path fill="#4285F4" d="M16 2.5C9.65 2.5 4.5 7.65 4.5 14c0 8.2 10.3 16.7 10.75 17.06.44.35 1.06.35 1.5 0 .45-.36 10.75-8.86 10.75-17.06 0-6.35-5.15-11.5-11.5-11.5z"/>
-              <path fill="#EA4335" d="M16 2.5C9.65 2.5 4.5 7.65 4.5 14c0 3.3 1.4 6.3 3.65 8.4L16 14V2.5z"/>
-              <path fill="#FBBC04" d="M16 14l-7.85 8.4c1.8 1.7 4.2 3.8 7.85 7.1V14z"/>
-              <path fill="#34A853" d="M16 29.5c3.65-3.3 6.05-5.4 7.85-7.1L16 14v15.5z"/>
-              <path fill="#1A73E8" d="M16 2.5V14l7.85 8.4c2.25-2.1 3.65-5.1 3.65-8.4 0-6.35-5.15-11.5-11.5-11.5z"/>
-              <circle cx="16" cy="14" r="4.5" fill="#FFFFFF"/>
-              <circle cx="16" cy="14" r="2.8" fill="#4285F4"/>
-            </svg>
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
           </a>
         </div>
       </div>
@@ -1548,24 +1568,16 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
     <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
     <span id="mb-call">Appeler</span>
   </a>
-  <a href="https://wa.me/212666979312?text=Bonjour%20Auto%20Meknès%20Ismailia" target="_blank" class="mob-btn accent" id="mb-wa-link">
-    <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.699c.983.537 1.956.822 2.796.822 3.179 0 5.767-2.586 5.768-5.766 0-3.18-2.589-5.768-5.768-5.768zm7.394 5.766c0 4.079-3.315 7.394-7.394 7.394-1.284 0-2.484-.33-3.535-.905l-4.14 1.086 1.106-4.037c-.675-1.12-1.031-2.415-1.031-3.738 0-4.079 3.315-7.394 7.394-7.394 4.079 0 7.394 3.315 7.394 7.394z"/></svg>
-    WhatsApp
+  <a href="https://wa.me/212666979312?text=Bonjour%20Auto%20Meknès%20Ismailia" target="_blank" class="mob-btn" id="mb-wa-link">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+    <span id="mb-wa">WhatsApp</span>
   </a>
   <button class="mob-btn" onclick="openModal('modal-booking')">
     <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
     <span id="mb-book">RDV</span>
   </button>
   <a href="https://share.google/qjgfQifJ4eAU9GInu" target="_blank" class="mob-btn" id="mb-maps-link">
-    <svg viewBox="0 0 32 32" width="22" height="22" style="flex-shrink:0">
-      <path fill="#4285F4" d="M16 2.5C9.65 2.5 4.5 7.65 4.5 14c0 8.2 10.3 16.7 10.75 17.06.44.35 1.06.35 1.5 0 .45-.36 10.75-8.86 10.75-17.06 0-6.35-5.15-11.5-11.5-11.5z"/>
-      <path fill="#EA4335" d="M16 2.5C9.65 2.5 4.5 7.65 4.5 14c0 3.3 1.4 6.3 3.65 8.4L16 14V2.5z"/>
-      <path fill="#FBBC04" d="M16 14l-7.85 8.4c1.8 1.7 4.2 3.8 7.85 7.1V14z"/>
-      <path fill="#34A853" d="M16 29.5c3.65-3.3 6.05-5.4 7.85-7.1L16 14v15.5z"/>
-      <path fill="#1A73E8" d="M16 2.5V14l7.85 8.4c2.25-2.1 3.65-5.1 3.65-8.4 0-6.35-5.15-11.5-11.5-11.5z"/>
-      <circle cx="16" cy="14" r="4.5" fill="#FFFFFF"/>
-      <circle cx="16" cy="14" r="2.8" fill="#4285F4"/>
-    </svg>
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
     <span id="mb-maps">Maps</span>
   </a>
 </nav>
@@ -1669,12 +1681,12 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
       <div class="cmp-head-selectors">
         <div>
           <label style="display:block;font-size:10px;font-weight:700;color:var(--text2);margin-bottom:4px" id="cmp-lbl-a">Véhicule 1</label>
-          <select class="fselect" id="cmp-select-a" onchange="renderCompareUI()"></select>
+          <select class="fselect" id="cmp-select-a" onchange="onCompareChange('a')"></select>
         </div>
         <div class="cmp-vs-badge">VS</div>
         <div>
           <label style="display:block;font-size:10px;font-weight:700;color:var(--text2);margin-bottom:4px" id="cmp-lbl-b">Véhicule 2</label>
-          <select class="fselect" id="cmp-select-b" onchange="renderCompareUI()"></select>
+          <select class="fselect" id="cmp-select-b" onchange="onCompareChange('b')"></select>
         </div>
       </div>
 
@@ -2516,10 +2528,25 @@ function setLang(l){
   onEcoCarChange(ecoState.targetCar);
   initCompareSelects();
   renderCompareUI();
+  updateLiveOpeningStatus();
 }
 
 /* ─── Modals ─── */
-function openModal(id){document.getElementById(id).classList.add('open')}
+function updateBookingDateConstraints(){
+  const dateInput = document.getElementById('bk-date');
+  if(!dateInput) return;
+  const today = new Date();
+  const minDate = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
+  dateInput.min = minDate;
+  if(!dateInput.value || dateInput.value < minDate){
+    dateInput.value = minDate;
+  }
+}
+
+function openModal(id){
+  if(id === 'modal-booking') updateBookingDateConstraints();
+  document.getElementById(id).classList.add('open');
+}
 function closeModal(id){document.getElementById(id).classList.remove('open')}
 document.querySelectorAll('.modal-bg').forEach(o=>{o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('open')})});
 
@@ -2642,6 +2669,35 @@ const COMPARISON_MODELS = [
 let cmpCarAId = 'corolla';
 let cmpCarBId = 'corolla-cross';
 
+function updateCompareOptions(){
+  const selA = document.getElementById('cmp-select-a');
+  const selB = document.getElementById('cmp-select-b');
+  if(!selA || !selB) return;
+  Array.from(selA.options).forEach(opt => { opt.disabled = (opt.value === selB.value); });
+  Array.from(selB.options).forEach(opt => { opt.disabled = (opt.value === selA.value); });
+}
+
+function onCompareChange(side){
+  const selA = document.getElementById('cmp-select-a');
+  const selB = document.getElementById('cmp-select-b');
+  if(!selA || !selB) return;
+  if(side === 'a'){
+    cmpCarAId = selA.value;
+    if(cmpCarAId === cmpCarBId){
+      const other = COMPARISON_MODELS.find(m => m.id !== cmpCarAId);
+      if(other){ cmpCarBId = other.id; selB.value = cmpCarBId; }
+    }
+  } else if(side === 'b'){
+    cmpCarBId = selB.value;
+    if(cmpCarBId === cmpCarAId){
+      const other = COMPARISON_MODELS.find(m => m.id !== cmpCarBId);
+      if(other){ cmpCarAId = other.id; selA.value = cmpCarAId; }
+    }
+  }
+  updateCompareOptions();
+  renderCompareUI();
+}
+
 function initCompareSelects(){
   const isAr = lang === 'ar';
   const selA = document.getElementById('cmp-select-a');
@@ -2656,8 +2712,15 @@ function initCompareSelects(){
   selA.innerHTML = optionsHtml;
   selB.innerHTML = optionsHtml;
   
+  if(!cmpCarAId || !COMPARISON_MODELS.find(m => m.id === cmpCarAId)) cmpCarAId = COMPARISON_MODELS[0].id;
+  if(!cmpCarBId || !COMPARISON_MODELS.find(m => m.id === cmpCarBId) || cmpCarBId === cmpCarAId){
+    const other = COMPARISON_MODELS.find(m => m.id !== cmpCarAId);
+    cmpCarBId = other ? other.id : COMPARISON_MODELS[1].id;
+  }
+  
   selA.value = cmpCarAId;
   selB.value = cmpCarBId;
+  updateCompareOptions();
 }
 
 function renderCompareUI(){
@@ -2838,6 +2901,15 @@ function bookCar(name){
 function submitBooking(e){
   e.preventDefault();
   const isAr = lang === 'ar';
+  const dateInput = document.getElementById('bk-date');
+  const dateVal = dateInput ? dateInput.value : '';
+  const today = new Date();
+  const minDate = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
+  if(dateVal && dateVal < minDate){
+    alert(isAr ? 'يرجى اختيار تاريخ اليوم أو موعد لاحق في المستقبل.' : 'Veuillez sélectionner une date du jour ou une date future.');
+    if(dateInput) dateInput.focus();
+    return;
+  }
   const typeEl = document.querySelector('input[name="type"]:checked');
   const typeVal = typeEl ? typeEl.value : 'Conseil & Achat';
   const carName = document.getElementById('bk-car').value;
@@ -3320,6 +3392,7 @@ async function loadConfigAndInit(){
   initCompareSelects();
   renderCompareUI();
   initReelVideos();
+  updateLiveOpeningStatus();
 }
 
 /* ─── Scroll reveal ─── */
