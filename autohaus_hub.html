@@ -571,7 +571,7 @@ body.ar .sc-price small{font-size:11px;font-weight:600;color:var(--text2);margin
   margin-top:32px;
 }
 @media(min-width:640px){.svc-grid{grid-template-columns:repeat(3,1fr);gap:16px}}
-@media(min-width:960px){.svc-grid{grid-template-columns:repeat(6,1fr);gap:14px}}
+@media(min-width:1024px){.svc-grid{grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:16px}}
 .svc-card{
   background:var(--surface);border:1px solid var(--border);
   border-radius:var(--radius);padding:24px 20px;
@@ -1598,15 +1598,6 @@ body.ar .fselect{
         <div class="svc-sub" id="svc-5s">Calculer mes mensualités</div>
       </div>
 
-      <!-- 4. Visite 360° Cockpit -->
-      <div class="svc-card reveal reveal-delay-2" onclick="openTour360('corolla-cross')">
-        <div class="svc-icon-wrap" style="background:rgba(235,10,30,.1);color:#FF4A5A">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-        </div>
-        <div class="svc-name" id="svc-tour">Visite 360° Cockpit</div>
-        <div class="svc-sub" id="svc-tour-sub">Immersion intérieure & écrans</div>
-      </div>
-
       <!-- 5. Économies Hybride -->
       <div class="svc-card reveal reveal-delay-2" onclick="openEcoForCar('corolla')">
         <div class="svc-icon-wrap" style="background:rgba(52,211,153,.08);color:var(--emerald)">
@@ -2138,12 +2129,13 @@ body.ar .fselect{
       <button class="modal-x" onclick="closeModal('modal-tradein')">✕</button>
     </div>
     <div class="modal-body">
+      <div class="fg"><label id="tr-lbl-name">Nom et Prénom</label><input type="text" class="finput" id="tr-name" placeholder="Votre nom complet"></div>
       <div class="fg"><label id="tr-lbl-m">Marque & Modèle</label><input type="text" class="finput" id="tr-model" placeholder="Ex: Toyota Yaris 2020"></div>
       <div class="frow">
         <div class="fg"><label id="tr-lbl-y">Année</label><input type="number" class="finput" id="tr-year" placeholder="2019"></div>
         <div class="fg"><label id="tr-lbl-k">Kilométrage</label><input type="number" class="finput" id="tr-km" placeholder="80 000"></div>
       </div>
-      <div class="fg"><label id="tr-lbl-p">Votre Téléphone</label><input type="tel" class="finput" id="tr-phone" placeholder="06 XX XX XX XX"></div>
+      <div class="fg"><label id="tr-lbl-p">WhatsApp / Téléphone</label><input type="tel" class="finput" id="tr-phone" placeholder="06 XX XX XX XX"></div>
       <button onclick="submitTradeIn()" class="btn btn-red" style="width:100%;padding:14px;font-size:13px" id="tr-submit">Demander Mon Offre</button>
     </div>
   </div>
@@ -2377,7 +2369,7 @@ const D={
     tmTitle:'Vos Conseillers',tmSub:'Équipe Auto Meknès Ismailia',
     tm1r:'Ventes Neufs · Hybride & 4×4',tm2r:'Financement · Crédit & Leasing',tmCall:'Appeler',tmWa:'WhatsApp',
     trTitle:'Estimation de Reprise',trSub:'Offre ferme sous 2 heures',
-    trLblM:'Marque & Modèle',trLblY:'Année',trLblK:'Kilométrage',trLblP:'Votre Téléphone',trSubmit:'Demander Mon Offre',
+    trLblName:'Nom et Prénom',trLblM:'Marque & Modèle',trLblY:'Année',trLblK:'Kilométrage',trLblP:'WhatsApp / Téléphone',trSubmit:'Demander Mon Offre',
     dtSub:'Spécifications complètes',dtClose:'Fermer',dtBook:'Demander Conseil',
     
     secFaqLabel:'RÉPONSES & CONSEILS',secFaqTitle:'Foire Aux Questions',secFaqDesc:'Tout ce que vous devez savoir sur l\'achat, le financement et l\'entretien de votre Toyota à Meknès.',
@@ -2474,7 +2466,7 @@ const D={
     tmTitle:'مستشارو المبيعات',tmSub:'فريق Auto Meknès Ismailia',
     tm1r:'مبيعات الجديدة · هجين ودفع رباعي',tm2r:'التمويل · الائتمان والليزينغ',tmCall:'اتصال',tmWa:'واتساب',
     trTitle:'تقييم سيارتك للاستبدال',trSub:'عرض نهائي خلال ساعتين',
-    trLblM:'الماركة والموديل',trLblY:'سنة الصنع',trLblK:'الكيلومترات',trLblP:'هاتفك / واتساب',trSubmit:'احسب عرض الاستبدال',
+    trLblName:'الاسم الكامل',trLblM:'الماركة والموديل',trLblY:'سنة الصنع',trLblK:'الكيلومترات',trLblP:'واتساب / الهاتف',trSubmit:'طلب عرض الاستبدال',
     dtSub:'المواصفات الكاملة',dtClose:'إغلاق',dtBook:'طلب استشارة',
     
     secFaqLabel:'إجابات وإرشادات',secFaqTitle:'الأسئلة الأكثر تداولاً (FAQ)',secFaqDesc:'كل ما تحتاجون معرفته حول شراء، تمويل وصيانة سيارات تويوتا في مكناس.',
@@ -2883,7 +2875,7 @@ function setLang(l){
   const setPh=(id,val)=>{const el=document.getElementById(id);if(el)el.setAttribute('placeholder',val);};
   setPh('fin-name',d.phName);setPh('fin-phone',d.phPhone);
   setPh('bk-name',d.phName);setPh('bk-phone',d.phPhone);
-  setPh('tr-model',d.phModel);setPh('tr-phone',d.phPhone);
+  setPh('tr-name',d.phName);setPh('tr-model',d.phModel);setPh('tr-phone',d.phPhone);
   setPh('eco-name',d.phName);setPh('eco-phone',d.phPhone);
   
   // Booking modal strings & options
@@ -2909,7 +2901,7 @@ function setLang(l){
   s('tm-c1',d.tmCall);s('tm-c2',d.tmCall);
   s('tm-w1',d.tmWa);s('tm-w2',d.tmWa);
   s('tr-title',d.trTitle);s('tr-sub',d.trSub);
-  s('tr-lbl-m',d.trLblM);s('tr-lbl-y',d.trLblY);s('tr-lbl-k',d.trLblK);s('tr-lbl-p',d.trLblP);s('tr-submit',d.trSubmit);
+  s('tr-lbl-name',d.trLblName);s('tr-lbl-m',d.trLblM);s('tr-lbl-y',d.trLblY);s('tr-lbl-k',d.trLblK);s('tr-lbl-p',d.trLblP);s('tr-submit',d.trSubmit);
   s('dt-sub',d.dtSub);s('dt-close',d.dtClose);s('dt-book',d.dtBook);
 
   // FAQ Translations
@@ -3382,6 +3374,7 @@ function submitBooking(e){
 /* ─── Trade-in ─── */
 function submitTradeIn(){
   const isAr = lang === 'ar';
+  const name = document.getElementById('tr-name').value || (isAr ? 'زبون المعرض' : 'Client Showroom');
   const m = document.getElementById('tr-model').value || '-';
   const y = document.getElementById('tr-year').value || '-';
   const k = document.getElementById('tr-km').value || '-';
@@ -3397,7 +3390,8 @@ function submitTradeIn(){
           `• سنة الصنع : ${y}\n` +
           `• الكيلومترات : ${k} كم\n` +
           `────────────────────────\n` +
-          `*معلومات التواصل :*\n` +
+          `*معلومات الزبون :*\n` +
+          `• الاسم الكامل : ${name}\n` +
           `• رقم الهاتف : ${p}`;
   } else {
     msg = `*Auto Meknès Ismailia — Estimation de Reprise Auto*\n` +
@@ -3408,6 +3402,7 @@ function submitTradeIn(){
           `• Kilométrage : ${k} km\n` +
           `────────────────────────\n` +
           `*Contact client :*\n` +
+          `• Nom & Prénom : ${name}\n` +
           `• Téléphone : ${p}`;
   }
   
