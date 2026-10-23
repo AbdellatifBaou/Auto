@@ -1993,13 +1993,17 @@ body.ar .fselect{
         </div>
       </div>
 
-      <!-- Lead submission -->
+      <!-- Appointment & Lead submission -->
       <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border)">
+        <div class="frow">
+          <div class="fg"><label id="fin-lbl-date">Date du rendez-vous</label><input type="date" class="finput" id="fin-date" required></div>
+          <div class="fg"><label id="fin-lbl-time">Créneau horaire</label><select class="fselect" id="fin-time"><option>09:00 – 11:00</option><option>11:00 – 13:00</option><option>15:00 – 17:00</option><option>17:00 – 19:00</option></select></div>
+        </div>
         <div class="fg"><label id="fin-lbl-name">Votre Nom et Prénom</label><input type="text" class="finput" id="fin-name" placeholder="Votre nom complet"></div>
         <div class="fg"><label id="fin-lbl-phone">WhatsApp / Téléphone</label><input type="tel" class="finput" id="fin-phone" placeholder="06 XX XX XX XX"></div>
         <button onclick="submitFinLead()" class="btn btn-red" style="width:100%;padding:14px;font-size:13.5px;gap:8px" id="fin-submit">
           <svg fill="currentColor" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.699c.983.537 1.956.822 2.796.822 3.179 0 5.767-2.586 5.768-5.768 0-3.18-2.589-5.768-5.768-5.768zm7.394 5.766c0 4.079-3.315 7.394-7.394 7.394-1.284 0-2.484-.33-3.535-.905l-4.14 1.086 1.106-4.037c-.675-1.12-1.031-2.415-1.031-3.738 0-4.079 3.315-7.394 7.394-7.394 4.079 0 7.394 3.315 7.394 7.394z"/></svg>
-          <span id="fin-btn-text">Demander cette Offre de Financement</span>
+          <span id="fin-btn-text">Demander cette Offre & RDV via WhatsApp</span>
         </button>
       </div>
     </div>
@@ -2231,16 +2235,10 @@ body.ar .fselect{
         </div>
       </div>
 
-      <!-- Lead Contact -->
-      <div class="frow" style="margin-top:16px">
-        <div class="fg" style="margin-bottom:0"><label id="eco-lbl-name">Nom et Prénom</label><input type="text" class="finput" id="eco-name" placeholder="Votre nom complet"></div>
-        <div class="fg" style="margin-bottom:0"><label id="eco-lbl-phone">WhatsApp</label><input type="tel" class="finput" id="eco-phone" placeholder="06 XX XX XX XX"></div>
-      </div>
     </div>
     <div class="modal-foot">
-      <button type="button" class="btn btn-red" style="width:100%" onclick="submitEcoLead()" id="eco-submit">
-        <svg fill="currentColor" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.699c.983.537 1.956.822 2.796.822 3.179 0 5.767-2.586 5.768-5.766 0-3.18-2.589-5.768-5.768zm7.394 5.766c0 4.079-3.315 7.394-7.394 7.394-1.284 0-2.484-.33-3.535-.905l-4.14 1.086 1.106-4.037c-.675-1.12-1.031-2.415-1.031-3.738 0-4.079 3.315-7.394 7.394-7.394 4.079 0 7.394 3.315 7.394 7.394z"/></svg>
-        <span id="eco-submit-txt">Envoyer Mon Bilan d'Économies via WhatsApp</span>
+      <button type="button" class="btn btn-glass" style="width:100%;padding:14px;font-size:13px" onclick="closeModal('modal-hybrid-calc')">
+        <span id="eco-close-txt">Fermer</span>
       </button>
     </div>
   </div>
@@ -2351,8 +2349,10 @@ const D={
     finDCar:'Prix véhicule',finDApp:'Apport initial',finDDur:'Durée',
     finLblApport:'Apport initial (Acompte)',finLblDuration:'Durée de remboursement',
     finMonths:'mois',finMin:'10% (Min)',finMax:'60% (Max)',
+    finLblDate:'Date du rendez-vous',finLblTime:'Créneau horaire',
     finLblName:'Votre Nom et Prénom',finLblPhone:'WhatsApp / Téléphone',
-    finBtnText:'Demander cette Offre de Financement',
+    finBtnText:'Demander cette Offre & RDV via WhatsApp',
+    ecoClose:'Fermer',
     cmpTitle:'Comparateur Face-à-Face',cmpSub:'Sélectionnez 2 modèles pour analyser leurs différences',
     cmpLblA:'Véhicule 1',cmpLblB:'Véhicule 2',cmpPrice:'Prix TTC',cmpPower:'Puissance',cmpCons:'Consommation Mixte',
     cmpTrans:'Transmission',cmpUsage:'Usage Idéal',cmpShareWa:'Partager ce comparatif avec un conseiller WhatsApp',
@@ -2448,8 +2448,10 @@ const D={
     finDCar:'سعر السيارة',finDApp:'الدفعة الأولى',finDDur:'المدة',
     finLblApport:'الدفعة الأولى (التسبيق)',finLblDuration:'مدة السداد بالشهور',
     finMonths:'شهر',finMin:'10% (أدنى)',finMax:'60% (أقصى)',
+    finLblDate:'تاريخ الموعد',finLblTime:'التوقيت المناسب',
     finLblName:'الاسم الكامل',finLblPhone:'واتساب / الهاتف',
-    finBtnText:'طلب هذا العرض التمويلي عبر واتساب',
+    finBtnText:'طلب عرض التمويل والموعد عبر واتساب',
+    ecoClose:'إغلاق',
     cmpTitle:'مقارنة موديلين جنباً إلى جنب',cmpSub:'اختر سيارتين لمقارنة المواصفات والفروقات الفنية والأسعار',
     cmpLblA:'السيارة الأولى',cmpLblB:'السيارة الثانية',cmpPrice:'السعر شامل الضريبة',cmpPower:'القوة الحصانية',cmpCons:'معدل الاستهلاك',
     cmpTrans:'ناقل الحركة والدفع',cmpUsage:'الاستخدام المثالي',cmpShareWa:'استشارة الفريق حول هذه المقارنة عبر واتساب',
@@ -2717,6 +2719,8 @@ function submitFinLead(){
   const isAr = lang === 'ar';
   const car = CARS.find(c => c.id === finState.carId) || CARS[0];
   const res = calcMonthly(car.price, finState.appPct, finState.months);
+  const dateVal = document.getElementById('fin-date').value || '-';
+  const timeVal = document.getElementById('fin-time').value || '-';
   const name = document.getElementById('fin-name').value || (isAr ? 'زبون المعرض' : 'Client Showroom');
   const phone = document.getElementById('fin-phone').value || '-';
   const chosenColObj = selectedColors[car.id] || car.colors[0];
@@ -2727,7 +2731,7 @@ function submitFinLead(){
   
   let msg = '';
   if(isAr){
-    msg = `*Auto Meknès Ismailia — محاكاة تمويل سيارة*\n` +
+    msg = `*Auto Meknès Ismailia — محاكاة تمويل سيارة وطلب موعد*\n` +
           `────────────────────────\n` +
           `*الموديل :* ${carDisplayName}\n` +
           `*اللون :* ${colName}\n` +
@@ -2736,11 +2740,15 @@ function submitFinLead(){
           `*المدة :* ${finState.months} شهر\n` +
           `*القسط الشهري التقديري :* *${fNum(res.monthly)} درهم / شهر*\n` +
           `────────────────────────\n` +
+          `*موعد الاستشارة بالمعرض :*\n` +
+          `• التاريخ : ${dateVal}\n` +
+          `• التوقيت : ${timeVal}\n` +
+          `────────────────────────\n` +
           `*معلومات الزبون :*\n` +
           `• الاسم الكامل : ${name}\n` +
           `• رقم الهاتف : ${phone}`;
   } else {
-    msg = `*Auto Meknès Ismailia — Simulation de Financement*\n` +
+    msg = `*Auto Meknès Ismailia — Simulation de Financement & RDV*\n` +
           `────────────────────────\n` +
           `*Modèle :* ${carDisplayName}\n` +
           `*Couleur :* ${colName}\n` +
@@ -2748,6 +2756,10 @@ function submitFinLead(){
           `*Apport initial :* ${fNum(res.downPayment)} DH (${finState.appPct}%)\n` +
           `*Durée :* ${finState.months} mois\n` +
           `*Mensualité estimée :* *${fNum(res.monthly)} DH / mois*\n` +
+          `────────────────────────\n` +
+          `*Rendez-vous souhaité en showroom :*\n` +
+          `• Date : ${dateVal}\n` +
+          `• Créneau : ${timeVal}\n` +
           `────────────────────────\n` +
           `*Coordonnées client :*\n` +
           `• Nom & Prénom : ${name}\n` +
@@ -2866,7 +2878,9 @@ function setLang(l){
   s('fin-title',d.finTitle);s('fin-sub',d.finSub);s('fin-lbl-est',d.finLblEst);s('fin-unit',d.finUnit);
   s('fin-d-car',d.finDCar);s('fin-d-app',d.finDApp);s('fin-d-dur',d.finDDur);
   s('fin-lbl-apport',d.finLblApport);s('fin-lbl-duration',d.finLblDuration);
+  s('fin-lbl-date',d.finLblDate);s('fin-lbl-time',d.finLblTime);
   s('fin-lbl-name',d.finLblName);s('fin-lbl-phone',d.finLblPhone);s('fin-btn-text',d.finBtnText);
+  s('eco-close-txt',d.ecoClose);
   s('ftab-prado',d.ftabPrado);s('ftab-corolla',d.ftabCorolla);s('ftab-cross',d.ftabCross);
   s('fd-24',d.finMonths);s('fd-36',d.finMonths);s('fd-48',d.finMonths);s('fd-60',d.finMonths);
   s('fin-smin',d.finMin);s('fin-smax',d.finMax);
@@ -2935,18 +2949,20 @@ function setLang(l){
 
 /* ─── Modals ─── */
 function updateBookingDateConstraints(){
-  const dateInput = document.getElementById('bk-date');
-  if(!dateInput) return;
-  const today = new Date();
-  const minDate = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
-  dateInput.min = minDate;
-  if(!dateInput.value || dateInput.value < minDate){
-    dateInput.value = minDate;
-  }
+  ['bk-date', 'fin-date'].forEach(id => {
+    const dateInput = document.getElementById(id);
+    if(!dateInput) return;
+    const today = new Date();
+    const minDate = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
+    dateInput.min = minDate;
+    if(!dateInput.value || dateInput.value < minDate){
+      dateInput.value = minDate;
+    }
+  });
 }
 
 function openModal(id){
-  if(id === 'modal-booking') updateBookingDateConstraints();
+  if(id === 'modal-booking' || id === 'modal-finance') updateBookingDateConstraints();
   document.getElementById(id).classList.add('open');
 }
 function closeModal(id){document.getElementById(id).classList.remove('open')}
